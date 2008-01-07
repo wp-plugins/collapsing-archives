@@ -1,0 +1,22 @@
+Fancy Categories Changelog
+* 0.2: 
+    * Changed name from Fancy Archives to Collapsing Archives
+    * Changed author from Andrew Rader to Robert Felty
+    * Added triangles which mark the collapsing and expanding features
+      That is, clicking on the triangle collapses or expands, while clicking
+      on a month or year links to the archives for the said category.
+      This uses html entities (dings) instead of images, for a variety of 
+      reasons
+    * Lists the titles of posts, instead of just listing subcategories
+    * Removed the rel='hide' and rel='show' tags, because they are not xhtml
+      1.0 compliant. Now uses the CSS classes instead
+		* MOST IMPORTANTLY -- is compatible with both the pre 2.3 database which
+		  uses categories, and the 2.3+ database structure which uses the tag
+		  taxonomy
+
+---------------------------------------------------------------------------
+
+Fancy Categories Changelog
+
+0.1:
+	Initial Release
