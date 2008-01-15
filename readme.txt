@@ -68,7 +68,7 @@ None yet.
 
 == Screenshots ==
 
-options.png shows the available options.
+1. available options
 
 == Demo ==
 
