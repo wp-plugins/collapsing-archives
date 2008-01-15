@@ -41,15 +41,15 @@ class collapsArch {
 		if( function_exists('add_option') ) {
 			add_option( 'collapsArchOrder', 'DESC' );
 			add_option( 'collapsArchLinkToArchives', 'no' );
-			add_option( 'collapsArchExpandCurrentYear', 'no' );
-			add_option( 'collapsArchExpandCurrentMonth', 'no' );
+			add_option( 'collapsArchExpandCurrentYear', 'yes' );
+			add_option( 'collapsArchExpandCurrentMonth', 'yes' );
 			add_option( 'collapsArchShowYearCount', 'no' );
 			add_option( 'collapsArchShowMonths', 'yes' );
-			add_option( 'collapsArchShowMonthCount', 'no' );
-			add_option( 'collapsArchExpandMonths', 'no' );
+			add_option( 'collapsArchShowMonthCount', 'yes' );
+			add_option( 'collapsArchExpandMonths', 'yes' );
 			add_option( 'collapsArchShowCommentCount', 'no' );
       add_option( 'collapsArchShowPages', 'no' );
-			add_option( 'collapsArchShowPostTitle', 'no' );
+			add_option( 'collapsArchShowPostTitle', 'yes' );
 			add_option( 'collapsArchShowPostTitleLength', '0' );
 			add_option( 'collapsArchShowPostTitleEllipsis', 'yes' );
 			add_option( 'collapsArchShowPostDate', 'no' );
