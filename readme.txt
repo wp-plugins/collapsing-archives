@@ -68,7 +68,7 @@ None yet.
 
 == Screenshots ==
 
-None yet.
+options.png show options for the plugin.
 
 == Demo ==
 
