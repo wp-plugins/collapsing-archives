@@ -136,12 +136,12 @@ This file is part of Collapsing Archives
    <legend><?php _e('Display Options:'); ?></legend>
    <ul style="list-style-type: none;">
     <li>
-     <input type="radio" name="archives" <?php if(get_option('collapsArchLinkToArchives')=='no') echo 'checked'; ?> id="archivesNO" value='DESC'></input> <label for="orderDESC">Links based on index.php (default)</label>
-     <input type="radio" name="archives" <?php if(get_option('collapsArchLinkToArchives')=='yes') echo 'checked'; ?> id="archivesYES" value='ASC'></input> <label for="orderASC">Links based on archives.php</label>
+     <input type="radio" name="archives" <?php if(get_option('collapsArchLinkToArchives')=='no') echo 'checked'; ?> id="archivesNO" value='no'></input> <label for="orderDESC">Links based on index.php (default)</label>
+     <input type="radio" name="archives" <?php if(get_option('collapsArchLinkToArchives')=='yes') echo 'checked'; ?> id="archivesYES" value='yes'></input> <label for="orderASC">Links based on archives.php</label>
     </li>
     <li>
-     <input type="radio" name="order" <?php if(get_option('collapsArchOrder')=='DESC') echo 'checked'; ?> id="orderDESC" value='no'></input> <label for="orderDESC">Reverse Chronological Order (default)</label>
-     <input type="radio" name="order" <?php if(get_option('collapsArchOrder')=='ASC') echo 'checked'; ?> id="orderASC" value='yes'></input> <label for="orderASC">Chronological Order</label>
+     <input type="radio" name="order" <?php if(get_option('collapsArchOrder')=='DESC') echo 'checked'; ?> id="orderDESC" value='DESC'></input> <label for="orderDESC">Reverse Chronological Order (default)</label>
+     <input type="radio" name="order" <?php if(get_option('collapsArchOrder')=='ASC') echo 'checked'; ?> id="orderASC" value='ASC'></input> <label for="orderASC">Chronological Order</label>
     </li>
     <li>
      <input type="checkbox" name="expandCurrentYear" <?php if (get_option('collapsArchExpandCurrentYear')=='yes')  echo 'checked'; ?> id="expandCurrentYear"></input> <label for="expandCurrentYear">Leave Current Year Expanded by Default</label>
