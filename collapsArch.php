@@ -78,7 +78,7 @@ class collapsArch {
 
 	function get_head() {
 		$url = get_settings('siteurl');
-		echo "<script type=\"text/javascript\" src=\"$url/wp-content/plugins/collapsArch/collapsArch.js\"></script>\n";
+		echo "<script type=\"text/javascript\" src=\"$url/wp-content/plugins/collapsing-archives/collapsArch.js\"></script>\n";
 		echo "<script type=\"text/javascript\">\n";
 		echo "// <![CDATA[\n";
 		echo "// These variables are part of the Collapsing Archives Plugin\n// Copyright 2007 Robert Felty (robfelty.com)\n";
