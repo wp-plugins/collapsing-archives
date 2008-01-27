@@ -1,22 +1,48 @@
-Fancy Categories Changelog
-* 0.2: 
+Collapsing Archives Changelog
+
+* 0.6.1:
+    * Bug fix - fixed the previous year triangle pointing in the wrong 
+      direction
+    * Changed default options to reflect how I use it on my website
+
+* 0.6: 
     * Changed name from Fancy Archives to Collapsing Archives
     * Changed author from Andrew Rader to Robert Felty
+    * Added option to link to archives.php
+    * Added option to list in chronological or reverse chronological order
     * Added triangles which mark the collapsing and expanding features
       That is, clicking on the triangle collapses or expands, while clicking
-      on a month or year links to the archives for the said category.
-      This uses html entities (dings) instead of images, for a variety of 
-      reasons
-    * Lists the titles of posts, instead of just listing subcategories
+      on a month or year links to the archives for the said month or year
+    * Changed behavior from starting all expanded and then collapsing on page
+      load to the opposite
     * Removed the rel='hide' and rel='show' tags, because they are not xhtml
       1.0 compliant. Now uses the CSS classes instead
-		* MOST IMPORTANTLY -- is compatible with both the pre 2.3 database which
-		  uses categories, and the 2.3+ database structure which uses the tag
-		  taxonomy
-
 ---------------------------------------------------------------------------
+Fancy Archives Changelog
+* 0.5:
+    * Added option to display Page entries with Posts inside the month links
+    * Cleaned up the list generation code
 
-Fancy Categories Changelog
+* 0.4:
+    * Added option: Trim post titles to a set size
+    * Added option: Optionally show ellipsis if a post title was shrunk
+    * Fix: Added fix for when page's content-type is "application/xhtml+xml"
 
-0.1:
-	Initial Release
+* 0.3:
+    * Huge rewrite: cleaned up javascript - one function does all the work,
+      javascript no longer visible in page source
+    * Added options: month links are optional, set current year/month to be
+      expanded by default
+    * Links now link to 'javascript;' instead of '#'
+
+* 0.2.5:
+    * Fixed an issue with displaying comment counts in < WP2.0, fixed by using
+      WP's internal comment counting function (Thanks Will)
+
+* 0.2:
+    * Massive update, now has a dedicated options page (no more passing options to
+      function)
+    * Month links can expand to show individual posts
+
+* 0.1:
+	* Initial Release

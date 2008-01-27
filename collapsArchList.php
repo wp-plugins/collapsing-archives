@@ -1,6 +1,6 @@
 <?php
 /*
-Collapsing Archives ver 0.6
+Collapsing Archives ver 0.6.1
 
 Copyright 2007 Robert Felty
 
@@ -145,7 +145,7 @@ if( $archPosts ) {
                         && $currentMonth == date('n') ) {
 									$monthRel = 'hide';
                   $postStyle = '';
-									$ding = '&#9660; foo';
+									$ding = '&#9660;';
                 } else {
 									$monthRel = 'show';
 									$ding = '&#9658;';
