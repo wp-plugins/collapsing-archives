@@ -1,6 +1,6 @@
 <?php
 /*
-Collapsing Archives ver 0.6
+Collapsing Archives ver 0.6.1
 
 Copyright 2007 Robert Felty
 
@@ -63,9 +63,9 @@ if( $archPosts ) {
     $newMonth = false;
     $closePreviousYear = false;
 
-    $ding = '&#9658;';
     $i=0;
     foreach( $archPosts as $archPost ) {
+    $ding = '&#9658;';
         $i++;
         $yearRel = 'show';
         $monthRel = 'show';
@@ -77,11 +77,11 @@ if( $archPosts ) {
 				 */
         if( get_option('collapsArchExpandCurrentYear')=='yes'
                 && $archPost->year == date('Y') ) {
-            if ($i==1) {
+            //if ($i==1) {
               $ding = '&#9660;';
-            } else {
-              $ding = '&#9658;';
-            }
+           // } else {
+        //      $ding = '&#9658;';
+            //}
             $yearRel = "hide";
             $monthStyle = '';
         }
