@@ -145,7 +145,7 @@ if( $archPosts ) {
                         && $currentMonth == date('n') ) {
 									$monthRel = 'hide';
                   $postStyle = '';
-									$ding = '&#9660;';
+									$ding = '&#9660; foo';
                 } else {
 									$monthRel = 'show';
 									$ding = '&#9658;';
