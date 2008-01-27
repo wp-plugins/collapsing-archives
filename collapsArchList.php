@@ -77,11 +77,11 @@ if( $archPosts ) {
 				 */
         if( get_option('collapsArchExpandCurrentYear')=='yes'
                 && $archPost->year == date('Y') ) {
-            if ($i==1) {
-              $ding = '&#9660;';
-            } else {
+            //if ($i==1) {
+             // $ding = '&#9660;';
+           // } else {
               $ding = '&#9658;';
-            }
+            //}
             $yearRel = "hide";
             $monthStyle = '';
         }
