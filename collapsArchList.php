@@ -63,9 +63,9 @@ if( $archPosts ) {
     $newMonth = false;
     $closePreviousYear = false;
 
-    $ding = '&#9658;';
     $i=0;
     foreach( $archPosts as $archPost ) {
+    $ding = '&#9658;';
         $i++;
         $yearRel = 'show';
         $monthRel = 'show';
