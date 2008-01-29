@@ -108,6 +108,7 @@ class collapsArch {
 						font-size:1.3em;
 					 }
 					#sidebar li.collapsing:before {content:'';} 
+          #sidebar li.collapsing {list-style-type:none}
 				 </style>
 	";
 	}
