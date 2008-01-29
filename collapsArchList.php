@@ -125,7 +125,7 @@ if( $archPosts ) {
             }
             $closePreviousYear = true;
             
-            echo "<li><span class='collapsing $yearRel' onclick='hideNestedList(event); return false' >$ding&nbsp;</span>";
+            echo "<li class='collapsing'><span class='collapsing $yearRel' onclick='hideNestedList(event); return false' >$ding&nbsp;</span>";
             $home = get_settings('home');
             echo "<a href='$home/$archives$currentYear'>$currentYear</a>$yearCount\n";
             echo "<ul $monthStyle id='collapsArchList-$currentYear'>\n";
@@ -160,7 +160,7 @@ if( $archPosts ) {
             $the_link .="<a href='$home/$archives$currentYear/$currentMonth' title='$title_text'>";
             $the_link .="$text</a>";
 
-            echo "<li>".$the_link.$monthCount;
+            echo "<li class='collapsing'>".$the_link.$monthCount;
 
             if( get_option('collapsArchShowMonths')=='yes' && get_option('collapsArchExpandMonths')=='yes' ) {
                 echo "<ul $postStyle id=\"collapsArchList-";
