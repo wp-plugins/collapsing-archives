@@ -97,16 +97,14 @@ class collapsArch {
 			echo "false";
 		}
 		echo ";\n// ]]>\n</script>\n";
+		echo "
+	<!--  a bit more style for the collapsing class used in the fancy categories and fancy archives  -->
+		<style type='text/css'>
+			.collapsing {cursor:pointer;
+									 font-size:1.3em;}
+		</style>
+	";
 	}
-
-  echo "
-<!--  a bit more style for the collapsing class used in the fancy categories and fancy archives  -->
-  <style type='text/css'>
-.collapsing {cursor:pointer;
-             font-size:1.3em;}
-  </style>
-";
-
 }
 
 function collapsArch() {
