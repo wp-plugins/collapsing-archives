@@ -69,6 +69,8 @@ if( $archPosts ) {
         $i++;
         $yearRel = 'show';
         $monthRel = 'show';
+        $yearTitle= 'click to expand';
+        $monthTitle= 'click to expand';
 				$postStyle = "style='display:none'";
 				$monthStyle = "style='display:none'";
 				/* rel = show means that it will be hidden, and clicking on the
@@ -83,6 +85,7 @@ if( $archPosts ) {
         //      $ding = '&#9658;';
             //}
             $yearRel = "hide";
+						$yearTitle= 'click to collapse';
             $monthStyle = '';
         }
 
@@ -125,7 +128,7 @@ if( $archPosts ) {
             }
             $closePreviousYear = true;
             
-            echo "<li class='collapsing'><span class='collapsing $yearRel' onclick='hideNestedList(event); return false' >$ding&nbsp;</span>";
+            echo "<li class='collapsing'><span title='$yearTitle' class='collapsing $yearRel' onclick='hideNestedList(event); return false' >$ding&nbsp;</span>";
             $home = get_settings('home');
             echo "<a href='$home/$archives$currentYear'>$currentYear</a>$yearCount\n";
             echo "<ul $monthStyle id='collapsArchList-$currentYear'>\n";
@@ -144,10 +147,12 @@ if( $archPosts ) {
                         && $currentYear == date('Y')
                         && $currentMonth == date('n') ) {
 									$monthRel = 'hide';
+									$monthTitle= 'click to collapse';
                   $postStyle = '';
 									$ding = '&#9660;';
                 } else {
 									$monthRel = 'show';
+									$monthTitle= 'click to expand';
 									$ding = '&#9658;';
                 }
             }
@@ -156,7 +161,7 @@ if( $archPosts ) {
                 $onclick = '';
                 $monthRel = '';
             }
-            $the_link = "<span class='collapsing $monthRel' $onclick>$ding&nbsp;</span>";
+            $the_link = "<span title='$monthTitle' class='collapsing $monthRel' $onclick>$ding&nbsp;</span>";
             $the_link .="<a href='$home/$archives$currentYear/$currentMonth' title='$title_text'>";
             $the_link .="$text</a>";
 
