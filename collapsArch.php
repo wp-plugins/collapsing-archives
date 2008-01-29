@@ -98,11 +98,17 @@ class collapsArch {
 		}
 		echo ";\n// ]]>\n</script>\n";
 		echo "
-	<!--  a bit more style for the collapsing class used in the fancy categories and fancy archives  -->
-		<style type='text/css'>
-			.collapsing {cursor:pointer;
-									 font-size:1.3em;}
-		</style>
+				 <style type='text/css'>
+	/* a bit more style for the collapsing class used in the fancy categories and fancy archives */
+					 /*#sidebar ul ul li:before {content:'';}        */
+					 span.collapsing {border:0;
+						 padding:0; 
+						 margin:0; 
+						 cursor:pointer;
+						font-size:1.3em;
+					 }
+					 li.collapsing: before {content:'';} 
+				 </style>
 	";
 	}
 }
