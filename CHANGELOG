@@ -1,5 +1,11 @@
 Collapsing Archives Changelog
 
+* 0.6.2: 
+    * Added collapsing class to <li>s with triangles for CSS styling
+    * Added style information to make triangles bigger and give a pointer
+      cursor over them
+    * Added title tags to triangles to indicate functionality
+
 * 0.6.1:
     * Bug fix - fixed the previous year triangle pointing in the wrong 
       direction

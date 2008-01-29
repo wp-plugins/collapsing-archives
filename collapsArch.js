@@ -74,11 +74,13 @@ function hideNestedList( e ) {
 	if( src.getAttribute( "class" ) == 'collapsing hide' ) {
 		childList.style.display = "none";
 		src.setAttribute("class","collapsing show");
+		src.setAttribute("title","click to expand");
     src.innerHTML="&#9658&nbsp;";
 	}
 	else {
 		childList.style.display = "";
 		src.setAttribute("class","collapsing hide");
+		src.setAttribute("title","click to collapse");
     src.innerHTML="&#9660&nbsp;";
 	}
 

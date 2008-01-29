@@ -4,7 +4,7 @@ Donate link: http://blog.robfelty.com/wordpress-plugins
 Tags: archives
 Requires at least: 2.0
 Tested up to: 2.3
-Stable tag: 0.6.1
+Stable tag: 0.6.2
 
 This plugin uses Javascript to dynamically expand or collaps the set of
 months for each year and posts for each month in the archive listing.
@@ -14,7 +14,9 @@ months for each year and posts for each month in the archive listing.
 This is a relatively simple plugin that uses Javascript to
 make the Archive links in the sidebar collapsable by year.
 
-It is largely based off of the Collapsing Categories Plugin by Andrew Rader
+It is largely based off of the Fancy Archives Plugin by Andrew Rader
+ 
+See the CHANGELOG for more information
 
 == Installation ==
 
@@ -58,9 +60,9 @@ For those who have widget capabilities, (default in Wordpress 2.3+), installatio
 
 Unpackage contents to wp-content/plugins/ so that the files are in a collapsCat
 directory. There should be 2 new plugins in your Wordpress Admin interface --
-Collapsing Categories, and Collapsing Categories Widget. You must enable both
+Collapsing Archives, and Collapsing Archives Widget. You must enable both
 of them, in that order. Then simply go the Presentation > Widgets section and
-drag over the Collapsing Categories Widget.
+drag over the Collapsing Archives Widget.
 
 == Frequently Asked Questions ==
 
@@ -69,6 +71,7 @@ None yet.
 == Screenshots ==
 
 1. available options
+2. Collapsing archives with default theme
 
 == Demo ==
 
