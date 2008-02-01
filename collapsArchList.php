@@ -56,6 +56,7 @@ $archPosts = $wpdb->get_results("SELECT DISTINCT YEAR(post_date) AS `year`,
     MONTH(post_date) AS `month`, count(ID) as posts FROM $wpdb->posts
     WHERE post_date < '$now' AND $post_attrs GROUP BY YEAR(post_date),
     MONTH(post_date) ORDER BY post_date $order");
+/*
 $allPosts = $wpdb->get_results("SELECT ID, post_title,
           post_date, YEAR(post_date) AS `year`,
     MONTH(post_date) AS `month`, count(ID) as posts FROM $wpdb->posts
@@ -70,7 +71,6 @@ print_r($archPosts);
 print_r($allPosts);
 echo "-->\n";
 */
-
 if( $allPosts ) {
   $currentYear = -1;
   $currentMonth = -1;
