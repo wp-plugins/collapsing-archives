@@ -4,7 +4,7 @@ Plugin Name: Collapsing Archives
 Plugin URI: http://blog.robfelty.com/plugins
 Description: Allows users to expand and collapse archive links like Blogger 
 Author: Robert Felty
-Version: 0.6.1
+Version: 0.7
 Author URI: http://robfelty.com
 
 Copyright 2007 Robert Felty
