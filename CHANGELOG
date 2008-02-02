@@ -1,5 +1,8 @@
 Collapsing Archives Changelog
 
+* 0.7:
+		* Complete rewrite of database code to reduce the number of queries from
+		  2 * #months + 1 to 1 single query
 * 0.6.2: 
     * Added collapsing class to <li>s with triangles for CSS styling
     * Added style information to make triangles bigger and give a pointer
