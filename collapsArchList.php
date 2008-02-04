@@ -198,7 +198,7 @@ if( $allPosts ) {
       }
 
       if( get_option('collapsArchShowPostDate')=='yes' ) {
-        $theDate = mysql2date( get_option('collapsArchPostDateFormat'), $archPost->post_date );
+        $theDate = mysql2date(get_option('collapsArchPostDateFormat'), $archPost->post_date );
         $text .= ( $text == '' ? $theDate : ', '.$theDate );
       }
 
@@ -223,8 +223,8 @@ if( $allPosts ) {
       }
 
       if( get_option('collapsArchShowPostDate')=='yes' ) {
-        $theDate = mysql2date( get_option('collapsArchPostDateFormat')=='yes', $archPost->post_date );
-        $text .= ( $text == '' ? $theDate : ', '.$theDate );
+        $theDate = mysql2date(get_option('collapsArchPostDateFormat'), $archPost->post_date );
+        $text .= ( $text == '' ? $theDate : ', foo '.$theDate );
       }
 
       if( get_option('collapsArchShowCommentCount')=='yes' ) {

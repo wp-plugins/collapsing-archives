@@ -109,7 +109,7 @@ This file is part of Collapsing Archives
 		}
 
 		$format= trim(stripslashes($_POST['postDateFormat']));
-		update_option( 'collapsArchPostdateformat', $format );
+		update_option( 'collapsArchPostDateFormat', $format );
 
 		if( isset($_POST['showPostNumber']) ) {
 			update_option( 'collapsArchShowPostNumber', 'yes' );
@@ -187,14 +187,23 @@ This file is part of Collapsing Archives
      </ul>
     </li>
     <li>
-     <input type="checkbox" name="showPostDate" <?php if(get_option('collapsArchShowPostDate')=='yes') echo 'checked'; ?> id="showPostDate"></input> <label for="showPostDate">Show Post Date in Post Links</label>
-<?php if( get_option('collapsArchShowPostDate')=='yes') : ?>
+     <input onchange='checkChecked();' type="checkbox" id="showPostDate" name="showPostDate" <?php if(get_option('collapsArchShowPostDate')=='yes') echo 'checked'; ?> id="showPostDate"></input> <label for="showPostDate">Show Post Date in Post Links</label>
      <ul>
       <li>
-		 <input name="postDateFormat" id="postDateFormat" value="<?php echo get_option('collapsArchPostDateFormat'); ?>"> Format (<a href="http://codex.wordpress.org/Formatting_Date_and_Time">Formatting Docs)</a></input>
+		 <input onfocus='checkChecked();'  name="postDateFormat" id="postDateFormat" value="<?php echo get_option('collapsArchPostDateFormat'); ?>"> Format (<a href="http://codex.wordpress.org/Formatting_Date_and_Time">Formatting Docs)</a></input>
 		</li>
+      <script type='text/javascript'>
+        function checkChecked() {
+          var dateFormatCheck = document.getElementById('showPostDate');
+          var dateFormatInput = document.getElementById('postDateFormat');
+          if (dateFormatCheck.checked==true) {
+            dateFormatInput.readOnly=false; 
+          } else {
+            dateFormatInput.readOnly=true;
+          }
+        }
+      </script>
      </ul>
-<?php endif ?>
     </li>
     <li>
      <input type="checkbox" name="showCommentCount" <?php if(get_option('collapsArchShowCommentCount')=='yes') echo 'checked'; ?> id="showCommentCount"></input> <label for="showCommentCount">Show Comment Count in Post Links</label>

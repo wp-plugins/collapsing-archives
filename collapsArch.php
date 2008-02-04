@@ -32,7 +32,7 @@ This file is part of Collapsing Archives
 */ 
 
 add_action( 'wp_head', array('collapsArch','get_head'));
-add_action('activate_Collapsing-Archives/CollapsArch.php', array('collapsArch','init'));
+add_action('activate_collapsing-archives/collapsArch.php', array('collapsArch','init'));
 add_action('admin_menu', array('collapsArch','setup'));
 
 class collapsArch {
@@ -53,7 +53,7 @@ class collapsArch {
 			add_option( 'collapsArchShowPostTitleLength', '0' );
 			add_option( 'collapsArchShowPostTitleEllipsis', 'yes' );
 			add_option( 'collapsArchShowPostDate', 'no' );
-			add_option( 'collapsArchPostDateFormat', '' );
+			add_option( 'collapsArchPostDateFormat', 'm/d' );
 			add_option( 'collapsArchShowPostNumber', 'no' );
 		}
 	}
