@@ -125,7 +125,7 @@ if( $allPosts ) {
       $lastYear=$currentYear;
       $currentYear = $archPost->year;
       $newYear = true;
-      if( get_option('collapsArchShowYearCount')=='yes' && $archYearposts ) {
+      if( get_option('collapsArchShowYearCount')=='yes') {
          $yearCount = ' (' . $yearCounts{"$currentYear"} . ")\n";
       }
       else {
@@ -152,7 +152,7 @@ if( $allPosts ) {
         echo "        </ul>\n      </li> <!-- close month $currentMonth," .  $allPosts[$i-2]->month . " --> \n";
       }
 
-      if( get_option('collapsArchShowMonthCount')=='yes' && $archMonthsposts ) {
+      if( get_option('collapsArchShowMonthCount')=='yes') {
          $monthCount = ' (' . $monthCounts{"$currentYear$currentMonth"} . ")\n";
       } else {
         $monthCount = '';
