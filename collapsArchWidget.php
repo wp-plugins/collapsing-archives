@@ -3,7 +3,7 @@
 Plugin Name: Collapsing Archive widget
 Plugin URI: http://robfelty.com
 Description: Use the Collapsing Archives plugin as a widget
-Version: 0.7
+Version: 0.7.1
 Author: Robert Felty
 Author URI: http://robfelty.com
 */

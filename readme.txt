@@ -4,7 +4,7 @@ Donate link: http://blog.robfelty.com/wordpress-plugins
 Tags: archives
 Requires at least: 2.0
 Tested up to: 2.3
-Stable tag: 0.7
+Stable tag: 0.7.1
 
 This plugin uses Javascript to dynamically expand or collaps the set of
 months for each year and posts for each month in the archive listing.
@@ -103,4 +103,64 @@ This plugin relies on Javascript, but does degrade
 gracefully if it is not present/enabled to show all of the
 archive links as usual.
 
+== HISTORY ==
 
+* 0.7.1
+    * Fixed comment count feature in post links
+    * Fixed display of date in post links
+    * Fixed automatic loading of options into database
+* 0.7:
+		* Complete rewrite of database code to reduce the number of queries from
+		  2 * #months + 1 to 1 single query
+* 0.6.2: 
+    * Added collapsing class to <li>s with triangles for CSS styling
+    * Added style information to make triangles bigger and give a pointer
+      cursor over them
+    * Added title tags to triangles to indicate functionality
+
+* 0.6.1:
+    * Bug fix - fixed the previous year triangle pointing in the wrong 
+      direction
+    * Changed default options to reflect how I use it on my website
+
+* 0.6: 
+    * Changed name from Fancy Archives to Collapsing Archives
+    * Changed author from Andrew Rader to Robert Felty
+    * Added option to link to archives.php
+    * Added option to list in chronological or reverse chronological order
+    * Added triangles which mark the collapsing and expanding features
+      That is, clicking on the triangle collapses or expands, while clicking
+      on a month or year links to the archives for the said month or year
+    * Changed behavior from starting all expanded and then collapsing on page
+      load to the opposite
+    * Removed the rel='hide' and rel='show' tags, because they are not xhtml
+      1.0 compliant. Now uses the CSS classes instead
+---------------------------------------------------------------------------
+Fancy Archives Changelog
+* 0.5:
+    * Added option to display Page entries with Posts inside the month links
+    * Cleaned up the list generation code
+
+* 0.4:
+    * Added option: Trim post titles to a set size
+    * Added option: Optionally show ellipsis if a post title was shrunk
+    * Fix: Added fix for when page's content-type is "application/xhtml+xml"
+
+* 0.3:
+    * Huge rewrite: cleaned up javascript - one function does all the work,
+      javascript no longer visible in page source
+    * Added options: month links are optional, set current year/month to be
+      expanded by default
+    * Links now link to 'javascript;' instead of '#'
+
+* 0.2.5:
+    * Fixed an issue with displaying comment counts in < WP2.0, fixed by using
+      WP's internal comment counting function (Thanks Will)
+
+* 0.2:
+    * Massive update, now has a dedicated options page (no more passing options to
+      function)
+    * Month links can expand to show individual posts
+
+* 0.1:
+	* Initial Release
