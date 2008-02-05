@@ -203,7 +203,7 @@ if( $allPosts ) {
       }
 
       if( get_option('collapsArchShowCommentCount')=='yes' ) {
-        $commcount = ' ('.getCommentsNumber($archPost->ID).')';
+        $commcount = ' ('.get_comments_number($archPost->ID).')';
       }
 
       $link = get_permalink( $archPost->ID );
@@ -228,7 +228,7 @@ if( $allPosts ) {
       }
 
       if( get_option('collapsArchShowCommentCount')=='yes' ) {
-        $commcount = ' ('.getCommentsNumber($archPost->ID).')';
+        $commcount = ' ('.get_comments_number($archPost->ID).')';
       }
 
       $link = get_permalink( $archPost->ID );
