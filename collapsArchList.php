@@ -209,7 +209,7 @@ if( $allPosts ) {
       }
 
       $link = get_permalink( $archPost->ID );
-      echo "          <li><a href=\"$link\" title='$title_text'>$text</a>$commcount</li>\n";
+      echo "          <li class='collapsArchPost'><a href=\"$link\" title='$title_text'>$text</a>$commcount</li>\n";
       }
     } else {
       echo '          <li>';
