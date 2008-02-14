@@ -1,5 +1,10 @@
 Collapsing Archives Changelog
 
+* 0.7.3
+    * posts now have the class "collapsCatPost" and can be styled with CSS.
+      Some styling has been added in collapsCat.php
+    * removed list icons in front of triangles
+    
 * 0.7.2
     * Added option to link to index.php, root, or archives.php
 
