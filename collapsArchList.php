@@ -212,7 +212,7 @@ if( $allPosts ) {
       echo "          <li class='collapsArchPost'><a href=\"$link\" title='$title_text'>$text</a>$commcount</li>\n";
       }
     } else {
-      echo '          <li>';
+      echo "          <li class='collapsArchPost'>";
       $text = '';
 
       if( get_option('collapsArchShowPostNumber')=='yes' ) {

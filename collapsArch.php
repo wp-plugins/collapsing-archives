@@ -109,7 +109,8 @@ class collapsArch {
 					 }
 					#sidebar li.collapsing:before {content:'';} 
           #sidebar li.collapsing {list-style-type:none}
-          #sidebar li.collapsArchPost {padding:0 0 0 2em;}
+          #sidebar li.collapsArchPost {padding:0 0 0 .1em;
+                         margin:0 0 0 1em;}
 				 </style>
 	";
 	}
