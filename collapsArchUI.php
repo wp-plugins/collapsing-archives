@@ -122,10 +122,12 @@ This file is part of Collapsing Archives
     } else {
       update_option( 'collapsArchOrder', 'DESC' );
     }
-    if($_POST['archives'] == 'yes') {
-      update_option( 'collapsArchLinkToArchives', 'yes' );
-    } else {
-      update_option( 'collapsArchLinkToArchives', 'no' );
+    if($_POST['archives'] == 'root') {
+      update_option( 'collapsArchLinkToArchives', 'root' );
+    } elseif ($_POST['archives'] == 'archives') {
+      update_option( 'collapsArchLinkToArchives', 'archives' );
+    } elseif ($_POST['archives'] == 'index') {
+      update_option( 'collapsArchLinkToArchives', 'index' );
     }
 	}
 ?>
@@ -136,8 +138,9 @@ This file is part of Collapsing Archives
    <legend><?php _e('Display Options:'); ?></legend>
    <ul style="list-style-type: none;">
     <li>
-     <input type="radio" name="archives" <?php if(get_option('collapsArchLinkToArchives')=='no') echo 'checked'; ?> id="archivesNO" value='no'></input> <label for="orderDESC">Links based on index.php (default)</label>
-     <input type="radio" name="archives" <?php if(get_option('collapsArchLinkToArchives')=='yes') echo 'checked'; ?> id="archivesYES" value='yes'></input> <label for="orderASC">Links based on archives.php</label>
+     <input type="radio" name="archives" <?php if(get_option('collapsArchLinkToArchives')=='root') echo 'checked'; ?> id="archivesRoot" value='root'></input> <label for="orderDESC">Links based on site root (default)</label>
+     <input type="radio" name="archives" <?php if(get_option('collapsArchLinkToArchives')=='index') echo 'checked'; ?> id="archivesIndex" value='index'></input> <label for="orderDESC">Links based on index.php </label>
+     <input type="radio" name="archives" <?php if(get_option('collapsArchLinkToArchives')=='archives') echo 'checked'; ?> id="archivesArchives" value='archives'></input> <label for="orderASC">Links based on archives.php</label>
     </li>
     <li>
      <input type="radio" name="order" <?php if(get_option('collapsArchOrder')=='DESC') echo 'checked'; ?> id="orderDESC" value='DESC'></input> <label for="orderDESC">Reverse Chronological Order (default)</label>

@@ -1,6 +1,6 @@
 <?php
 /*
-Collapsing Archives version: 0.7.1
+Collapsing Archives version: 0.7.2
 
 Copyright 2007 Robert Felty
 
@@ -44,9 +44,11 @@ if (get_option('collapsArchOrder')=='ASC') {
 } else {
   $order='DESC';
 }
-if (get_option('collapsArchLinkToArchives')=='yes') {
+if (get_option('collapsArchLinkToArchives')=='archives') {
   $archives='archives.php/';
-} else {
+} elseif (get_option('collapsArchLinkToArchives')=='index') {
+  $archives='index.php/';
+} elseif (get_option('collapsArchLinkToArchives')=='root') {
   $archives='';
 }
 

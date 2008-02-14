@@ -1,5 +1,8 @@
 Collapsing Archives Changelog
 
+* 0.7.2
+    * Added option to link to index.php, root, or archives.php
+
 * 0.7.1
     * Fixed comment count feature in post links
     * Fixed display of date in post links
