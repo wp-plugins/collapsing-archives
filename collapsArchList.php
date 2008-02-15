@@ -1,6 +1,6 @@
 <?php
 /*
-Collapsing Archives version: 0.7.3
+Collapsing Archives version: 0.7.4
 
 Copyright 2007 Robert Felty
 
@@ -209,7 +209,7 @@ if( $allPosts ) {
       }
 
       $link = get_permalink( $archPost->ID );
-      echo "          <li class='collapsArchPost'><a href=\"$link\" title='$title_text'>$text</a>$commcount</li>\n";
+      echo "          <li class='collapsArchPost'><a href='$link' title='$title_text'>$text</a>$commcount</li>\n";
       }
     } else {
       echo "          <li class='collapsArchPost'>";
@@ -234,7 +234,7 @@ if( $allPosts ) {
       }
 
       $link = get_permalink( $archPost->ID );
-      echo "<a href='.$link.' title='$title_text'>$text</a>$commcount";
+      echo "<a href='$link.' title='$title_text'>$text</a>$commcount";
       echo "</li>\n";
     }
   }

@@ -1,5 +1,8 @@
 Collapsing Archives Changelog
 
+* 0.7.4
+    * fixed broken links
+
 * 0.7.3
     * posts now have the class "collapsCatPost" and can be styled with CSS.
       Some styling has been added in collapsCat.php
