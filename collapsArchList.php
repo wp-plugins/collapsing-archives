@@ -234,7 +234,7 @@ if( $allPosts ) {
       }
 
       $link = get_permalink( $archPost->ID );
-      echo "<a href='$link.' title='$title_text'>$text</a>$commcount";
+      echo "<a href='$link' title='$title_text'>$text</a>$commcount";
       echo "</li>\n";
     }
   }
