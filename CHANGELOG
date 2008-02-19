@@ -1,5 +1,9 @@
 Collapsing Archives Changelog
 
+* 0.7.5
+    * fixed bug when turning off "month links should expand to show posts" 
+      option
+
 * 0.7.4
     * fixed broken links
 

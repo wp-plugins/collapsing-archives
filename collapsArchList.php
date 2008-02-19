@@ -1,6 +1,6 @@
 <?php
 /*
-Collapsing Archives version: 0.7.4
+Collapsing Archives version: 0.7.5
 
 Copyright 2007 Robert Felty
 
@@ -166,7 +166,7 @@ if( $allPosts ) {
 									$ding = '&#9658;';
         }
       } else {
-        $link = getMonth_link( $currentYear, $currentMonth );
+        $link = get_month_link( $currentYear, $currentMonth );
         $onclick = '';
         $monthRel = '';
       }
