@@ -139,7 +139,11 @@ if( $allPosts ) {
       if($newYear == false) { #close off last month
         $newYear=true; 
       } else {
-        echo "        </ul>\n      </li> <!-- close month $currentMonth," .  $allPosts[$i-2]->month . " --> \n";
+				if( get_option('collapsArchExpandMonths')=='yes' ) {
+					echo "        </ul>\n      </li> <!-- close month --> \n";
+				} else {
+					echo "      </li> <!-- close month --> \n";
+				}
       }
 
       if( get_option('collapsArchShowMonthCount')=='yes') {
