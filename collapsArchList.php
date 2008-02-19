@@ -120,7 +120,7 @@ if( $allPosts ) {
       
       if($i>=2 && $allPosts[$i-2]->year != $archPost->year ) {
 				if( get_option('collapsArchExpandMonths')=='yes' ) {
-					echo "        </ul>\n      </li> <!-- close month --> \n";
+					echo "        </ul>\n      </li> <!-- close expanded month --> \n";
 				} else {
 					echo "      </li> <!-- close month --> \n";
 				}
@@ -140,7 +140,7 @@ if( $allPosts ) {
         $newYear=true; 
       } else {
 				if( get_option('collapsArchExpandMonths')=='yes' ) {
-					echo "        </ul>\n      </li> <!-- close month --> \n";
+					echo "        </ul>\n      </li> <!-- close expanded month --> \n";
 				} else {
 					echo "      </li> <!-- close month --> \n";
 				}
@@ -152,42 +152,42 @@ if( $allPosts ) {
         $monthCount = '';
       }
       if( get_option('collapsArchShowMonths')=='yes' ) {
-      $text = sprintf('%s', $month[zeroise($currentMonth,2)]);
+				$text = sprintf('%s', $month[zeroise($currentMonth,2)]);
 
-      $text = wptexturize($text);
-      #$title_text = wp_specialchars($text,1);
-      $title_text = strip_tags($text);
+				$text = wptexturize($text);
+				#$title_text = wp_specialchars($text,1);
+				$title_text = strip_tags($text);
 
-      if( get_option('collapsArchExpandMonths')=='yes' ) {
-        $link = 'javascript:;';
-        $onclick = 'onclick="hideNestedList(event); return false"';
-        $monthCollapse = 'collapsing';
-        if( get_option('collapsArchExpandCurrentMonth')=='yes'
-            && $currentYear == date('Y')
-            && $currentMonth == date('n') ) {
-									$monthRel = 'hide';
-									$monthTitle= 'click to collapse';
-          $postStyle = '';
-									$ding = '&#9660;&nbsp;';
-        } else {
-									$monthRel = 'show';
-									$monthTitle= 'click to expand';
-									$ding = '&#9658;&nbsp;';
-        }
-				$the_link = "<span title='$monthTitle' class='$monthCollapse $monthRel' $onclick>$ding</span>";
-				$the_link .="<a href='$home/$archives$currentYear/$currentMonth' title='$title_text'>";
-				$the_link .="$text</a>\n";
-      } else {
-        $link = get_month_link( $currentYear, $currentMonth );
-        $onclick = '';
-        $monthRel = '';
-        $monthTitle = '';
-        $monthCollapse = '';
-				$the_link ="<a href='$home/$archives$currentYear/$currentMonth' title='$title_text'>";
-				$the_link .="$text</a>\n";
-      }
+				if( get_option('collapsArchExpandMonths')=='yes' ) {
+					$link = 'javascript:;';
+					$onclick = 'onclick="hideNestedList(event); return false"';
+					$monthCollapse = 'collapsing';
+					if( get_option('collapsArchExpandCurrentMonth')=='yes'
+							&& $currentYear == date('Y')
+							&& $currentMonth == date('n') ) {
+										$monthRel = 'hide';
+										$monthTitle= 'click to collapse';
+						$postStyle = '';
+										$ding = '&#9660;&nbsp;';
+					} else {
+										$monthRel = 'show';
+										$monthTitle= 'click to expand';
+										$ding = '&#9658;&nbsp;';
+					}
+					$the_link = "<span title='$monthTitle' class='$monthCollapse $monthRel' $onclick>$ding</span>";
+					$the_link .="<a href='$home/$archives$currentYear/$currentMonth' title='$title_text'>";
+					$the_link .="$text</a>\n";
+				} else {
+					$link = get_month_link( $currentYear, $currentMonth );
+					$onclick = '';
+					$monthRel = '';
+					$monthTitle = '';
+					$monthCollapse = '';
+					$the_link ="<a href='$home/$archives$currentYear/$currentMonth' title='$title_text'>";
+					$the_link .="$text</a>\n";
+				}
 
-      echo "      <li class='$monthCollapse'>".$the_link.$monthCount;
+				echo "      <li class='$monthCollapse'>".$the_link.$monthCount;
 
 			}
 			if( get_option('collapsArchShowMonths')=='yes' && get_option('collapsArchExpandMonths')=='yes' ) {
@@ -280,10 +280,10 @@ if( $allPosts ) {
 						$commcount = ' ('.get_comments_number($archPost->ID).')';
 					}
 
+		*/
 					$link = get_permalink( $archPost->ID );
 					echo "<a href='$link' title='$title_text'>$text</a>$commcount";
 					echo "</li>\n";
-		*/
 			}
     }
   }
