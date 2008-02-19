@@ -255,9 +255,9 @@ if( $allPosts ) {
 						$commcount = ' ('.get_comments_number($archPost->ID).')';
 					}
 
-		/*
 					$link = get_permalink( $archPost->ID );
 					echo "          <li class='collapsArchPost'><a href='$link' title='$title_text'>$text</a>$commcount</li>\n";
+		/*
 					}
 					echo "          <li class='collapsArchPost'>";
 					$text = '';
@@ -280,10 +280,10 @@ if( $allPosts ) {
 						$commcount = ' ('.get_comments_number($archPost->ID).')';
 					}
 
-		*/
 					$link = get_permalink( $archPost->ID );
 					echo "<a href='$link' title='$title_text'>$text</a>$commcount";
 					echo "</li>\n";
+		*/
 			}
     }
   }
