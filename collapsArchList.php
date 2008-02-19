@@ -119,7 +119,11 @@ if( $allPosts ) {
       }
       
       if($i>=2 && $allPosts[$i-2]->year != $archPost->year ) {
-        echo "        </ul>\n      </li> <!-- close month --> \n";
+				if( get_option('collapsArchExpandMonths')=='yes' ) {
+					echo "        </ul>\n      </li> <!-- close month --> \n";
+				} else {
+					echo "      </li> <!-- close month --> \n";
+				}
         echo "    </ul>\n  </li> <!-- end year -->\n";
       }
       echo "  <li class='collapsing'><span title='$yearTitle' class='collapsing $yearRel' onclick='hideNestedList(event); return false' >$ding&nbsp;</span>";
@@ -129,7 +133,7 @@ if( $allPosts ) {
       $newYear = false;
     }
 
-    if($currentMonth != $archPost->month ) {
+    if($currentMonth != $archPost->month &&  get_option('collapsArchExpandMonths')=='yes') {
       $currentMonth = $archPost->month;
       $newMonth = true;
       if($newYear == false) { #close off last month
@@ -153,6 +157,7 @@ if( $allPosts ) {
       if( get_option('collapsArchExpandMonths')=='yes' ) {
         $link = 'javascript:;';
         $onclick = 'onclick="hideNestedList(event); return false"';
+        $monthCollapse = 'collapsing';
         if( get_option('collapsArchExpandCurrentMonth')=='yes'
             && $currentYear == date('Y')
             && $currentMonth == date('n') ) {
@@ -169,8 +174,10 @@ if( $allPosts ) {
         $link = get_month_link( $currentYear, $currentMonth );
         $onclick = '';
         $monthRel = '';
+        $monthTitle = '';
+        $monthCollapse = '';
       }
-      $the_link = "<span title='$monthTitle' class='collapsing $monthRel' $onclick>$ding&nbsp;</span>";
+      $the_link = "<span title='$monthTitle' class='$monthCollapse $monthRel' $onclick>$ding&nbsp;</span>";
       $the_link .="<a href='$home/$archives$currentYear/$currentMonth' title='$title_text'>";
       $the_link .="$text</a>\n";
 
