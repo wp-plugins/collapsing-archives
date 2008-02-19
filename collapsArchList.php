@@ -86,7 +86,7 @@ if( $allPosts ) {
   $monthCount=0;
   $i=0;
   foreach( $allPosts as $archPost ) {
-    $ding = '&#9658;';
+    $ding = '&#9658;&nbsp;';
     $i++;
     $yearRel = 'show';
     $monthRel = 'show';
@@ -100,7 +100,7 @@ if( $allPosts ) {
      */
     if( get_option('collapsArchExpandCurrentYear')=='yes'
         && $archPost->year == date('Y') ) {
-      $ding = '&#9660;';
+      $ding = '&#9660;&nbsp;';
       $yearRel = "hide";
       $yearTitle= 'click to collapse';
       $monthStyle = '';
@@ -126,7 +126,7 @@ if( $allPosts ) {
 				}
         echo "    </ul>\n  </li> <!-- end year -->\n";
       }
-      echo "  <li class='collapsing'><span title='$yearTitle' class='collapsing $yearRel' onclick='hideNestedList(event); return false' >$ding&nbsp;</span>";
+      echo "  <li class='collapsing'><span title='$yearTitle' class='collapsing $yearRel' onclick='hideNestedList(event); return false' >$ding</span>";
       $home = get_settings('home');
       echo "<a href='$home/$archives$currentYear'>$currentYear</a>$yearCount\n";
       echo "    <ul $monthStyle id='collapsArchList-$currentYear'>\n";
@@ -168,24 +168,26 @@ if( $allPosts ) {
 									$monthRel = 'hide';
 									$monthTitle= 'click to collapse';
           $postStyle = '';
-									$ding = '&#9660;';
+									$ding = '&#9660;&nbsp;';
         } else {
 									$monthRel = 'show';
 									$monthTitle= 'click to expand';
-									$ding = '&#9658;';
+									$ding = '&#9658;&nbsp;';
         }
+				$the_link = "<span title='$monthTitle' class='$monthCollapse $monthRel' $onclick>$ding</span>";
+				$the_link .="<a href='$home/$archives$currentYear/$currentMonth' title='$title_text'>";
+				$the_link .="$text</a>\n";
       } else {
         $link = get_month_link( $currentYear, $currentMonth );
         $onclick = '';
         $monthRel = '';
         $monthTitle = '';
         $monthCollapse = '';
+				$the_link .="<a href='$home/$archives$currentYear/$currentMonth' title='$title_text'>";
+				$the_link .="$text</a>\n";
       }
-      $the_link = "<span title='$monthTitle' class='$monthCollapse $monthRel' $onclick>$ding&nbsp;</span>";
-      $the_link .="<a href='$home/$archives$currentYear/$currentMonth' title='$title_text'>";
-      $the_link .="$text</a>\n";
 
-      echo "      <li class='collapsing'>".$the_link.$monthCount;
+      echo "      <li class='$monthCollapse'>".$the_link.$monthCount;
 
 			}
 			if( get_option('collapsArchShowMonths')=='yes' && get_option('collapsArchExpandMonths')=='yes' ) {
