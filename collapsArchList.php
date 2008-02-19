@@ -183,7 +183,7 @@ if( $allPosts ) {
         $monthRel = '';
         $monthTitle = '';
         $monthCollapse = '';
-				$the_link .="<a href='$home/$archives$currentYear/$currentMonth' title='$title_text'>";
+				$the_link ="<a href='$home/$archives$currentYear/$currentMonth' title='$title_text'>";
 				$the_link .="$text</a>\n";
       }
 
