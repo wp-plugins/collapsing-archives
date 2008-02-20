@@ -1,6 +1,6 @@
 <?php
 /*
-Collapsing Archives version: 0.7.5
+Collapsing Archives version: 0.7.6
 
 Copyright 2007 Robert Felty
 
@@ -287,8 +287,10 @@ if( $allPosts ) {
 			}
     }
   }
+  if( get_option('collapsArchShowMonths')=='yes' && get_option('collapsArchExpandMonths')=='yes' ) {
+    echo "        </ul>\n";
+  }
 } ?>
-        </ul>
       </li> <!-- close month -->
     </ul>
   </li> <!-- close year -->

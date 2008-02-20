@@ -1,5 +1,8 @@
 Collapsing Archives Changelog
 
+* 0.7.6
+    * fixed some more markup issues to make it valid xhtml
+
 * 0.7.5
     * fixed bug when turning off "month links should expand to show posts" 
       option
