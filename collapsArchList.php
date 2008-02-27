@@ -1,6 +1,6 @@
 <?php
 /*
-Collapsing Archives version: 0.7.6
+Collapsing Archives version: 0.7.7
 
 Copyright 2007 Robert Felty
 
@@ -128,7 +128,7 @@ if( $allPosts ) {
       }
       echo "  <li class='collapsing'><span title='$yearTitle' class='collapsing $yearRel' onclick='hideNestedList(event); return false' >$ding</span>";
       $home = get_settings('home');
-      echo "<a href='$home/$archives$currentYear'>$currentYear</a>$yearCount\n";
+      echo "<a href='".get_year_link($archPost->year). "'>$currentYear</a>$yearCount\n";
       echo "    <ul $monthStyle id='collapsArchList-$currentYear'>\n";
       $newYear = false;
     }
@@ -175,7 +175,7 @@ if( $allPosts ) {
 										$ding = '&#9658;&nbsp;';
 					}
 					$the_link = "<span title='$monthTitle' class='$monthCollapse $monthRel' $onclick>$ding</span>";
-					$the_link .="<a href='$home/$archives$currentYear/$currentMonth' title='$title_text'>";
+					$the_link .="<a href='".get_month_link($currentYear, $currentMonth)."' title='$title_text'>";
 					$the_link .="$text</a>\n";
 				} else {
 					$link = get_month_link( $currentYear, $currentMonth );
@@ -183,7 +183,8 @@ if( $allPosts ) {
 					$monthRel = '';
 					$monthTitle = '';
 					$monthCollapse = '';
-					$the_link ="<a href='$home/$archives$currentYear/$currentMonth' title='$title_text'>";
+					//$the_link ="<a href='$home/$archives$currentYear/$currentMonth' title='$title_text'>";
+					$the_link ="<a href='".get_month_link($currentYear, $currentMonth)."' title='$title_text'>";
 					$the_link .="$text</a>\n";
 				}
 

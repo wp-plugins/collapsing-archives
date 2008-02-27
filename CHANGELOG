@@ -1,5 +1,9 @@
 Collapsing Archives Changelog
 
+* 0.7.7
+    * Now links should work with all sorts of permalink structures. Thanks to
+      Krysthora http://krysthora.free.fr/ for finding this bug
+
 * 0.7.6
     * fixed some more markup issues to make it valid xhtml
 
@@ -22,9 +26,11 @@ Collapsing Archives Changelog
     * Fixed comment count feature in post links
     * Fixed display of date in post links
     * Fixed automatic loading of options into database
+
 * 0.7:
 		* Complete rewrite of database code to reduce the number of queries from
 		  2 * #months + 1 to 1 single query
+
 * 0.6.2: 
     * Added collapsing class to <li>s with triangles for CSS styling
     * Added style information to make triangles bigger and give a pointer
@@ -48,6 +54,7 @@ Collapsing Archives Changelog
       load to the opposite
     * Removed the rel='hide' and rel='show' tags, because they are not xhtml
       1.0 compliant. Now uses the CSS classes instead
+
 ---------------------------------------------------------------------------
 Fancy Archives Changelog
 * 0.5:
@@ -71,8 +78,8 @@ Fancy Archives Changelog
       WP's internal comment counting function (Thanks Will)
 
 * 0.2:
-    * Massive update, now has a dedicated options page (no more passing options to
-      function)
+    * Massive update, now has a dedicated options page (no more passing
+      options to function)
     * Month links can expand to show individual posts
 
 * 0.1:
