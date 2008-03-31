@@ -111,6 +111,7 @@ archive links as usual.
     * Now has custom styling option through the collapsArch.css stylesheet
     * updated screenshots
     * (Hopefully) fixed multi-language support for titles (put htmlentitites back in)
+    * moved javascript into collapsArch.php and got rid of separate file
 
 * 0.7.8 
     * Got rid of htmlentities in post titles. Should display better now
