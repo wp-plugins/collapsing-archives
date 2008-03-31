@@ -1,9 +1,9 @@
 === Collapsing Archives ===
 Contributors: robfelty
 Donate link: http://blog.robfelty.com/wordpress-plugins
-Tags: archives
+Tags: archives, sidebar, widget
 Requires at least: 2.0
-Tested up to: 2.3
+Tested up to: 2.5
 Stable tag: 0.8
 
 This plugin uses Javascript to dynamically expand or collaps the set of
