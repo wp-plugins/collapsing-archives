@@ -32,5 +32,6 @@ font-size:1.3em;
 }
 #sidebar li.collapsArch:before {content:'';} 
 #sidebar li.collapsArch {list-style-type:none}
-#sidebar li.collapsArchPost {padding:0 0 0 .1em;
+#sidebar li.collapsArchPost {
+             text-indent:-1em;
              margin:0 0 0 1em;}
