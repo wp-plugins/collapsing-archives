@@ -84,18 +84,55 @@ class collapsArch {
 		echo "// These variables are part of the Collapsing Archives Plugin version: 0.8\n// Copyright 2007 Robert Felty (robfelty.com)\n";
 		echo "collapsArchExpCurrYear = ";
 		if (get_option('collapsArchExpandCurrentYear')=='yes') {
-			echo "true";
+			echo "true;\n";
 		}
 		else {
-			echo "false";
+			echo "false;\n";
 		}
 		echo ";\ncollapsArchExpCurrMonth = ";
 		if (get_option('collapsArchExpandCurrentMonth')=='yes') {
-			echo "true";
+			echo "true;\n";
 		}
 		else {
-			echo "false";
+			echo "false;\n";
 		}
+  echo "function expandArch( e ) {
+	if( e.target ) {
+		src = e.target;
+	}
+	else {
+		src = window.event.srcElement;
+	}
+
+	srcList = src.parentNode;
+	childList = null;
+
+	for( i = 0; i < srcList.childNodes.length; i++ ) {
+		if( srcList.childNodes[i].nodeName.toLowerCase() == 'ul' ) {
+			childList = srcList.childNodes[i];
+		}
+	}
+
+	if( src.getAttribute( 'class' ) == 'collapsArch hide' ) {
+		childList.style.display = 'none';
+		src.setAttribute('class','collapsArch show');
+		src.setAttribute('title','click to expand');
+    src.innerHTML='&#9658&nbsp;';
+	}
+	else {
+		childList.style.display = '';
+		src.setAttribute('class','collapsArch hide');
+		src.setAttribute('title','click to collapse');
+    src.innerHTML='&#9660&nbsp;';
+	}
+
+	if( e.preventDefault ) {
+		e.preventDefault();
+	}
+
+	return false;
+}\n";
+
 		echo ";\n// ]]>\n</script>\n";
     echo "<style type='text/css'>
 		@import '$url/wp-content/plugins/collapsing-archives/collapsArch.css';

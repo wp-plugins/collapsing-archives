@@ -126,7 +126,7 @@ if( $allPosts ) {
 				}
         echo "    </ul>\n  </li> <!-- end year -->\n";
       }
-      echo "  <li class='collapsArch'><span title='$yearTitle' class='collapsArch $yearRel' onclick='hideNestedList(event); return false' >$ding</span>";
+      echo "  <li class='collapsArch'><span title='$yearTitle' class='collapsArch $yearRel' onclick='expandArch(event); return false' >$ding</span>";
       $home = get_settings('home');
       echo "<a href='".get_year_link($archPost->year). "'>$currentYear</a>$yearCount\n";
       echo "    <ul $monthStyle id='collapsArchList-$currentYear'>\n";
@@ -161,7 +161,7 @@ if( $allPosts ) {
 
 				if( get_option('collapsArchExpandMonths')=='yes' ) {
 					$link = 'javascript:;';
-					$onclick = 'onclick="hideNestedList(event); return false"';
+					$onclick = 'onclick="expandArch(event); return false"';
 					$monthCollapse = 'collapsArch';
 					if( get_option('collapsArchExpandCurrentMonth')=='yes'
 							&& $currentYear == date('Y')
