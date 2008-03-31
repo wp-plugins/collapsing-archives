@@ -1,5 +1,11 @@
 Collapsing Archives Changelog
 
+* 0.8 
+    * Verified to work with wordpress 2.5
+    * Now has custom styling option through the collapsArch.css stylesheet
+    * updated screenshots
+    * (Hopefully) fixed multi-language support for titles (put htmlentitites back in)
+
 * 0.7.8 
     * Got rid of htmlentities in post titles. Should display better now
 

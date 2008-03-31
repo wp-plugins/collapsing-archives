@@ -126,7 +126,7 @@ if( $allPosts ) {
 				}
         echo "    </ul>\n  </li> <!-- end year -->\n";
       }
-      echo "  <li class='collapsing'><span title='$yearTitle' class='collapsing $yearRel' onclick='hideNestedList(event); return false' >$ding</span>";
+      echo "  <li class='collapsArch'><span title='$yearTitle' class='collapsArch $yearRel' onclick='hideNestedList(event); return false' >$ding</span>";
       $home = get_settings('home');
       echo "<a href='".get_year_link($archPost->year). "'>$currentYear</a>$yearCount\n";
       echo "    <ul $monthStyle id='collapsArchList-$currentYear'>\n";
@@ -155,13 +155,14 @@ if( $allPosts ) {
 				$text = sprintf('%s', $month[zeroise($currentMonth,2)]);
 
 				$text = wptexturize($text);
-				#$title_text = wp_specialchars($text,1);
-				$title_text = strip_tags($text);
+				$title_text = wp_specialchars($text,1);
+				#$title_text = wptexturize($text);
+				#$title_text = strip_tags($text);
 
 				if( get_option('collapsArchExpandMonths')=='yes' ) {
 					$link = 'javascript:;';
 					$onclick = 'onclick="hideNestedList(event); return false"';
-					$monthCollapse = 'collapsing';
+					$monthCollapse = 'collapsArch';
 					if( get_option('collapsArchExpandCurrentMonth')=='yes'
 							&& $currentYear == date('Y')
 							&& $currentMonth == date('n') ) {
@@ -201,7 +202,8 @@ if( $allPosts ) {
 				}
 
 				if( get_option('collapsArchShowPostTitle')=='yes' ) {
-					$title_text = strip_tags($archPost->post_title);
+						$title_text = htmlentities(strip_tags($archPost->post_title), ENT_QUOTES);
+					#$title_text = strip_tags($archPost->post_title);
 
 					if( get_option('collapsArchPostTitleLength')> 0 && strlen( $title_text ) > get_option('collapsArchPostTitleLength') ) {
 						$title_text = substr($title_text, 0, get_option('collapsArchPostTitleLength') );
@@ -235,8 +237,10 @@ if( $allPosts ) {
 					}
 
 					if( get_option('collapsArchShowPostTitle')=='yes' ) {
-						$title_text = strip_tags($archPost->post_title);
+						#$title_text = strip_tags($archPost->post_title);
 
+						$title_text = htmlentities(strip_tags($archPost->post_title), ENT_QUOTES);
+						#$title_text = strip_tags(htmlentities($archPost->post_title, ENT_QUOTES));
 						if( get_option('collapsArchPostTitleLength')> 0 && strlen( $title_text ) > get_option('collapsArchPostTitleLength') ) {
 							$title_text = substr($title_text, 0, get_option('collapsArchPostTitleLength') );
 							if( get_option('collapsArchShowPostTitleEllipsis')=='yes' ) {

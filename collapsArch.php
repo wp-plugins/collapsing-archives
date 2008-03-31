@@ -97,22 +97,9 @@ class collapsArch {
 			echo "false";
 		}
 		echo ";\n// ]]>\n</script>\n";
-		echo "
-				 <style type='text/css'>
-	/* a bit more style for the collapsing class used in the fancy categories and fancy archives */
-					 /*#sidebar ul ul li:before {content:'';}        */
-					 span.collapsing {border:0;
-						 padding:0; 
-						 margin:0; 
-						 cursor:pointer;
-						font-size:1.3em;
-					 }
-					#sidebar li.collapsing:before {content:'';} 
-          #sidebar li.collapsing {list-style-type:none}
-          #sidebar li.collapsArchPost {padding:0 0 0 .1em;
-                         margin:0 0 0 1em;}
-				 </style>
-	";
+    echo "<style type='text/css'>
+		@import '$url/wp-content/plugins/collapsing-archives/collapsArch.css';
+    </style>\n";
 	}
 }
 

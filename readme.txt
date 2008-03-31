@@ -66,12 +66,13 @@ drag over the Collapsing Archives Widget.
 
 == Frequently Asked Questions ==
 
-None yet.
+1. How do I change the style of the collapsing archives lists?
+   You can modify the collapsArch.css file to your liking
 
 == Screenshots ==
 
-1. available options
-2. Collapsing archives with default theme
+1. Collapsing archives with default theme
+2. available options
 
 == Demo ==
 
@@ -84,7 +85,7 @@ Options for Collapsing Archives are found under Options -> Collapsing
 Archives. So far, there are the following options:
 
   * Use chronological or reverse chronological ordering
-  * Links point to index.php or archives.php
+  * Links point to root, index.php or archives.php
   * Leave Current Year Expanded by Default
   * Display number of posts in a year
   * Show Month Link
@@ -105,13 +106,46 @@ archive links as usual.
 
 == HISTORY ==
 
+* 0.8 
+    * Verified to work with wordpress 2.5
+    * Now has custom styling option through the collapsArch.css stylesheet
+    * updated screenshots
+    * (Hopefully) fixed multi-language support for titles (put htmlentitites back in)
+
+* 0.7.8 
+    * Got rid of htmlentities in post titles. Should display better now
+
+* 0.7.7
+    * Now links should work with all sorts of permalink structures. Thanks to
+      Krysthora http://krysthora.free.fr/ for finding this bug
+
+* 0.7.6
+    * fixed some more markup issues to make it valid xhtml
+
+* 0.7.5
+    * fixed bug when turning off "month links should expand to show posts" 
+      option
+
+* 0.7.4
+    * fixed broken links
+
+* 0.7.3
+    * posts now have the class "collapsCatPost" and can be styled with CSS.
+      Some styling has been added in collapsCat.php
+    * removed list icons in front of triangles
+    
+* 0.7.2
+    * Added option to link to index.php, root, or archives.php
+
 * 0.7.1
     * Fixed comment count feature in post links
     * Fixed display of date in post links
     * Fixed automatic loading of options into database
+
 * 0.7:
 		* Complete rewrite of database code to reduce the number of queries from
 		  2 * #months + 1 to 1 single query
+
 * 0.6.2: 
     * Added collapsing class to <li>s with triangles for CSS styling
     * Added style information to make triangles bigger and give a pointer
@@ -135,6 +169,7 @@ archive links as usual.
       load to the opposite
     * Removed the rel='hide' and rel='show' tags, because they are not xhtml
       1.0 compliant. Now uses the CSS classes instead
+
 ---------------------------------------------------------------------------
 Fancy Archives Changelog
 * 0.5:
@@ -158,8 +193,8 @@ Fancy Archives Changelog
       WP's internal comment counting function (Thanks Will)
 
 * 0.2:
-    * Massive update, now has a dedicated options page (no more passing options to
-      function)
+    * Massive update, now has a dedicated options page (no more passing
+      options to function)
     * Month links can expand to show individual posts
 
 * 0.1:
