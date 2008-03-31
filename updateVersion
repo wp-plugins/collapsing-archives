@@ -7,7 +7,7 @@ else
   VER=$1
 fi
 
-for file in *.{php,js,txt}; do
+for file in *.{php,js,txt,css}; do
   perl -pe "s/(version|stable tag): [0-9\.]+/\$1: $VER/gi" < $file > ${file}TEMP
 done
 for file in *TEMP; do

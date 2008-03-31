@@ -4,7 +4,7 @@ Donate link: http://blog.robfelty.com/wordpress-plugins
 Tags: archives
 Requires at least: 2.0
 Tested up to: 2.3
-Stable tag: 0.7.8
+Stable tag: 0.8
 
 This plugin uses Javascript to dynamically expand or collaps the set of
 months for each year and posts for each month in the archive listing.
