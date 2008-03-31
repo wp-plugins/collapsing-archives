@@ -20,7 +20,7 @@ $o		= empty($options['options']) ? 'icon,temp,forecast,curtime,sunrise,sunset' :
 ?>
     <?php echo $before_widget; ?>
     <?php echo $before_title . $title . $after_title; ?>
-      <li><h2>Archives</h2>
+      <li class='widget widget_collapsArch'><h2>Archives</h2>
 
       <?php
        if( function_exists('collapsArch') ) {
