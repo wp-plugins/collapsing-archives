@@ -4,7 +4,7 @@ Donate link: http://blog.robfelty.com/wordpress-plugins
 Tags: archives, sidebar, widget
 Requires at least: 2.0
 Tested up to: 2.5
-Stable tag: 0.8
+Stable tag: 0.8.1
 
 This plugin uses Javascript to dynamically expand or collaps the set of
 months for each year and posts for each month in the archive listing.
@@ -106,11 +106,17 @@ archive links as usual.
 
 == HISTORY ==
 
+* 0.8.1
+    * Changed htmlentities to htmlspecialchars in formatting title text. Now
+      this should not mess up accented characters, but should escape quotes
+    * Using unicode codes in css file for double quote character
+
 * 0.8 
     * Verified to work with wordpress 2.5
     * Now has custom styling option through the collapsArch.css stylesheet
     * updated screenshots
-    * (Hopefully) fixed multi-language support for titles (put htmlentitites back in)
+    * (Hopefully) fixed multi-language support for titles (put htmlentitites
+      back in)
     * moved javascript into collapsArch.php and got rid of separate file
 
 * 0.7.8 

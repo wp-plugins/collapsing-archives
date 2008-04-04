@@ -1,10 +1,16 @@
 Collapsing Archives Changelog
 
+* 0.8.1
+    * Changed htmlentities to htmlspecialchars in formatting title text. Now
+      this should not mess up accented characters, but should escape quotes
+    * Using unicode codes in css file for double quote character
+
 * 0.8 
     * Verified to work with wordpress 2.5
     * Now has custom styling option through the collapsArch.css stylesheet
     * updated screenshots
-    * (Hopefully) fixed multi-language support for titles (put htmlentitites back in)
+    * (Hopefully) fixed multi-language support for titles (put htmlentitites
+      back in)
     * moved javascript into collapsArch.php and got rid of separate file
 
 * 0.7.8 

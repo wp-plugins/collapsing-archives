@@ -4,7 +4,7 @@ Plugin Name: Collapsing Archives
 Plugin URI: http://blog.robfelty.com/plugins
 Description: Allows users to expand and collapse archive links like Blogger 
 Author: Robert Felty
-Version: 0.8
+Version: 0.8.1
 Author URI: http://robfelty.com
 
 Copyright 2007 Robert Felty
@@ -80,7 +80,7 @@ class collapsArch {
 		$url = get_settings('siteurl');
 		echo "<script type=\"text/javascript\">\n";
 		echo "// <![CDATA[\n";
-		echo "// These variables are part of the Collapsing Archives Plugin version: 0.8\n// Copyright 2007 Robert Felty (robfelty.com)\n";
+		echo "// These variables are part of the Collapsing Archives Plugin version: 0.8.1\n// Copyright 2007 Robert Felty (robfelty.com)\n";
 		echo "collapsArchExpCurrYear = ";
 		if (get_option('collapsArchExpandCurrentYear')=='yes') {
 			echo "true;\n";
