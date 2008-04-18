@@ -67,7 +67,6 @@ if (get_option('collapsArchLinkToArchives')=='archives') {
 	if ( empty($exclusions) ) {
 		$exclusions = '';
   }
-    echo "exclusions - $exclusions";
 
 
 $postquery= "SELECT $wpdb->posts.ID, $wpdb->posts.post_title,
