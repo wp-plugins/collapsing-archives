@@ -1,0 +1,72 @@
+    <li>Order:
+     <input type="radio" name="order" <?php if(get_option('collapsArchOrder')=='DESC') echo 'checked'; ?> id="orderDESC" value='DESC'></input> <label for="orderDESC">Reverse Chronological</label>
+     <input type="radio" name="order" <?php if(get_option('collapsArchOrder')=='ASC') echo 'checked'; ?> id="orderASC" value='ASC'></input> <label for="orderASC">Chronological</label>
+    </li>
+    <li>
+     <input type="checkbox" name="expandCurrentYear" <?php if (get_option('collapsArchExpandCurrentYear')=='yes')  echo 'checked'; ?> id="expandCurrentYear"></input> <label for="expandCurrentYear">Leave Current Year Expanded by Default</label>
+    </li>
+    <li>
+     <input type="checkbox" name="showYearCount" <?php if (get_option('collapsArchShowYearCount')=='yes')  echo 'checked'; ?> id="showYearCount"></input> <label for="showYearCount">Show Post Count in Year Links</label>
+    </li>
+    <li>
+     <input type="checkbox" name="showMonths" <?php if (get_option('collapsArchShowMonths')=='yes')  echo 'checked'; ?> id="showMonths"></input> <label for="showMonths">Show Month Link</label>
+     <ul>
+      <li>
+       <input type="checkbox" name="showMonthCount" <?php if (get_option( 'collapsArchShowMonthCount' ) == 'yes') echo 'checked'; ?> id="showMonthCount"></input> <label for="showMonthCount">Show Post Count in Month Links</label>
+      </li>
+      <li>
+       <input type="checkbox" name="expandMonths" <?php if(get_option('collapsArchExpandMonths')=='yes') echo 'checked'; ?> id="expandMonths"></input> <label for="expandMonths">Month Links should expand to show Posts</label>
+       <ul>
+        <li>
+         <input type="checkbox" name="expandCurrentMonth" <?php if (get_option('collapsArchExpandCurrentMonth')=='yes') echo 'checked'; ?> id="expandCurrentMonth"></input> <label for="expandCurrentMonth">Leave Current Month Expanded by Default</label>
+        </li>
+       </ul>
+      </li>
+     </ul>
+    </li>
+   </ul>
+   <b>Note</b>: Note, Posts are only shown if either the Month links are set to expand, or if Month links are disabled.
+   <ul style="list-style-type: none;">
+    <li>
+     <input type="checkbox" name="showPages" <?php if(get_option('collapsArchShowPages')=='yes') echo 'checked'; ?> id="showPages"></input> <label for="showPages">Show Pages together with Posts</label>
+    </li>
+    <li>
+     <input type="checkbox" name="showPostNumber" <?php if(get_option('collapsArchShowPostNumber')=='yes') echo 'checked'; ?> id="showPostNumber"></input> <label for="showPostNumber">Show Post Number in Post Links</label>
+    </li>
+    <li>
+     <input type="checkbox" name="showPostTitle" <?php if(get_option('collapsArchShowPostTitle')=='yes') echo 'checked'; ?> id="showPostTitle"></input> <label for="showPostTitle">Show Post Title in Post Links</label>
+     <ul>
+      <li>
+       <label for="postTitleLength">Limit Title Length <small>( 0 for full title )</small>:</label>
+       <input type="text" name="postTitleLength" id="postTitleLength" value="<?php echo get_option('collapsArchPostTitleLength'); ?>"></input>
+      </li>
+      <li>
+       <input type="checkbox" name="showPostTitleEllipsis" <?php if(get_option('collapsArchShowPostTitleEllipsis')=='yes') echo 'checked'; ?> id="showPostTitleEllipsis"></input> <label for="showPostTitleEllipsis">Show Ellipsis in Shortened Titles</label>
+      </li>
+     </ul>
+    </li>
+    <li>
+     <input onchange='checkChecked();' type="checkbox" id="showPostDate" name="showPostDate" <?php if(get_option('collapsArchShowPostDate')=='yes') echo 'checked'; ?> id="showPostDate"></input> <label for="showPostDate">Show Post Date in Post Links</label>
+     <ul>
+      <li>
+		 <input onfocus='checkChecked();'  name="postDateFormat" id="postDateFormat" value="<?php echo get_option('collapsArchPostDateFormat'); ?>"> Format (<a href="http://codex.wordpress.org/Formatting_Date_and_Time">Formatting Docs)</a></input>
+		</li>
+      <script type='text/javascript'>
+        function checkChecked() {
+          var dateFormatCheck = document.getElementById('showPostDate');
+          var dateFormatInput = document.getElementById('postDateFormat');
+          if (dateFormatCheck.checked==true) {
+            dateFormatInput.readOnly=false; 
+          } else {
+            dateFormatInput.readOnly=true;
+          }
+        }
+      </script>
+     </ul>
+    </li>
+    <li>
+     <input type="checkbox" name="showCommentCount" <?php if(get_option('collapsArchShowCommentCount')=='yes') echo 'checked'; ?> id="showCommentCount"></input> <label for="showCommentCount">Show Comment Count in Post Links</label>
+    </li>
+    <li>Exclude these categories (separated by commas):<br />
+     <input type="text" name="collapsArchExclude" value="<?php echo get_option('collapsArchExclude') ?>" id="collapsArchExclude"</input> 
+    </li>

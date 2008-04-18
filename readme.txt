@@ -4,7 +4,7 @@ Donate link: http://blog.robfelty.com/wordpress-plugins
 Tags: archives, sidebar, widget
 Requires at least: 2.0
 Tested up to: 2.5
-Stable tag: 0.8.1
+Stable tag: 0.8.2
 
 This plugin uses Javascript to dynamically expand or collaps the set of
 months for each year and posts for each month in the archive listing.
@@ -105,6 +105,13 @@ gracefully if it is not present/enabled to show all of the
 archive links as usual.
 
 == HISTORY ==
+
+* 0.8.2
+    * Added option to exclude posts that belong to certain categories. So far
+      this is only working for posts that belong to a single category
+    * Added option to change title in widget, and can now set all options from
+      the widget page
+    * Now is condensed into one plugin
 
 * 0.8.1
     * Changed htmlentities to htmlspecialchars in formatting title text. Now

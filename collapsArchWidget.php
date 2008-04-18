@@ -1,28 +1,9 @@
 <?php
-/*
-Plugin Name: Collapsing Archive widget
-Plugin URI: http://robfelty.com
-Description: Use the Collapsing Archives plugin as a widget
-Version: 0.8.1
-Author: Robert Felty
-Author URI: http://robfelty.com
-*/
-
   function collapsArchWidget() {
-    //extract($args);
-   /*
-    $options	= get_option('widget_get_weather');
-    $z		= empty($options['zip']) ? '02334' : $options['zip'];
-    $l		= empty($options['location']) ? 'Mass' : $options['location'];
-$o		= empty($options['options']) ? 'icon,temp,forecast,curtime,sunrise,sunset' : $options['options'];
-    $title		= empty($options['title']) ? __('Local Weather') : $options['title'];
-*/
-?>
-    <?php echo $before_widget; ?>
-    <?php echo $before_title . $title . $after_title; ?>
-      <li class='widget widget_collapsArch'><h2>Archives</h2>
-
-      <?php
+  extract($args);
+  $options = get_option('collapsArchWidget');
+  $title = ($options['title'] != "") ? $options['title'] : ""; 
+    echo $before_widget . $before_title . $title . $after_title;
        if( function_exists('collapsArch') ) {
         collapsArch();
        } else {
@@ -30,38 +11,14 @@ $o		= empty($options['options']) ? 'icon,temp,forecast,curtime,sunrise,sunset' :
         wp_get_archives('type=monthly');
         echo "</ul>\n";
        }
-      ?>
-
-      </li>
-    <?php echo $after_widget; ?>
-<?php
+    echo $after_widget;
   }
 
-  /*
-	function widget_fancy_archives_control() {
-		$options = $newoptions = get_option('widget_fancy_archives');
-		if ( $_POST['fancy_archives-submit'] ) {
-			$newoptions['zip']	= strip_tags(stripslashes($_POST['get_weather-zip']));
-			$newoptions['location']	= strip_tags(stripslashes($_POST['get_weather-location']));
-			$newoptions['options']	= strip_tags(stripslashes($_POST['get_weather-options']));
-			$newoptions['title']	= strip_tags(stripslashes($_POST['get_weather-title']));
-		}
-		if ( $options != $newoptions ) {
-			$options = $newoptions;
-			update_option('widget_get_weather', $options);
-		}
-		$title		= wp_specialchars($options['title']);
-		$zip		= wp_specialchars($options['zip']);
-		$location	= wp_specialchars($options['location']);
-		$options	= wp_specialchars($options['options']);
- 
-  */
-	//}
-
 function collapsArchWidgetInit() {
+	$widget_ops = array('classname' => 'collapsArchWidget', 'description' => __('Archives expand and collapse to show posts'));
 	if (function_exists('register_sidebar_widget')) {
-		register_sidebar_widget('Collapsing Archives', 'collapsArchWidget');
-	//	register_widget_control('Fancy Archives', 'widget_fancy_archives_control', 300, 200);
+    register_sidebar_widget('Collapsing Archives', 'collapsArchWidget');
+    register_widget_control('Collapsing Archives', 'collapsArchWidgetControl','300px');
 	}
 }
 
@@ -78,4 +35,42 @@ if (function_exists('collapsArch')) {
 	exit;
 }
 
+
+// Run our code later in case this loads prior to any required plugins.
+if (function_exists('collapsArch')) {
+	add_action('plugins_loaded', 'collapsArchWidgetInit');
+} else {
+	$fname = basename(__FILE__);
+	$current = get_settings('active_plugins');
+	array_splice($current, array_search($fname, $current), 1 ); // Array-fu!
+	update_option('active_plugins', $current);
+	do_action('deactivate_' . trim($fname));
+	header('Location: ' . get_settings('siteurl') . '/wp-admin/plugins.php?deactivate=true');
+	exit;
+}
+
+	function collapsArchWidgetControl() {
+		$options = get_option('collapsArchWidget');
+    if ( !is_array($options) ) {
+      $options = array('title'=>'Archives'
+      );
+     }
+
+		if ( $_POST['collapsArch-submit'] ) {
+			$options['title']	= strip_tags(stripslashes($_POST['collapsArch-title']));
+			include('updateOptions.php');
+		}
+    update_option('collapsArchWidget', $options);
+		$title		= wp_specialchars($options['title']);
+    // Here is our little form segment. Notice that we don't need a
+    // complete form. This will be embedded into the existing form.
+    echo '<p style="text-align:right;"><label for="collapsArch-title">' . __('Title:') . '<input class="widefat" style="width: 200px;" id="collapsArch-title" name="collapsArch-title" type="text" value="'.$title.'" /></label></p>';
+  echo "<ul style='list-style-type:none;width:400px;margin:0;padding:0;'>";
+    include('options.txt');
+  echo "</ul>\n";
+   ?>
+   <?php
+    echo '<input type="hidden" id="collapsArch-submit" name="collapsArch-submit" value="1" />';
+
+	}
 ?>

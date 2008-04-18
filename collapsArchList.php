@@ -1,6 +1,6 @@
 <?php
 /*
-Collapsing Archives version: 0.8.1
+Collapsing Archives version: 0.8.2
 
 Copyright 2007 Robert Felty
 
@@ -51,12 +51,38 @@ if (get_option('collapsArchLinkToArchives')=='archives') {
 } elseif (get_option('collapsArchLinkToArchives')=='root') {
   $archives='';
 }
+  $exclude=get_option('collapsArchExclude');
+	$exclusions = '';
+	if ( !empty($exclude) ) {
+		$exterms = preg_split('/[,]+/',$exclude);
+		if ( count($exterms) ) {
+			foreach ( $exterms as $exterm ) {
+				if (empty($exclusions))
+					$exclusions = "'" . sanitize_title($exterm) . "'";
+				else
+					$exclusions .= ", '" . sanitize_title($exterm) . "' ";
+			}
+		}
+	}
+	if ( empty($exclusions) ) {
+		$exclusions = '';
+  }
+    echo "exclusions - $exclusions";
 
 
-$allPosts = $wpdb->get_results("SELECT ID, post_title,
-          post_date, YEAR(post_date) AS `year`,
-    MONTH(post_date) AS `month` FROM $wpdb->posts
-    WHERE post_date < '$now' AND $post_attrs ORDER BY post_date $order");
+$postquery= "SELECT $wpdb->posts.ID, $wpdb->posts.post_title,
+          $wpdb->posts.post_date, YEAR($wpdb->posts.post_date) AS 'year',
+    MONTH($wpdb->posts.post_date) AS 'month' 
+FROM $wpdb->posts LEFT JOIN $wpdb->term_relationships ON $wpdb->posts.ID = $wpdb->term_relationships.object_id LEFT JOIN $wpdb->terms ON $wpdb->terms.slug NOT IN ($exclusions) WHERE $wpdb->term_relationships.term_taxonomy_id = $wpdb->terms.term_id AND $wpdb->posts.post_status='publish' $isPage GROUP BY $wpdb->posts.ID ORDER BY $wpdb->posts.post_date $order";
+//$allPosts = $wpdb->get_results("SELECT $wpdb->posts.ID, $wpdb->posts.post_title,
+          //$wpdb->posts.post_date, YEAR($wpdb->posts.post_date) AS 'year',
+    //MONTH($wpdb->posts.post_date) AS 'month' FROM  $wpdb->posts, $wpdb->terms, $wpdb->term_taxonomy, $wpdb->term_relationships  WHERE $wpdb->posts.id = $wpdb->term_relationships.object_id AND $wpdb->posts.post_status='publish' AND $wpdb->terms.term_id = $wpdb->term_taxonomy.term_id AND $wpdb->term_relationships.term_taxonomy_id = $wpdb->term_taxonomy.term_taxonomy_id AND $wpdb->term_taxonomy.taxonomy = 'category' $isPage $exclusions GROUP BY $wpdb->posts.ID ORDER BY $wpdb->posts.post_date $order");
+
+//$allPosts = $wpdb->get_results("SELECT $wpdb->posts.ID, $wpdb->posts.post_title,
+          //$wpdb->posts.post_date, YEAR($wpdb->posts.post_date) AS `year`,
+    //MONTH($wpdb->posts.post_date) AS `month` FROM $wpdb->posts, $wpdb->terms   WHERE  $wpdb->posts.post_date < '$now'  AND $post_attrs $exclusions GROUP BY $wpdb->posts.id ORDER BY $wpdb->posts.post_date $order");
+
+$allPosts=$wpdb->get_results($postquery);
 /*echo "<!--\n";
 print_r($archPosts);
 print_r($allPosts);
