@@ -73,7 +73,7 @@ if (get_option('collapsArchLinkToArchives')=='archives') {
 $postquery= "SELECT $wpdb->posts.ID, $wpdb->posts.post_title,
           $wpdb->posts.post_date, YEAR($wpdb->posts.post_date) AS 'year',
     MONTH($wpdb->posts.post_date) AS 'month' 
-FROM $wpdb->posts LEFT JOIN $wpdb->term_relationships ON $wpdb->posts.ID = $wpdb->term_relationships.object_id LEFT JOIN $wpdb->terms ON $wpdb->terms.slug NOT IN ($exclusions) WHERE $wpdb->term_relationships.term_taxonomy_id = $wpdb->terms.term_id AND $wpdb->posts.post_status='publish' $isPage GROUP BY $wpdb->posts.ID ORDER BY $wpdb->posts.post_date $order";
+FROM $wpdb->posts LEFT JOIN $wpdb->term_relationships ON $wpdb->posts.ID = $wpdb->term_relationships.object_id LEFT JOIN $wpdb->terms ON $wpdb->terms.slug NOT IN ($exclusions) WHERE $wpdb->term_relationships.term_taxonomy_id = $wpdb->terms.term_id AND $post_attrs GROUP BY $wpdb->posts.ID ORDER BY $wpdb->posts.post_date $order";
 //$allPosts = $wpdb->get_results("SELECT $wpdb->posts.ID, $wpdb->posts.post_title,
           //$wpdb->posts.post_date, YEAR($wpdb->posts.post_date) AS 'year',
     //MONTH($wpdb->posts.post_date) AS 'month' FROM  $wpdb->posts, $wpdb->terms, $wpdb->term_taxonomy, $wpdb->term_relationships  WHERE $wpdb->posts.id = $wpdb->term_relationships.object_id AND $wpdb->posts.post_status='publish' AND $wpdb->terms.term_id = $wpdb->term_taxonomy.term_id AND $wpdb->term_relationships.term_taxonomy_id = $wpdb->term_taxonomy.term_taxonomy_id AND $wpdb->term_taxonomy.taxonomy = 'category' $isPage $exclusions GROUP BY $wpdb->posts.ID ORDER BY $wpdb->posts.post_date $order");
