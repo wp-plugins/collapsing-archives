@@ -1,6 +1,6 @@
 <?php
 /*
-Collapsing Archives version: 0.8.2
+Collapsing Archives version: 0.8.3
 
 Copyright 2007 Robert Felty
 
@@ -65,7 +65,7 @@ if (get_option('collapsArchLinkToArchives')=='archives') {
 		}
 	}
 	if ( empty($exclusions) ) {
-		$exclusions = '';
+		$exclusions = "''";
   }
 
 
