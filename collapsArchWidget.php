@@ -1,5 +1,5 @@
 <?php
-  function collapsArchWidget() {
+  function collapsArchWidget($args) {
   extract($args);
   $options = get_option('collapsArchWidget');
   $title = ($options['title'] != "") ? $options['title'] : ""; 
@@ -52,8 +52,7 @@ if (function_exists('collapsArch')) {
 	function collapsArchWidgetControl() {
 		$options = get_option('collapsArchWidget');
     if ( !is_array($options) ) {
-      $options = array('title'=>'Archives'
-      );
+      $options = array('title'=>'Archives');
      }
 
 		if ( $_POST['collapsArch-submit'] ) {

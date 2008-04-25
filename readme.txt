@@ -58,11 +58,10 @@ WIDGET INSTALLATION
 
 For those who have widget capabilities, (default in Wordpress 2.3+), installation is easier. 
 
-Unpackage contents to wp-content/plugins/ so that the files are in a collapsCat
-directory. There should be 2 new plugins in your Wordpress Admin interface --
-Collapsing Archives, and Collapsing Archives Widget. You must enable both
-of them, in that order. Then simply go the Presentation > Widgets section and
-drag over the Collapsing Archives Widget.
+Unzip contents to wp-content/plugins/ so that the files are in a
+collapsing-archives directory.  You must enable the Collapsing Archives
+plugin,  then simply go the Presentation > Widgets section and add the
+Collapsing Archives Widget.
 
 == Frequently Asked Questions ==
 
@@ -85,7 +84,6 @@ Options for Collapsing Archives are found under Options -> Collapsing
 Archives. So far, there are the following options:
 
   * Use chronological or reverse chronological ordering
-  * Links point to root, index.php or archives.php
   * Leave Current Year Expanded by Default
   * Display number of posts in a year
   * Show Month Link
@@ -97,6 +95,8 @@ Archives. So far, there are the following options:
     * Number (ID)
     * Title
     * Comment Count
+  * Exclude posts belonging to particular categories (works for
+    single-category posts only)
 
 == CAVEAT ==
 
@@ -105,6 +105,10 @@ gracefully if it is not present/enabled to show all of the
 archive links as usual.
 
 == HISTORY ==
+
+* 0.8.4
+    * title of archives now shows up correctly using before_title and
+      after_title
 
 * 0.8.3 
     * fixed bug introduced in version 0.8.2 trying to exclude categories. Would

@@ -1,5 +1,9 @@
 Collapsing Archives Changelog
 
+* 0.8.4
+    * title of archives now shows up correctly using before_title and
+      after_title
+
 * 0.8.3 
     * fixed bug introduced in version 0.8.2 trying to exclude categories. Would
       break if no categories were being excluded
