@@ -1,6 +1,6 @@
 <?php
 /*
-Collapsing Archives version: 0.8.3
+Collapsing Archives version: 0.8.4
 
 Copyright 2007 Robert Felty
 
