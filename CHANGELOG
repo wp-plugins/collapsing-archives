@@ -1,5 +1,9 @@
 Collapsing Archives Changelog
 
+* 0.8.5
+    * fixed bug (introduced in 0.8.2) that made the widget not show up after an
+      upgrade
+
 * 0.8.4
     * title of archives now shows up correctly using before_title and
       after_title

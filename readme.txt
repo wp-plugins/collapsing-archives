@@ -4,7 +4,7 @@ Donate link: http://blog.robfelty.com/wordpress-plugins
 Tags: archives, sidebar, widget
 Requires at least: 2.0
 Tested up to: 2.5
-Stable tag: 0.8.4
+Stable tag: 0.8.5
 
 This plugin uses Javascript to dynamically expand or collaps the set of
 months for each year and posts for each month in the archive listing.
@@ -105,6 +105,10 @@ gracefully if it is not present/enabled to show all of the
 archive links as usual.
 
 == HISTORY ==
+
+* 0.8.5
+    * fixed bug (introduced in 0.8.2) that made the widget not show up after an
+      upgrade
 
 * 0.8.4
     * title of archives now shows up correctly using before_title and
