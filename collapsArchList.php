@@ -1,6 +1,6 @@
 <?php
 /*
-Collapsing Archives version: 0.8.5
+Collapsing Archives version: 0.8.6
 
 Copyright 2007 Robert Felty
 
@@ -144,17 +144,23 @@ if( $allPosts ) {
       }
       
       if($i>=2 && $allPosts[$i-2]->year != $archPost->year ) {
-				if( get_option('collapsArchExpandMonths')=='yes' ) {
-					echo "        </ul>\n      </li> <!-- close expanded month --> \n";
-				} else {
-					echo "      </li> <!-- close month --> \n";
-				}
-        echo "    </ul>\n  </li> <!-- end year -->\n";
+				if( get_option('collapsArchShowMonths')=='yes' ) {
+          if( get_option('collapsArchExpandMonths')=='yes' ) {
+            echo "        </ul>\n      </li> <!-- close expanded month --> \n";
+          } else {
+            echo "      </li> <!-- close month --> \n";
+          }
+          echo "    </ul>\n  </li> <!-- end year -->\n";
+        } else {
+          echo "  </li> <!-- end year -->\n";
+        }
       }
       echo "  <li class='collapsArch'><span title='$yearTitle' class='collapsArch $yearRel' onclick='expandArch(event); return false' >$ding</span>";
       $home = get_settings('home');
       echo "<a href='".get_year_link($archPost->year). "'>$currentYear</a>$yearCount\n";
-      echo "    <ul $monthStyle id='collapsArchList-$currentYear'>\n";
+      if( get_option('collapsArchShowMonths')=='yes' ) {
+        echo "    <ul $monthStyle id='collapsArchList-$currentYear'>\n";
+      }
       $newYear = false;
     }
 
@@ -164,11 +170,13 @@ if( $allPosts ) {
       if($newYear == false) { #close off last month
         $newYear=true; 
       } else {
-				if( get_option('collapsArchExpandMonths')=='yes' ) {
-					echo "        </ul>\n      </li> <!-- close expanded month --> \n";
-				} else {
-					echo "      </li> <!-- close month --> \n";
-				}
+				if( get_option('collapsArchShowMonths')=='yes' ) {
+          if( get_option('collapsArchExpandMonths')=='yes' ) {
+            echo "        </ul>\n      </li> <!-- close expanded month --> \n";
+          } else {
+            echo "      </li> <!-- close month --> \n";
+          }
+        }
       }
 
       if( get_option('collapsArchShowMonthCount')=='yes') {
@@ -318,10 +326,10 @@ if( $allPosts ) {
     }
   }
   if( get_option('collapsArchShowMonths')=='yes' && get_option('collapsArchExpandMonths')=='yes' ) {
-    echo "        </ul>\n";
+    echo "        </ul>\n
+      </li> <!-- close month -->
+    </ul>";
   }
 } ?>
-      </li> <!-- close month -->
-    </ul>
   </li> <!-- close year -->
 </ul>

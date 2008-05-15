@@ -1,5 +1,8 @@
 Collapsing Archives Changelog
 
+* 0.8.6
+    * fixed bug which had wrong markup when months were turned off
+
 * 0.8.5
     * fixed bug (introduced in 0.8.2) that made the widget not show up after an
       upgrade

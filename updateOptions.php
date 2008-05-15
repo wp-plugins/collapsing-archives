@@ -18,6 +18,9 @@
 		}
 		else {
 			update_option( 'collapsArchShowMonths', 'no' );
+			update_option( 'collapsArchExpandCurrentMonth', 'no' );
+			update_option( 'collapsArchShowMonthCount', 'no' );
+			update_option( 'collapsArchExpandMonths', 'no' );
 		}
 
 		if( isset($_POST['expandCurrentMonth']) ) {
