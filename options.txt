@@ -28,7 +28,7 @@
    <b>Note</b>: Note, Posts are only shown if either the Month links are set to expand, or if Month links are disabled.
    <ul style="list-style-type: none;">
     <li>
-     <input type="checkbox" name="showPages" <?php if(get_option('collapsArchShowPages')=='yes') echo 'checked'; ?> id="showPages"></input> <label for="showPages">Show Pages together with Posts</label>
+     <input type="checkbox" name="collapsArchShowPages" <?php if(get_option('collapsArchShowPages')=='yes') echo 'checked'; ?> id="collapsArchShowPages"></input> <label for="collapsArchShowPages">Show Pages together with Posts</label>
     </li>
     <li>
      <input type="checkbox" name="showPostNumber" <?php if(get_option('collapsArchShowPostNumber')=='yes') echo 'checked'; ?> id="showPostNumber"></input> <label for="showPostNumber">Show Post Number in Post Links</label>

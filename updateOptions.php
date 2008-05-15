@@ -22,37 +22,32 @@
 
 		if( isset($_POST['expandCurrentMonth']) ) {
 			update_option( 'collapsArchExpandCurrentMonth', 'yes' );
-		}
-		else {
+		} else {
 			update_option( 'collapsArchExpandCurrentMonth', 'no' );
 		}
 
 		if( isset($_POST['showMonthCount']) ) {
 			update_option( 'collapsArchShowMonthCount', 'yes' );
-		}
-		else {
+		} else {
 			update_option( 'collapsArchShowMonthCount', 'no' );
 		}
 
 		if( isset($_POST['expandMonths']) ) {
 			update_option( 'collapsArchExpandMonths', 'yes' );
-		}
-		else {
+		} else {
 			update_option( 'collapsArchExpandMonths', 'no' );
 		}
 
 		if( isset($_POST['showCommentCount']) ) {
 			update_option( 'collapsArchShowCommentCount', 'yes' );
-		}
-		else {
+		} else {
 			update_option( 'collapsArchShowCommentCount', 'no' );
 		}
 
-		if( isset($_POST['showPages']) ) {
-        update_option( 'collapsArchShowpages', 'yes' );
-		}
-		else {
-        update_option( 'collapsArchShowpages', 'no' );
+		if( isset($_POST['collapsArchShowPages']) ) {
+        update_option( 'collapsArchShowPages', 'yes' );
+		} else {
+        update_option( 'collapsArchShowPages', 'no' );
 		}
 
 		if( isset($_POST['showPostTitle']) ) {
