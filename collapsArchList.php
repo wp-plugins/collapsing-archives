@@ -135,6 +135,10 @@ if( $allPosts ) {
     if( $currentYear != $archPost->year ) {
       $lastYear=$currentYear;
       $currentYear = $archPost->year;
+      /* this should fix the "sparse year" problem
+       * Thanks to Aishda
+       */
+      $currentMonth = 0;
       $newYear = true;
       if( get_option('collapsArchShowYearCount')=='yes') {
          $yearCount = ' (' . $yearCounts{"$currentYear"} . ")\n";
