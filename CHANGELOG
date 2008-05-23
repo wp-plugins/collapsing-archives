@@ -1,5 +1,10 @@
 Collapsing Archives Changelog
 
+* 0.8.7
+    * fixed sparse year problem (extra tags would get inserted after a year
+      with only one post which was in January) -- thanks to [aishdas]
+      (http://wordpress.org/support/profile/444678) for pointing this out
+
 * 0.8.6
     * fixed bug which had wrong markup when months were turned off
 
