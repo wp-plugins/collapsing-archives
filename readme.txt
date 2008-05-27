@@ -65,9 +65,28 @@ Collapsing Archives Widget.
 
 == Frequently Asked Questions ==
 
-1. How do I change the style of the collapsing archives lists?
-   You can modify the collapsArch.css file to your liking
+=  How do I change the style of the collapsing archives lists? =
 
+  The collapsing archives plugin uses several ids and classes which can be
+  styled with CSS. I have provided a few defaults in the collapsArch.css file.
+  You can modify the collapsArch.css file to your liking. Alternatively, you
+  can copy those rules into your themes style file. You may have to rename
+  some of the id statements. For example, if your sidebar is called
+  "myawesomesidebar", you would rewrite the line 
+
+  #sidebar li.collapsArch {list-style-type:none}
+  to
+  #myawesomesidebar li.collapsArch {list-style-type:none}
+
+= The stylesheet doesn't seem to be having any effect? =
+ 
+  Check this url in your browser:
+  http://yourblogaddress/wp-content/plugins/collapsing-archives/collapsArch.css
+  If you don't see a plaintext file with css style rules, there may be
+  something wrong with your .htaccess file (mod_rewrite). If you don't know
+  how to fix this, you can copy the style rules there into your themes style
+  file.
+   
 == Screenshots ==
 
 1. Collapsing archives with default theme
@@ -105,6 +124,10 @@ gracefully if it is not present/enabled to show all of the
 archive links as usual.
 
 == HISTORY ==
+
+* 0.8.8 (2008.05.27)
+    * added some more FAQ about stylesheets
+    * added option to only include certain years
 
 * 0.8.7
     * fixed sparse year problem (extra tags would get inserted after a year

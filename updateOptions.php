@@ -103,9 +103,9 @@
     } elseif ($_POST['archives'] == 'index') {
       update_option( 'collapsArchLinkToArchives', 'index' );
     }
-  if($_POST['collapsArchExclude']) {
     $excludeSafe=addslashes($_POST['collapsArchExclude']);
-    //$excludeSafe=wp_texturize($_POST['exclude']);
     update_option( 'collapsArchExclude', $excludeSafe);
-  }
+
+    $includeSafe=addslashes($_POST['collapsArchInclude']);
+    update_option( 'collapsArchInclude', $includeSafe);
 ?>

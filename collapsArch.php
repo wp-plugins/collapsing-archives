@@ -56,6 +56,7 @@ class collapsArch {
 			add_option( 'collapsArchPostDateFormat', 'm/d' );
 			add_option( 'collapsArchShowPostNumber', 'no' );
 			add_option( 'collapsArchExclude', '' );
+			add_option( 'collapsArchInclude', '' );
 		}
 	}
 

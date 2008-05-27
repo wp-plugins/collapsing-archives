@@ -1,5 +1,9 @@
 Collapsing Archives Changelog
 
+* 0.8.8 (2008.05.27)
+    * added some more FAQ about stylesheets
+    * added option to only include certain years
+
 * 0.8.7
     * fixed sparse year problem (extra tags would get inserted after a year
       with only one post which was in January) -- thanks to [aishdas]

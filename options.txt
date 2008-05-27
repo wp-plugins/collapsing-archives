@@ -70,3 +70,6 @@
     <li>Exclude these categories (separated by commas):<br />
      <input type="text" name="collapsArchExclude" value="<?php echo get_option('collapsArchExclude') ?>" id="collapsArchExclude"</input> 
     </li>
+    <li>Only include archives from these years:(separated by commas):<br />
+      <input type="text" name="collapsArchInclude" value="<?php echo get_option('collapsArchInclude') ?>" id="collapsArchInclude"</input> 
+    </li>
