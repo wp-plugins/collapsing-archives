@@ -1,6 +1,6 @@
 <?php
 /*
-Collapsing Archives version: 0.8.7
+Collapsing Archives version: 0.8.9
 
 Copyright 2007 Robert Felty
 
@@ -36,6 +36,16 @@ $now = current_time( 'mysql' );
 
 $post_attrs = "post_date != '0000-00-00 00:00:00' AND post_status = 'publish'";
 
+$expand='&#9658;';
+$collapse='&#9660;';
+
+if (get_option('collapsArchExpand')==1) {
+	$expand='+';
+	$collapse='&mdash;';
+} elseif (get_option('collapsArchExpand')==2) {
+	$expand='[+]';
+	$collapse='[&mdash;]';
+}
 if( get_option('collapsArchShowPages')=='no' ) {
   $post_attrs .= " AND post_type = 'post'";
 }
@@ -129,7 +139,7 @@ if( $allPosts ) {
   $monthCount=0;
   $i=0;
   foreach( $allPosts as $archPost ) {
-    $ding = '&#9658;&nbsp;';
+    $ding = $expand;
     $i++;
     $yearRel = 'show';
     $monthRel = 'show';
@@ -143,7 +153,7 @@ if( $allPosts ) {
      */
     if( get_option('collapsArchExpandCurrentYear')=='yes'
         && $archPost->year == date('Y') ) {
-      $ding = '&#9660;&nbsp;';
+      $ding = $collapse;
       $yearRel = "hide";
       $yearTitle= 'click to collapse';
       $monthStyle = '';
@@ -177,7 +187,7 @@ if( $allPosts ) {
           echo "  </li> <!-- end year -->\n";
         }
       }
-      echo "  <li class='collapsArch'><span title='$yearTitle' class='collapsArch $yearRel' onclick='expandArch(event); return false' >$ding</span>";
+      echo "  <li class='collapsArch'><span title='$yearTitle' class='collapsArch $yearRel' onclick='expandArch(event); return false' >$ding</span>&nbsp;";
       $home = get_settings('home');
       echo "<a href='".get_year_link($archPost->year). "'>$currentYear</a>$yearCount\n";
       if( get_option('collapsArchShowMonths')=='yes' ) {
@@ -224,13 +234,13 @@ if( $allPosts ) {
 										$monthRel = 'hide';
 										$monthTitle= 'click to collapse';
 						$postStyle = '';
-										$ding = '&#9660;&nbsp;';
+										$ding = $collapse;
 					} else {
 										$monthRel = 'show';
 										$monthTitle= 'click to expand';
-										$ding = '&#9658;&nbsp;';
+										$ding = $expand;
 					}
-					$the_link = "<span title='$monthTitle' class='$monthCollapse $monthRel' $onclick>$ding</span>";
+					$the_link = "<span title='$monthTitle' class='$monthCollapse $monthRel' $onclick>$ding</span>&nbsp;";
 					$the_link .="<a href='".get_month_link($currentYear, $currentMonth)."' title='$title_text'>";
 					$the_link .="$text</a>\n";
 				} else {

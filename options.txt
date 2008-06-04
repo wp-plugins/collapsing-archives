@@ -67,6 +67,11 @@
     <li>
      <input type="checkbox" name="showCommentCount" <?php if(get_option('collapsArchShowCommentCount')=='yes') echo 'checked'; ?> id="showCommentCount"></input> <label for="showCommentCount">Show Comment Count in Post Links</label>
     </li>
+    <li>Expanding and collapse characters:<br />
+     <input type="radio" name="collapsArchExpand" <?php if(get_option('collapsArchExpand')==0) echo 'checked'; ?> id="expand0" value='0'></input> <label for="expand0">&#9658;&nbsp;&#9660;</label>
+     <input type="radio" name="collapsArchExpand" <?php if(get_option('collapsArchExpand')==1) echo 'checked'; ?> id="expand1" value='1'></input> <label for="expand1">+&nbsp;&mdash;</label>
+     <input type="radio" name="collapsArchExpand" <?php if(get_option('collapsArchExpand')==2) echo 'checked'; ?> id="expand2" value='2'></input> <label for="expand1">[+]&nbsp;[&mdash;]</label>
+    </li>
     <li>Exclude these categories (separated by commas):<br />
      <input type="text" name="collapsArchExclude" value="<?php echo get_option('collapsArchExclude') ?>" id="collapsArchExclude"</input> 
     </li>
