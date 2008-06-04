@@ -1,5 +1,8 @@
 Collapsing Archives Changelog
 
+* 0.8.9 (2008.06.04)
+    * added option for different expand and collapse symbols (triangles, +/-)
+
 * 0.8.8 (2008.05.27)
     * added some more FAQ about stylesheets
     * added option to only include certain years

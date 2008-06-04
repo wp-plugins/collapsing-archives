@@ -4,7 +4,7 @@ Plugin Name: Collapsing Archives
 Plugin URI: http://blog.robfelty.com/plugins
 Description: Allows users to expand and collapse archive links like Blogger 
 Author: Robert Felty
-Version: 0.8.7
+Version: 0.8.9
 Author URI: http://robfelty.com
 
 Copyright 2007 Robert Felty
@@ -57,6 +57,7 @@ class collapsArch {
 			add_option( 'collapsArchShowPostNumber', 'no' );
 			add_option( 'collapsArchExclude', '' );
 			add_option( 'collapsArchInclude', '' );
+			add_option( 'collapsArchExpand', 0 );
 		}
 	}
 
@@ -79,10 +80,20 @@ class collapsArch {
 	}
 
 	function get_head() {
+    $expand='&#9658;';
+    $collapse='&#9660;';
+
+    if (get_option('collapsArchExpand')==1) {
+      $expand='+';
+      $collapse='&mdash;';
+    } elseif (get_option('collapsArchExpand')==2) {
+      $expand='[+]';
+      $collapse='[&mdash;]';
+    }
 		$url = get_settings('siteurl');
 		echo "<script type=\"text/javascript\">\n";
 		echo "// <![CDATA[\n";
-		echo "// These variables are part of the Collapsing Archives Plugin version: 0.8.7\n// Copyright 2007 Robert Felty (robfelty.com)\n";
+		echo "// These variables are part of the Collapsing Archives Plugin version: 0.8.9\n// Copyright 2007 Robert Felty (robfelty.com)\n";
 		echo "collapsArchExpCurrYear = ";
 		if (get_option('collapsArchExpandCurrentYear')=='yes') {
 			echo "true;\n";
@@ -118,13 +129,13 @@ class collapsArch {
 		childList.style.display = 'none';
 		src.setAttribute('class','collapsArch show');
 		src.setAttribute('title','click to expand');
-    src.innerHTML='&#9658&nbsp;';
+    src.innerHTML='$expand';
 	}
 	else {
 		childList.style.display = '';
 		src.setAttribute('class','collapsArch hide');
 		src.setAttribute('title','click to collapse');
-    src.innerHTML='&#9660&nbsp;';
+    src.innerHTML='$collapse';
 	}
 
 	if( e.preventDefault ) {

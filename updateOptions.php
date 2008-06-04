@@ -103,6 +103,13 @@
     } elseif ($_POST['archives'] == 'index') {
       update_option( 'collapsArchLinkToArchives', 'index' );
     }
+		if($_POST['collapsArchExpand'] == '0') {
+			update_option( 'collapsArchExpand', 0 );
+		} elseif ($_POST['collapsArchExpand'] == '1') {
+			update_option( 'collapsArchExpand', 1 );
+		} elseif ($_POST['collapsArchExpand'] == '2') {
+			update_option( 'collapsArchExpand', 2 );
+		}
     $excludeSafe=addslashes($_POST['collapsArchExclude']);
     update_option( 'collapsArchExclude', $excludeSafe);
 
