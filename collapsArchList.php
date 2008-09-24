@@ -1,6 +1,6 @@
 <?php
 /*
-Collapsing Archives version: 0.8.9
+Collapsing Archives version: 0.9alpha
 
 Copyright 2007 Robert Felty
 
@@ -36,32 +36,85 @@ $now = current_time( 'mysql' );
 
 $post_attrs = "post_date != '0000-00-00 00:00:00' AND post_status = 'publish'";
 
-$expand='&#9658;';
-$collapse='&#9660;';
+  $options=get_option('collapsArchOptions');
+  print_r($options);
+  extract($options[$number]);
+  if ($expand==1) {
+    $expandSym='+';
+    $collapseSym='—';
+  } elseif ($expand==2) {
+    $expandSym='[+]';
+    $collapseSym='[—]';
+  } elseif ($expand==3) {
+    $expandSym="<img src='". get_settings('siteurl') .
+         "/wp-content/plugins/collapsing-archives/" . 
+         "img/expand.gif' alt='expand' />";
+    $collapseSym="<img src='". get_settings('siteurl') .
+         "/wp-content/plugins/collapsing-archives/" . 
+         "img/collapse.gif' alt='collapse' />";
+  } else {
+    $expandSym='►';
+    $collapseSym='▼';
+  }
+	$inExclusions = array();
+	if ( !empty($inExclude) && !empty($inExcludeCats) ) {
+		$exterms = preg_split('/[,]+/',$inExcludeCats);
+    if ($inExclude=='include') {
+      $in='IN';
+    } else {
+      $in='NOT IN';
+    }
+		if ( count($exterms) ) {
+			foreach ( $exterms as $exterm ) {
+				if (empty($inExclusions))
+					$inExclusions = "'" . sanitize_title($exterm) . "'";
+				else
+					$inExclusions .= ", '" . sanitize_title($exterm) . "' ";
+			}
+		}
+	}
+	if ( empty($inExclusions) ) {
+		$inExcludeQuery = "''";
+  } else {
+    $inExcludeQuery ="AND $wpdb->terms.name $in ($inExclusions)";
+  }
 
-if (get_option('collapsArchExpand')==1) {
-	$expand='+';
-	$collapse='&mdash;';
-} elseif (get_option('collapsArchExpand')==2) {
-	$expand='[+]';
-	$collapse='[&mdash;]';
-}
-if( get_option('collapsArchShowPages')=='no' ) {
+  $isPage='';
+  if ($showPages=='no') {
+    $isPage="AND $wpdb->posts.post_type='post'";
+  }
+  if ($postSort!='') {
+    if ($postSort=='postDate') {
+      $postSortColumn="ORDER BY $wpdb->posts.post_date";
+    } elseif ($postSort=='postId') {
+      $postSortColumn="ORDER BY $wpdb->posts.id";
+    } elseif ($postSort=='postTitle') {
+      $postSortColumn="ORDER BY $wpdb->posts.post_title";
+    } elseif ($postSort=='postComment') {
+      $postSortColumn="ORDER BY $wpdb->posts.comment_count";
+    }
+  } 
+	if ($defaultExpand!='') {
+		$autoExpand = preg_split('/,\s*/',$defaultExpand);
+  } else {
+	  $autoExpand = array();
+  }
+if( $collapsArchShowPages=='no' ) {
   $post_attrs .= " AND post_type = 'post'";
 }
-if (get_option('collapsArchOrder')=='ASC') {
+if ($collapsArchOrder=='ASC') {
   $order='ASC';
 } else {
   $order='DESC';
 }
-if (get_option('collapsArchLinkToArchives')=='archives') {
+if ($collapsArchLinkToArchives=='archives') {
   $archives='archives.php/';
-} elseif (get_option('collapsArchLinkToArchives')=='index') {
+} elseif ($collapsArchLinkToArchives=='index') {
   $archives='index.php/';
-} elseif (get_option('collapsArchLinkToArchives')=='root') {
+} elseif ($collapsArchLinkToArchives=='root') {
   $archives='';
 }
-  $exclude=get_option('collapsArchExclude');
+  $exclude=$collapsArchExclude;
 	$exclusions = '';
 	if ( !empty($exclude) ) {
 		$exterms = preg_split('/[,]+/',$exclude);
@@ -77,7 +130,7 @@ if (get_option('collapsArchLinkToArchives')=='archives') {
 	if ( empty($exclusions) ) {
 		$exclusions = "''";
   }
-  $include=get_option('collapsArchInclude');
+  $include=$collapsArchInclude;
 	$inclusions = '';
 	if ( !empty($include) ) {
 		$interms = preg_split('/[,]+/',$include);
@@ -96,18 +149,14 @@ if (get_option('collapsArchLinkToArchives')=='archives') {
     $include ="AND YEAR($wpdb->posts.post_date) IN ($inclusions)";
   }
 
+$collapsArchShowMonths='yes';
+$collapsArchExpandMonths='yes';
+$collapsArchShowPostTitle='yes';
 
 $postquery= "SELECT $wpdb->posts.ID, $wpdb->posts.post_title,
           $wpdb->posts.post_date, YEAR($wpdb->posts.post_date) AS 'year',
     MONTH($wpdb->posts.post_date) AS 'month' 
 FROM $wpdb->posts LEFT JOIN $wpdb->term_relationships ON $wpdb->posts.ID = $wpdb->term_relationships.object_id LEFT JOIN $wpdb->terms ON $wpdb->terms.slug NOT IN ($exclusions) WHERE $wpdb->term_relationships.term_taxonomy_id = $wpdb->terms.term_id AND $post_attrs $include GROUP BY $wpdb->posts.ID ORDER BY $wpdb->posts.post_date $order";
-//$allPosts = $wpdb->get_results("SELECT $wpdb->posts.ID, $wpdb->posts.post_title,
-          //$wpdb->posts.post_date, YEAR($wpdb->posts.post_date) AS 'year',
-    //MONTH($wpdb->posts.post_date) AS 'month' FROM  $wpdb->posts, $wpdb->terms, $wpdb->term_taxonomy, $wpdb->term_relationships  WHERE $wpdb->posts.id = $wpdb->term_relationships.object_id AND $wpdb->posts.post_status='publish' AND $wpdb->terms.term_id = $wpdb->term_taxonomy.term_id AND $wpdb->term_relationships.term_taxonomy_id = $wpdb->term_taxonomy.term_taxonomy_id AND $wpdb->term_taxonomy.taxonomy = 'category' $isPage $exclusions GROUP BY $wpdb->posts.ID ORDER BY $wpdb->posts.post_date $order");
-
-//$allPosts = $wpdb->get_results("SELECT $wpdb->posts.ID, $wpdb->posts.post_title,
-          //$wpdb->posts.post_date, YEAR($wpdb->posts.post_date) AS `year`,
-    //MONTH($wpdb->posts.post_date) AS `month` FROM $wpdb->posts, $wpdb->terms   WHERE  $wpdb->posts.post_date < '$now'  AND $post_attrs $exclusions GROUP BY $wpdb->posts.id ORDER BY $wpdb->posts.post_date $order");
 
 $allPosts=$wpdb->get_results($postquery);
 /*echo "<!--\n";
@@ -139,7 +188,7 @@ if( $allPosts ) {
   $monthCount=0;
   $i=0;
   foreach( $allPosts as $archPost ) {
-    $ding = $expand;
+    $ding = $expandSym;
     $i++;
     $yearRel = 'show';
     $monthRel = 'show';
@@ -151,9 +200,9 @@ if( $allPosts ) {
      * triangle will expand it. rel = hide means that is will be shown, and
      * clicking on the triangle will collapse (hide) it 
      */
-    if( get_option('collapsArchExpandCurrentYear')=='yes'
+    if( $collapsArchExpandCurrentYear=='yes'
         && $archPost->year == date('Y') ) {
-      $ding = $collapse;
+      $ding = $collapseSym;
       $yearRel = "hide";
       $yearTitle= 'click to collapse';
       $monthStyle = '';
@@ -168,7 +217,7 @@ if( $allPosts ) {
        */
       $currentMonth = 0;
       $newYear = true;
-      if( get_option('collapsArchShowYearCount')=='yes') {
+      if( $collapsArchShowYearCount=='yes') {
          $yearCount = ' (' . $yearCounts{"$currentYear"} . ")\n";
       }
       else {
@@ -176,8 +225,8 @@ if( $allPosts ) {
       }
       
       if($i>=2 && $allPosts[$i-2]->year != $archPost->year ) {
-				if( get_option('collapsArchShowMonths')=='yes' ) {
-          if( get_option('collapsArchExpandMonths')=='yes' ) {
+				if( $collapsArchShowMonths=='yes' ) {
+          if( $collapsArchExpandMonths=='yes' ) {
             echo "        </ul>\n      </li> <!-- close expanded month --> \n";
           } else {
             echo "      </li> <!-- close month --> \n";
@@ -187,10 +236,10 @@ if( $allPosts ) {
           echo "  </li> <!-- end year -->\n";
         }
       }
-      echo "  <li class='collapsArch'><span title='$yearTitle' class='collapsArch $yearRel' onclick='expandArch(event); return false' >$ding</span>&nbsp;";
+      echo "  <li class='collapsArch'><span title='$yearTitle' class='collapsArch $yearRel' onclick='expandArch(event, $expand); return false' >$ding</span>&nbsp;";
       $home = get_settings('home');
       echo "<a href='".get_year_link($archPost->year). "'>$currentYear</a>$yearCount\n";
-      if( get_option('collapsArchShowMonths')=='yes' ) {
+      if( $collapsArchShowMonths=='yes' ) {
         echo "    <ul $monthStyle id='collapsArchList-$currentYear'>\n";
       }
       $newYear = false;
@@ -202,8 +251,8 @@ if( $allPosts ) {
       if($newYear == false) { #close off last month
         $newYear=true; 
       } else {
-				if( get_option('collapsArchShowMonths')=='yes' ) {
-          if( get_option('collapsArchExpandMonths')=='yes' ) {
+				if( $collapsArchShowMonths=='yes' ) {
+          if( $collapsArchExpandMonths=='yes' ) {
             echo "        </ul>\n      </li> <!-- close expanded month --> \n";
           } else {
             echo "      </li> <!-- close month --> \n";
@@ -211,12 +260,12 @@ if( $allPosts ) {
         }
       }
 
-      if( get_option('collapsArchShowMonthCount')=='yes') {
+      if( $collapsArchShowMonthCount=='yes') {
          $monthCount = ' (' . $monthCounts{"$currentYear$currentMonth"} . ")\n";
       } else {
         $monthCount = '';
       }
-      if( get_option('collapsArchShowMonths')=='yes' ) {
+      if( $collapsArchShowMonths=='yes' ) {
 				$text = sprintf('%s', $month[zeroise($currentMonth,2)]);
 
 				$text = wptexturize($text);
@@ -224,21 +273,21 @@ if( $allPosts ) {
 				#$title_text = wptexturize($text);
 				#$title_text = strip_tags($text);
 
-				if( get_option('collapsArchExpandMonths')=='yes' ) {
+				if( $collapsArchExpandMonths=='yes' ) {
 					$link = 'javascript:;';
-					$onclick = 'onclick="expandArch(event); return false"';
+					$onclick = 'onclick="expandArch(event, $expand); return false"';
 					$monthCollapse = 'collapsArch';
-					if( get_option('collapsArchExpandCurrentMonth')=='yes'
+					if( $collapsArchExpandCurrentMonth=='yes'
 							&& $currentYear == date('Y')
 							&& $currentMonth == date('n') ) {
 										$monthRel = 'hide';
 										$monthTitle= 'click to collapse';
 						$postStyle = '';
-										$ding = $collapse;
+										$ding = $collapseSym;
 					} else {
 										$monthRel = 'show';
 										$monthTitle= 'click to expand';
-										$ding = $expand;
+										$ding = $expandSym;
 					}
 					$the_link = "<span title='$monthTitle' class='$monthCollapse $monthRel' $onclick>$ding</span>&nbsp;";
 					$the_link .="<a href='".get_month_link($currentYear, $currentMonth)."' title='$title_text'>";
@@ -257,22 +306,22 @@ if( $allPosts ) {
 				echo "      <li class='$monthCollapse'>".$the_link.$monthCount;
 
 			}
-			if( get_option('collapsArchShowMonths')=='yes' && get_option('collapsArchExpandMonths')=='yes' ) {
+			if( $collapsArchShowMonths=='yes' && $collapsArchExpandMonths=='yes' ) {
 				echo "        <ul $postStyle id=\"collapsArchList-";
 				echo "$currentYear-$currentMonth\">\n";
 				$text = '';
 
-				if( get_option('collapsArchShowPostNumber')=='yes' ) {
+				if( $collapsArchShowPostNumber=='yes' ) {
 					$text .= '#'.$archPost->ID;
 				}
 
-				if( get_option('collapsArchShowPostTitle')=='yes' ) {
+				if( $collapsArchShowPostTitle=='yes' ) {
 						$title_text = htmlspecialchars(strip_tags($archPost->post_title), ENT_QUOTES);
 					#$title_text = strip_tags($archPost->post_title);
 
-					if( get_option('collapsArchPostTitleLength')> 0 && strlen( $title_text ) > get_option('collapsArchPostTitleLength') ) {
-						$title_text = substr($title_text, 0, get_option('collapsArchPostTitleLength') );
-						if( get_option('collapsArchShowPostTitleEllipsis')=='yes' ) {
+					if( $collapsArchPostTitleLength> 0 && strlen( $title_text ) > $collapsArchPostTitleLength ) {
+						$title_text = substr($title_text, 0, $collapsArchPostTitleLength );
+						if( $collapsArchShowPostTitleEllipsis=='yes' ) {
 							$title_text .= ' ...';
 						}
 					}
@@ -280,12 +329,12 @@ if( $allPosts ) {
 					$text .= ( $text == '' ? $title_text : ' - '.$title_text );
 				}
 
-				if( get_option('collapsArchShowPostDate')=='yes' ) {
-					$theDate = mysql2date(get_option('collapsArchPostDateFormat'), $archPost->post_date );
+				if( $collapsArchShowPostDate=='yes' ) {
+					$theDate = mysql2date($collapsArchPostDateFormat, $archPost->post_date );
 					$text .= ( $text == '' ? $theDate : ', '.$theDate );
 				}
 
-				if( get_option('collapsArchShowCommentCount')=='yes' ) {
+				if( $collapsArchShowCommentCount=='yes' ) {
 					$commcount = ' ('.get_comments_number($archPost->ID).')';
 				}
 
@@ -294,21 +343,21 @@ if( $allPosts ) {
 				}
 			} else {
 
-				if( get_option('collapsArchShowMonths')=='yes' && get_option('collapsArchExpandMonths')=='yes' ) {
+				if( $collapsArchShowMonths=='yes' && $collapsArchExpandMonths=='yes' ) {
 					$text = '';
 
-					if( get_option('collapsArchShowPostNumber')=='yes' ) {
+					if( $collapsArchShowPostNumber=='yes' ) {
 						$text .= '#'.$archPost->ID;
 					}
 
-					if( get_option('collapsArchShowPostTitle')=='yes' ) {
+					if( $collapsArchShowPostTitle=='yes' ) {
 						#$title_text = strip_tags($archPost->post_title);
 
 						$title_text = htmlspecialchars(strip_tags($archPost->post_title), ENT_QUOTES);
 						#$title_text = strip_tags(htmlentities($archPost->post_title, ENT_QUOTES));
-						if( get_option('collapsArchPostTitleLength')> 0 && strlen( $title_text ) > get_option('collapsArchPostTitleLength') ) {
-							$title_text = substr($title_text, 0, get_option('collapsArchPostTitleLength') );
-							if( get_option('collapsArchShowPostTitleEllipsis')=='yes' ) {
+						if( $collapsArchPostTitleLength> 0 && strlen( $title_text ) > $collapsArchPostTitleLength ) {
+							$title_text = substr($title_text, 0, $collapsArchPostTitleLength );
+							if( $collapsArchShowPostTitleEllipsis=='yes' ) {
 								$title_text .= ' ...';
 							}
 						}
@@ -316,12 +365,12 @@ if( $allPosts ) {
 						$text .= ( $text == '' ? $title_text : ' - '.$title_text );
 					}
 
-					if( get_option('collapsArchShowPostDate')=='yes' ) {
-						$theDate = mysql2date(get_option('collapsArchPostDateFormat'), $archPost->post_date );
+					if( $collapsArchShowPostDate=='yes' ) {
+						$theDate = mysql2date($collapsArchPostDateFormat, $archPost->post_date );
 						$text .= ( $text == '' ? $theDate : ', '.$theDate );
 					}
 
-					if( get_option('collapsArchShowCommentCount')=='yes' ) {
+					if( $collapsArchShowCommentCount=='yes' ) {
 						$commcount = ' ('.get_comments_number($archPost->ID).')';
 					}
 
@@ -332,21 +381,21 @@ if( $allPosts ) {
 					echo "          <li class='collapsArchPost'>";
 					$text = '';
 
-					if( get_option('collapsArchShowPostNumber')=='yes' ) {
+					if( $collapsArchShowPostNumber=='yes' ) {
 						$text .= '#'.$archPost->ID;
 					}
 
-					if( get_option('collapsArchShowPostTitle')=='yes' ) {
+					if( $collapsArchShowPostTitle=='yes' ) {
 						$title_text = strip_tags(htmlentities($archPost->post_title, ENT_QUOTES));
 						$text .= ( $text == '' ? $archPost->post_title : ' - '.$archPost->post_title );
 					}
 
-					if( get_option('collapsArchShowPostDate')=='yes' ) {
-						$theDate = mysql2date(get_option('collapsArchPostDateFormat'), $archPost->post_date );
+					if( $collapsArchShowPostDate=='yes' ) {
+						$theDate = mysql2date($collapsArchPostDateFormat, $archPost->post_date );
 						$text .= ( $text == '' ? $theDate : ', foo '.$theDate );
 					}
 
-					if( get_option('collapsArchShowCommentCount')=='yes' ) {
+					if( $collapsArchShowCommentCount=='yes' ) {
 						$commcount = ' ('.get_comments_number($archPost->ID).')';
 					}
 
@@ -357,7 +406,7 @@ if( $allPosts ) {
 			}
     }
   }
-  if( get_option('collapsArchShowMonths')=='yes' && get_option('collapsArchExpandMonths')=='yes' ) {
+  if( $collapsArchShowMonths=='yes' && $collapsArchExpandMonths=='yes' ) {
     echo "        </ul>\n
       </li> <!-- close month -->
     </ul>";

@@ -4,7 +4,7 @@ Plugin Name: Collapsing Archives
 Plugin URI: http://blog.robfelty.com/plugins
 Description: Allows users to expand and collapse archive links like Blogger 
 Author: Robert Felty
-Version: 0.8.9
+Version: 0.9alpha
 Author URI: http://robfelty.com
 
 Copyright 2007 Robert Felty
@@ -33,45 +33,16 @@ This file is part of Collapsing Archives
 
 add_action( 'wp_head', array('collapsArch','get_head'));
 add_action('activate_collapsing-archives/collapsArch.php', array('collapsArch','init'));
-add_action('admin_menu', array('collapsArch','setup'));
 
 class collapsArch {
 
 	function init() {
-		if( function_exists('add_option') ) {
-			add_option( 'collapsArchOrder', 'DESC' );
-			add_option( 'collapsArchLinkToArchives', 'root' );
-			add_option( 'collapsArchExpandCurrentYear', 'yes' );
-			add_option( 'collapsArchExpandCurrentMonth', 'yes' );
-			add_option( 'collapsArchShowYearCount', 'no' );
-			add_option( 'collapsArchShowMonths', 'yes' );
-			add_option( 'collapsArchShowMonthCount', 'yes' );
-			add_option( 'collapsArchExpandMonths', 'yes' );
-			add_option( 'collapsArchShowCommentCount', 'no' );
-      add_option( 'collapsArchShowPages', 'no' );
-			add_option( 'collapsArchShowPostTitle', 'yes' );
-			add_option( 'collapsArchShowPostTitleLength', '0' );
-			add_option( 'collapsArchShowPostTitleEllipsis', 'yes' );
-			add_option( 'collapsArchShowPostDate', 'no' );
-			add_option( 'collapsArchPostDateFormat', 'm/d' );
-			add_option( 'collapsArchShowPostNumber', 'no' );
-			add_option( 'collapsArchExclude', '' );
-			add_option( 'collapsArchInclude', '' );
-			add_option( 'collapsArchExpand', 0 );
-		}
 	}
 
 	function setup() {
-		if( function_exists('add_options_page') ) {
-			add_options_page(__('Collapsing Archives'),__('Collapsing Archives'),1,basename(__FILE__),array('collapsArch','ui'));
-		}
 	}
 
-	function ui() {
-		include_once( 'collapsArchUI.php' );
-	}
-
-	function list_archives() {
+	function list_archives($number) {
 		global $wpdb;
 
 		include( 'collapsArchList.php' );
@@ -80,71 +51,75 @@ class collapsArch {
 	}
 
 	function get_head() {
-    $expand='&#9658;';
-    $collapse='&#9660;';
-
-    if (get_option('collapsArchExpand')==1) {
-      $expand='+';
-      $collapse='&mdash;';
-    } elseif (get_option('collapsArchExpand')==2) {
-      $expand='[+]';
-      $collapse='[&mdash;]';
-    }
-		$url = get_settings('siteurl');
 		echo "<script type=\"text/javascript\">\n";
 		echo "// <![CDATA[\n";
-		echo "// These variables are part of the Collapsing Archives Plugin version: 0.8.9\n// Copyright 2007 Robert Felty (robfelty.com)\n";
-		echo "collapsArchExpCurrYear = ";
-		if (get_option('collapsArchExpandCurrentYear')=='yes') {
-			echo "true;\n";
-		}
-		else {
-			echo "false;\n";
-		}
-		echo ";\ncollapsArchExpCurrMonth = ";
-		if (get_option('collapsArchExpandCurrentMonth')=='yes') {
-			echo "true;\n";
-		}
-		else {
-			echo "false;\n";
-		}
-  echo "function expandArch( e ) {
-	if( e.target ) {
-		src = e.target;
-	}
-	else {
-		src = window.event.srcElement;
-	}
+		echo "// These variables are part of the Collapsing Archives Plugin version: 0.9alpha\n// Copyright 2008 Robert Felty (robfelty.com)\n";
 
-	srcList = src.parentNode;
-	childList = null;
+    $expandSym="<img src='". get_settings('siteurl') .
+         "/wp-content/plugins/collapsing-archives/" . 
+         "img/expand.gif' alt='expand' />";
+    $collapseSym="<img src='". get_settings('siteurl') .
+         "/wp-content/plugins/collapsing-archives/" . 
+         "img/collapse.gif' alt='collapse' />";
+    echo "function expandArch( e, expand ) {
+    if (expand==1) {
+      expand='+';
+      collapse='—';
+    } else if (expand==2) {
+      expand='[+]';
+      collapse='[—]';
+    } else if (expand==3) {
+      expand=\"$expandSym\";
+      collapse=\"$collapseSym\";
+    } else {
+      expand='►';
+      collapse='▼';
+    }
+    if( e.target ) {
+      src = e.target;
+    }
+    else {
+      src = window.event.srcElement;
+    }
 
-	for( i = 0; i < srcList.childNodes.length; i++ ) {
-		if( srcList.childNodes[i].nodeName.toLowerCase() == 'ul' ) {
-			childList = srcList.childNodes[i];
-		}
-	}
+    if (src.nodeName.toLowerCase() == 'img') {
+      src=src.parentNode;
+      //alert('it is an image');
+    }
+    srcList = src.parentNode;
+    //alert(srcList)
+    if (srcList.nodeName.toLowerCase() == 'span') {
+      srcList= srcList.parentNode;
+      src= src.parentNode;
+    }
+    childList = null;
 
-	if( src.getAttribute( 'class' ) == 'collapsArch hide' ) {
-		childList.style.display = 'none';
-		src.setAttribute('class','collapsArch show');
-		src.setAttribute('title','click to expand');
-    src.innerHTML='$expand';
-	}
-	else {
-		childList.style.display = '';
-		src.setAttribute('class','collapsArch hide');
-		src.setAttribute('title','click to collapse');
-    src.innerHTML='$collapse';
-	}
+    for( i = 0; i < srcList.childNodes.length; i++ ) {
+      if( srcList.childNodes[i].nodeName.toLowerCase() == 'ul' ) {
+        childList = srcList.childNodes[i];
+      }
+    }
 
-	if( e.preventDefault ) {
-		e.preventDefault();
-	}
+    if( src.getAttribute( 'class' ) == 'collapsArch hide' ) {
+      childList.style.display = 'none';
+      var theSpan = src.childNodes[0];
+      src.setAttribute('class','collapsArch show');
+      src.setAttribute('title','click to expand');
+      theSpan.innerHTML=expand;
+    } else {
+      childList.style.display = 'block';
+      var theSpan = src.childNodes[0];
+      src.setAttribute('class','collapsArch hide');
+      src.setAttribute('title','click to collapse');
+      theSpan.innerHTML=collapse;
+    }
 
-	return false;
-}\n";
+    if( e.preventDefault ) {
+      e.preventDefault();
+    }
 
+    return false;
+  }\n";
 		echo ";\n// ]]>\n</script>\n";
     echo "<style type='text/css'>
 		@import '$url/wp-content/plugins/collapsing-archives/collapsArch.css';
@@ -152,8 +127,8 @@ class collapsArch {
 	}
 }
 
-function collapsArch() {
-	collapsArch::list_archives();
+function collapsArch($number) {
+	collapsArch::list_archives($number);
 }
 include('collapsArchWidget.php');
 ?>
