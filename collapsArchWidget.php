@@ -160,6 +160,15 @@ if (function_exists('collapsArch')) {
       if( !isset($widget_collapsArch['expandMonths'])) {
         $expandMonths= 'no' ;
       }
+      $showPostTitle='yes';
+      if( !isset($widget_collapsArch['showPostTitle'])) {
+        $showPostTitle= 'no' ;
+      }
+      $showPostDate='no';
+      if( isset($widget_collapsArch['showPostDate'])) {
+        $showPostDate= 'yes' ;
+      }
+      $postDateFormat=addslashes($widget_collapsArch['postDateFormat']);
       $expandCurrentMonth='yes';
       if( !isset($widget_collapsArch['expandCurrentMonth'])) {
         $expandCurrentMonth= 'no' ;
@@ -170,7 +179,8 @@ if (function_exists('collapsArch')) {
           'expand','inExclude', 'showPosts',
           'inExcludeYears','postSort','postSortOrder','showPages', 'linkToArch',
           'showYearCount', 'expandCurrentYear','expandMonths', 'showMonths',
-          'expandCurrentMonth','showMonthCount');
+          'expandCurrentMonth','showMonthCount', 'showPostTitle',
+          'showPostDate', 'postDateFormat');
     }
 
     update_option('collapsArchOptions', $options);
@@ -200,6 +210,9 @@ if (function_exists('collapsArch')) {
     $expandMonths='yes';
     $showMonthCount='yes';
     $showMonths='yes';
+    $showPostTitle='yes';
+    $showPostDate='no';
+    $postDateFormat='m/d';
   } else {
     $title = attribute_escape($options[$number]['title']);
     $showPostCount = $options[$number]['showPostCount'];
@@ -220,6 +233,9 @@ if (function_exists('collapsArch')) {
     $showMonths = $options[$number]['showMonths'];
     $expandMonths = $options[$number]['expandMonths'];
     $expandCurrentMonth = $options[$number]['expandCurrentMonth'];
+    $showPostTitle = $options[$number]['showPostTitle'];
+    $showPostDate = $options[$number]['showPostDate'];
+    $postDateFormat = $options[$number]['postDateFormat'];
   }
 
 		//$title		= wp_specialchars($options['title']);
@@ -310,6 +326,27 @@ if (function_exists('collapsArch')) {
         </li>
       </ul>
     </ul>
+   </p>
+   <p>
+   <input type="checkbox" name="collapsArch[<?php echo $number
+   ?>][showPostTitle]" <?php if ($showPostTitle=='yes') echo
+   'checked'; ?> id="showPostTitle-<?php echo $number ?>"></input> <label
+   for="showPostTitle">Show Post Title</label>
+   | Truncate Post Title to
+   <input type="text" size='3' name="collapsArch[<?php echo $number
+   ?>][postTitleLength]"
+   id="postTitleLength-<?php echo $number ?>"><?php echo $postTitleLength; ?></input> <label
+   for="postTitleLength"> characters</label>
+   </p>
+   <p>
+   <input type="checkbox" name="collapsArch[<?php echo $number
+   ?>][showPostDate]" <?php if ($showPostDate=='yes') echo
+   'checked'; ?> id="showPostDate-<?php echo $number ?>"></input> <label
+   for="showPostDate">Show Post Date</label> | 
+   <label for="postDateFormat">Post Date Format:</label>
+   <input type="text" size='3' name="collapsArch[<?php echo $number
+   ?>][postDateFormat]" value="<?php echo $postDateFormat; ?>" 
+   id="postDateFormat-<?php echo $number ?>"></input>
    </p>
    <?php
     echo '<input type="hidden" id="collapsArch-submit-'.$number.'" name="collapsArch['.$number.'][submit]" value="1" />';
