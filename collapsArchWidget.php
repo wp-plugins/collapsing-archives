@@ -164,6 +164,10 @@ if (function_exists('collapsArch')) {
       if( !isset($widget_collapsArch['showPostTitle'])) {
         $showPostTitle= 'no' ;
       }
+      $animate=1;
+      if( !isset($widget_collapsArch['animate'])) {
+        $animate= 0 ;
+      }
       $showPostDate='no';
       if( isset($widget_collapsArch['showPostDate'])) {
         $showPostDate= 'yes' ;
@@ -180,7 +184,7 @@ if (function_exists('collapsArch')) {
           'inExcludeYears','postSort','postSortOrder','showPages', 'linkToArch',
           'showYearCount', 'expandCurrentYear','expandMonths', 'showMonths',
           'expandCurrentMonth','showMonthCount', 'showPostTitle',
-          'showPostDate', 'postDateFormat');
+          'showPostDate', 'postDateFormat','animate');
     }
 
     update_option('collapsArchOptions', $options);
@@ -213,6 +217,7 @@ if (function_exists('collapsArch')) {
     $showPostTitle='yes';
     $showPostDate='no';
     $postDateFormat='m/d';
+    $animate=1;
   } else {
     $title = attribute_escape($options[$number]['title']);
     $showPostCount = $options[$number]['showPostCount'];
@@ -236,6 +241,7 @@ if (function_exists('collapsArch')) {
     $showPostTitle = $options[$number]['showPostTitle'];
     $showPostDate = $options[$number]['showPostDate'];
     $postDateFormat = $options[$number]['postDateFormat'];
+    $animate = $options[$number]['animate'];
   }
 
 		//$title		= wp_specialchars($options['title']);
@@ -347,6 +353,12 @@ if (function_exists('collapsArch')) {
    <input type="text" size='3' name="collapsArch[<?php echo $number
    ?>][postDateFormat]" value="<?php echo $postDateFormat; ?>" 
    id="postDateFormat-<?php echo $number ?>"></input>
+   </p>
+   <p>
+   <input type="checkbox" name="collapsArch[<?php echo $number
+   ?>][animate]" <?php if ($animate==1) echo
+   'checked'; ?> id="animate-<?php echo $number ?>"></input> <label
+   for="animate">Animate collapsing and expanding</label>
    </p>
    <?php
     echo '<input type="hidden" id="collapsArch-submit-'.$number.'" name="collapsArch['.$number.'][submit]" value="1" />';

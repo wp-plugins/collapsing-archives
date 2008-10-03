@@ -30,7 +30,7 @@ This file is part of Collapsing Archives
     along with Collapsing Archives; if not, write to the Free Software
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */ 
-
+add_action('wp_head', wp_enqueue_script('scriptaculous-effects'));
 add_action( 'wp_head', array('collapsArch','get_head'));
 add_action('activate_collapsing-archives/collapsArch.php', array('collapsArch','init'));
 
@@ -61,7 +61,7 @@ class collapsArch {
     $collapseSym="<img src='". get_settings('siteurl') .
          "/wp-content/plugins/collapsing-archives/" . 
          "img/collapse.gif' alt='collapse' />";
-    echo "function expandArch( e, expand ) {
+    echo "function expandArch( e, expand,animate ) {
     if (expand==1) {
       expand='+';
       collapse='—';
@@ -101,13 +101,21 @@ class collapsArch {
     }
 
     if( src.getAttribute( 'class' ) == 'collapsArch hide' ) {
-      childList.style.display = 'none';
+      if (animate==1) {
+        Effect.BlindUp(childList, {duration: 0.5});
+      } else {
+        childList.style.display = 'none';
+      }
       var theSpan = src.childNodes[0];
       src.setAttribute('class','collapsArch show');
       src.setAttribute('title','click to expand');
       theSpan.innerHTML=expand;
     } else {
-      childList.style.display = 'block';
+      if (animate==1) {
+        Effect.BlindDown(childList, {duration: 0.5});
+      } else {
+        childList.style.display = 'block';
+      }
       var theSpan = src.childNodes[0];
       src.setAttribute('class','collapsArch hide');
       src.setAttribute('title','click to collapse');
@@ -121,6 +129,7 @@ class collapsArch {
     return false;
   }\n";
 		echo ";\n// ]]>\n</script>\n";
+		$url = get_settings('siteurl');
     echo "<style type='text/css'>
 		@import '$url/wp-content/plugins/collapsing-archives/collapsArch.css';
     </style>\n";

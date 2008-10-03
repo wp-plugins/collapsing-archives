@@ -37,7 +37,7 @@ $now = current_time( 'mysql' );
 $post_attrs = "post_date != '0000-00-00 00:00:00' AND post_status = 'publish'";
 
   $options=get_option('collapsArchOptions');
-  print_r($options);
+  //print_r($options);
   extract($options[$number]);
   if ($expand==1) {
     $expandSym='+';
@@ -205,7 +205,8 @@ if( $allPosts ) {
           echo "  </li> <!-- end year -->\n";
         }
       }
-      echo "  <li class='collapsArch'><span title='$yearTitle' class='collapsArch $yearRel' onclick='expandArch(event, $expand); return false' ><span class='sym'>$ding</span></span>";
+      echo "  <li class='collapsArch'><span title='$yearTitle'
+      class='collapsArch $yearRel' onclick='expandArch(event, $expand, $animate); return false' ><span class='sym'>$ding</span></span>";
       $home = get_settings('home');
       echo "<a href='".get_year_link($archPost->year). "'>$currentYear</a>$yearCount\n";
       if( $showMonths=='yes' ) {
@@ -244,7 +245,7 @@ if( $allPosts ) {
 
 				if( $expandMonths=='yes' ) {
 					$link = 'javascript:;';
-					$onclick = "onclick='expandArch(event, $expand); return false'";
+					$onclick = "onclick='expandArch(event, $expand, $animate); return false'";
 					$monthCollapse = 'collapsArch';
 					if( $expandCurrentMonth=='yes'
 							&& $currentYear == date('Y')

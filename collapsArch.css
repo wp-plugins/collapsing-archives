@@ -38,3 +38,16 @@ font-size:1.3em;
               list-style-type:none;
              margin:0 0 0 1em;}
 #sidebar li.collapsArchPost:before {content: "\00BB \00A0" !important;} 
+#sidebar .sym {
+               font-size:1.1em;
+               font-family:monospace;
+               margin:2px 5px 0px 0; 
+               line-height:.8em;
+               padding:0;
+               /* uncomment to put a box around +/-
+               border:1px solid;
+               height:.9em;
+               display:inline-block;
+               vertical-align:baseline;
+               */
+              }
