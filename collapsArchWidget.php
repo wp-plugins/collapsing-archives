@@ -184,7 +184,7 @@ if (function_exists('collapsArch')) {
     $title = 'Archives';
     $text = '';
     $showPostCount = 'yes';
-    $archSortOrder = 'ASC';
+    $archSortOrder = 'DESC';
     $defaultExpand='';
     $number = '%i%';
     $expand='1';
