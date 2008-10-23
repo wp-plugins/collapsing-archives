@@ -1,6 +1,6 @@
 <?php
 /*
-Collapsing Archives version: 0.9alpha
+Collapsing Archives version: 0.9.alpha
 
 Copyright 2007 Robert Felty
 
@@ -56,33 +56,56 @@ $post_attrs = "post_date != '0000-00-00 00:00:00' AND post_status = 'publish'";
     $expandSym='►';
     $collapseSym='▼';
   }
-	$inExclusions = array();
-	if ( !empty($inExclude) && !empty($inExcludeCats) ) {
+	$inExclusionsCat = array();
+	if ( !empty($inExcludeCat) && !empty($inExcludeCats) ) {
 		$exterms = preg_split('/[,]+/',$inExcludeCats);
-    if ($inExclude=='include') {
+    if ($inExcludeCat=='include') {
       $in='IN';
     } else {
       $in='NOT IN';
     }
 		if ( count($exterms) ) {
 			foreach ( $exterms as $exterm ) {
-				if (empty($inExclusions))
-					$inExclusions = "'" . sanitize_title($exterm) . "'";
+				if (empty($inExclusionsCat))
+					$inExclusionsCat = "'" . sanitize_title($exterm) . "'";
 				else
-					$inExclusions .= ", '" . sanitize_title($exterm) . "' ";
+					$inExclusionsCat .= ", '" . sanitize_title($exterm) . "' ";
 			}
 		}
 	}
-	if ( empty($inExclusions) ) {
-		$inExcludeQuery = "NOT IN ('')";
+	if ( empty($inExclusionsCat) ) {
+		$inExcludeCatQuery = "NOT IN ('')";
   } else {
-    $inExcludeQuery ="$in ($inExclusions)";
+    $inExcludeCatQuery ="$in ($inExclusionsCat)";
+  }
+	$inExclusionsYear = array();
+	if ( !empty($inExcludeYear) && !empty($inExcludeYears) ) {
+		$exterms = preg_split('/[,]+/',$inExcludeYears);
+    if ($inExcludeYear=='include') {
+      $in='IN';
+    } else {
+      $in='NOT IN';
+    }
+		if ( count($exterms) ) {
+			foreach ( $exterms as $exterm ) {
+				if (empty($inExclusionsYear))
+					$inExclusionsYear = "'" .$exterm . "'";
+				else
+					$inExclusionsYear .= ", '" . $exterm . "' ";
+			}
+		}
+	}
+	if ( empty($inExclusionsYear) ) {
+		$inExcludeYearQuery = "";
+  } else {
+    $inExcludeYearQuery ="AND YEAR($wpdb->posts.post_date) $in ($inExclusionsYear)";
   }
 
   $isPage='';
   if ($showPages=='no') {
     $isPage="AND $wpdb->posts.post_type='post'";
   }
+  /*
   if ($postSort!='') {
     if ($postSort=='postDate') {
       $postSortColumn="ORDER BY $wpdb->posts.post_date";
@@ -94,6 +117,7 @@ $post_attrs = "post_date != '0000-00-00 00:00:00' AND post_status = 'publish'";
       $postSortColumn="ORDER BY $wpdb->posts.comment_count";
     }
   } 
+  */
 	if ($defaultExpand!='') {
 		$autoExpand = preg_split('/,\s*/',$defaultExpand);
   } else {
@@ -101,11 +125,6 @@ $post_attrs = "post_date != '0000-00-00 00:00:00' AND post_status = 'publish'";
   }
 if( $showPages=='no' ) {
   $post_attrs .= " AND post_type = 'post'";
-}
-if ($order=='ASC') {
-  $order='ASC';
-} else {
-  $order='DESC';
 }
 
 /*
@@ -119,16 +138,19 @@ $postquery= "SELECT $wpdb->posts.ID, $wpdb->posts.post_title,
     MONTH($wpdb->posts.post_date) AS 'month' 
   FROM $wpdb->posts LEFT JOIN $wpdb->term_relationships ON $wpdb->posts.ID =
     $wpdb->term_relationships.object_id LEFT JOIN $wpdb->terms ON
-    $wpdb->terms.slug $inExcludeQuery 
+    $wpdb->terms.slug $inExcludeCatQuery
   WHERE
     $wpdb->term_relationships.term_taxonomy_id = $wpdb->terms.term_id AND
-    $post_attrs $include 
+    $post_attrs  $inExcludeYearQuery
   GROUP BY $wpdb->posts.ID 
-  ORDER BY $wpdb->posts.post_date $order";
+  ORDER BY $wpdb->posts.post_date $archSortOrder";
 
 
 $allPosts=$wpdb->get_results($postquery);
 /*echo "<!--\n";
+echo $postquery;
+echo "year=$inExcludeYears";
+echo "excludeYear=$inExcludeYear";
 print_r($archPosts);
 print_r($allPosts);
 echo "-->\n";
@@ -206,9 +228,15 @@ if( $allPosts ) {
         }
       }
       echo "  <li class='collapsArch'><span title='$yearTitle'
-      class='collapsArch $yearRel' onclick='expandArch(event, $expand, $animate); return false' ><span class='sym'>$ding</span></span>";
+      class='collapsArch $yearRel' onclick='expandArch(event, $expand, $animate); return false' ><span class='sym'>$ding</span>";
       $home = get_settings('home');
-      echo "<a href='".get_year_link($archPost->year). "'>$currentYear</a>$yearCount\n";
+      if ($linkToArch=='yes') {
+        echo  "</span>";
+        echo "<a href='".get_year_link($archPost->year). "'>$currentYear</a>$yearCount\n";
+      } else {
+        echo "$currentYear$yearCount\n";
+        echo "</span>";
+      }
       if( $showMonths=='yes' ) {
         echo "    <ul $monthStyle id='collapsArchList-$currentYear'>\n";
       }
@@ -259,9 +287,15 @@ if( $allPosts ) {
 										$monthTitle= 'click to expand';
 										$ding = $expandSym;
 					}
-					$the_link = "<span title='$monthTitle' class='$monthCollapse $monthRel' $onclick><span class='sym'>$ding</span></span>";
-					$the_link .="<a href='".get_month_link($currentYear, $currentMonth)."' title='$title_text'>";
-					$the_link .="$text</a>\n";
+					$the_link = "<span title='$monthTitle' class='$monthCollapse $monthRel' $onclick><span class='sym'>$ding</span>";
+          if ($linkToArch=='yes') {
+            $the_link.= "</span>";
+            $the_link .="<a href='".get_month_link($currentYear, $currentMonth)."' title='$title_text'>";
+            $the_link .="$text</a>\n";
+          } else {
+            $the_link .="$text\n";
+            $the_link.="</span>";
+          }
 				} else {
 					$link = get_month_link( $currentYear, $currentMonth );
 					$onclick = '';
@@ -334,7 +368,7 @@ if( $allPosts ) {
 					}
 
 					if( $showPostDate=='yes' ) {
-						$theDate = mysql2date($collapsArchPostDateFormat, $archPost->post_date );
+						$theDate = mysql2date($postDateFormat, $archPost->post_date );
 						$text .= ( $text == '' ? $theDate : ', '.$theDate );
 					}
 

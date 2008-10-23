@@ -99,9 +99,9 @@ if (function_exists('collapsArch')) {
       if ( !isset($widget_collapsArch['title']) && isset($options[$widget_number]) ) // user clicked cancel
         continue;
       $title = strip_tags(stripslashes($widget_collapsArch['title']));
-      $catSortOrder= 'ASC' ;
-      if($widget_collapsArch['catSortOrder'] == 'DESC') {
-        $catSortOrder= 'DESC' ;
+      $archSortOrder= 'DESC' ;
+      if($widget_collapsArch['archSortOrder'] == 'ASC') {
+        $archSortOrder= 'ASC' ;
       }
       $showPosts= 'yes' ;
       if($widget_collapsArch['showPosts'] == 'no') {
@@ -127,26 +127,13 @@ if (function_exists('collapsArch')) {
       if( !isset($widget_collapsArch['expandCurrentYear'])) {
         $expandCurrentYear= 'no' ;
       }
-      $postSortOrder= 'ASC' ;
-      if($widget_collapsArch['postSortOrder'] == 'DESC') {
-        $postSortOrder= 'DESC' ;
-      }
-      if($widget_collapsArch['postSort'] == 'postTitle') {
-        $postSort= 'postTitle' ;
-      } elseif ($widget_collapsArch['postSort'] == 'postId') {
-        $postSort= 'postId' ;
-      } elseif ($widget_collapsArch['postSort'] == 'postComment') {
-        $postSort= 'postComment' ;
-      } elseif ($widget_collapsArch['postSort'] == 'postDate') {
-        $postSort= 'postDate' ;
-      } elseif ($widget_collapsArch['postSort'] == '') {
-        $postSort= '' ;
-        $postSortOrder= '' ;
-      }
       $expand= $widget_collapsArch['expand'];
-      $inExclude= 'include' ;
-      if($widget_collapsArch['inExclude'] == 'exclude') {
-        $inExclude= 'exclude' ;
+      $inExcludeYear= 'include' ;
+      if($widget_collapsArch['inExcludeYear'] == 'exclude') {
+        $inExcludeYear= 'exclude' ;
+      }
+      if($widget_collapsArch['inExcludeCat'] == 'exclude') {
+        $inExcludeCat= 'exclude' ;
       }
       $showMonths='yes';
       if( !isset($widget_collapsArch['showMonths'])) {
@@ -178,12 +165,13 @@ if (function_exists('collapsArch')) {
         $expandCurrentMonth= 'no' ;
       }
       $inExcludeYears=addslashes($widget_collapsArch['inExcludeYears']);
+      $inExcludeCats=addslashes($widget_collapsArch['inExcludeCats']);
       $defaultExpand=addslashes($widget_collapsArch['defaultExpand']);
       $options[$widget_number] = compact( 'title','showPostCount',
-          'expand','inExclude', 'showPosts',
-          'inExcludeYears','postSort','postSortOrder','showPages', 'linkToArch',
+          'inExcludeCat', 'inExcludeCats', 'inExcludeYear', 'inExcludeYears',
+          'archSortOrder', 'showPosts', 'showPages', 'linkToArch',
           'showYearCount', 'expandCurrentYear','expandMonths', 'showMonths',
-          'expandCurrentMonth','showMonthCount', 'showPostTitle',
+          'expandCurrentMonth','showMonthCount', 'showPostTitle', 'expand',
           'showPostDate', 'postDateFormat','animate');
     }
 
@@ -196,15 +184,14 @@ if (function_exists('collapsArch')) {
     $title = 'Archives';
     $text = '';
     $showPostCount = 'yes';
-    $catSort = 'catName';
-    $catSortOrder = 'ASC';
-    $postSort = 'postTitle';
-    $postSortOrder = 'ASC';
+    $archSortOrder = 'ASC';
     $defaultExpand='';
     $number = '%i%';
     $expand='1';
-    $inExclude='include';
+    $inExcludeCat='include';
+    $inExcludeYear='include';
     $inExcludeCats='';
+    $inExcludeYears='';
     $showPosts='yes';
     $linkToArch='yes';
     $showPages='no';
@@ -223,11 +210,10 @@ if (function_exists('collapsArch')) {
     $showPostCount = $options[$number]['showPostCount'];
     $expand = $options[$number]['expand'];
     $inExcludeCats = $options[$number]['inExcludeCats'];
-    $inExclude = $options[$number]['inExclude'];
-    $catSort = $options[$number]['catSort'];
-    $catSortOrder = $options[$number]['catSortOrder'];
-    $postSort = $options[$number]['postSort'];
-    $postSortOrder = $options[$number]['postSortOrder'];
+    $inExcludeYears = $options[$number]['inExcludeYears'];
+    $inExcludeCat = $options[$number]['inExcludeCat'];
+    $inExcludeYear = $options[$number]['inExcludeYear'];
+    $archSortOrder = $options[$number]['archSortOrder'];
     $defaultExpand = $options[$number]['defaultExpand'];
     $showPosts = $options[$number]['showPosts'];
     $showPages = $options[$number]['showPages'];
@@ -256,19 +242,16 @@ if (function_exists('collapsArch')) {
      id="collapsArch-showPages-<?php echo $number ?>"></input> <label
      for="collapsArchShowPages">Show Pages as well as posts </label>
     </p>
-    <p>Sort Posts by:<br />
-     <select name="collapsArch[<?php echo $number ?>][postSort]">
-     <option <?php if($postSort=='postTitle') echo 'selected'; ?>
-     id="sortPostTitle-<?php echo $number ?>" value='postTitle'>Post Title</option>
-     <option <?php if($postSort=='postId') echo 'selected'; ?> id="sortPostId-<?php echo $number ?>" value='postId'>Post id</option>
-     <option <?php if($postSort=='postDate') echo 'selected'; ?>
-     id="sortPostDate-<?php echo $number ?>" value='postDate'>Post Date</option>
-     <option <?php if($postSort=='postComment') echo 'selected'; ?>
-     id="sortComment-<?php echo $number ?>" value='postComment'>Post Comment
-     Count</option>
-    </select>
-     <input type="radio" name="collapsArch[<?php echo $number ?>][postSortOrder]" <?php if($postSortOrder=='ASC') echo 'checked'; ?> id="postSortASC" value='ASC'></input> <label for="postPostASC">Ascending</label>
-     <input type="radio" name="collapsArch[<?php echo $number ?>][postSortOrder]" <?php if($postSortOrder=='DESC') echo 'checked'; ?> id="postPostDESC" value='DESC'></input> <label for="postPostDESC">Descending</label>
+     <p>Display archives in 
+     <select name="collapsArch[<?php echo $number ?>][archSortOrder]">
+     <option  <?php if($archSortOrder=='ASC') echo 'selected'; ?>
+     id="archSortOrderInclude-<?php echo $number ?>"
+     value='include'>Chronological</option>
+     <option  <?php if($archSortOrder=='DESC') echo 'selected'; ?>
+     id="archSortOrderExclude-<?php echo $number ?>"
+     value='exclude'>Reverse Chronological</option>
+     </select>
+    order
     </p>
     <p>Clicking on year/month :<br />
      <input type="radio" name="collapsArch[<?php echo $number ?>][linkToArch]"
@@ -294,12 +277,26 @@ if (function_exists('collapsArch')) {
      src='<?php echo get_settings('siteurl') .
      "/wp-content/plugins/collapsing-archives/" ?>img/expand.gif' /></label>
     </p>
-     <select name="collapsArch[<?php echo $number ?>][inExclude]">
-     <option  <?php if($inExclude=='include') echo 'selected'; ?> id="inExcludeInclude-<?php echo $number ?>" value='include'>Include</option>
-     <option  <?php if($inExclude=='exclude') echo 'selected'; ?> id="inExcludeExclude-<?php echo $number ?>" value='exclude'>Exclude</option>
+    <p>
+     <select name="collapsArch[<?php echo $number ?>][inExcludeYear]">
+     <option  <?php if($inExcludeYear=='include') echo 'selected'; ?> id="inExcludeYearInclude-<?php echo $number ?>" value='include'>Include</option>
+     <option  <?php if($inExcludeYear=='exclude') echo 'selected'; ?> id="inExcludeYearExclude-<?php echo $number ?>" value='exclude'>Exclude</option>
      </select>
      these years separated by commas):<br />
-    <input type="text" name="collapsArch[<?php echo $number ?>][inExcludeYears]" value="<?php echo $inExcludeYears ?>" id="collapsArch-inExcludeYears-<?php echo $number ?>"></input> 
+    <input type="text" name="collapsArch[<?php echo $number
+    ?>][inExcludeYears]" value="<?php echo $inExcludeYears ?>"  
+    id="collapsArch-inExcludeYears-<?php echo $number ?>"></input> 
+    </p>
+    <p>
+     <select name="collapsArch[<?php echo $number ?>][inExcludeCat]">
+     <option  <?php if($inExcludeCat=='include') echo 'selected'; ?> id="inExcludeCatInclude-<?php echo $number ?>" value='include'>Include</option>
+     <option  <?php if($inExcludeCat=='exclude') echo 'selected'; ?> id="inExcludeCatExclude-<?php echo $number ?>" value='exclude'>Exclude</option>
+     </select>
+     these categories separated by commas):<br />
+    <input type="text" name="collapsArch[<?php echo $number
+    ?>][inExcludeCats]" value="<?php echo $inExcludeCats ?>"
+    id="collapsArch-inExcludeCats-<?php echo $number ?>"><?php echo
+    $inExcludeCats ?></input> 
     </p>
      <p>
      <input type="checkbox" name="collapsArch[<?php echo $number
@@ -315,23 +312,23 @@ if (function_exists('collapsArch')) {
      <input type="checkbox" name="collapsArch[<?php echo $number
      ?>][showMonths]" <?php if ($showMonths=='yes')  echo 'checked'; ?>
      id="showMonths-<?php echo $number ?>"></input> <label for="showMonths">Show Month Link</label>
-     <ul>
-      <li>
-       <input type="checkbox" name="collapsArch[<?php echo $number
-       ?>][showMonthCount]" <?php if ($showMonthCount == 'yes') echo 'checked'; ?> id="showMonthCount-<?php echo $number ?>"></input> <label for="showMonthCount">Show Post Count in Month Links</label>
-      </li>
-      <li>
-       <input type="checkbox" name="collapsArch[<?php echo $number
-       ?>][expandMonths]" <?php if($expandMonths=='yes') echo 'checked'; ?>
-       id="expandMonths-<?php echo $number ?>"></input> <label for="expandMonths">Month Links should expand to show Posts</label>
-       <ul>
-        <li>
-         <input type="checkbox" name="collapsArch[<?php echo $number
-         ?>][expandCurrentMonth]" <?php if ($expandCurrentMonth=='yes') echo
-         'checked'; ?> id="expandCurrentMonth-<?php echo $number ?>"></input> <label for="expandCurrentMonth">Leave Current Month Expanded by Default</label>
-        </li>
-      </ul>
-    </ul>
+   </p>
+   <p>
+      &nbsp;&nbsp;<input type="checkbox" name="collapsArch[<?php echo $number
+      ?>][showMonthCount]" <?php if ($showMonthCount == 'yes') echo
+      'checked'; ?> id="showMonthCount-<?php echo $number ?>"></input> <label
+      for="showMonthCount">Show Post Count in Month Links</label><br />
+
+        &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="collapsArch[<?php
+        echo $number ?>][expandMonths]" <?php if($expandMonths=='yes') echo
+        'checked'; ?> id="expandMonths-<?php echo $number ?>"></input> <label
+        for="expandMonths">Month Links should expand to show Posts</label><br />
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox"
+          name="collapsArch[<?php echo $number ?>][expandCurrentMonth]" <?php
+          if ($expandCurrentMonth=='yes') echo 'checked'; ?>
+          id="expandCurrentMonth-<?php echo $number ?>"></input> <label
+          for="expandCurrentMonth">Leave Current Month Expanded by
+          Default</label>
    </p>
    <p>
    <input type="checkbox" name="collapsArch[<?php echo $number

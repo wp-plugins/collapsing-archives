@@ -1,5 +1,12 @@
 Collapsing Archives Changelog
 
+* 0.9.alpha (2008.10.23) 
+    * Can now use more than one widget
+    * Added option to animate collapsing and expanding
+    * Added option to use images as collapsing symbols
+    * Added option to have the year and month activate collapsing instead of
+      linking to the yearly/monthly archive
+
 * 0.8.9 (2008.06.04)
     * added option for different expand and collapse symbols (triangles, +/-)
 
