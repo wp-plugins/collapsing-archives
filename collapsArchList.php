@@ -301,7 +301,7 @@ if( $allPosts ) {
 					$onclick = '';
 					$monthRel = '';
 					$monthTitle = '';
-					$monthCollapse = '';
+					$monthCollapse = 'collapsArchMonth';
 					//$the_link ="<a href='$home/$archives$currentYear/$currentMonth' title='$title_text'>";
 					$the_link ="<a href='".get_month_link($currentYear, $currentMonth)."' title='$title_text'>";
 					$the_link .="$text</a>\n";
