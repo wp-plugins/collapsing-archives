@@ -1,5 +1,10 @@
 Collapsing Archives Changelog
 
+* 0.9.1 (2008.10.28)
+    * added collapsArchMonth class for when posts are not shown
+    * added img directory
+    * calling it stable
+
 * 0.9.alpha (2008.10.23) 
     * Can now use more than one widget
     * Added option to animate collapsing and expanding
