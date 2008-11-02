@@ -1,6 +1,6 @@
 <?php
 /*
-Collapsing Archives version: 0.9.1
+Collapsing Archives version: 0.9.2
 
 Copyright 2007 Robert Felty
 
@@ -321,13 +321,14 @@ if( $allPosts ) {
 
 				if( $showPostTitle=='yes' ) {
 						$title_text = htmlspecialchars(strip_tags($archPost->post_title), ENT_QUOTES);
+            $description_text = $title_text;
 					#$title_text = strip_tags($archPost->post_title);
 
 					if( $postTitleLength> 0 && strlen( $title_text ) > $postTitleLength ) {
 						$title_text = substr($title_text, 0, $postTitleLength );
-						if( $showPostTitleEllipsis=='yes' ) {
+						//if( $showPostTitleEllipsis=='yes' ) {
 							$title_text .= ' ...';
-						}
+						//}
 					}
 
 					$text .= ( $text == '' ? $title_text : ' - '.$title_text );
@@ -343,7 +344,8 @@ if( $allPosts ) {
 				}
 
 				$link = get_permalink( $archPost->ID );
-				echo "          <li class='collapsArchPost'><a href='$link' title='$title_text'>$text</a>$commcount</li>\n";
+				echo "          <li class='collapsArchPost'><a href='$link'
+        title='$description_text'>$text</a>$commcount</li>\n";
 				}
 			} else {
 
@@ -357,12 +359,15 @@ if( $allPosts ) {
 					if( $showPostTitle=='yes' ) {
 
 						$title_text = htmlspecialchars(strip_tags($archPost->post_title), ENT_QUOTES);
-						if( $collapsArchPostTitleLength> 0 && strlen( $title_text ) > $collapsArchPostTitleLength ) {
-							$title_text = substr($title_text, 0, $collapsArchPostTitleLength );
-							if( $showPostTitleEllipsis=='yes' ) {
+            $description_text = $title_text;
+            //echo $description_text;
+						if( $postTitleLength> 0 && strlen( $title_text ) > $postTitleLength ) {
+							$title_text = substr($title_text, 0, $postTitleLength );
+						//	if( $showPostTitleEllipsis=='yes' ) {
 								$title_text .= ' ...';
-							}
+						//	}
 						}
+            //echo $description_text;
 
 						$text .= ( $text == '' ? $title_text : ' - '.$title_text );
 					}
@@ -377,7 +382,8 @@ if( $allPosts ) {
 					}
 
 					$link = get_permalink( $archPost->ID );
-					echo "          <li class='collapsArchPost'><a href='$link' title='$title_text'>$text</a>$commcount</li>\n";
+					echo "          <li class='collapsArchPost'><a href='$link'
+          title='$description_text'>$text</a>$commcount</li>\n";
 			}
     }
   }

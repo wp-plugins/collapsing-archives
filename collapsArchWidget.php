@@ -165,6 +165,7 @@ if (function_exists('collapsArch')) {
         $expandCurrentMonth= 'no' ;
       }
       $inExcludeYears=addslashes($widget_collapsArch['inExcludeYears']);
+      $postTitleLength=addslashes($widget_collapsArch['postTitleLength']);
       $inExcludeCats=addslashes($widget_collapsArch['inExcludeCats']);
       $defaultExpand=addslashes($widget_collapsArch['defaultExpand']);
       $options[$widget_number] = compact( 'title','showPostCount',
@@ -172,7 +173,7 @@ if (function_exists('collapsArch')) {
           'archSortOrder', 'showPosts', 'showPages', 'linkToArch',
           'showYearCount', 'expandCurrentYear','expandMonths', 'showMonths',
           'expandCurrentMonth','showMonthCount', 'showPostTitle', 'expand',
-          'showPostDate', 'postDateFormat','animate');
+          'showPostDate', 'postDateFormat','animate','postTitleLength');
     }
 
     update_option('collapsArchOptions', $options);
@@ -192,6 +193,7 @@ if (function_exists('collapsArch')) {
     $inExcludeYear='include';
     $inExcludeCats='';
     $inExcludeYears='';
+    $postTitleLength='';
     $showPosts='yes';
     $linkToArch='yes';
     $showPages='no';
@@ -211,6 +213,7 @@ if (function_exists('collapsArch')) {
     $expand = $options[$number]['expand'];
     $inExcludeCats = $options[$number]['inExcludeCats'];
     $inExcludeYears = $options[$number]['inExcludeYears'];
+    $postTitleLength = $options[$number]['postTitleLength'];
     $inExcludeCat = $options[$number]['inExcludeCat'];
     $inExcludeYear = $options[$number]['inExcludeYear'];
     $archSortOrder = $options[$number]['archSortOrder'];
@@ -338,7 +341,8 @@ if (function_exists('collapsArch')) {
    | Truncate Post Title to
    <input type="text" size='3' name="collapsArch[<?php echo $number
    ?>][postTitleLength]"
-   id="postTitleLength-<?php echo $number ?>"><?php echo $postTitleLength; ?></input> <label
+   id="postTitleLength-<?php echo $number ?>" value="<?php echo
+   $postTitleLength; ?>"></input> <label
    for="postTitleLength"> characters</label>
    </p>
    <p>
