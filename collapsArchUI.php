@@ -1,6 +1,6 @@
 <?php
 /*
-Collapsing Archives version: 0.9.2alphaalpha
+Collapsing Archives version: 0.9.3alphaalpha
 Copyright 2007 Robert Felty
 
 This work is largely based on the Fancy Archives plugin by Andrew Rader
@@ -30,6 +30,14 @@ check_admin_referer();
 if( isset($_POST['infoUpdate']) ) {
   include('updateOptions.php');
 }
+$theOptions=get_option('collapsArchOptions');
+if (empty($theOptions)) {
+  $number = -1;
+} else {
+  $numbers=array_keys($theOptions);
+  $number= $numbers[0];
+}
+include('processOptions.php');
 ?>
 <div class=wrap>
  <form method="post">
@@ -37,7 +45,9 @@ if( isset($_POST['infoUpdate']) ) {
   <fieldset name="Collapsing Archives Options">
    <legend><?php _e('Display Options:'); ?></legend>
    <ul style="list-style-type: none;">
-   <?php include('options.txt'); ?>
+   <?php
+    echo '<p style="text-align:left;"><label for="collapsArch-title-'.$number.'">' . __('Title:') . '<input class="widefat" style="width: 200px;" id="collapsArch-title-'.$number.'" name="collapsArch['.$number.'][title]" type="text" value="'.$title.'" /></label></p>';
+   include('options.txt'); ?>
    </ul>
   </fieldset>
   <div class="submit">

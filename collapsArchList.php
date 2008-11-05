@@ -1,6 +1,6 @@
 <?php
 /*
-Collapsing Archives version: 0.9.2
+Collapsing Archives version: 0.9.3
 
 Copyright 2007 Robert Felty
 
@@ -37,8 +37,8 @@ $now = current_time( 'mysql' );
 $post_attrs = "post_date != '0000-00-00 00:00:00' AND post_status = 'publish'";
 
   $options=get_option('collapsArchOptions');
-  //print_r($options);
   extract($options[$number]);
+
   if ($expand==1) {
     $expandSym='+';
     $collapseSym='—';
@@ -53,6 +53,7 @@ $post_attrs = "post_date != '0000-00-00 00:00:00' AND post_status = 'publish'";
          "/wp-content/plugins/collapsing-archives/" . 
          "img/collapse.gif' alt='collapse' />";
   } else {
+    $expand=0;
     $expandSym='►';
     $collapseSym='▼';
   }
@@ -321,14 +322,13 @@ if( $allPosts ) {
 
 				if( $showPostTitle=='yes' ) {
 						$title_text = htmlspecialchars(strip_tags($archPost->post_title), ENT_QUOTES);
-            $description_text = $title_text;
 					#$title_text = strip_tags($archPost->post_title);
 
 					if( $postTitleLength> 0 && strlen( $title_text ) > $postTitleLength ) {
 						$title_text = substr($title_text, 0, $postTitleLength );
-						//if( $showPostTitleEllipsis=='yes' ) {
+						if( $showPostTitleEllipsis=='yes' ) {
 							$title_text .= ' ...';
-						//}
+						}
 					}
 
 					$text .= ( $text == '' ? $title_text : ' - '.$title_text );
@@ -344,8 +344,7 @@ if( $allPosts ) {
 				}
 
 				$link = get_permalink( $archPost->ID );
-				echo "          <li class='collapsArchPost'><a href='$link'
-        title='$description_text'>$text</a>$commcount</li>\n";
+				echo "          <li class='collapsArchPost'><a href='$link' title='$title_text'>$text</a>$commcount</li>\n";
 				}
 			} else {
 
@@ -359,15 +358,12 @@ if( $allPosts ) {
 					if( $showPostTitle=='yes' ) {
 
 						$title_text = htmlspecialchars(strip_tags($archPost->post_title), ENT_QUOTES);
-            $description_text = $title_text;
-            //echo $description_text;
-						if( $postTitleLength> 0 && strlen( $title_text ) > $postTitleLength ) {
-							$title_text = substr($title_text, 0, $postTitleLength );
-						//	if( $showPostTitleEllipsis=='yes' ) {
+						if( $collapsArchPostTitleLength> 0 && strlen( $title_text ) > $collapsArchPostTitleLength ) {
+							$title_text = substr($title_text, 0, $collapsArchPostTitleLength );
+							if( $showPostTitleEllipsis=='yes' ) {
 								$title_text .= ' ...';
-						//	}
+							}
 						}
-            //echo $description_text;
 
 						$text .= ( $text == '' ? $title_text : ' - '.$title_text );
 					}
@@ -382,8 +378,7 @@ if( $allPosts ) {
 					}
 
 					$link = get_permalink( $archPost->ID );
-					echo "          <li class='collapsArchPost'><a href='$link'
-          title='$description_text'>$text</a>$commcount</li>\n";
+					echo "          <li class='collapsArchPost'><a href='$link' title='$title_text'>$text</a>$commcount</li>\n";
 			}
     }
   }
