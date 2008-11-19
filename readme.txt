@@ -26,10 +26,9 @@ See the CHANGELOG for more information
 
 MANUAL INSTALLATION
 
-Unpack the tar contents to wp-content/plugins/ so that the
-files are in a collapsArch directory. Now enable the
-plugin. To use the plugin, change the following here
-appropriate (most likely sidebar.php):
+Unpack the contents to wp-content/plugins/ so that the files are in a
+collapsing-archives directory. Now enable the plugin. To use the plugin,
+change the following here appropriate (most likely sidebar.php):
 
 Change From:
 
