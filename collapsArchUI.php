@@ -28,12 +28,25 @@ This file is part of Collapsing Archives
 check_admin_referer();
 
 if( isset($_POST['infoUpdate']) ) {
-  include('updateOptions.php');
+  if (isset($_POST['reset'])) {
+    delete_option('collapsArchOptions');   
+  } else {
+    include('updateOptions.php');
+  }
 }
 $theOptions=get_option('collapsArchOptions');
 if (empty($theOptions)) {
   $number = -1;
 } else {
+   echo "
+  <h2>Collapsing Archives Options</h2>
+<p>If you wish to use the collapsing archives plugin as a widget, you should set the options in the widget page. If you would like to use it manually (that is, you modify your theme), then click below to delete the current widget options</p>
+<form method='post'>
+   <input type='hidden' name='reset' value='true' />
+   <input type='submit' name='infoUpdate' value='reset options' />
+</form>
+";
+  return;
   $numbers=array_keys($theOptions);
   $number= $numbers[0];
 }

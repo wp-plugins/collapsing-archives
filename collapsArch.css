@@ -23,7 +23,6 @@ This file is part of Collapsing Archives
     along with Collapsing Archives; if not, write to the Free Software
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
-/*#sidebar ul ul li:before {content:'';}        */
 span.collapsArch {border:0;
  padding:0; 
  margin:0; 
@@ -36,7 +35,7 @@ span.collapsArch {border:0;
               list-style-type:none;
              margin:0 0 0 1em;}
 #sidebar li.collapsArchPost:before {content: "\00BB \00A0" !important;} 
-#sidebar .sym {
+#sidebar li.collapsArch .sym {
                font-size:1.2em;
                font-family:Monaco, 'Andale Mono', 'FreeMono', 'Courier new', 'Courier', monospace;
                margin:2px 5px 0px 0; 

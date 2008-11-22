@@ -30,7 +30,9 @@ This file is part of Collapsing Archives
     along with Collapsing Archives; if not, write to the Free Software
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */ 
+$url = get_settings('siteurl');
 add_action('wp_head', wp_enqueue_script('scriptaculous-effects'));
+add_action('wp_head', wp_enqueue_script('collapsFunctions', "$url/wp-content/plugins/collapsing-archives/collapsFunctions.js"));
 add_action( 'wp_head', array('collapsArch','get_head'));
 add_action('admin_menu', array('collapsArch','setup'));
 //add_action('activate_collapsing-archives/collapsArch.php', array('collapsArch','init'));
@@ -62,6 +64,8 @@ class collapsArch {
 	}
 
 	function get_head() {
+    $url = get_settings('siteurl');
+		echo "<script type ='text/javascript' src='$url/wp-content/plugins/collapsing-archives/collapsArch.js'></script>";
 		echo "<script type=\"text/javascript\">\n";
 		echo "// <![CDATA[\n";
 		echo "// These variables are part of the Collapsing Archives Plugin version: 0.9.3\n// Copyright 2008 Robert Felty (robfelty.com)\n";
@@ -88,9 +92,13 @@ class collapsArch {
     }
     if( e.target ) {
       src = e.target;
-    }
-    else {
-      src = window.event.srcElement;
+    } else if (e.className.match(/^collapsArch/)) {
+      src=e;
+    } else {
+      try {
+        src = window.event.srcElement;
+      } catch (err) {
+      }
     }
 
     if (src.nodeName.toLowerCase() == 'img') {
@@ -118,6 +126,8 @@ class collapsArch {
         childList.style.display = 'none';
       }
       var theSpan = src.childNodes[0];
+      var theId= childList.getAttribute('id');
+      createCookie(theId,0,7);
       src.setAttribute('class','collapsArch show');
       src.setAttribute('title','click to expand');
       theSpan.innerHTML=expand;
@@ -128,6 +138,8 @@ class collapsArch {
         childList.style.display = 'block';
       }
       var theSpan = src.childNodes[0];
+      var theId= childList.getAttribute('id');
+      createCookie(theId,1,7);
       src.setAttribute('class','collapsArch hide');
       src.setAttribute('title','click to collapse');
       theSpan.innerHTML=collapse;
@@ -140,7 +152,6 @@ class collapsArch {
     return false;
   }\n";
 		echo ";\n// ]]>\n</script>\n";
-		$url = get_settings('siteurl');
     echo "<style type='text/css'>
 		@import '$url/wp-content/plugins/collapsing-archives/collapsArch.css';
     </style>\n";

@@ -1,5 +1,10 @@
 Collapsing Archives Changelog
 
+* 0.9.4 (2008.11.21)
+    * Improved handling of options for non-widget version
+    * Uses cookies to keep track of expanded and collapsed years/months
+    * tested with 2.7 beta3
+
 * 0.9.3 (2008.11.04)
     * Now can once again use as a widget or non-widget
 
