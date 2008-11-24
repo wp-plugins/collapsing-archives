@@ -4,7 +4,7 @@ Donate link: http://blog.robfelty.com/wordpress-plugins
 Tags: archives, sidebar, widget
 Requires at least: 2.6
 Tested up to: 2.6.3
-Stable tag: 0.9.3
+Stable tag: 0.9.4
 
 This plugin uses Javascript to dynamically expand or collaps the set of
 months for each year and posts for each month in the archive listing.
@@ -14,7 +14,10 @@ months for each year and posts for each month in the archive listing.
 This is a relatively simple plugin that uses Javascript to
 make the Archive links in the sidebar collapsable by year, and/or month.
 
-New in version 0.9.3 -- now can once again be used as a widget or manually.
+New in version 0.9.4 -- uses cookies to keep expanded and collapsed items
+expanded or collapsed on page reload (or visiting a different page or post)
+
+New in version 0.9.3+ -- now can once again be used as a widget or manually.
 Note that the syntax for manual usage has changed slightly - see installation
 for instructions.
 
@@ -127,6 +130,11 @@ gracefully if it is not present/enabled to show all of the
 archive links as usual.
 
 == HISTORY ==
+
+* 0.9.4 (2008.11.21)
+    * Improved handling of options for non-widget version
+    * Uses cookies to keep track of expanded and collapsed years/months
+    * tested with 2.7 beta3
 
 * 0.9.3 (2008.11.04)
     * Now can once again use as a widget or non-widget
