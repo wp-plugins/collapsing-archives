@@ -92,7 +92,7 @@ class collapsArch {
     }
     if( e.target ) {
       src = e.target;
-    } else if (e.className.match(/^collapsArch/)) {
+    } else if (e.className && e.className.match(/^collapsArch/)) {
       src=e;
     } else {
       try {
