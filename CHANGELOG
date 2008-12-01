@@ -1,5 +1,8 @@
 Collapsing Archives Changelog
 
+* 0.9.5 (2008.12.01)
+    * fixed javascript bug for IE7
+
 * 0.9.4 (2008.11.21)
     * Improved handling of options for non-widget version
     * Uses cookies to keep track of expanded and collapsed years/months
