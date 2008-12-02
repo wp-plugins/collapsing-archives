@@ -1,6 +1,6 @@
 <?php
 /*
-Collapsing Archives version: 0.9.5
+Collapsing Archives version: 0.9.6
 
 Copyright 2007 Robert Felty
 
@@ -382,10 +382,12 @@ if( $allPosts ) {
 			}
     }
   }
-  if( $showMonths=='yes' && $expandMonths=='yes' ) {
-    echo "        </ul>\n
-      </li> <!-- close month -->
-    </ul>";
+  if ($showMonths=='yes' ) {
+    if ($expandMonths=='yes') {
+      echo "        </ul>\n";
+    }
+    echo "  </li> <!-- close month -->
+          </ul>";
   }
 } ?>
   </li> <!-- close year -->
