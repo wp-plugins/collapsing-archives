@@ -35,14 +35,24 @@ add_action('wp_head', wp_enqueue_script('scriptaculous-effects'));
 add_action('wp_head', wp_enqueue_script('collapsFunctions', "$url/wp-content/plugins/collapsing-archives/collapsFunctions.js"));
 add_action( 'wp_head', array('collapsArch','get_head'));
 add_action('admin_menu', array('collapsArch','setup'));
-//add_action('activate_collapsing-archives/collapsArch.php', array('collapsArch','init'));
+add_action('activate_collapsing-archives/collapsArch.php', array('collapsArch','init'));
 
 class collapsArch {
 
-/*
 	function init() {
+    $options=array('%i%' => array('title' => 'Archives', 'showPostCount' => 'yes',
+                   'inExcludeCat' => 'exclude', 'inExcludeCats' => '',
+                   'inExcludeYear' => 'exclude', 'inExcludeYears' => '',
+                   'showPosts' => 'yes', 'showPages' => 'no',
+                   'linkToArch' => 'no', 'showYearCount' => 'yes',
+                   'expandCurrentYear' => 'yes', 'expandMonths' => 'yes',
+                   'showMonths' => 'yes', 'expandCurrentMonth' => 'yes',
+                   'showMonthCount' => 'yes', 'showPostTitle' => 'yes',
+                   'expand' => '0', 'showPostDate' => 'no', 
+                   'postDateFormat' => 'm/d', 'animate' => 'yes',
+                   'postTitleLength' => ''));
+    update_option('collapsArchOptions', $options);
 	}
-  */
 
 	function setup() {
 		if( function_exists('add_options_page') ) {
