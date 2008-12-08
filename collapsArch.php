@@ -84,13 +84,13 @@ class collapsArch {
 		echo "// These variables are part of the Collapsing Archives Plugin version: 0.9.7\n// Copyright 2008 Robert Felty (robfelty.com)\n";
 
     $expandSym="<img src='". get_settings('siteurl') .
-         "/wp-content/plugins/collapsing-categories/" . 
+         "/wp-content/plugins/collapsing-archives/" . 
          "img/expand.gif' alt='expand' />";
     $collapseSym="<img src='". get_settings('siteurl') .
-         "/wp-content/plugins/collapsing-categories/" . 
+         "/wp-content/plugins/collapsing-archives/" . 
          "img/collapse.gif' alt='collapse' />";
-    echo "var expandSym=$expandSym;";
-    echo "var collapseSym=$collapseSym;";
+    echo "var expandSym=\"$expandSym\";";
+    echo "var collapseSym=\"$collapseSym\";";
     echo"
     addLoadEvent(function() {
       autoExpandCollapse('collapsArch');
