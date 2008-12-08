@@ -40,7 +40,9 @@ add_action('activate_collapsing-archives/collapsArch.php', array('collapsArch','
 class collapsArch {
 
 	function init() {
-    $options=array('%i%' => array('title' => 'Archives', 'showPostCount' => 'yes',
+    if (!get_option('collapsArchOptions')) {
+      $options=array('%i%' => array('title' => 'Archives',
+                   'showPostCount' => 'yes',
                    'inExcludeCat' => 'exclude', 'inExcludeCats' => '',
                    'inExcludeYear' => 'exclude', 'inExcludeYears' => '',
                    'showPosts' => 'yes', 'showPages' => 'no',
@@ -51,7 +53,7 @@ class collapsArch {
                    'expand' => '0', 'showPostDate' => 'no', 
                    'postDateFormat' => 'm/d', 'animate' => 'yes',
                    'postTitleLength' => ''));
-    update_option('collapsArchOptions', $options);
+      update_option('collapsArchOptions', $options);
 	}
 
 	function setup() {
