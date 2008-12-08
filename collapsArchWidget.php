@@ -13,17 +13,17 @@ function collapsArchWidget($args, $widget_args=1) {
 
   $title = ($options[$number]['title'] != "") ? $options[$number]['title'] : ""; 
 
-    echo $before_widget . $before_title . $title . $after_title;
-       if( function_exists('collapsArch') ) {
-        collapsArch($number);
-       } else {
-        echo "<ul>\n";
-        wp_list_cats('sort_column=name&optioncount=1&hierarchical=0');
-        echo "</ul>\n";
-       }
+  echo $before_widget . $before_title . $title . $after_title;
+     if( function_exists('collapsArch') ) {
+      collapsArch($number);
+     } else {
+      echo "<ul>\n";
+      wp_list_archives('sort_column=name&optioncount=1&hierarchical=0');
+      echo "</ul>\n";
+     }
 
-    echo $after_widget;
-  }
+  echo $after_widget;
+}
 
 
 function collapsArchWidgetInit() {
@@ -65,7 +65,7 @@ if (function_exists('collapsArch')) {
 	exit;
 }
 
-	function collapsArchWidgetControl($widget_args) {
+function collapsArchWidgetControl($widget_args) {
   global $wp_registered_widgets;
   static $updated = false;
 
@@ -102,9 +102,7 @@ if (function_exists('collapsArch')) {
     // complete form. This will be embedded into the existing form.
     echo '<p style="text-align:right;"><label for="collapsArch-title-'.$number.'">' . __('Title:') . '<input class="widefat" style="width: 200px;" id="collapsArch-title-'.$number.'" name="collapsArch['.$number.'][title]" type="text" value="'.$title.'" /></label></p>';
   include('options.txt');
-  ?>
-   <?php
-    echo '<input type="hidden" id="collapsArch-submit-'.$number.'" name="collapsArch['.$number.'][submit]" value="1" />';
+  echo '<input type="hidden" id="collapsArch-submit-'.$number.'" name="collapsArch['.$number.'][submit]" value="1" />';
 
-	}
+}
 ?>

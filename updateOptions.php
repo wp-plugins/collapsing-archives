@@ -4,7 +4,6 @@ foreach ( (array) $_POST['collapsArch'] as $widget_number => $widget_collapsArch
   if (!isset($widget_collapsArch['title']) && isset($options[$widget_number]) ) { // user clicked cancel
     continue;
   }
-  echo "widget_number = $widget_number";
   $title = strip_tags(stripslashes($widget_collapsArch['title']));
   $archSortOrder= 'DESC' ;
   if($widget_collapsArch['archSortOrder'] == 'ASC') {

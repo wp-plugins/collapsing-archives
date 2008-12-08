@@ -229,7 +229,7 @@ if( $allPosts ) {
         }
       }
       echo "  <li class='collapsArch'><span title='$yearTitle'
-      class='collapsArch $yearRel' onclick='expandArch(event, $expand, $animate); return false' ><span class='sym'>$ding</span>";
+      class='collapsArch $yearRel' onclick='expandCollapse(event, $expand, $animate, \"collapsArch\"); return false' ><span class='sym'>$ding</span>";
       $home = get_settings('home');
       if ($linkToArch=='yes') {
         echo  "</span>";
@@ -274,7 +274,7 @@ if( $allPosts ) {
 
 				if( $expandMonths=='yes' ) {
 					$link = 'javascript:;';
-					$onclick = "onclick='expandArch(event, $expand, $animate); return false'";
+					$onclick = "onclick='expandCollapse(event, $expand, $animate, \"collapsArch\"); return false'";
 					$monthCollapse = 'collapsArch';
 					if( $expandCurrentMonth=='yes'
 							&& $currentYear == date('Y')

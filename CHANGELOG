@@ -1,4 +1,6 @@
 Collapsing Archives Changelog
+* 0.9.7 (2008.12.08)
+    * Integrating javascript with other collapsing plugins
 
 * 0.9.6 (2008.12.02)
     * Minor bug fix with missing end tag when years expand to months, but
