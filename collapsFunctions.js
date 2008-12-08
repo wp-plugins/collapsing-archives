@@ -45,7 +45,6 @@ function addLoadEvent(func) {
   }
 }
 function autoExpandCollapse(collapsClass) {
-  alert(collapsClass);
   var cookies = document.cookie.split(';');
   var cookiePattern = new RegExp(collapsClass+'(-[0-9]+|List-[0-9]+-[0-9]+)');
   var classPattern = new RegExp('^' + collapsClass);
