@@ -51,7 +51,7 @@ class collapsArch {
                    'showMonths' => 'yes', 'expandCurrentMonth' => 'yes',
                    'showMonthCount' => 'yes', 'showPostTitle' => 'yes',
                    'expand' => '0', 'showPostDate' => 'no', 
-                   'postDateFormat' => 'm/d', 'animate' => 'yes',
+                   'postDateFormat' => 'm/d', 'animate' => '1',
                    'postTitleLength' => ''));
       update_option('collapsArchOptions', $options);
     }
