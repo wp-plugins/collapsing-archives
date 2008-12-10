@@ -68,7 +68,7 @@ cursor:pointer;
        text-indent:-1em;
         list-style-type:none;
        margin:0 0 0 1em;}
-#sidebar li.collapsArchPost:before {content: "\00BB \00A0" !important;} 
+#sidebar li.collapsArchPost:before {content: \"\\00BB \\00A0\" !important;} 
 #sidebar li.collapsArch .sym {
          font-size:1.2em;
          font-family:Monaco, 'Andale Mono', 'FreeMono', 'Courier new', 'Courier', monospace;
