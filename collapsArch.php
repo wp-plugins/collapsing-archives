@@ -82,7 +82,7 @@ cursor:pointer;
          vertical-align:baseline;
          */
         }";
-      add_option( 'collapsPageStyle', $style);
+      add_option( 'collapsArchStyle', $style);
     }
 	}
 
@@ -106,7 +106,7 @@ cursor:pointer;
 	}
 
 	function get_head() {
-    $style=get_option('collapsArchStyle');
+    $style=stripslashes(get_option('collapsArchStyle'));
     echo "<style type='text/css'>
     $style
     </style>\n";
