@@ -121,3 +121,9 @@
    'checked'; ?> id="animate-<?php echo $number ?>"></input> <label
    for="animate">Animate collapsing and expanding</label>
    </p>
+   <p>
+<label for="collapsArchStyle">Style info:</label>
+   <textarea cols='60' rows='6' id="collapsArchStyle" name="collapsArchStyle">
+    <?php echo stripslashes(get_option('collapsArchStyle')) ?>
+   </textarea>
+    </p>

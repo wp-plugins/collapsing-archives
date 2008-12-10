@@ -34,6 +34,7 @@ $url = get_settings('siteurl');
 add_action('wp_head', wp_enqueue_script('scriptaculous-effects'));
 add_action('wp_head', wp_enqueue_script('collapsFunctions', "$url/wp-content/plugins/collapsing-archives/collapsFunctions.js"));
 add_action( 'wp_head', array('collapsArch','get_head'));
+add_action( 'wp_footer', array('collapsArch','get_foot'));
 add_action('admin_menu', array('collapsArch','setup'));
 add_action('activate_collapsing-archives/collapsArch.php', array('collapsArch','init'));
 
@@ -54,6 +55,34 @@ class collapsArch {
                    'postDateFormat' => 'm/d', 'animate' => '1',
                    'postTitleLength' => ''));
       update_option('collapsArchOptions', $options);
+    }
+    if( function_exists('add_option') ) {
+      $style="span.collapsArch {border:0;
+padding:0; 
+margin:0; 
+cursor:pointer;
+}
+#sidebar li.collapsArch:before {content:'';} 
+#sidebar li.collapsArch {list-style-type:none}
+#sidebar li.collapsArchPost {
+       text-indent:-1em;
+        list-style-type:none;
+       margin:0 0 0 1em;}
+#sidebar li.collapsArchPost:before {content: "\00BB \00A0" !important;} 
+#sidebar li.collapsArch .sym {
+         font-size:1.2em;
+         font-family:Monaco, 'Andale Mono', 'FreeMono', 'Courier new', 'Courier', monospace;
+         margin:2px 5px 0px 0; 
+         line-height:.8em;
+         padding:0;
+         /* uncomment to put a box around +/-
+         border:1px solid;
+         height:.9em;
+         display:inline-block;
+         vertical-align:baseline;
+         */
+        }";
+      add_option( 'collapsPageStyle', $style);
     }
 	}
 
@@ -77,16 +106,21 @@ class collapsArch {
 	}
 
 	function get_head() {
+    $style=get_option('collapsArchStyle');
+    echo "<style type='text/css'>
+    $style
+    </style>\n";
+	}
+  function get_foot() {
     $url = get_settings('siteurl');
-		//echo "<script type ='text/javascript' src='$url/wp-content/plugins/collapsing-archives/collapsArch.js'></script>";
 		echo "<script type=\"text/javascript\">\n";
 		echo "// <![CDATA[\n";
 		echo "// These variables are part of the Collapsing Archives Plugin version: 0.9.7\n// Copyright 2008 Robert Felty (robfelty.com)\n";
 
-    $expandSym="<img src='". get_settings('siteurl') .
+    $expandSym="<img src='". $url .
          "/wp-content/plugins/collapsing-archives/" . 
          "img/expand.gif' alt='expand' />";
-    $collapseSym="<img src='". get_settings('siteurl') .
+    $collapseSym="<img src='". $url .
          "/wp-content/plugins/collapsing-archives/" . 
          "img/collapse.gif' alt='collapse' />";
     echo "var expandSym=\"$expandSym\";";
@@ -97,10 +131,7 @@ class collapsArch {
     });
     ";
 		echo ";\n// ]]>\n</script>\n";
-    echo "<style type='text/css'>
-		@import '$url/wp-content/plugins/collapsing-archives/collapsArch.css';
-    </style>\n";
-	}
+  }
 }
 
 function collapsArch($number) {

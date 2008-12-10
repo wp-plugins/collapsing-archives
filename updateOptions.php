@@ -83,5 +83,7 @@ foreach ( (array) $_POST['collapsArch'] as $widget_number => $widget_collapsArch
 }
 
 update_option('collapsArchOptions', $options);
+$style=$_POST['collapsArchStyle'];
+update_option('collapsArchStyle', $style);
 $updated = true;
 ?>

@@ -27,6 +27,12 @@ See the CHANGELOG for more information
 
 == Installation ==
 
+IMPORTANT!
+Please deactivate before upgrading, then re-activate the plugin. Also, note
+that in 2.7, adding the widget does not seem to work if you have "show all
+widgets" selected, but it does if you select "show unused widgets" from the
+widget editing menu. Hopefully this will be corrected eventually
+
 MANUAL INSTALLATION
 
 Unpack the contents to wp-content/plugins/ so that the files are in a
