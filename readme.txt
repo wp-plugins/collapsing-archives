@@ -3,7 +3,7 @@ Contributors: robfelty
 Donate link: http://blog.robfelty.com/wordpress-plugins
 Tags: archives, sidebar, widget
 Requires at least: 2.6
-Tested up to: 2.6.5
+Tested up to: 2.7
 Stable tag: 1.0
 
 This plugin uses Javascript to dynamically expand or collaps the set of
