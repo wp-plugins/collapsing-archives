@@ -29,7 +29,7 @@ function collapsArchWidget($args, $widget_args=1) {
 function collapsArchWidgetInit() {
 if ( !$options = get_option('collapsArchOptions') )
     $options = array();
-  $control_ops = array('width' => 400, 'height' => 350, 'id_base' => 'collapsArch');
+  $control_ops = array('width' => 400, 'height' => 350, 'id_base' => 'collapsarch');
 	$widget_ops = array('classname' => 'collapsArch', 'description' =>
   __('Archives expand and collapse to show months and/or posts'));
   $name = __('Collapsing Archives');
@@ -39,15 +39,15 @@ if ( !$options = get_option('collapsArchOptions') )
     // Old widgets can have null values for some reason
     if ( !isset($options[$o]['title']) || !isset($options[$o]['title']) )
       continue;
-    $id = "collapsArch-$o"; // Never never never translate an id
+    $id = "collapsarch-$o"; // Never never never translate an id
     wp_register_sidebar_widget($id, $name, 'collapsArchWidget', $widget_ops, array( 'number' => $o ));
     wp_register_widget_control($id, $name, 'collapsArchWidgetControl', $control_ops, array( 'number' => $o ));
   }
 
   // If there are none, we register the widget's existance with a generic template
   if ( !$id ) {
-    wp_register_sidebar_widget( 'collapsArch-1', $name, 'collapsArchWidget', $widget_ops, array( 'number' => -1 ) );
-    wp_register_widget_control( 'collapsArch-1', $name, 'collapsArchWidgetControl', $control_ops, array( 'number' => -1 ) );
+    wp_register_sidebar_widget( 'collapsarch-1', $name, 'collapsArchWidget', $widget_ops, array( 'number' => -1 ) );
+    wp_register_widget_control( 'collapsarch-1', $name, 'collapsArchWidgetControl', $control_ops, array( 'number' => -1 ) );
   }
 
 }

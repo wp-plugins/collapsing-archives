@@ -1,4 +1,9 @@
 Collapsing Archives Changelog
+* 1.1 (2009/01/06)
+    * Finally fixed disappearing widget problem when trying to add to sidebar
+    * Added debugging option to show the query used and the output
+    * Moved style option to options page
+
 * 1.0 (2008.12.08)
     * Integrating javascript with other collapsing plugins
     * Non-widget version now works out of the box (defaults added to database

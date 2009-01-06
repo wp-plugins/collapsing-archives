@@ -146,8 +146,15 @@ $postquery= "SELECT $wpdb->posts.ID, $wpdb->posts.post_title,
   GROUP BY $wpdb->posts.ID 
   ORDER BY $wpdb->posts.post_date $archSortOrder";
 
+$allPosts=wp_cache_get('collapsArchPosts');
+if (false === $allPosts) {
+  echo "not using cache";
+  $allPosts=$wpdb->get_results($postquery);
+  wp_cache_set('collapsArchPosts', $allPosts,$expire=200);
+} else {
+  echo "using cache";
+}
 
-$allPosts=$wpdb->get_results($postquery);
 /*echo "<!--\n";
 echo $postquery;
 echo "year=$inExcludeYears";
