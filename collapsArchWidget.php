@@ -102,6 +102,10 @@ function collapsArchWidgetControl($widget_args) {
     // complete form. This will be embedded into the existing form.
     echo '<p style="text-align:right;"><label for="collapsArch-title-'.$number.'">' . __('Title:') . '<input class="widefat" style="width: 200px;" id="collapsArch-title-'.$number.'" name="collapsArch['.$number.'][title]" type="text" value="'.$title.'" /></label></p>';
   include('options.txt');
+  ?>
+  <p>Style can be set from the <a
+  href='options-general.php?page=collapsArch.php'>options page</a></p>
+  <?php
   echo '<input type="hidden" id="collapsArch-submit-'.$number.'" name="collapsArch['.$number.'][submit]" value="1" />';
 
 }

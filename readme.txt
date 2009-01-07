@@ -28,10 +28,7 @@ See the CHANGELOG for more information
 == Installation ==
 
 IMPORTANT!
-Please deactivate before upgrading, then re-activate the plugin. Also, note
-that in 2.7, adding the widget does not seem to work if you have "show all
-widgets" selected, but it does if you select "show unused widgets" from the
-widget editing menu. Hopefully this will be corrected eventually
+Please deactivate before upgrading, then re-activate the plugin. 
 
 MANUAL INSTALLATION
 
@@ -80,11 +77,9 @@ Collapsing Archives Widget.
 =  How do I change the style of the collapsing archives lists? =
 
   The collapsing archives plugin uses several ids and classes which can be
-  styled with CSS. I have provided a few defaults in the collapsArch.css file.
-  You can modify the collapsArch.css file to your liking. Alternatively, you
-  can copy those rules into your themes style file. You may have to rename
-  some of the id statements. For example, if your sidebar is called
-  "myawesomesidebar", you would rewrite the line 
+styled with CSS. These can be changed from the settings page. You may have to
+rename some of the id statements. For example, if your sidebar is called
+"myawesomesidebar", you would rewrite the line 
 
   #sidebar li.collapsArch {list-style-type:none}
   to
@@ -136,6 +131,18 @@ gracefully if it is not present/enabled to show all of the
 archive links as usual.
 
 == HISTORY ==
+
+* 1.1 (2009/01/06)
+    * Finally fixed disappearing widget problem when trying to add to sidebar
+    * Added debugging option to show the query used and the output
+    * Moved style option to options page
+
+* 1.0 (2008.12.08)
+    * Integrating javascript with other collapsing plugins
+    * Non-widget version now works out of the box (defaults added to database
+      upon activation)
+    * style can now be set with an option
+    * inline javascript moved to bottom for faster page loading
 
 * 0.9.6 (2008.12.02)
     * Minor bug fix with missing end tag when years expand to months, but

@@ -128,11 +128,6 @@ if( $showPages=='no' ) {
   $post_attrs .= " AND post_type = 'post'";
 }
 
-/*
-$showMonths='yes';
-$expandMonths='yes';
-$showPostTitle='yes';
-*/
 
 $postquery= "SELECT $wpdb->posts.ID, $wpdb->posts.post_title,
     $wpdb->posts.post_date, YEAR($wpdb->posts.post_date) AS 'year',
@@ -155,14 +150,17 @@ if (false === $allPosts) {
   echo "using cache";
 }
 
-/*echo "<!--\n";
-echo $postquery;
-echo "year=$inExcludeYears";
-echo "excludeYear=$inExcludeYear";
-print_r($archPosts);
-print_r($allPosts);
-echo "-->\n";
-*/
+if ($debug==1) {
+  echo "<pre style='display:none' >";
+  printf ("MySQL server version: %s\n", mysql_get_server_info());
+  echo "POST QUERY:\n $postquery\n";
+  echo "\nPOST QUERY RESULTS\n";
+  print_r($posts);
+  echo "\ncollapsArch options:\n";
+  print_r($options[$number]);
+  echo "</pre>";
+}
+
 if( $allPosts ) {
   $currentYear = -1;
   $currentMonth = -1;
@@ -175,12 +173,9 @@ if( $allPosts ) {
     if ($post->month != $lastMonth) {
       $lastMonth=$post->month;
     }
-    #foreach ($a as $b) {
-      $yearCounts{"$lastYear"}++;
-      $monthCounts{"$lastYear$lastMonth"}++;
-    #}
+    $yearCounts{"$lastYear"}++;
+    $monthCounts{"$lastYear$lastMonth"}++;
   }
-  #print_r($count_values);
   $newYear = false;
   $newMonth = false;
   $closePreviousYear = false;

@@ -61,6 +61,10 @@ foreach ( (array) $_POST['collapsArch'] as $widget_number => $widget_collapsArch
   if( !isset($widget_collapsArch['animate'])) {
     $animate= 0 ;
   }
+  $debug=0;
+  if (isset($widget_collapsArch['debug'])) {
+    $debug= 1 ;
+  }
   $showPostDate='no';
   if( isset($widget_collapsArch['showPostDate'])) {
     $showPostDate= 'yes' ;
@@ -83,7 +87,5 @@ foreach ( (array) $_POST['collapsArch'] as $widget_number => $widget_collapsArch
 }
 
 update_option('collapsArchOptions', $options);
-$style=$_POST['collapsArchStyle'];
-update_option('collapsArchStyle', $style);
 $updated = true;
 ?>

@@ -26,6 +26,7 @@ if ( -1 == $number ) {
   $showPostDate='no';
   $postDateFormat='m/d';
   $animate=1;
+  $debug=0;
 } else {
   $title = attribute_escape($options[$number]['title']);
   $showPostCount = $options[$number]['showPostCount'];
@@ -50,5 +51,6 @@ if ( -1 == $number ) {
   $showPostDate = $options[$number]['showPostDate'];
   $postDateFormat = $options[$number]['postDateFormat'];
   $animate = $options[$number]['animate'];
+  $debug = $options[$number]['debug'];
 }
 ?>
