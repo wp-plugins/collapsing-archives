@@ -1,5 +1,5 @@
 Collapsing Archives Changelog
-* 1.1 (2009/01/06)
+* 1.0.1 (2009/01/06)
     * Finally fixed disappearing widget problem when trying to add to sidebar
     * Added debugging option to show the query used and the output
     * Moved style option to options page
