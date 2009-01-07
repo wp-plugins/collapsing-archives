@@ -1,3 +1,6 @@
+/*  Collapse Functions, version 1.0
+ *
+ *--------------------------------------------------------------------------*/
 String.prototype.trim = function() {
   return this.replace(/^\s+|\s+$/g,"");
 }

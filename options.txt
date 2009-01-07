@@ -8,11 +8,11 @@
      <p>Display archives in 
      <select name="collapsArch[<?php echo $number ?>][archSortOrder]">
      <option  <?php if($archSortOrder=='ASC') echo 'selected'; ?>
-     id="archSortOrderInclude-<?php echo $number ?>"
-     value='include'>Chronological</option>
+     id="archSortOrder-<?php echo $number ?>"
+     value='ASC'>Chronological</option>
      <option  <?php if($archSortOrder=='DESC') echo 'selected'; ?>
-     id="archSortOrderExclude-<?php echo $number ?>"
-     value='exclude'>Reverse Chronological</option>
+     id="archSortOrder-<?php echo $number ?>"
+     value='DESC'>Reverse Chronological</option>
      </select>
     order
     </p>

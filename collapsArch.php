@@ -4,7 +4,7 @@ Plugin Name: Collapsing Archives
 Plugin URI: http://blog.robfelty.com/plugins
 Description: Allows users to expand and collapse archive links like Blogger 
 Author: Robert Felty
-Version: 1.0.1
+Version: 1.0.2
 Author URI: http://robfelty.com
 
 Copyright 2007 Robert Felty
@@ -31,10 +31,13 @@ This file is part of Collapsing Archives
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */ 
 $url = get_settings('siteurl');
-add_action('wp_head', wp_enqueue_script('scriptaculous-effects'));
-add_action('wp_head', wp_enqueue_script('collapsFunctions', "$url/wp-content/plugins/collapsing-archives/collapsFunctions.js"));
-add_action( 'wp_head', array('collapsArch','get_head'));
-add_action( 'wp_footer', array('collapsArch','get_foot'));
+if (!is_admin()) {
+  add_action('wp_head', wp_enqueue_script('scriptaculous-effects'));
+  add_action('wp_head', wp_enqueue_script('collapsFunctions',
+  "$url/wp-content/plugins/collapsing-archives/collapsFunctions.js", '', '1.0'));
+  add_action( 'wp_head', array('collapsArch','get_head'));
+  add_action( 'wp_footer', array('collapsArch','get_foot'));
+}
 add_action('admin_menu', array('collapsArch','setup'));
 add_action('activate_collapsing-archives/collapsArch.php', array('collapsArch','init'));
 
@@ -118,7 +121,7 @@ cursor:pointer;
     $url = get_settings('siteurl');
 		echo "<script type=\"text/javascript\">\n";
 		echo "// <![CDATA[\n";
-		echo "// These variables are part of the Collapsing Archives Plugin version: 1.0.1\n// Copyright 2008 Robert Felty (robfelty.com)\n";
+		echo "// These variables are part of the Collapsing Archives Plugin version: 1.0.2\n// Copyright 2008 Robert Felty (robfelty.com)\n";
 
     $expandSym="<img src='". $url .
          "/wp-content/plugins/collapsing-archives/" . 
