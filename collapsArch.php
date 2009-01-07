@@ -41,6 +41,34 @@ add_action('activate_collapsing-archives/collapsArch.php', array('collapsArch','
 class collapsArch {
 
 	function init() {
+    $style="span.collapsArch {border:0;
+padding:0; 
+margin:0; 
+cursor:pointer;
+}
+#sidebar li.collapsArch:before {content:'';} 
+#sidebar li.collapsArch {list-style-type:none}
+#sidebar li.collapsArchPost {
+     text-indent:-1em;
+      list-style-type:none;
+     margin:0 0 0 1em;}
+#sidebar li.collapsArchPost:before {content: \"\\\\00BB \\\\00A0\" !important;} 
+#sidebar li.collapsArch .sym {
+       font-size:1.2em;
+       font-family:Monaco, 'Andale Mono', 'FreeMono', 'Courier new', 'Courier', monospace;
+       margin:2px 5px 0px 0; 
+       line-height:.8em;
+       padding:0;
+       /* uncomment to put a box around +/-
+       border:1px solid;
+       height:.9em;
+       display:inline-block;
+       vertical-align:baseline;
+       */
+      }";
+    if( function_exists('add_option') ) {
+      update_option( 'collapsArchOrigStyle', $style);
+    }
     if (!get_option('collapsArchOptions')) {
       $options=array('%i%' => array('title' => 'Archives',
                    'showPostCount' => 'yes',
@@ -55,34 +83,9 @@ class collapsArch {
                    'postDateFormat' => 'm/d', 'animate' => '1',
                    'postTitleLength' => ''));
       update_option('collapsArchOptions', $options);
-    }
-    if( function_exists('add_option') ) {
-      $style="span.collapsArch {border:0;
-padding:0; 
-margin:0; 
-cursor:pointer;
-}
-#sidebar li.collapsArch:before {content:'';} 
-#sidebar li.collapsArch {list-style-type:none}
-#sidebar li.collapsArchPost {
-       text-indent:-1em;
-        list-style-type:none;
-       margin:0 0 0 1em;}
-#sidebar li.collapsArchPost:before {content: \"\\\\00BB \\\\00A0\" !important;} 
-#sidebar li.collapsArch .sym {
-         font-size:1.2em;
-         font-family:Monaco, 'Andale Mono', 'FreeMono', 'Courier new', 'Courier', monospace;
-         margin:2px 5px 0px 0; 
-         line-height:.8em;
-         padding:0;
-         /* uncomment to put a box around +/-
-         border:1px solid;
-         height:.9em;
-         display:inline-block;
-         vertical-align:baseline;
-         */
-        }";
-      add_option( 'collapsArchStyle', $style);
+      if( function_exists('add_option') ) {
+        add_option( 'collapsArchStyle', $style);
+      }
     }
 	}
 
