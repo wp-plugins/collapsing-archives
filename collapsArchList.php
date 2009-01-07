@@ -141,6 +141,7 @@ $postquery= "SELECT $wpdb->posts.ID, $wpdb->posts.post_title,
   GROUP BY $wpdb->posts.ID 
   ORDER BY $wpdb->posts.post_date $archSortOrder";
 
+/*
 $allPosts=wp_cache_get('collapsArchPosts');
 if (false === $allPosts) {
   echo "not using cache";
@@ -149,6 +150,8 @@ if (false === $allPosts) {
 } else {
   echo "using cache";
 }
+*/
+  $allPosts=$wpdb->get_results($postquery);
 
 if ($debug==1) {
   echo "<pre style='display:none' >";
