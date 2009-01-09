@@ -229,13 +229,17 @@ if( $allPosts ) {
             echo "      </li> <!-- close month --> \n";
           }
           echo "    </ul>\n  </li> <!-- end year -->\n";
-          echo "  <li class='collapsArch'><span title='$yearTitle'
-          class='collapsArch $yearRel' onclick='expandCollapse(event, $expand, $animate, \"collapsArch\"); return false' ><span class='sym'>$ding</span>";
         } else {
           echo "  </li> <!-- end year -->\n";
         }
       }
       $home = get_settings('home');
+      if( $showMonths=='yes' ) {
+				echo "  <li class='collapsArch'><span title='$yearTitle'
+				class='collapsArch $yearRel' onclick='expandCollapse(event, $expand, $animate, \"collapsArch\"); return false' ><span class='sym'>$ding</span>";
+			} else {
+			  echo "  <li class='collapsArchPost'>\n";
+			}
       if ($linkToArch=='yes') {
         echo  "</span>";
         echo "<a href='".get_year_link($archPost->year). "'>$currentYear</a>$yearCount\n";

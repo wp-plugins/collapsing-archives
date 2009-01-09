@@ -3,6 +3,7 @@ Collapsing Archives Changelog
 * 1.0.3 (2009/01/09)
     * don't put an expand icon for years if "show months" is not selected
     * add self class to post for additional styling
+    * fixed :before style info to restore default style
 
 * 1.0.2 (2009/01/07)
     * added javascript version

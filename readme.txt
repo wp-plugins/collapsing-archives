@@ -85,14 +85,6 @@ rename some of the id statements. For example, if your sidebar is called
   to
   #myawesomesidebar li.collapsArch {list-style-type:none}
 
-= The stylesheet doesn't seem to be having any effect? =
- 
-  Check this url in your browser:
-  http://yourblogaddress/wp-content/plugins/collapsing-archives/collapsArch.css
-  If you don't see a plaintext file with css style rules, there may be
-  something wrong with your .htaccess file (mod_rewrite). If you don't know
-  how to fix this, you can copy the style rules there into your themes style
-  file.
    
 == Screenshots ==
 
