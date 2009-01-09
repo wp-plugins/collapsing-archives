@@ -229,12 +229,12 @@ if( $allPosts ) {
             echo "      </li> <!-- close month --> \n";
           }
           echo "    </ul>\n  </li> <!-- end year -->\n";
+          echo "  <li class='collapsArch'><span title='$yearTitle'
+          class='collapsArch $yearRel' onclick='expandCollapse(event, $expand, $animate, \"collapsArch\"); return false' ><span class='sym'>$ding</span>";
         } else {
           echo "  </li> <!-- end year -->\n";
         }
       }
-      echo "  <li class='collapsArch'><span title='$yearTitle'
-      class='collapsArch $yearRel' onclick='expandCollapse(event, $expand, $animate, \"collapsArch\"); return false' ><span class='sym'>$ding</span>";
       $home = get_settings('home');
       if ($linkToArch=='yes') {
         echo  "</span>";

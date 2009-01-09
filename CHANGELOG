@@ -1,4 +1,9 @@
 Collapsing Archives Changelog
+
+* 1.0.3 (2009/01/09)
+    * don't put an expand icon for years if "show months" is not selected
+    * add self class to post for additional styling
+
 * 1.0.2 (2009/01/07)
     * added javascript version
     * not loading unnecessary code for admin pages (fixes interference with
