@@ -85,6 +85,15 @@ rename some of the id statements. For example, if your sidebar is called
   to
   #myawesomesidebar li.collapsArch {list-style-type:none}
 
+= There seems to be a newline between the collapsing/expanding symbol and the
+category name. How do I fix this? =
+
+If your theme has some css that says something like
+
+#sidebar li a {display:block}
+
+that is the problem. 
+You probably want to add a float:left to the .sym class
    
 == Screenshots ==
 
