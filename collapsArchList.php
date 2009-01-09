@@ -1,6 +1,6 @@
 <?php
 /*
-Collapsing Archives version: 1.0.2
+Collapsing Archives version: 1.0.3
 
 Copyright 2007 Robert Felty
 
@@ -335,9 +335,7 @@ if( $allPosts ) {
 
 					if( $postTitleLength> 0 && strlen( $title_text ) > $postTitleLength ) {
 						$title_text = substr($title_text, 0, $postTitleLength );
-						if( $showPostTitleEllipsis=='yes' ) {
 							$title_text .= ' ...';
-						}
 					}
 
 					$text .= ( $text == '' ? $title_text : ' - '.$title_text );
@@ -367,11 +365,9 @@ if( $allPosts ) {
 					if( $showPostTitle=='yes' ) {
 
 						$title_text = htmlspecialchars(strip_tags($archPost->post_title), ENT_QUOTES);
-						if( $collapsArchPostTitleLength> 0 && strlen( $title_text ) > $collapsArchPostTitleLength ) {
-							$title_text = substr($title_text, 0, $collapsArchPostTitleLength );
-							if( $showPostTitleEllipsis=='yes' ) {
+						if( $postTitleLength> 0 && strlen( $title_text ) > $postTitleLength ) {
+							$title_text = substr($title_text, 0, $postTitleLength );
 								$title_text .= ' ...';
-							}
 						}
 
 						$text .= ( $text == '' ? $title_text : ' - '.$title_text );
