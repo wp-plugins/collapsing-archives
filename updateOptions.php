@@ -80,7 +80,7 @@ foreach ( (array) $_POST['collapsArch'] as $widget_number => $widget_collapsArch
   $defaultExpand=addslashes($widget_collapsArch['defaultExpand']);
   $options[$widget_number] = compact( 'title','showPostCount',
       'inExcludeCat', 'inExcludeCats', 'inExcludeYear', 'inExcludeYears',
-      'archSortOrder', 'showPosts', 'showPages', 'linkToArch',
+      'archSortOrder', 'showPosts', 'showPages', 'linkToArch', 'debug',
       'showYearCount', 'expandCurrentYear','expandMonths', 'showMonths',
       'expandCurrentMonth','showMonthCount', 'showPostTitle', 'expand',
       'showPostDate', 'postDateFormat','animate','postTitleLength');

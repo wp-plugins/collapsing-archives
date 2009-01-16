@@ -1,6 +1,6 @@
 <?php
 /*
-Collapsing Archives version: 1.0.3
+Collapsing Archives version: 1.0.4
 
 Copyright 2007 Robert Felty
 
@@ -156,11 +156,11 @@ if (false === $allPosts) {
 if ($debug==1) {
   echo "<pre style='display:none' >";
   printf ("MySQL server version: %s\n", mysql_get_server_info());
-  echo "POST QUERY:\n $postquery\n";
-  echo "\nPOST QUERY RESULTS\n";
-  print_r($posts);
   echo "\ncollapsArch options:\n";
   print_r($options[$number]);
+  echo "POST QUERY:\n $postquery\n";
+  echo "\nPOST QUERY RESULTS\n";
+  print_r($allPosts);
   echo "</pre>";
 }
 

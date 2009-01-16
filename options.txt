@@ -122,8 +122,8 @@
    for="animate">Animate collapsing and expanding</label>
    </p>
     <p>
-     <input type="checkbox" name="collapsPage[<?php echo $number ?>][debug]"
-<?php if ($debug=='1')  echo 'checked'; ?> id="collapsPage-debug-<?php echo
-$number ?>"></input> <label for="collapsPageDebug">Show debugging information
+     <input type="checkbox" name="collapsArch[<?php echo $number ?>][debug]"
+<?php if ($debug==1)  echo 'checked'; ?> id="collapsArch-debug-<?php echo
+$number ?>"></input> <label for="collapsArchDebug">Show debugging information
 (shows up as a hidden pre right after the title)</label>
     </p>

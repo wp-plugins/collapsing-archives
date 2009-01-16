@@ -1,5 +1,9 @@
 Collapsing Archives Changelog
 
+* 1.0.4 (2009/01/15)
+    * fixed debug option
+    * style is set in database if the style column is not already there
+
 * 1.0.3 (2009/01/09)
     * don't put an expand icon for years if "show months" is not selected
     * add self class to post for additional styling
