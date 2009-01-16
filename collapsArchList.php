@@ -134,14 +134,16 @@ $postquery= "SELECT $wpdb->posts.ID, $wpdb->posts.post_title,
     MONTH($wpdb->posts.post_date) AS 'month' 
   FROM $wpdb->posts LEFT JOIN $wpdb->term_relationships ON $wpdb->posts.ID =
     $wpdb->term_relationships.object_id LEFT JOIN $wpdb->terms ON
-    $wpdb->terms.slug $inExcludeCatQuery
+    $wpdb->terms.slug 
+		LEFT JOIN $wpdb->term_taxonomy ON $wpdb->term_taxonomy.term_taxonomy_id =
+		$wpdb->term_relationships.term_taxonomy_id $inExcludeCatQuery
   WHERE
-    $wpdb->term_relationships.term_taxonomy_id = $wpdb->terms.term_id AND
-    $post_attrs  $inExcludeYearQuery
+		$post_attrs  $inExcludeYearQuery
   GROUP BY $wpdb->posts.ID 
   ORDER BY $wpdb->posts.post_date $archSortOrder";
 
 /*
+    $wpdb->term_relationships.term_taxonomy_id = $wpdb->terms.term_id 
 $allPosts=wp_cache_get('collapsArchPosts');
 if (false === $allPosts) {
   echo "not using cache";
