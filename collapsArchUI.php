@@ -36,7 +36,7 @@ echo "</pre>\n";
 $widgetOn=0;
 $number='%i%';
 if (empty($theOptions)) {
-  $number = -1;
+  $number = '%i%';
 } elseif (!isset($theOptions['%i%']['title']) || 
     count($theOptions) > 1) {
   $widgetOn=1; 
@@ -44,6 +44,7 @@ if (empty($theOptions)) {
 if( isset($_POST['resetOptions']) ) {
   if (isset($_POST['reset'])) {
     delete_option('collapsArchOptions');   
+		$widgetOn=0;
   }
 } elseif (isset($_POST['infoUpdate'])) {
   $style=$_POST['collapsArchStyle'];

@@ -1,5 +1,13 @@
 Collapsing Archives Changelog
 
+* 1.0.5 (2009/01/20)
+    * changed query
+    * when using truncated titles, title attribute has full title
+    * using html ellipsis in truncate titles
+    * Got rid of comma before post date
+    * fixed some issues with settings page
+    * updated FAQ
+
 * 1.0.4 (2009/01/15)
     * fixed debug option
     * style is set in database if the style column is not already there

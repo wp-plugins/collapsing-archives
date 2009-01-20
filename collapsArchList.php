@@ -336,16 +336,16 @@ if( $allPosts ) {
 					#$title_text = strip_tags($archPost->post_title);
 
 					if( $postTitleLength> 0 && strlen( $title_text ) > $postTitleLength ) {
-						$title_text = substr($title_text, 0, $postTitleLength );
-							$title_text .= ' ...';
+						$tmp_text = substr($title_text, 0, $postTitleLength );
+							$tmp_text .= ' &hellip;';
 					}
 
-					$text .= ( $text == '' ? $title_text : ' - '.$title_text );
+					$text .= ( $text == '' ? $tmp_text : ' - '.$tmp_text );
 				}
 
 				if( $showPostDate=='yes' ) {
 					$theDate = mysql2date($postDateFormat, $archPost->post_date );
-					$text .= ( $text == '' ? $theDate : ', '.$theDate );
+					$text .= ( $text == '' ? $theDate : " $theDate" );
 				}
 
 				if( $showCommentCount=='yes' ) {
@@ -368,16 +368,16 @@ if( $allPosts ) {
 
 						$title_text = htmlspecialchars(strip_tags($archPost->post_title), ENT_QUOTES);
 						if( $postTitleLength> 0 && strlen( $title_text ) > $postTitleLength ) {
-							$title_text = substr($title_text, 0, $postTitleLength );
-								$title_text .= ' ...';
+							$tmptext = substr($title_text, 0, $postTitleLength );
+								$tmptext .= ' &hellip;';
 						}
 
-						$text .= ( $text == '' ? $title_text : ' - '.$title_text );
+						$text .= ( $text == '' ? $tmptext : ' - '.$tmptext );
 					}
 
 					if( $showPostDate=='yes' ) {
 						$theDate = mysql2date($postDateFormat, $archPost->post_date );
-						$text .= ( $text == '' ? $theDate : ', '.$theDate );
+						$text .= ( $text == '' ? $theDate : " $theDate" );
 					}
 
 					if( $showCommentCount=='yes' ) {

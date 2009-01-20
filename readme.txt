@@ -85,6 +85,9 @@ rename some of the id statements. For example, if your sidebar is called
   to
   #myawesomesidebar li.collapsArch {list-style-type:none}
 
+If you are using the plugin manually (i.e. inserting code into your theme),
+you may want to replace #sidebar with #collapsArchList
+
 = There seems to be a newline between the collapsing/expanding symbol and the
 category name. How do I fix this? =
 
