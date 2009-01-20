@@ -340,7 +340,7 @@ if( $allPosts ) {
 							$tmp_text .= ' &hellip;';
 					}
 
-					$text .= ( $text == '' ? $tmp_text : ' - '.$tmp_text );
+					$text .= ( $tmp_text == '' ? $title_text : ' - '.$tmp_text );
 				}
 
 				if( $showPostDate=='yes' ) {
@@ -368,11 +368,11 @@ if( $allPosts ) {
 
 						$title_text = htmlspecialchars(strip_tags($archPost->post_title), ENT_QUOTES);
 						if( $postTitleLength> 0 && strlen( $title_text ) > $postTitleLength ) {
-							$tmptext = substr($title_text, 0, $postTitleLength );
-								$tmptext .= ' &hellip;';
+							$tmp_text = substr($title_text, 0, $postTitleLength );
+								$tmp_text .= ' &hellip;';
 						}
 
-						$text .= ( $text == '' ? $tmptext : ' - '.$tmptext );
+						$text .= ( $tmp_text == '' ? $title_text : ' - '.$tmp_text );
 					}
 
 					if( $showPostDate=='yes' ) {
