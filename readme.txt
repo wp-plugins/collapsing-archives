@@ -4,7 +4,7 @@ Donate link: http://blog.robfelty.com/wordpress-plugins
 Tags: archives, sidebar, widget
 Requires at least: 2.6
 Tested up to: 2.7
-Stable tag: 1.0.4
+Stable tag: 1.0.5
 
 This plugin uses Javascript to dynamically expand or collaps the set of
 months for each year and posts for each month in the archive listing.
@@ -135,6 +135,31 @@ gracefully if it is not present/enabled to show all of the
 archive links as usual.
 
 == HISTORY ==
+
+* 1.0.5 (2009/01/21)
+    * changed query
+    * when using truncated titles, title attribute has full title
+    * using html ellipsis in truncate titles
+    * Got rid of comma before post date
+    * fixed some issues with settings page
+    * updated FAQ
+
+* 1.0.4 (2009/01/15)
+    * fixed debug option
+    * style is set in database if the style column is not already there
+
+* 1.0.3 (2009/01/09)
+    * don't put an expand icon for years if "show months" is not selected
+    * add self class to post for additional styling
+    * fixed :before style info to restore default style
+    * fixed post title truncating
+
+* 1.0.2 (2009/01/07)
+    * added javascript version
+    * not loading unnecessary code for admin pages (fixes interference with
+      akismet stats page
+    * fixed settings page for manual usage
+    * fixed sort order option
 
 * 1.0.1 (2009/01/06)
     * Finally fixed disappearing widget problem when trying to add to sidebar

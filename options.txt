@@ -113,7 +113,7 @@
    <label for="postDateFormat"><a href='http://php.net/date'
     title='information about date formatting syntax' target='_blank'>
     Post Date Format</a>:</label>
-   <input type="text" size='3' name="collapsArch[<?php echo $number
+   <input type="text" size='8' name="collapsArch[<?php echo $number
    ?>][postDateFormat]" value="<?php echo $postDateFormat; ?>" 
    id="postDateFormat-<?php echo $number ?>"></input> 
    </p>

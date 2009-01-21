@@ -1,6 +1,6 @@
 Collapsing Archives Changelog
 
-* 1.0.5 (2009/01/20)
+* 1.0.5 (2009/01/21)
     * changed query
     * when using truncated titles, title attribute has full title
     * using html ellipsis in truncate titles
