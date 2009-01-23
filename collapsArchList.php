@@ -280,12 +280,11 @@ if( $allPosts ) {
 
 				$text = wptexturize($text);
 				$title_text = wp_specialchars($text,1);
-				#$title_text = wptexturize($text);
-				#$title_text = strip_tags($text);
 
-				if( $expandMonths=='yes' ) {
+				if ($expandMonths=='yes' ) {
 					$link = 'javascript:;';
-					$onclick = "onclick='expandCollapse(event, $expand, $animate, \"collapsArch\"); return false'";
+					$onclick = "onclick='expandCollapse(event, $expand, $animate, " .
+					    "\"collapsArch\"); return false'";
 					$monthCollapse = 'collapsArch';
 					if( $expandCurrentMonth=='yes'
 							&& $currentYear == date('Y')
@@ -299,10 +298,13 @@ if( $allPosts ) {
 										$monthTitle= 'click to expand';
 										$ding = $expandSym;
 					}
-					$the_link = "<span title='$monthTitle' class='$monthCollapse $monthRel' $onclick><span class='sym'>$ding</span>";
+					$the_link = "<span title='$monthTitle' " .
+					    "class='$monthCollapse $monthRel' $onclick>" .
+							"<span class='sym'>$ding</span>";
           if ($linkToArch=='yes') {
             $the_link.= "</span>";
-            $the_link .="<a href='".get_month_link($currentYear, $currentMonth)."' title='$title_text'>";
+            $the_link .="<a href='".get_month_link($currentYear, $currentMonth).
+						    "' title='$title_text'>";
             $the_link .="$text</a>\n";
           } else {
             $the_link .="$text\n";
@@ -314,32 +316,31 @@ if( $allPosts ) {
 					$monthRel = '';
 					$monthTitle = '';
 					$monthCollapse = 'collapsArchMonth';
-					//$the_link ="<a href='$home/$archives$currentYear/$currentMonth' title='$title_text'>";
-					$the_link ="<a href='".get_month_link($currentYear, $currentMonth)."' title='$title_text'>";
+					$the_link ="<a href='".get_month_link($currentYear, $currentMonth).
+					    "' title='$title_text'>";
 					$the_link .="$text</a>\n";
 				}
 
 				echo "      <li class='$monthCollapse'>".$the_link.$monthCount;
 
 			}
-			if( $showMonths=='yes' && $expandMonths=='yes' ) {
+			if ($showMonths=='yes' && $expandMonths=='yes' ) {
 				echo "        <ul $postStyle id=\"collapsArchList-";
 				echo "$currentYear-$currentMonth\">\n";
 				$text = '';
 
-				if( $showPostNumber=='yes' ) {
+				if ($showPostNumber=='yes' ) {
 					$text .= '#'.$archPost->ID;
 				}
 
-				if( $showPostTitle=='yes' ) {
-						$title_text = htmlspecialchars(strip_tags($archPost->post_title), ENT_QUOTES);
-					#$title_text = strip_tags($archPost->post_title);
-
-					if( $postTitleLength> 0 && strlen( $title_text ) > $postTitleLength ) {
+				if ($showPostTitle=='yes' ) {
+					$title_text = htmlspecialchars(strip_tags($archPost->post_title), 
+							ENT_QUOTES);
+					$tmp_text = '';
+					if ($postTitleLength> 0 && strlen($title_text) > $postTitleLength ) {
 						$tmp_text = substr($title_text, 0, $postTitleLength );
 							$tmp_text .= ' &hellip;';
 					}
-
 					$text .= ( $tmp_text == '' ? $title_text : ' - '.$tmp_text );
 				}
 
@@ -353,7 +354,8 @@ if( $allPosts ) {
 				}
 
 				$link = get_permalink( $archPost->ID );
-				echo "          <li class='collapsArchPost'><a href='$link' title='$title_text'>$text</a>$commcount</li>\n";
+				echo "          <li class='collapsArchPost'>" . 
+				    "<a href='$link' title='$title_text'>$text</a>$commcount</li>\n";
 				}
 			} else {
 
@@ -364,28 +366,30 @@ if( $allPosts ) {
 						$text .= '#'.$archPost->ID;
 					}
 
-					if( $showPostTitle=='yes' ) {
+					if ($showPostTitle=='yes' ) {
 
 						$title_text = htmlspecialchars(strip_tags($archPost->post_title), ENT_QUOTES);
-						if( $postTitleLength> 0 && strlen( $title_text ) > $postTitleLength ) {
+						$tmp_text = '';
+						if ($postTitleLength>0 && strlen($title_text)>$postTitleLength ) {
 							$tmp_text = substr($title_text, 0, $postTitleLength );
-								$tmp_text .= ' &hellip;';
+							$tmp_text .= ' &hellip;';
 						}
 
 						$text .= ( $tmp_text == '' ? $title_text : ' - '.$tmp_text );
 					}
 
-					if( $showPostDate=='yes' ) {
+					if ($showPostDate=='yes' ) {
 						$theDate = mysql2date($postDateFormat, $archPost->post_date );
 						$text .= ( $text == '' ? $theDate : " $theDate" );
 					}
 
-					if( $showCommentCount=='yes' ) {
+					if ($showCommentCount=='yes' ) {
 						$commcount = ' ('.get_comments_number($archPost->ID).')';
 					}
 
 					$link = get_permalink( $archPost->ID );
-					echo "          <li class='collapsArchPost'><a href='$link' title='$title_text'>$text</a>$commcount</li>\n";
+					echo "          <li class='collapsArchPost'><a href='$link' " .
+					    "title='$title_text'>$text</a>$commcount</li>\n";
 			}
     }
   }

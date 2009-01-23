@@ -1,5 +1,10 @@
 Collapsing Archives Changelog
 
+* 1.0.6 (2009/01/25)
+    * fixed bug with truncating titles
+    * cleaned up code a bit
+    * TODO: add option for "no title" - suggested by Brad Parker
+
 * 1.0.5 (2009/01/21)
     * changed query
     * when using truncated titles, title attribute has full title
