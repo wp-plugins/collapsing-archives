@@ -55,7 +55,7 @@
      <option  <?php if($inExcludeCat=='include') echo 'selected'; ?> id="inExcludeCatInclude-<?php echo $number ?>" value='include'>Include</option>
      <option  <?php if($inExcludeCat=='exclude') echo 'selected'; ?> id="inExcludeCatExclude-<?php echo $number ?>" value='exclude'>Exclude</option>
      </select>
-     these categories separated by commas):<br />
+     these categories (input slugs separated by commas):<br />
     <input type="text" name="collapsArch[<?php echo $number
     ?>][inExcludeCats]" value="<?php echo $inExcludeCats ?>"
     id="collapsArch-inExcludeCats-<?php echo $number ?>"><?php echo
