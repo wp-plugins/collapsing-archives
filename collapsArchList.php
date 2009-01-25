@@ -75,9 +75,9 @@ $post_attrs = "post_date != '0000-00-00 00:00:00' AND post_status = 'publish'";
 		}
 	}
 	if ( empty($inExclusionsCat) ) {
-		$inExcludeCatQuery = "NOT IN ('')";
+		$inExcludeCatQuery = "";
   } else {
-    $inExcludeCatQuery ="$in ($inExclusionsCat)";
+    $inExcludeCatQuery ="AND $wpdb->terms.slug $in ($inExclusionsCat)";
   }
 	$inExclusionsYear = array();
 	if ( !empty($inExcludeYear) && !empty($inExcludeYears) ) {
@@ -129,16 +129,16 @@ if( $showPages=='no' ) {
 }
 
 
-$postquery= "SELECT $wpdb->posts.ID, $wpdb->posts.post_title,
+$postquery= "SELECT $wpdb->terms.slug, $wpdb->posts.ID, $wpdb->posts.post_title,
     $wpdb->posts.post_date, YEAR($wpdb->posts.post_date) AS 'year',
     MONTH($wpdb->posts.post_date) AS 'month' 
   FROM $wpdb->posts LEFT JOIN $wpdb->term_relationships ON $wpdb->posts.ID =
-    $wpdb->term_relationships.object_id LEFT JOIN $wpdb->terms ON
-    $wpdb->terms.slug 
+    $wpdb->term_relationships.object_id 
 		LEFT JOIN $wpdb->term_taxonomy ON $wpdb->term_taxonomy.term_taxonomy_id =
-		$wpdb->term_relationships.term_taxonomy_id $inExcludeCatQuery
-  WHERE
-		$post_attrs  $inExcludeYearQuery
+																			$wpdb->term_relationships.term_taxonomy_id
+		LEFT JOIN $wpdb->terms ON $wpdb->terms.term_id = 
+		                          $wpdb->term_taxonomy.term_id 
+  WHERE $post_attrs  $inExcludeYearQuery $inExcludeCatQuery 
   GROUP BY $wpdb->posts.ID 
   ORDER BY $wpdb->posts.post_date $archSortOrder";
 
