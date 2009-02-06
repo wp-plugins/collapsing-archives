@@ -74,7 +74,7 @@ cursor:pointer;
     }
     if (!get_option('collapsArchOptions')) {
       $options=array('%i%' => array('title' => 'Archives',
-                   'showPostCount' => 'yes',
+                   'showPostCount' => 'yes', 'noTitle' => '',
                    'inExcludeCat' => 'exclude', 'inExcludeCats' => '',
                    'inExcludeYear' => 'exclude', 'inExcludeYears' => '',
                    'showPosts' => 'yes', 'showPages' => 'no',
@@ -121,7 +121,11 @@ cursor:pointer;
     $url = get_settings('siteurl');
 		echo "<script type=\"text/javascript\">\n";
 		echo "// <![CDATA[\n";
-		echo "// These variables are part of the Collapsing Archives Plugin version: 1.0.5\n// Copyright 2008 Robert Felty (robfelty.com)\n";
+		echo '/* These variables are part of the Collapsing Archives Plugin
+		       * version: 1.0.5
+					 * revision: $Id$
+					 * Copyright 2008 Robert Felty (robfelty.com)
+					 */' ."\n";
 
     $expandSym="<img src='". $url .
          "/wp-content/plugins/collapsing-archives/" . 

@@ -129,3 +129,9 @@
 $number ?>"></input> <label for="collapsArchDebug">Show debugging information
 (shows up as a hidden pre right after the title)</label>
     </p>
+    <p>
+Mark posts with no title as: 
+    <input type="text" name="collapsArch[<?php echo $number
+    ?>][noTitle]" value="<?php echo $noTitle ?>"  
+    id="collapsArch-noTitle-<?php echo $number ?>"></input> 
+    </p>

@@ -106,19 +106,6 @@ $post_attrs = "post_date != '0000-00-00 00:00:00' AND post_status = 'publish'";
   if ($showPages=='no') {
     $isPage="AND $wpdb->posts.post_type='post'";
   }
-  /*
-  if ($postSort!='') {
-    if ($postSort=='postDate') {
-      $postSortColumn="ORDER BY $wpdb->posts.post_date";
-    } elseif ($postSort=='postId') {
-      $postSortColumn="ORDER BY $wpdb->posts.id";
-    } elseif ($postSort=='postTitle') {
-      $postSortColumn="ORDER BY $wpdb->posts.post_title";
-    } elseif ($postSort=='postComment') {
-      $postSortColumn="ORDER BY $wpdb->posts.comment_count";
-    }
-  } 
-  */
 	if ($defaultExpand!='') {
 		$autoExpand = preg_split('/,\s*/',$defaultExpand);
   } else {
@@ -328,71 +315,45 @@ if( $allPosts ) {
 				echo "        <ul $postStyle id=\"collapsArchList-";
 				echo "$currentYear-$currentMonth\">\n";
 				$text = '';
+      }
+		} else {
 
-				if ($showPostNumber=='yes' ) {
-					$text .= '#'.$archPost->ID;
-				}
-
-				if ($showPostTitle=='yes' ) {
-					$title_text = htmlspecialchars(strip_tags($archPost->post_title), 
-							ENT_QUOTES);
-					$tmp_text = '';
-					if ($postTitleLength> 0 && strlen($title_text) > $postTitleLength ) {
-						$tmp_text = substr($title_text, 0, $postTitleLength );
-							$tmp_text .= ' &hellip;';
-					}
-					$text .= ( $tmp_text == '' ? $title_text : ' - '.$tmp_text );
-				}
-
-				if( $showPostDate=='yes' ) {
-					$theDate = mysql2date($postDateFormat, $archPost->post_date );
-					$text .= ( $text == '' ? $theDate : " $theDate" );
-				}
-
-				if( $showCommentCount=='yes' ) {
-					$commcount = ' ('.get_comments_number($archPost->ID).')';
-				}
-
-				$link = get_permalink( $archPost->ID );
-				echo "          <li class='collapsArchPost'>" . 
-				    "<a href='$link' title='$title_text'>$text</a>$commcount</li>\n";
-				}
-			} else {
-
-				if( $showMonths=='yes' && $expandMonths=='yes' ) {
-					$text = '';
-
-					if( $showPostNumber=='yes' ) {
-						$text .= '#'.$archPost->ID;
-					}
-
-					if ($showPostTitle=='yes' ) {
-
-						$title_text = htmlspecialchars(strip_tags($archPost->post_title), ENT_QUOTES);
-						$tmp_text = '';
-						if ($postTitleLength>0 && strlen($title_text)>$postTitleLength ) {
-							$tmp_text = substr($title_text, 0, $postTitleLength );
-							$tmp_text .= ' &hellip;';
-						}
-
-						$text .= ( $tmp_text == '' ? $title_text : ' - '.$tmp_text );
-					}
-
-					if ($showPostDate=='yes' ) {
-						$theDate = mysql2date($postDateFormat, $archPost->post_date );
-						$text .= ( $text == '' ? $theDate : " $theDate" );
-					}
-
-					if ($showCommentCount=='yes' ) {
-						$commcount = ' ('.get_comments_number($archPost->ID).')';
-					}
-
-					$link = get_permalink( $archPost->ID );
-					echo "          <li class='collapsArchPost'><a href='$link' " .
-					    "title='$title_text'>$text</a>$commcount</li>\n";
+			if( $showMonths=='yes' && $expandMonths=='yes' ) {
+				$text = '';
 			}
-    }
-  }
+		}
+		if( $showPostNumber=='yes' ) {
+			$text .= '#'.$archPost->ID;
+		}
+
+		if ($showPostTitle=='yes' ) {
+
+			$title_text = htmlspecialchars(strip_tags(__($archPost->post_title)), ENT_QUOTES);
+			if(strlen(trim($title_text))==0) {
+				$title_text = $noTitle;
+			}
+			$tmp_text = '';
+			if ($postTitleLength>0 && strlen($title_text)>$postTitleLength ) {
+				$tmp_text = substr($title_text, 0, $postTitleLength );
+				$tmp_text .= ' &hellip;';
+			}
+
+			$text .= ( $tmp_text == '' ? $title_text : ' - '.$tmp_text );
+		}
+
+		if ($showPostDate=='yes' ) {
+			$theDate = mysql2date($postDateFormat, $archPost->post_date );
+			$text .= ( $text == '' ? $theDate : " $theDate" );
+		}
+
+		if ($showCommentCount=='yes' ) {
+			$commcount = ' ('.get_comments_number($archPost->ID).')';
+		}
+
+		$link = get_permalink( $archPost->ID );
+		echo "          <li class='collapsArchPost'><a href='$link' " .
+				"title='$title_text'>$text</a>$commcount</li>\n";
+	}
   if ($showMonths=='yes' ) {
     if ($expandMonths=='yes') {
       echo "        </ul>\n";

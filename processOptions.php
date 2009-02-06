@@ -8,6 +8,7 @@ if ( -1 == $number ) {
   $defaultExpand='';
   $number = '%i%';
   $expand='1';
+  $noTitle='';
   $inExcludeCat='include';
   $inExcludeYear='include';
   $inExcludeCats='';
@@ -52,5 +53,6 @@ if ( -1 == $number ) {
   $postDateFormat = $options[$number]['postDateFormat'];
   $animate = $options[$number]['animate'];
   $debug = $options[$number]['debug'];
+  $noTitle = $options[$number]['noTitle'];
 }
 ?>

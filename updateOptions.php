@@ -34,6 +34,7 @@ foreach ( (array) $_POST['collapsArch'] as $widget_number => $widget_collapsArch
     $expandCurrentYear= 'no' ;
   }
   $expand= $widget_collapsArch['expand'];
+  $noTitle= $widget_collapsArch['noTitle'];
 
 	$inExcludeYear= $widget_collapsArch['inExcludeYear'];
 	$inExcludeCat= $widget_collapsArch['inExcludeCat'];
@@ -80,6 +81,7 @@ foreach ( (array) $_POST['collapsArch'] as $widget_number => $widget_collapsArch
       'archSortOrder', 'showPosts', 'showPages', 'linkToArch', 'debug',
       'showYearCount', 'expandCurrentYear','expandMonths', 'showMonths',
       'expandCurrentMonth','showMonthCount', 'showPostTitle', 'expand',
+			'noTitle',
       'showPostDate', 'postDateFormat','animate','postTitleLength');
 }
 
