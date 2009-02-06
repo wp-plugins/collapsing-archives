@@ -34,13 +34,10 @@ foreach ( (array) $_POST['collapsArch'] as $widget_number => $widget_collapsArch
     $expandCurrentYear= 'no' ;
   }
   $expand= $widget_collapsArch['expand'];
-  $inExcludeYear= 'include' ;
-  if($widget_collapsArch['inExcludeYear'] == 'exclude') {
-    $inExcludeYear= 'exclude' ;
-  }
-  if($widget_collapsArch['inExcludeCat'] == 'exclude') {
-    $inExcludeCat= 'exclude' ;
-  }
+
+	$inExcludeYear= $widget_collapsArch['inExcludeYear'];
+	$inExcludeCat= $widget_collapsArch['inExcludeCat'];
+
   $showMonths='yes';
   if( !isset($widget_collapsArch['showMonths'])) {
     $showMonths= 'no' ;

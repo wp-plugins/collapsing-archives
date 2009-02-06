@@ -4,6 +4,7 @@ Collapsing Archives Changelog
     * fixed bug with truncating titles
     * cleaned up code a bit
     * fixed query for excluding categories
+    * fixed including only certain categories
     * TODO: add option for "no title" - suggested by Brad Parker
 
 * 1.0.5 (2009/01/21)
