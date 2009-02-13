@@ -6,7 +6,9 @@ Collapsing Archives Changelog
     * fixed query for excluding categories
     * fixed including only certain categories
     * added option for "no title" - suggested by Brad Parker
+    * reduced number of queries
     * TODO: improved internationalization
+    * fixed settings panel
 
 * 1.0.5 (2009/01/21)
     * changed query

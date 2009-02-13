@@ -105,8 +105,9 @@ cursor:pointer;
 
 	function list_archives($number) {
 		global $wpdb;
-
-		include( 'collapsArchList.php' );
+    if (!is_admin()) {
+      include( 'collapsArchList.php' );
+    }
 
 		return;
 	}

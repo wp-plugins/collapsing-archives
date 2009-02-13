@@ -80,6 +80,7 @@ include('processOptions.php');
     </div>
     ";
     } else {
+     extract($theOptions['%i%']);
      echo '<p style="text-align:left;"><label for="collapsArch-title-'.$number.'">' . __('Title:') . '<input class="widefat" style="width: 200px;" id="collapsArch-title-'.$number.'" name="collapsArch['.$number.'][title]" type="text" value="'.$title.'" /></label></p>';
      include('options.txt'); 
    }

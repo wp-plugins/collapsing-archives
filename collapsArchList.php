@@ -350,7 +350,7 @@ if( $allPosts ) {
 			$commcount = ' ('.get_comments_number($archPost->ID).')';
 		}
 
-		$link = get_permalink( $archPost->ID );
+		$link = get_permalink($archPost);
 		echo "          <li class='collapsArchPost'><a href='$link' " .
 				"title='$title_text'>$text</a>$commcount</li>\n";
 	}
