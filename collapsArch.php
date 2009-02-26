@@ -7,7 +7,7 @@ Author: Robert Felty
 Version: 1.0.5
 Author URI: http://robfelty.com
 
-Copyright 2007 Robert Felty
+Copyright 2007-2009 Robert Felty
 
 This work is largely based on the Fancy Archives plugin by Andrew Rader
 (http://nymb.us), which was also distributed under the GPLv2. I have tried
