@@ -26,6 +26,81 @@ This file is part of Collapsing Archives
   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 */
+function collaps_permalink($id = 0, $leavename = false) {
+	$rewritecode = array(
+		'%year%',
+		'%monthnum%',
+		'%day%',
+		'%hour%',
+		'%minute%',
+		'%second%',
+		$leavename? '' : '%postname%',
+		'%post_id%',
+		'%category%',
+		'%author%',
+		$leavename? '' : '%pagename%',
+	);
+  $post = $id;
+  /*
+	if ( empty($post->ID) ) return false;
+
+	if ( $post->post_type == 'page' )
+		return get_page_link($post->ID, $leavename);
+	elseif ($post->post_type == 'attachment')
+		return get_attachment_link($post->ID);
+
+	$permalink = get_option('permalink_structure');
+
+	if ( '' != $permalink && !in_array($post->post_status, array('draft', 'pending')) ) {
+		$unixtime = strtotime($post->post_date);
+
+		$category = '';
+		if ( strpos($permalink, '%category%') !== false ) {
+			$cats = get_the_category($post->ID);
+			if ( $cats ) {
+				usort($cats, '_usort_terms_by_ID'); // order by ID
+				$category = $cats[0]->slug;
+				if ( $parent = $cats[0]->parent )
+					$category = get_category_parents($parent, false, '/', true) . $category;
+			}
+			// show default category in permalinks, without
+			// having to assign it explicitly
+			if ( empty($category) ) {
+				$default_category = get_category( get_option( 'default_category' ) );
+				$category = is_wp_error( $default_category ) ? '' : $default_category->slug;
+			}
+		}
+
+		$author = '';
+		if ( strpos($permalink, '%author%') !== false ) {
+			$authordata = get_userdata($post->post_author);
+			$author = $authordata->user_nicename;
+		}
+
+		$date = explode(" ",date('Y m d H i s', $unixtime));
+		$rewritereplace =
+		array(
+			$date[0],
+			$date[1],
+			$date[2],
+			$date[3],
+			$date[4],
+			$date[5],
+			$post->post_name,
+			$post->ID,
+			$category,
+			$author,
+			$post->post_name,
+		);
+		$permalink = get_option('home') . str_replace($rewritecode, $rewritereplace, $permalink);
+		$permalink = user_trailingslashit($permalink, 'single');
+		return apply_filters('post_link', $permalink, $post, $leavename);
+	} else { // if they're not using the fancy permalink option
+		$permalink = get_option('home') . '/?p=' . $post->ID;
+		return apply_filters('post_link', $permalink, $post, $leavename);
+	}
+  */
+}
 ?>
 
 <ul id="collapsArchList">
@@ -116,7 +191,7 @@ if( $showPages=='no' ) {
 }
 
 
-$postquery= "SELECT $wpdb->terms.slug, $wpdb->posts.ID, $wpdb->posts.post_title,
+$postquery= "SELECT $wpdb->terms.slug, $wpdb->posts.ID, $wpdb->posts.post_name, $wpdb->posts.post_title,
     $wpdb->posts.post_date, YEAR($wpdb->posts.post_date) AS 'year',
     MONTH($wpdb->posts.post_date) AS 'month' 
   FROM $wpdb->posts LEFT JOIN $wpdb->term_relationships ON $wpdb->posts.ID =
@@ -350,7 +425,7 @@ if( $allPosts ) {
 			$commcount = ' ('.get_comments_number($archPost->ID).')';
 		}
 
-		$link = get_permalink($archPost->ID);
+		$link = get_permalink($archPost);
 		echo "          <li class='collapsArchPost'><a href='$link' " .
 				"title='$title_text'>$text</a>$commcount</li>\n";
 	}
