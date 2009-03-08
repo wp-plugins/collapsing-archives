@@ -7,7 +7,7 @@ Collapsing Archives Changelog
     * fixed including only certain categories
     * added option for "no title" - suggested by Brad Parker
     * reduced number of queries by using get_permalink without id
-    * TODO: improved internationalization
+    * Improved internationalization
     * fixed settings panel
 
 * 1.0.5 (2009/01/21)
