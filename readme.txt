@@ -14,14 +14,15 @@ months for each year and posts for each month in the archive listing.
 This is a relatively simple plugin that uses Javascript to
 make the Archive links in the sidebar collapsable by year, and/or month.
 
-New in version 0.9.4 -- uses cookies to keep expanded and collapsed items
-expanded or collapsed on page reload (or visiting a different page or post)
-
-New in version 0.9.3+ -- now can once again be used as a widget or manually.
-Note that the syntax for manual usage has changed slightly - see installation
-for instructions.
-
-It was inspired by the Fancy Archives Plugin by Andrew Rader
+= What's new in 1.1? =
+  * fixed bug with truncating titles
+  * cleaned up code a bit
+  * fixed query for excluding categories
+  * fixed including only certain categories
+  * added option for "no title" - suggested by Brad Parker
+  * reduced number of queries by using get_permalink without id
+  * Improved internationalization
+  * fixed settings panel
  
 See the CHANGELOG for more information
 
@@ -135,6 +136,16 @@ gracefully if it is not present/enabled to show all of the
 archive links as usual.
 
 == HISTORY ==
+
+* 1.1 (2009/03/07)
+    * fixed bug with truncating titles
+    * cleaned up code a bit
+    * fixed query for excluding categories
+    * fixed including only certain categories
+    * added option for "no title" - suggested by Brad Parker
+    * reduced number of queries by using get_permalink without id
+    * Improved internationalization
+    * fixed settings panel
 
 * 1.0.5 (2009/01/21)
     * changed query

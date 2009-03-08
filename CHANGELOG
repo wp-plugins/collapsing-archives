@@ -1,6 +1,6 @@
 Collapsing Archives Changelog
 
-* 1.1 (2009/02/06)
+* 1.1 (2009/03/07)
     * fixed bug with truncating titles
     * cleaned up code a bit
     * fixed query for excluding categories
