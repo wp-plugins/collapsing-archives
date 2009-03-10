@@ -105,6 +105,8 @@ function collaps_permalink($id = 0, $leavename = false) {
 
 <ul id="collapsArchList">
 <?php
+function list_archives($number) {
+  global $wpdb;
 global $wpdb, $month;
 
 $now = current_time( 'mysql' );
@@ -436,6 +438,9 @@ if( $allPosts ) {
     echo "  </li> <!-- close month -->
           </ul>";
   }
-} ?>
-  </li> <!-- close year -->
+} 
+		return;
+	}
+ ?>
+ </li> <!-- close year -->
 </ul>

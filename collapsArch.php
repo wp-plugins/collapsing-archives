@@ -103,14 +103,7 @@ cursor:pointer;
 		include_once( 'collapsArchUI.php' );
 	}
 
-	function list_archives($number) {
-		global $wpdb;
-    if (!is_admin()) {
-      include( 'collapsArchList.php' );
-    }
 
-		return;
-	}
 
 	function get_head() {
     $style=stripslashes(get_option('collapsArchStyle'));
@@ -146,7 +139,10 @@ cursor:pointer;
 }
 
 function collapsArch($number) {
-	collapsArch::list_archives($number);
+  include_once( 'collapsArchList.php' );
+  if (!is_admin()) {
+    list_archives($number);
+  }
 }
 include('collapsArchWidget.php');
 ?>
