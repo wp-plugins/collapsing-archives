@@ -413,7 +413,7 @@ if( $allPosts ) {
 				$tmp_text .= ' &hellip;';
 			}
 
-			$text .= ( $tmp_text == '' ? $title_text : ' - '.$tmp_text );
+			$text .= ( $tmp_text == '' ? $title_text : $tmp_text );
 		}
 
 		if ($showPostDate=='yes' ) {
