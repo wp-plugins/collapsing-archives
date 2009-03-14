@@ -34,7 +34,6 @@ function list_archives($number) {
   global $wpdb;
 global $wpdb, $month;
 
-$now = current_time( 'mysql' );
 
 $post_attrs = "post_date != '0000-00-00 00:00:00' AND post_status = 'publish'";
 
@@ -363,8 +362,8 @@ if( $allPosts ) {
           </ul>";
   }
 } 
-		return;
-	}
+   echo "  </li> <!-- close year -->
+  </ul> <!-- end of collapsing archives -->";
+  return;
+}
  ?>
- </li> <!-- close year -->
-</ul>
