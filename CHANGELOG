@@ -1,9 +1,9 @@
 Collapsing Archives Changelog
-* 1.1.1 (2009/03/10)
-    * TODO, after excluding posts, if no posts are left in month X, it should not show up (thanks Debi http://wordpress.org/support/profile/60826)
+* 1.1.1 (2009/03/17)
     * Fixed truncating post title
     * Fixed issue with multiple widgets
     * Fixed problem when months don't expand to show posts
+    * Fixed settings panel issues
 
 * 1.1 (2009/03/07)
     * fixed bug with truncating titles

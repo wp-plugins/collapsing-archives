@@ -45,8 +45,8 @@
      <option  <?php if($inExcludeYear=='include') echo 'selected'; ?> id="inExcludeYearInclude-<?php echo $number ?>" value='include'>Include</option>
      <option  <?php if($inExcludeYear=='exclude') echo 'selected'; ?> id="inExcludeYearExclude-<?php echo $number ?>" value='exclude'>Exclude</option>
      </select>
-     these years separated by commas):<br />
-    <input type="text" name="collapsArch[<?php echo $number
+     these years (separated by commas):<br />
+    <input type="text" size='40' name="collapsArch[<?php echo $number
     ?>][inExcludeYears]" value="<?php echo $inExcludeYears ?>"  
     id="collapsArch-inExcludeYears-<?php echo $number ?>"></input> 
     </p>
@@ -55,11 +55,10 @@
      <option  <?php if($inExcludeCat=='include') echo 'selected'; ?> id="inExcludeCatInclude-<?php echo $number ?>" value='include'>Include</option>
      <option  <?php if($inExcludeCat=='exclude') echo 'selected'; ?> id="inExcludeCatExclude-<?php echo $number ?>" value='exclude'>Exclude</option>
      </select>
-     these categories (input slugs separated by commas):<br />
-    <input type="text" name="collapsArch[<?php echo $number
+     these categories (slugs separated by commas):<br />
+    <input type="text" size='40' name="collapsArch[<?php echo $number
     ?>][inExcludeCats]" value="<?php echo $inExcludeCats ?>"
-    id="collapsArch-inExcludeCats-<?php echo $number ?>"><?php echo
-    $inExcludeCats ?></input> 
+    id="collapsArch-inExcludeCats-<?php echo $number ?>" />
     </p>
      <p>
      <input type="checkbox" name="collapsArch[<?php echo $number

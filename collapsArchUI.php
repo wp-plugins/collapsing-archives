@@ -1,6 +1,6 @@
 <?php
 /*
-Collapsing Archives version: 1.1
+Collapsing Archives version: 1.1.1
 Copyright 2007 Robert Felty
 
 This work is largely based on the Fancy Archives plugin by Andrew Rader
@@ -27,10 +27,21 @@ This file is part of Collapsing Archives
 
 check_admin_referer();
 
+$options=get_option('collapsArchOptions');
+$widgetOn=0;
+$number='%i%';
+if (empty($options)) {
+  $number = '-1';
+} elseif (!isset($options['%i%']['title']) || 
+    count($options) > 1) {
+  $widgetOn=1; 
+}
+
 if( isset($_POST['resetOptions']) ) {
   if (isset($_POST['reset'])) {
     delete_option('collapsArchOptions');   
 		$widgetOn=0;
+    $number = '-1';
   }
 } elseif (isset($_POST['infoUpdate'])) {
   $style=$_POST['collapsArchStyle'];
@@ -39,20 +50,11 @@ if( isset($_POST['resetOptions']) ) {
     include('updateOptions.php');
   }
 }
-$options=get_option('collapsArchOptions');
 /*
 echo "<pre>\n";
 print_r($options);
 echo "</pre>\n";
 */
-$widgetOn=0;
-$number='%i%';
-if (empty($options)) {
-  $number = '%i%';
-} elseif (!isset($options['%i%']['title']) || 
-    count($options) > 1) {
-  $widgetOn=1; 
-}
 include('processOptions.php');
 ?>
 <div class=wrap>
