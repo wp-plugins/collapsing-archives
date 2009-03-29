@@ -225,8 +225,10 @@ if( $allPosts ) {
       }
       $home = get_settings('home');
       if( $showMonths=='yes' ) {
-				echo "  <li class='collapsArch'><span title='$yearTitle'
-				class='collapsArch $yearRel' onclick='expandCollapse(event, $expand, $animate, \"collapsArch\"); return false' ><span class='sym'>$ding</span>";
+				echo "  <li class='collapsArch'><span title='$yearTitle'" .
+				    "class='collapsArch $yearRel' " .
+            "onclick='expandCollapse(event, $expand, $animate," .
+            "\"collapsArch\"); return false' ><span class='sym'>$ding</span>";
 			} else {
 			  echo "  <li class='collapsArchPost'>\n";
 			}

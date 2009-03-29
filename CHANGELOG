@@ -1,4 +1,6 @@
 Collapsing Archives Changelog
+* 1.1.2 (2009/03/28)
+    * Span all on one line so it doesn't mess up exec-php (thanks GeekLad)
 * 1.1.1 (2009/03/17)
     * Fixed truncating post title
     * Fixed issue with multiple widgets
