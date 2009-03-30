@@ -28,11 +28,11 @@ This file is part of Collapsing Archives
 */
 ?>
 
-<ul id="collapsArchList">
 <?php
 function list_archives($number) {
   global $wpdb;
 global $wpdb, $month;
+echo "<ul id='collapsArchList-$number'>\n";
 
 
 $post_attrs = "post_date != '0000-00-00 00:00:00' AND post_status = 'publish'";
@@ -225,7 +225,7 @@ if( $allPosts ) {
       }
       $home = get_settings('home');
       if( $showMonths=='yes' ) {
-				echo "  <li class='collapsArch'><span title='$yearTitle'" .
+				echo "  <li class='collapsArch'><span title='$yearTitle' " .
 				    "class='collapsArch $yearRel' " .
             "onclick='expandCollapse(event, $expand, $animate," .
             "\"collapsArch\"); return false' ><span class='sym'>$ding</span>";
@@ -240,7 +240,7 @@ if( $allPosts ) {
         echo "</span>";
       }
       if( $showMonths=='yes' ) {
-        echo "    <ul $monthStyle id='collapsArchList-$currentYear'>\n";
+        echo "    <ul $monthStyle id='collapsArchList-$currentYear-$number'>\n";
       }
       $newYear = false;
     }
@@ -316,7 +316,7 @@ if( $allPosts ) {
 			}
 			if ($showMonths=='yes' && $expandMonths=='yes' ) {
 				echo "        <ul $postStyle id=\"collapsArchList-";
-				echo "$currentYear-$currentMonth\">\n";
+				echo "$currentYear-$currentMonth-$number\">\n";
 				$text = '';
       }
 		} else {
