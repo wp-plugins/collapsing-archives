@@ -34,8 +34,8 @@ foreach ( (array) $_POST['collapsArch'] as $widget_number => $widget_collapsArch
     $expandCurrentYear= 'no' ;
   }
   $expand= $widget_collapsArch['expand'];
-  $customExpand= htmlentities($widget_collapsArch['customExpand']);
-  $customCollapse= htmlentities($widget_collapsArch['customCollapse']);
+  $customExpand= $widget_collapsArch['customExpand'];
+  $customCollapse= $widget_collapsArch['customCollapse'];
   $noTitle= $widget_collapsArch['noTitle'];
 
 	$inExcludeYear= $widget_collapsArch['inExcludeYear'];
