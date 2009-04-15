@@ -54,8 +54,8 @@ $post_attrs = "post_date != '0000-00-00 00:00:00' AND post_status = 'publish'";
          "/wp-content/plugins/collapsing-archives/" . 
          "img/collapse.gif' alt='collapse' />";
   } elseif ($expand==4) {
-    $expandSym=$customExpand;
-    $collapseSym=$customCollapse;
+    $expandSym=htmlentities($customExpand);
+    $collapseSym=htmlentities($customCollapse);
   } else {
     $expandSym='►';
     $collapseSym='▼';
