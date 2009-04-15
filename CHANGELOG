@@ -1,7 +1,10 @@
 Collapsing Archives Changelog
-* 1.1.2 (2009/03/28)
+* 1.1.2 (2009/04/15)
     * Span all on one line so it doesn't mess up exec-php (thanks GeekLad)
     * fixed some minor issues to get page to be valid xhtml
+    * no longer requires footer
+    * updated javascript file
+    * added option for custom expanding and collapsing symbols
 
 * 1.1.1 (2009/03/17)
     * Fixed truncating post title

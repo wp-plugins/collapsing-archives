@@ -1,10 +1,10 @@
 === Collapsing Archives ===
 Contributors: robfelty
 Donate link: http://blog.robfelty.com/wordpress-plugins
-Tags: archives, sidebar, widget
+Tags: archives, sidebar, widget, navigation, menu, posts
 Requires at least: 2.6
 Tested up to: 2.7.1
-Stable tag: 1.1.1
+Stable tag: 1.1.2
 
 This plugin uses Javascript to dynamically expand or collaps the set of
 months for each year and posts for each month in the archive listing.
@@ -14,15 +14,12 @@ months for each year and posts for each month in the archive listing.
 This is a relatively simple plugin that uses Javascript to
 make the Archive links in the sidebar collapsable by year, and/or month.
 
-= What's new in 1.1? =
-  * fixed bug with truncating titles
-  * cleaned up code a bit
-  * fixed query for excluding categories
-  * fixed including only certain categories
-  * added option for "no title" - suggested by Brad Parker
-  * reduced number of queries by using get_permalink without id
-  * Improved internationalization
-  * fixed settings panel
+= What's new in 1.1.2? =
+  * Span all on one line so it doesn't mess up exec-php (thanks GeekLad)
+  * fixed some minor issues to get page to be valid xhtml
+  * no longer requires footer
+  * updated javascript file
+  * added option for custom expanding and collapsing symbols
  
 See the CHANGELOG for more information
 
@@ -136,6 +133,13 @@ gracefully if it is not present/enabled to show all of the
 archive links as usual.
 
 == HISTORY ==
+
+* 1.1.2 (2009/03/28)
+    * Span all on one line so it doesn't mess up exec-php (thanks GeekLad)
+    * fixed some minor issues to get page to be valid xhtml
+    * no longer requires footer
+    * updated javascript file
+    * added option for custom expanding and collapsing symbols
 
 * 1.1 (2009/03/07)
     * fixed bug with truncating titles

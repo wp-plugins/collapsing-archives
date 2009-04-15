@@ -8,6 +8,8 @@ if ( -1 == $number ) {
   $defaultExpand='';
   $number = '%i%';
   $expand='1';
+  $customExpand='';
+  $customCollapse='';
   $noTitle='';
   $inExcludeCat='include';
   $inExcludeYear='include';
@@ -32,6 +34,8 @@ if ( -1 == $number ) {
   $title = attribute_escape($options[$number]['title']);
   $showPostCount = $options[$number]['showPostCount'];
   $expand = $options[$number]['expand'];
+  $customExpand = htmlentities($options[$number]['customExpand']);
+  $customCollapse = htmlentities($options[$number]['customCollapse']);
   $inExcludeCats = $options[$number]['inExcludeCats'];
   $inExcludeYears = $options[$number]['inExcludeYears'];
   $postTitleLength = $options[$number]['postTitleLength'];

@@ -1,6 +1,6 @@
 <?php
 /*
-Collapsing Archives version: 1.1.1
+Collapsing Archives version: 1.1.2
 
 Copyright 2007 Robert Felty
 
@@ -53,10 +53,19 @@ $post_attrs = "post_date != '0000-00-00 00:00:00' AND post_status = 'publish'";
     $collapseSym="<img src='". get_settings('siteurl') .
          "/wp-content/plugins/collapsing-archives/" . 
          "img/collapse.gif' alt='collapse' />";
+  } elseif ($expand==4) {
+    $expandSym=$customExpand;
+    $collapseSym=$customCollapse;
   } else {
-    $expand=0;
     $expandSym='►';
     $collapseSym='▼';
+  }
+  if ($expand==3) {
+    $expandSymJS='expandImg';
+    $collapseSymJS='collapseImg';
+  } else {
+    $expandSymJS=$expandSym;
+    $collapseSymJS=$collapseSym;
   }
 	$inExclusionsCat = array();
 	if ( !empty($inExcludeCat) && !empty($inExcludeCats) ) {
@@ -227,7 +236,8 @@ if( $allPosts ) {
       if( $showMonths=='yes' ) {
 				echo "  <li class='collapsArch'><span title='$yearTitle' " .
 				    "class='collapsArch $yearRel' " .
-            "onclick='expandCollapse(event, $expand, $animate," .
+            "onclick='expandCollapse(event" .
+            ", \"$expandSymJS\", \"$collapseSymJS\", $animate," .
             "\"collapsArch\"); return false' ><span class='sym'>$ding</span>";
 			} else {
 			  echo "  <li class='collapsArchPost'>\n";
@@ -273,7 +283,8 @@ if( $allPosts ) {
 
 				if ($expandMonths=='yes' ) {
 					$link = 'javascript:;';
-					$onclick = "onclick='expandCollapse(event, $expand, $animate, " .
+					$onclick = "onclick='expandCollapse(event" . 
+              ", \"$expandSymJS\", \"$collapseSymJS\", $animate, " .
 					    "\"collapsArch\"); return false'";
 					$monthCollapse = 'collapsArch';
 					if( $expandCurrentMonth=='yes'
@@ -368,4 +379,26 @@ if( $allPosts ) {
   </ul> <!-- end of collapsing archives -->";
   return;
 }
+		echo "<script type=\"text/javascript\">\n";
+		echo "// <![CDATA[\n";
+		echo '/* These variables are part of the Collapsing Archives Plugin
+		       * version: 1.1.2
+					 * revision: $Id: collapsArch.php 103059 2009-03-17 20:12:01Z robfelty $
+					 * Copyright 2008 Robert Felty (robfelty.com)
+					 */' ."\n";
+
+    $expandSym="<img src='". $url .
+         "/wp-content/plugins/collapsing-archives/" . 
+         "img/expand.gif' alt='expand' />";
+    $collapseSym="<img src='". $url .
+         "/wp-content/plugins/collapsing-archives/" . 
+         "img/collapse.gif' alt='collapse' />";
+    echo "var expandSym=\"$expandSym\";";
+    echo "var collapseSym=\"$collapseSym\";";
+    echo"
+    addLoadEvent(function() {
+      autoExpandCollapse('collapsArch');
+    });
+    ";
+		echo ";\n// ]]>\n</script>\n";
  ?>

@@ -1,4 +1,4 @@
-/*  Collapse Functions, version 1.0
+/*  Collapse Functions, version 1.1
  *
  *--------------------------------------------------------------------------*/
 String.prototype.trim = function() {
@@ -68,9 +68,11 @@ function autoExpandCollapse(collapsClass) {
               if ((theSpan.className == show && cookievalue ==1) ||
                   (theSpan.className == hide && cookievalue ==0)) {
                 var theOnclick=theSpan.onclick+"";
-                var matches=theOnclick.match(/.*\(event, ?([0-9]).*\)/);
+                //var matches=theOnclick.match(/.*\(event, ?"([^"]*)".*/);
+                var matches=theOnclick.match(/.*\(event, ?"([^"]*)", ?"([^"]*)".*\)/);
                 var expand=matches[1];
-                expandCollapse(theSpan,expand,0,collapsClass);
+                var collapse=matches[2];
+                expandCollapse(theSpan,expand,collapse,0,collapsClass);
               }
             }
           }
@@ -80,20 +82,13 @@ function autoExpandCollapse(collapsClass) {
   }
 }
 
-function expandCollapse( e, expand,animate, collapsClass ) {
+function expandCollapse( e, expand,collapse, animate, collapsClass ) {
   var classPattern= new RegExp('^' + collapsClass);
-  if (expand==1) {
-    expand='+';
-    collapse='—';
-  } else if (expand==2) {
-    expand='[+]';
-    collapse='[—]';
-  } else if (expand==3) {
+  if (expand=='expandImg') {
     expand=expandSym;
+  }
+  if (collapse=='collapseImg') {
     collapse=collapseSym;
-  } else {
-    expand='►';
-    collapse='▼';
   }
   if( e.target ) {
     src = e.target;

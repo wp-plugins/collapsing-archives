@@ -32,6 +32,13 @@
      <input type="radio" name="collapsArch[<?php echo $number ?>][expand]"
      <?php if($expand==2) echo 'checked'; ?> id="expand2" value='2'></input>
      <label for="expand2">[+]&nbsp;[&mdash;]</label><br />
+     <input type="radio" name="collapsArch[<?php echo $number ?>][expand]"
+     <?php if($expand==4) echo 'checked'; ?> id="expand4" value='4'></input>
+     <label for="expand4">custom</label>
+     expand: 
+     <input type="text" size='2' name="collapsArch[<?php echo $number ?>][customExpand]" value="<?php echo $customExpand ?>" id="collapsArch-customExpand-<?php echo $number ?>"></input> 
+     collapse: 
+     <input type="text" size='2' name="collapsArch[<?php echo $number ?>][customCollapse]" value="<?php echo $customCollapse ?>" id="collapsArch-customCollapse-<?php echo $number ?>"></input> 
      images:
      <input type="radio" name="collapsArch[<?php echo $number ?>][expand]"
      <?php if($expand==3) echo 'checked'; ?> id="expand0" value='3'></input>
