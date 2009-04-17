@@ -1,6 +1,6 @@
 <?php
 /*
-Collapsing Archives version: 1.1.2
+Collapsing Archives version: 1.1.3
 
 Copyright 2007 Robert Felty
 
@@ -382,7 +382,7 @@ if( $allPosts ) {
 		echo "<script type=\"text/javascript\">\n";
 		echo "// <![CDATA[\n";
 		echo '/* These variables are part of the Collapsing Archives Plugin
-		       * version: 1.1.2
+		       * version: 1.1.3
 					 * revision: $Id: collapsArch.php 103059 2009-03-17 20:12:01Z robfelty $
 					 * Copyright 2008 Robert Felty (robfelty.com)
 					 */' ."\n";
