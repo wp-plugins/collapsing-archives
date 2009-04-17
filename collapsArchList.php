@@ -32,7 +32,8 @@ This file is part of Collapsing Archives
 function list_archives($number) {
   global $wpdb;
 global $wpdb, $month;
-echo "<ul id='collapsArchList-$number'>\n";
+$idnum= '%i%'==$number ? $idnum=1 : $idnum=$number;
+echo "<ul id='collapsArchList-$idnum'>\n";
 
 
 $post_attrs = "post_date != '0000-00-00 00:00:00' AND post_status = 'publish'";
@@ -250,7 +251,7 @@ if( $allPosts ) {
         echo "</span>";
       }
       if( $showMonths=='yes' ) {
-        echo "    <ul $monthStyle id='collapsArchList-$currentYear-$number'>\n";
+        echo "    <ul $monthStyle id='collapsArchList-$currentYear-$idnum'>\n";
       }
       $newYear = false;
     }
@@ -327,7 +328,7 @@ if( $allPosts ) {
 			}
 			if ($showMonths=='yes' && $expandMonths=='yes' ) {
 				echo "        <ul $postStyle id=\"collapsArchList-";
-				echo "$currentYear-$currentMonth-$number\">\n";
+				echo "$currentYear-$currentMonth-$idnum\">\n";
 				$text = '';
       }
 		} else {
