@@ -1,7 +1,7 @@
 <?php
 if ( -1 == $number ) {
   /* default options go here */
-  $title = 'Archives';
+  $title = __('Archives', 'collapsArch');
   $text = '';
   $showPostCount = 'yes';
   $archSortOrder = 'DESC';

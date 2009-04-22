@@ -1,6 +1,6 @@
 <?php
 /*
-Collapsing Archives version: 1.1.3
+Collapsing Archives version: 1.1.4
 Copyright 2007 Robert Felty
 
 This work is largely based on the Fancy Archives plugin by Andrew Rader
@@ -59,39 +59,32 @@ include('processOptions.php');
 ?>
 <div class=wrap>
  <form method="post">
-  <h2>Collapsing Archives Options</h2>
+  <h2><? _e('Collapsing Archives Options', 'collapsArch'); ?></h2>
   <fieldset name="Collapsing Archives Options">
-   <legend><?php _e('Display Options:'); ?></legend>
+   <legend><?php _e('Display Options', 'collapsArch'); ?>:</legend>
    <ul style="list-style-type: none;">
    <?php
    if ($widgetOn==1) {
      echo "
-    <div style='width:60em; background:#FFF; color:#444;border: 1px solid
-    #444;padding:0 1em'>
-    <p>If you wish to use the collapsing categories plugin as a widget, you
-    should set the options in the widget page (except for custom styling,
-    which is set here). If you would like to use it manually (that is, you
-    modify your theme), then click below to delete the current widget options.
-    </p>
+    <div style='width:60em; background:#FFF; color:#444;border: 1px solid #444;padding:0 1em'><p>" . __('If you wish to use the collapsing categories plugin as a widget, you should set the options in the widget page (except for custom styling, which is set here). If you would like to use it manually (that is, you modify your theme), then click below to delete the current widget options.', 'collapsArch') . "</p>
     <form method='post'>
     <p>
        <input type='hidden' name='reset' value='true' />
-       <input type='submit' name='resetOptions' value='reset options' />
+       <input type='submit' name='resetOptions' value='".__('reset options', 'collapsArch')."' />
        </p>
     </form>
     </div>
     ";
     } else {
-     echo '<p style="text-align:left;"><label for="collapsArch-title-'.$number.'">' . __('Title:') . '<input class="widefat" style="width: 200px;" id="collapsArch-title-'.$number.'" name="collapsArch['.$number.'][title]" type="text" value="'.$title.'" /></label></p>';
+     echo '<p style="text-align:left;"><label for="collapsArch-title-'.$number.'">' . __('Title', 'collapsArch') . ': <input class="widefat" style="width: 200px;" id="collapsArch-title-'.$number.'" name="collapsArch['.$number.'][title]" type="text" value="'.$title.'" /></label></p>';
      include('options.txt'); 
    }
    ?>
     <p>
   <input type='hidden' id='collapsArchOrigStyle' value="<?php echo
 stripslashes(get_option('collapsArchOrigStyle')) ?>" />
-<label for="collapsArchStyle">Style info:</label>
-   <input type='button' value='restore original style'
-onclick='restoreStyle();' /><br />
+<label for="collapsArchStyle"><? _e('Style info', 'collapsArch'); ?>:</label>
+   <input type='button' value='<? _e('restore original style', 'collapsArch'); ?>' onclick='restoreStyle();' /><br />
    <textarea cols='78' rows='10' id="collapsArchStyle" name="collapsArchStyle">
     <?php echo stripslashes(get_option('collapsArchStyle')) ?>
    </textarea>
@@ -106,7 +99,7 @@ function restoreStyle() {
    </ul>
   </fieldset>
   <div class="submit">
-   <input type="submit" name="infoUpdate" value="<?php _e('Update options', 'Collapsing Archives'); ?> &raquo;" />
+   <input type="submit" name="infoUpdate" value="<?php _e('Update options', 'collapsArch'); ?> &raquo;" />
   </div>
  </form>
 </div>

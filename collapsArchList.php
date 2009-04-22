@@ -1,6 +1,6 @@
 <?php
 /*
-Collapsing Archives version: 1.1.3
+Collapsing Archives version: 1.1.4
 
 Copyright 2007 Robert Felty
 
@@ -189,8 +189,8 @@ if( $allPosts ) {
     $i++;
     $yearRel = 'show';
     $monthRel = 'show';
-    $yearTitle= 'click to expand';
-    $monthTitle= 'click to expand';
+    $yearTitle= __('click to expand', 'collapsArch');
+    $monthTitle= __('click to expand', 'collapsArch');
     $postStyle = "style='display:none'";
     $monthStyle = "style='display:none'";
     /* rel = show means that it will be hidden, and clicking on the
@@ -201,7 +201,7 @@ if( $allPosts ) {
         && $archPost->year == date('Y') ) {
       $ding = $collapseSym;
       $yearRel = "hide";
-      $yearTitle= 'click to collapse';
+      $yearTitle= __('click to collapse', 'collapsArch');
       $monthStyle = '';
     }
 
@@ -297,7 +297,7 @@ if( $allPosts ) {
 										$ding = $collapseSym;
 					} else {
 										$monthRel = 'show';
-										$monthTitle= 'click to expand';
+                    $monthTitle= __('click to collapse', 'collapsArch');
 										$ding = $expandSym;
 					}
 					$the_link = "<span title='$monthTitle' " .
@@ -383,7 +383,7 @@ if( $allPosts ) {
 		echo "<script type=\"text/javascript\">\n";
 		echo "// <![CDATA[\n";
 		echo '/* These variables are part of the Collapsing Archives Plugin
-		       * version: 1.1.3
+		       * version: 1.1.4
 					 * revision: $Id: collapsArch.php 103059 2009-03-17 20:12:01Z robfelty $
 					 * Copyright 2008 Robert Felty (robfelty.com)
 					 */' ."\n";

@@ -27,12 +27,13 @@ function collapsArchWidget($args, $widget_args=1) {
 
 
 function collapsArchWidgetInit() {
+load_plugin_textdomain( 'collapsArch', WP_PLUGIN_DIR."/".basename(dirname(__FILE__)), basename(dirname(__FILE__)) );
 if ( !$options = get_option('collapsArchOptions') )
     $options = array();
   $control_ops = array('width' => 400, 'height' => 350, 'id_base' => 'collapsarch');
 	$widget_ops = array('classname' => 'collapsArch', 'description' =>
-  __('Archives expand and collapse to show months and/or posts'));
-  $name = __('Collapsing Archives');
+  __('Archives expand and collapse to show months and/or posts', 'collapsArch'));
+  $name = __('Collapsing Archives', 'collapsArch');
 
   $id = false;
   foreach ( array_keys($options) as $o ) {
@@ -100,11 +101,10 @@ function collapsArchWidgetControl($widget_args) {
 
     // Here is our little form segment. Notice that we don't need a
     // complete form. This will be embedded into the existing form.
-    echo '<p style="text-align:right;"><label for="collapsArch-title-'.$number.'">' . __('Title:') . '<input class="widefat" style="width: 200px;" id="collapsArch-title-'.$number.'" name="collapsArch['.$number.'][title]" type="text" value="'.$title.'" /></label></p>';
+    echo '<p style="text-align:right;"><label for="collapsArch-title-'.$number.'">' . __('Title') . ':<input class="widefat" style="width: 200px;" id="collapsArch-title-'.$number.'" name="collapsArch['.$number.'][title]" type="text" value="'.$title.'" /></label></p>';
   include('options.txt');
   ?>
-  <p>Style can be set from the <a
-  href='options-general.php?page=collapsArch.php'>options page</a></p>
+  <p><? echo sprintf(__('Style can be set from the <a href="%s">options page</a>', 'collapsArch'),'options-general.php?page=collapsArch.php'); ?></p>
   <?php
   echo '<input type="hidden" id="collapsArch-submit-'.$number.'" name="collapsArch['.$number.'][submit]" value="1" />';
 
