@@ -394,12 +394,11 @@ if( $allPosts ) {
     $collapseSym="<img src='". $url .
          "/wp-content/plugins/collapsing-archives/" . 
          "img/collapse.gif' alt='collapse' />";
-    echo "var expandSym=\"$expandSym\";";
-    echo "var collapseSym=\"$collapseSym\";";
+    echo "var expandSym=\"$expandSym\";\n";
+    echo "var collapseSym=\"$collapseSym\";\n";
     echo"
     addLoadEvent(function() {
       autoExpandCollapse('collapsArch');
     });
-    ";
-		echo ";\n// ]]>\n</script>\n";
+		// ]]>\n</script>\n";
  ?>
