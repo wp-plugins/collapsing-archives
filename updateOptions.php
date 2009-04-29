@@ -1,92 +1,98 @@
 <?php
 
-foreach ( (array) $_POST['collapsArch'] as $widget_number => $widget_collapsArch ) {
-  if (!isset($widget_collapsArch['title']) && isset($options[$widget_number]) ) { // user clicked cancel
-    continue;
-  }
-  $title = strip_tags(stripslashes($widget_collapsArch['title']));
+  $title = strip_tags(stripslashes($new_instance['title']));
   $archSortOrder= 'DESC' ;
-  if($widget_collapsArch['archSortOrder'] == 'ASC') {
+  if($new_instance['archSortOrder'] == 'ASC') {
     $archSortOrder= 'ASC' ;
   }
-  $showPosts= 'yes' ;
-  if($widget_collapsArch['showPosts'] == 'no') {
-    $showPosts= 'no' ;
+  if($new_instance['showPosts'] == 'yes') {
+    $showPosts= true ;
+  } else {
+    $showPosts= false ;
   }
-  $linkToArch= 'yes' ;
-  if($widget_collapsArch['linkToArch'] == 'no') {
-    $linkToArch= 'no' ;
+  if($new_instance['linkToArch'] == 'yes') {
+    $linkToArch= true ;
+  } else {
+    $linkToArch= false;
   }
-  $showPostCount= 'no' ;
-  if( isset($widget_collapsArch['showPostCount'])) {
-    $showPostCount= 'yes' ;
+  if (isset($new_instance['showPostCount'])) {
+    $showPostCount= true ;
+  } else {
+    $showPostCount= false ;
   }
-  $showPages= 'no' ;
-  if( isset($widget_collapsArch['showPages'])) {
-    $showPages= 'yes' ;
+  if (isset($new_instance['showArchives'])) {
+    $showArchives= true ;
+  } else {
+    $showArchives= false ;
   }
-  $showYearCount= 'yes' ;
-  if( !isset($widget_collapsArch['showYearCount'])) {
-    $showYearCount= 'no' ;
+  if (isset($new_instance['showYearCount'])) {
+    $showYearCount= true ;
+  } else {
+    $showYearCount= false ;
   }
-  $expandCurrentYear= 'yes' ;
-  if( !isset($widget_collapsArch['expandCurrentYear'])) {
-    $expandCurrentYear= 'no' ;
+  if (isset($new_instance['expandCurrentYear'])) {
+    $expandCurrentYear= true ;
+  } else {
+    $expandCurrentYear= false ;
   }
-  $expand= $widget_collapsArch['expand'];
-  $customExpand= $widget_collapsArch['customExpand'];
-  $customCollapse= $widget_collapsArch['customCollapse'];
-  $noTitle= $widget_collapsArch['noTitle'];
+  $expand= $new_instance['expand'];
+  $customExpand= $new_instance['customExpand'];
+  $customCollapse= $new_instance['customCollapse'];
+  $noTitle= $new_instance['noTitle'];
 
-	$inExcludeYear= $widget_collapsArch['inExcludeYear'];
-	$inExcludeCat= $widget_collapsArch['inExcludeCat'];
+	$inExcludeYear= $new_instance['inExcludeYear'];
+	$inExcludeCat= $new_instance['inExcludeCat'];
 
-  $showMonths='yes';
-  if( !isset($widget_collapsArch['showMonths'])) {
-    $showMonths= 'no' ;
+  if(isset($new_instance['showMonths'])) {
+    $showMonths= true ;
+  } else {
+    $showMonths=false;
   }
-  $showMonthCount='yes';
-  if( !isset($widget_collapsArch['showMonthCount'])) {
-    $showMonthCount= 'no' ;
+  if (isset($new_instance['showMonthCount'])) {
+    $showMonthCount= true ;
+  } else {
+    $showMonthCount=false;
   }
-  $expandMonths='yes';
-  if( !isset($widget_collapsArch['expandMonths'])) {
-    $expandMonths= 'no' ;
+  if (isset($new_instance['expandMonths'])) {
+    $expandMonths= true ;
+  } else {
+    $expandMonths=false;
   }
-  $showPostTitle='yes';
-  if( !isset($widget_collapsArch['showPostTitle'])) {
-    $showPostTitle= 'no' ;
+  if (isset($new_instance['showPostTitle'])) {
+    $showPostTitle= true ;
+  } else {
+    $showPostTitle=false;
   }
-  $animate=1;
-  if( !isset($widget_collapsArch['animate'])) {
+  if( !isset($new_instance['animate'])) {
     $animate= 0 ;
+  } else {
+    $animate=1;
   }
-  $debug=0;
-  if (isset($widget_collapsArch['debug'])) {
-    $debug= 1 ;
+  if (isset($new_instance['debug'])) {
+    $debug= true ;
+  } else {
+    $debug= false;
   }
-  $showPostDate='no';
-  if( isset($widget_collapsArch['showPostDate'])) {
-    $showPostDate= 'yes' ;
+  if( isset($new_instance['showPostDate'])) {
+    $showPostDate= true ;
+  } else {
+    $showPostDate=false;
   }
-  $postDateFormat=addslashes($widget_collapsArch['postDateFormat']);
-  $expandCurrentMonth='yes';
-  if( !isset($widget_collapsArch['expandCurrentMonth'])) {
-    $expandCurrentMonth= 'no' ;
+  $postDateFormat=addslashes($new_instance['postDateFormat']);
+  if(isset($new_instance['expandCurrentMonth'])) {
+    $expandCurrentMonth= true ;
+  } else {
+    $expandCurrentMonth= false ;
   }
-  $inExcludeYears=addslashes($widget_collapsArch['inExcludeYears']);
-  $postTitleLength=addslashes($widget_collapsArch['postTitleLength']);
-  $inExcludeCats=addslashes($widget_collapsArch['inExcludeCats']);
-  $defaultExpand=addslashes($widget_collapsArch['defaultExpand']);
-  $options[$widget_number] = compact( 'title','showPostCount',
+  $inExcludeYears=addslashes($new_instance['inExcludeYears']);
+  $postTitleLength=addslashes($new_instance['postTitleLength']);
+  $inExcludeCats=addslashes($new_instance['inExcludeCats']);
+  $defaultExpand=addslashes($new_instance['defaultExpand']);
+  $instance = compact( 'title','showPostCount',
       'inExcludeCat', 'inExcludeCats', 'inExcludeYear', 'inExcludeYears',
       'archSortOrder', 'showPosts', 'showPages', 'linkToArch', 'debug',
       'showYearCount', 'expandCurrentYear','expandMonths', 'showMonths',
       'expandCurrentMonth','showMonthCount', 'showPostTitle', 'expand',
 			'noTitle', 'customExpand', 'customCollapse',
       'showPostDate', 'postDateFormat','animate','postTitleLength');
-}
-
-update_option('collapsArchOptions', $options);
-$updated = true;
 ?>

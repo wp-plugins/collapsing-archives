@@ -81,21 +81,6 @@ cursor:pointer;
     if( function_exists('add_option') ) {
       update_option( 'collapsArchOrigStyle', $style);
     }
-    if (!get_option('collapsArchOptions')) {
-      $options=array('%i%' => array('title' => 'Archives',
-                   'showPostCount' => 'yes', 'noTitle' => '',
-                   'inExcludeCat' => 'exclude', 'inExcludeCats' => '',
-                   'inExcludeYear' => 'exclude', 'inExcludeYears' => '',
-                   'showPosts' => 'yes', 'showPages' => 'no',
-                   'linkToArch' => 'no', 'showYearCount' => 'yes',
-                   'expandCurrentYear' => 'yes', 'expandMonths' => 'yes',
-                   'showMonths' => 'yes', 'expandCurrentMonth' => 'yes',
-                   'showMonthCount' => 'yes', 'showPostTitle' => 'yes',
-                   'expand' => '0', 'showPostDate' => 'no', 'debug' => '0',
-                   'postDateFormat' => 'm/d', 'animate' => '1',
-                   'postTitleLength' => ''));
-      update_option('collapsArchOptions', $options);
-    }
     if (!get_option('collapsArchStyle')) {
 			add_option( 'collapsArchStyle', $style);
 		}

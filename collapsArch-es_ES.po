@@ -83,7 +83,7 @@ msgid "Show Post Count"
 msgstr "Mostrar Conteo de Entradas"
 
 #: options.php:6
-msgid "Show Pages as well as posts"
+msgid "Show Archives as well as posts"
 msgstr "Mostrar las Páginas al igual que las Entradas"
 
 #: options.php:8

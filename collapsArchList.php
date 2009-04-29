@@ -29,17 +29,17 @@ This file is part of Collapsing Archives
 ?>
 
 <?php
-function list_archives($number) {
-  global $wpdb;
+function list_archives($args) {
 global $wpdb, $month;
+include('defaults.php');
+$options=wp_parse_args($args, $defaults);
+extract($options);
 $idnum= '%i%'==$number ? $idnum=1 : $idnum=$number;
 echo "<ul id='collapsArchList-$idnum'>\n";
 
 
 $post_attrs = "post_date != '0000-00-00 00:00:00' AND post_status = 'publish'";
 
-  $options=get_option('collapsArchOptions');
-  extract($options[$number]);
 
   if ($expand==1) {
     $expandSym='+';
@@ -114,7 +114,7 @@ $post_attrs = "post_date != '0000-00-00 00:00:00' AND post_status = 'publish'";
   }
 
   $isPage='';
-  if ($showPages=='no') {
+  if (!$showPages) {
     $isPage="AND $wpdb->posts.post_type='post'";
   }
 	if ($defaultExpand!='') {
@@ -122,7 +122,7 @@ $post_attrs = "post_date != '0000-00-00 00:00:00' AND post_status = 'publish'";
   } else {
 	  $autoExpand = array();
   }
-if( $showPages=='no' ) {
+if( !$showPages ) {
   $post_attrs .= " AND post_type = 'post'";
 }
 
@@ -197,7 +197,7 @@ if( $allPosts ) {
      * triangle will expand it. rel = hide means that is will be shown, and
      * clicking on the triangle will collapse (hide) it 
      */
-    if( $expandCurrentYear=='yes'
+    if( $expandCurrentYear
         && $archPost->year == date('Y') ) {
       $ding = $collapseSym;
       $yearRel = "hide";
@@ -214,7 +214,7 @@ if( $allPosts ) {
        */
       $currentMonth = 0;
       $newYear = true;
-      if( $showYearCount=='yes') {
+      if( $showYearCount) {
          $yearCount = ' (' . $yearCounts{"$currentYear"} . ")\n";
       }
       else {
@@ -222,8 +222,8 @@ if( $allPosts ) {
       }
       
       if($i>=2 && $allPosts[$i-2]->year != $archPost->year ) {
-				if( $showMonths=='yes' ) {
-          if( $expandMonths=='yes' ) {
+				if( $showMonths ) {
+          if( $expandMonths ) {
             echo "        </ul>\n      </li> <!-- close expanded month --> \n";
           } else {
             echo "      </li> <!-- close month --> \n";
@@ -234,7 +234,7 @@ if( $allPosts ) {
         }
       }
       $home = get_settings('home');
-      if( $showMonths=='yes' ) {
+      if( $showMonths ) {
 				echo "  <li class='collapsArch'><span title='$yearTitle' " .
 				    "class='collapsArch $yearRel' " .
             "onclick='expandCollapse(event" .
@@ -243,14 +243,14 @@ if( $allPosts ) {
 			} else {
 			  echo "  <li class='collapsArchPost'>\n";
 			}
-      if ($linkToArch=='yes') {
+      if ($linkToArch) {
         echo  "</span>";
         echo "<a href='".get_year_link($archPost->year). "'>$currentYear</a>$yearCount\n";
       } else {
         echo "$currentYear$yearCount\n";
         echo "</span>";
       }
-      if( $showMonths=='yes' ) {
+      if( $showMonths ) {
         echo "    <ul $monthStyle id='collapsArchList-$currentYear-$idnum'>\n";
       }
       $newYear = false;
@@ -262,8 +262,8 @@ if( $allPosts ) {
       if($newYear == false) { #close off last month
         $newYear=true; 
       } else {
-				if( $showMonths=='yes' ) {
-          if( $expandMonths=='yes' ) {
+				if( $showMonths ) {
+          if( $expandMonths ) {
             echo "        </ul>\n      </li> <!-- close expanded month --> \n";
           } else {
             echo "      </li> <!-- close month --> \n";
@@ -271,24 +271,24 @@ if( $allPosts ) {
         }
       }
 
-      if( $showMonthCount=='yes') {
+      if( $showMonthCount) {
          $monthCount = ' (' . $monthCounts{"$currentYear$currentMonth"} . ")\n";
       } else {
         $monthCount = '';
       }
-      if( $showMonths=='yes' ) {
+      if( $showMonths ) {
 				$text = sprintf('%s', $month[zeroise($currentMonth,2)]);
 
 				$text = wptexturize($text);
 				$title_text = wp_specialchars($text,1);
 
-				if ($expandMonths=='yes' ) {
+				if ($expandMonths ) {
 					$link = 'javascript:;';
 					$onclick = "onclick='expandCollapse(event" . 
               ", \"$expandSymJS\", \"$collapseSymJS\", $animate, " .
 					    "\"collapsArch\"); return false'";
 					$monthCollapse = 'collapsArch';
-					if( $expandCurrentMonth=='yes'
+					if( $expandCurrentMonth
 							&& $currentYear == date('Y')
 							&& $currentMonth == date('n') ) {
 										$monthRel = 'hide';
@@ -303,7 +303,7 @@ if( $allPosts ) {
 					$the_link = "<span title='$monthTitle' " .
 					    "class='$monthCollapse $monthRel' $onclick>" .
 							"<span class='sym'>$ding</span>";
-          if ($linkToArch=='yes') {
+          if ($linkToArch) {
             $the_link.= "</span>";
             $the_link .="<a href='".get_month_link($currentYear, $currentMonth).
 						    "' title='$title_text'>";
@@ -326,22 +326,22 @@ if( $allPosts ) {
 				echo "      <li class='$monthCollapse'>".$the_link.$monthCount;
 
 			}
-			if ($showMonths=='yes' && $expandMonths=='yes' ) {
+			if ($showMonths && $expandMonths=='yes' ) {
 				echo "        <ul $postStyle id=\"collapsArchList-";
 				echo "$currentYear-$currentMonth-$idnum\">\n";
 				$text = '';
       }
 		} else {
 
-			if( $showMonths=='yes' && $expandMonths=='yes' ) {
+			if( $showMonths && $expandMonths=='yes' ) {
 				$text = '';
 			}
 		}
-		if( $showPostNumber=='yes' ) {
+		if( $showPostNumber ) {
 			$text .= '#'.$archPost->ID;
 		}
 
-		if ($showPostTitle=='yes'  && $expandMonths=='yes') {
+		if ($showPostTitle  && $expandMonths=='yes') {
 
 			$title_text = htmlspecialchars(strip_tags(__($archPost->post_title)), ENT_QUOTES);
 			if(strlen(trim($title_text))==0) {
@@ -354,12 +354,12 @@ if( $allPosts ) {
 			}
 
 			$text .= ( $tmp_text == '' ? $title_text : $tmp_text );
-      if ($showPostDate=='yes' ) {
+      if ($showPostDate ) {
         $theDate = mysql2date($postDateFormat, $archPost->post_date );
         $text .= ( $text == '' ? $theDate : " $theDate" );
       }
 
-      if ($showCommentCount=='yes' ) {
+      if ($showCommentCount ) {
         $commcount = ' ('.get_comments_number($archPost->ID).')';
       }
 
@@ -368,8 +368,8 @@ if( $allPosts ) {
           "title='$title_text'>$text</a>$commcount</li>\n";
     }
 	}
-  if ($showMonths=='yes' ) {
-    if ($expandMonths=='yes') {
+  if ($showMonths ) {
+    if ($expandMonths) {
       echo "        </ul>\n";
     }
     echo "  </li> <!-- close month -->
