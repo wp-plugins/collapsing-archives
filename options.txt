@@ -65,8 +65,8 @@
      id="<?php echo $this->get_field_id(''); ?>"></input> <label for="showYearCount"><?php _e('Show Post Count in Year Links', 'collapsArch'); ?></label>
     </p>
     <p>
-     <input type="checkbox" name="<?php echo $this->get_field_name('showMonths'); ?>" <?php if ($showMonths)  echo 'checked'; ?>
-     id="<?php echo $this->get_field_id('showMonths'); ?>"></input> <label for="showMonths"><?php _e('Show Month Link', 'collapsArch'); ?></label>
+     <input type="checkbox" name="<?php echo $this->get_field_name('expandYears'); ?>" <?php if ($expandYears)  echo 'checked'; ?>
+     id="<?php echo $this->get_field_id('expandYears'); ?>"></input> <label for="expandYears"><?php _e('Show Month Link', 'collapsArch'); ?></label>
    </p>
    <p>
       &nbsp;&nbsp;<input type="checkbox" name="<?php echo $this->get_field_name('showMonthCount'); ?>" <?php if ($showMonthCount == 'yes') echo

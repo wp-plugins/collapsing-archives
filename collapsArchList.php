@@ -138,7 +138,7 @@ $postquery= "SELECT $wpdb->terms.slug, $wpdb->posts.ID, $wpdb->posts.post_name, 
 		                          $wpdb->term_taxonomy.term_id 
   WHERE $post_attrs  $inExcludeYearQuery $inExcludeCatQuery 
   GROUP BY $wpdb->posts.ID 
-  ORDER BY $wpdb->posts.post_date $archSortOrder";
+  ORDER BY $wpdb->posts.post_date $sort";
 
 /*
     $wpdb->term_relationships.term_taxonomy_id = $wpdb->terms.term_id 
@@ -222,7 +222,7 @@ if( $allPosts ) {
       }
       
       if($i>=2 && $allPosts[$i-2]->year != $archPost->year ) {
-				if( $showMonths ) {
+				if( $expandYears ) {
           if( $expandMonths ) {
             echo "        </ul>\n      </li> <!-- close expanded month --> \n";
           } else {
@@ -234,7 +234,7 @@ if( $allPosts ) {
         }
       }
       $home = get_settings('home');
-      if( $showMonths ) {
+      if( $expandYears ) {
 				echo "  <li class='collapsArch'><span title='$yearTitle' " .
 				    "class='collapsArch $yearRel' " .
             "onclick='expandCollapse(event" .
@@ -250,7 +250,7 @@ if( $allPosts ) {
         echo "$currentYear$yearCount\n";
         echo "</span>";
       }
-      if( $showMonths ) {
+      if( $expandYears ) {
         echo "    <ul $monthStyle id='collapsArchList-$currentYear-$idnum'>\n";
       }
       $newYear = false;
@@ -262,7 +262,7 @@ if( $allPosts ) {
       if($newYear == false) { #close off last month
         $newYear=true; 
       } else {
-				if( $showMonths ) {
+				if( $expandYears ) {
           if( $expandMonths ) {
             echo "        </ul>\n      </li> <!-- close expanded month --> \n";
           } else {
@@ -276,7 +276,7 @@ if( $allPosts ) {
       } else {
         $monthCount = '';
       }
-      if( $showMonths ) {
+      if( $expandYears ) {
 				$text = sprintf('%s', $month[zeroise($currentMonth,2)]);
 
 				$text = wptexturize($text);
@@ -326,14 +326,14 @@ if( $allPosts ) {
 				echo "      <li class='$monthCollapse'>".$the_link.$monthCount;
 
 			}
-			if ($showMonths && $expandMonths=='yes' ) {
+			if ($expandYears && $expandMonths=='yes' ) {
 				echo "        <ul $postStyle id=\"collapsArchList-";
 				echo "$currentYear-$currentMonth-$idnum\">\n";
 				$text = '';
       }
 		} else {
 
-			if( $showMonths && $expandMonths=='yes' ) {
+			if( $expandYears && $expandMonths=='yes' ) {
 				$text = '';
 			}
 		}
@@ -368,7 +368,7 @@ if( $allPosts ) {
           "title='$title_text'>$text</a>$commcount</li>\n";
     }
 	}
-  if ($showMonths ) {
+  if ($expandYears ) {
     if ($expandMonths) {
       echo "        </ul>\n";
     }

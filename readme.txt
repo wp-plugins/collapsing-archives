@@ -14,21 +14,12 @@ months for each year and posts for each month in the archive listing.
 This is a relatively simple plugin that uses Javascript to
 make the Archive links in the sidebar collapsable by year, and/or month.
 
-= What's new? =
-
-* 1.1.4 (2009/04/22) 
-    * Fixed html validation error when using manual version
-    * Internationalization and Spanish localization (thanks to Karin Sequen)
-
-* 1.1.3 (2009/04/17)
-    * Fixed bug with unicode codes showing up instead of triangles
-
-* 1.1.2 (2009/03/28) 
-    * Span all on one line so it doesn't mess up exec-php (thanks GeekLad)
-    * fixed some minor issues to get page to be valid xhtml
-    * no longer requires footer
-    * updated javascript file
-    * added option for custom expanding and collapsing symbols
+= What's new for 1.2.alpha? =
+* Widget is compatible with wordpress 2.8 (not backwards compatible with 2.7
+  and previous). If you are using wordpress 2.7.1 or previous, please use
+  collapsing archives version 1.1.4 or earlier
+* Can now add parameters to the collapsLink function if you choose not to use
+  the widget (see options section below)
  
 See the CHANGELOG for more information
 
@@ -61,14 +52,8 @@ To something of the following:
      }
     ?>
 `
+You can specify options for collapsArch. See options section.
 
-This way, if you ever disable the plugin, your blog doesn't die.
-
-**Note**: `wp_get_archives` can be substituted for
-`wp_list_archives` depending on the design of the theme, so
-be sure to edit appropriately. Also, substitute
-`your_options_here` with what the appropriate options are
-for your theme.
 
 WIDGET INSTALLATION
 
@@ -123,27 +108,42 @@ I use this plugin in my blog at http://blog.robfelty.com
   'inExcludeCats' => '',
   'inExcludeYear' => 'exclude',
   'inExcludeYears' => '',
-  'showPosts' => true,
+  'sort' => 'DESC',
   'showPages' => false, 
   'linkToArch' => true,
   'showYearCount' => true,
   'expandCurrentYear' => true,
   'expandMonths' => true,
-  'showMonths' => true,
+  'expandYears' => true,
   'expandCurrentMonth' => true,
   'showMonthCount' => true,
   'showPostTitle' => true,
   'expand' => '0',
   'showPostDate' => false,
-  'debug' => '0',
   'postDateFormat' => 'm/d',
   'animate' => 0,
-  'postTitleLength' => '');
+  'postTitleLength' => '',
+  'debug' => '0',
+  );
 `
 
 * noTitle
     * If your posts don't have title, specify a string to show in place of the
       title
+* inExcludeCat
+    * Whether to include or exclude certain categories 
+        * 'exclude' (default) 
+        * 'include'
+* inExcludeCats
+    * The categories which should be included or excluded
+* inExcludeYear
+    * Whether to include or exclude certain years 
+        * 'exclude' (default) 
+        * 'include'
+* inExcludeYears
+    * The years which should be included or excluded
+* showPages
+    * Whether or not to include pages as well as posts. Default if false
 * showYearCount
     *  When true, the number of posts in the year will be shown in parentheses 
 * showMonthCount
@@ -151,34 +151,11 @@ I use this plugin in my blog at http://blog.robfelty.com
 * linkToArch
     * True, clicking on a the month or year will link to the archive (default)
     * False, clicking on a month or year expands and collapses 
-* catSort
-    * The order in which link categories should be sorted. Possible values:
-        * 'catName' the name of the link category (default)
-        * 'catId' the id of the link category
-        * 'catSlug' the slug of the link category
-        * 'catOrder' custom order specified in the links options
-        * 'catCount' the number of links in each category
-* linkSort
-    * The order in which link linkegories should be sorted. Possible values:
-        * 'linkName' the name of the link (default)
-        * 'linkId' the id of the link 
-        * 'linkUrl' the url of the link 
-        * 'linkRating' the rating  assigned to the link
-* catSortOrder
-    * Whether categories should be sorted in normal or reverse order. Possible
-      values:
-        * 'ASC' normal order (a-z, 0-9) (default)
-        * 'DESC' reverse order (z-a, 9-0)
-* linkSortOrder
-    * Whether link should be sorted in normal or reverse order. Possible values:
-        * 'ASC' normal order (a-z, 0-9) (default)
-        * 'DESC' reverse order (z-a, 9-0)
-* inExclude
-    * Whether to include or exclude certain categories 
-        * 'exclude' (default) 
-        * 'include'
-* inExcludeCats
-    * The link categories which should be included or excluded
+* sort
+    * Whether posts should be sorted in chronological  or reverse
+      chronological order. Possible values:
+        * 'DESC' reverse chronological order (default)
+        * 'ASC' chronological order
 * expand
     * The symbols to be used to mark expanding and collapsing. Possible values:
         * '0' Triangles (default)
@@ -193,13 +170,27 @@ I use this plugin in my blog at http://blog.robfelty.com
     * If you have selected '4' for the expand option, this character will be
       used to mark collapsible link categories
  
-* defaultExpand
-    * A comma separated list of link category IDs or Slugs which should be
-      expanded by default
+* expandYears
+    * True: Years collapse and expand to show months (default)
+    * False: Only links to yearly archives are shown
+* expandMonths
+    * True: Months collapse and expand to show posts (default)
+    * False: Only links to yearly and monthly archives are shown
+* expandCurrentMonth
+    * When true, the current month will be expanded by default
+* expandCurrentYear
+    * When true, the current year will be expanded by default
+* showPostTitle
+    * True: The title of each post is shown (default)
+* showPostDate
+    * True: Show the date of each post 
+* postDateFormat
+    * The format in which the date should be shown (default: 'm/d')
+* postTitleLength
+    * Truncate post titles to this number of characters (default: 0 = don't
+      truncate)
 * animate
     * When set to true, collapsing and expanding will be animated
-* nofollow
-    * When set to true (default), rel='nofollow' tags will be added to links
 * debug
     * When set to true, extra debugging information will be displayed in the
       underlying code of your page (but not visible from the browser). Use
@@ -207,12 +198,13 @@ I use this plugin in my blog at http://blog.robfelty.com
 
 = Examples =
 
-`collapsLink('animate=true&nofollow=false&expand=3,inExcludeCats=blogroll,lousy-friends')`
+`collapsArch('animate=true&sort=ASC&expand=3,inExcludeCats=general,uncategorized')`
 This will produce a list with:
 * animation on
-* no nofollow tags
+* shown in chronological order
 * using images to mark collapsing and expanding
-* exclude links in the categories blogroll and lousy-friends
+* exclude posts from  the categories general and uncategorized
+
 == CAVEAT ==
 
 This plugin relies on Javascript, but does degrade
