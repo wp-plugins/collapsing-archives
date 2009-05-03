@@ -1,5 +1,9 @@
 Collapsing Archives Changelog
 
+* 1.2.alpha (2009.05.02)
+    * Widgets work with 2.8 API
+    * Can specify options directly in manual usage
+
 * 1.1.4 (2009/04/18) 
     * Fixed html validation error when using manual version
     * Spanish localization (thanks to Karin Sequen)

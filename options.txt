@@ -5,12 +5,12 @@
      for="collapsArchShowPages"><? _e('Show Pages as well as posts', 'collapsArch'); ?> </label>
     </p>
      <p><?php _e('Display archives in', 'collapsArch'); ?> 
-     <select name="<?php echo $this->get_field_name('archSortOrder'); ?>">
-     <option  <?php if($archSortOrder=='ASC') echo 'selected'; ?>
-     id="<?php echo $this->get_field_id('archSortOrder'); ?>"
+     <select name="<?php echo $this->get_field_name('sort'); ?>">
+     <option  <?php if($sort=='ASC') echo 'selected'; ?>
+     id="<?php echo $this->get_field_id('sort'); ?>"
      value='ASC'><?php _e('Chronological order', 'collapsArch'); ?></option>
-     <option  <?php if($archSortOrder=='DESC') echo 'selected'; ?>
-     id="<?php echo $this->get_field_id('archSortOrder'); ?>"
+     <option  <?php if($sort=='DESC') echo 'selected'; ?>
+     id="<?php echo $this->get_field_id('sort'); ?>"
      value='DESC'><?php _e('Reverse Chronological order', 'collapsArch'); ?></option>
      </select>
     </p>

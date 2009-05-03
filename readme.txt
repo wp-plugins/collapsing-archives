@@ -2,8 +2,8 @@
 Contributors: robfelty
 Donate link: http://blog.robfelty.com/wordpress-plugins
 Tags: archives, sidebar, widget, navigation, menu, posts
-Requires at least: 2.6
-Tested up to: 2.7.1
+Requires at least: 2.8
+Tested up to: 2.8
 Stable tag: 1.1.4
 
 This plugin uses Javascript to dynamically expand or collaps the set of
@@ -46,17 +46,17 @@ change the following here appropriate (most likely sidebar.php):
 Change From:
 
     <ul>
-     `<?php wp_get_archives(your_options_here); ?>`
+     `<?php wp_get_archives(); ?>`
     </ul>
 
 To something of the following:
 `
     <?php
      if( function_exists('collapsArch') ) {
-      collapsArch('%i%');
+      collapsArch();
      } else {
       echo "<ul>\n";
-      wp_get_archives(your_options_here);
+      wp_get_archives();
       echo "</ul>\n";
      }
     ?>
@@ -117,24 +117,102 @@ I use this plugin in my blog at http://blog.robfelty.com
 
 == OPTIONS AND CONFIGURATIONS ==
 
-Options for Collapsing Archives are found under Options -> Collapsing
-Archives. So far, there are the following options:
+`$defaults=array(
+  'noTitle' => '',
+  'inExcludeCat' => 'exclude',
+  'inExcludeCats' => '',
+  'inExcludeYear' => 'exclude',
+  'inExcludeYears' => '',
+  'showPosts' => true,
+  'showPages' => false, 
+  'linkToArch' => true,
+  'showYearCount' => true,
+  'expandCurrentYear' => true,
+  'expandMonths' => true,
+  'showMonths' => true,
+  'expandCurrentMonth' => true,
+  'showMonthCount' => true,
+  'showPostTitle' => true,
+  'expand' => '0',
+  'showPostDate' => false,
+  'debug' => '0',
+  'postDateFormat' => 'm/d',
+  'animate' => 0,
+  'postTitleLength' => '');
+`
 
-  * Use chronological or reverse chronological ordering
-  * Leave Current Year Expanded by Default
-  * Display number of posts in a year
-  * Show Month Link
-    * Display number of posts in a month
-    * Enable month links to expand to show posts
-      * Display pages and posts, or just posts
-    * Leave Current Month Expanded by Defaul
-  * Posts can be displayed with any of the following:
-    * Number (ID)
-    * Title
-    * Comment Count
-  * Exclude posts belonging to particular categories (works for
-    single-category posts only)
+* noTitle
+    * If your posts don't have title, specify a string to show in place of the
+      title
+* showYearCount
+    *  When true, the number of posts in the year will be shown in parentheses 
+* showMonthCount
+    *  When true, the number of posts in the month will be shown in parentheses 
+* linkToArch
+    * True, clicking on a the month or year will link to the archive (default)
+    * False, clicking on a month or year expands and collapses 
+* catSort
+    * The order in which link categories should be sorted. Possible values:
+        * 'catName' the name of the link category (default)
+        * 'catId' the id of the link category
+        * 'catSlug' the slug of the link category
+        * 'catOrder' custom order specified in the links options
+        * 'catCount' the number of links in each category
+* linkSort
+    * The order in which link linkegories should be sorted. Possible values:
+        * 'linkName' the name of the link (default)
+        * 'linkId' the id of the link 
+        * 'linkUrl' the url of the link 
+        * 'linkRating' the rating  assigned to the link
+* catSortOrder
+    * Whether categories should be sorted in normal or reverse order. Possible
+      values:
+        * 'ASC' normal order (a-z, 0-9) (default)
+        * 'DESC' reverse order (z-a, 9-0)
+* linkSortOrder
+    * Whether link should be sorted in normal or reverse order. Possible values:
+        * 'ASC' normal order (a-z, 0-9) (default)
+        * 'DESC' reverse order (z-a, 9-0)
+* inExclude
+    * Whether to include or exclude certain categories 
+        * 'exclude' (default) 
+        * 'include'
+* inExcludeCats
+    * The link categories which should be included or excluded
+* expand
+    * The symbols to be used to mark expanding and collapsing. Possible values:
+        * '0' Triangles (default)
+        * '1' + -
+        * '2' [+] [-]
+        * '3' images (you can upload your own if you wish)
+        * '4' custom symbols
+* customExpand
+    * If you have selected '4' for the expand option, this character will be
+      used to mark expandable link categories
+* customCollapse
+    * If you have selected '4' for the expand option, this character will be
+      used to mark collapsible link categories
+ 
+* defaultExpand
+    * A comma separated list of link category IDs or Slugs which should be
+      expanded by default
+* animate
+    * When set to true, collapsing and expanding will be animated
+* nofollow
+    * When set to true (default), rel='nofollow' tags will be added to links
+* debug
+    * When set to true, extra debugging information will be displayed in the
+      underlying code of your page (but not visible from the browser). Use
+      this option if you are having problems
 
+= Examples =
+
+`collapsLink('animate=true&nofollow=false&expand=3,inExcludeCats=blogroll,lousy-friends')`
+This will produce a list with:
+* animation on
+* no nofollow tags
+* using images to mark collapsing and expanding
+* exclude links in the categories blogroll and lousy-friends
 == CAVEAT ==
 
 This plugin relies on Javascript, but does degrade
