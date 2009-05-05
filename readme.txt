@@ -4,7 +4,7 @@ Donate link: http://blog.robfelty.com/wordpress-plugins
 Tags: archives, sidebar, widget, navigation, menu, posts
 Requires at least: 2.6
 Tested up to: 2.7.1
-Stable tag: 1.1.4
+Stable tag: 1.1.5
 
 This plugin uses Javascript to dynamically expand or collaps the set of
 months for each year and posts for each month in the archive listing.
@@ -16,19 +16,14 @@ make the Archive links in the sidebar collapsable by year, and/or month.
 
 = What's new? =
 
+* 1.1.5 (2009/05/05)
+    * Fixed options page problems (<? to <?php
+    * Fixed problem with mdash on page load (javascript update)
+    * When using option to have clicking on the year/month expand and collapse,
+      now includes a link, so it degrades nicely when javascript is turned off
 * 1.1.4 (2009/04/22) 
     * Fixed html validation error when using manual version
     * Internationalization and Spanish localization (thanks to Karin Sequen)
-
-* 1.1.3 (2009/04/17)
-    * Fixed bug with unicode codes showing up instead of triangles
-
-* 1.1.2 (2009/03/28) 
-    * Span all on one line so it doesn't mess up exec-php (thanks GeekLad)
-    * fixed some minor issues to get page to be valid xhtml
-    * no longer requires footer
-    * updated javascript file
-    * added option for custom expanding and collapsing symbols
  
 See the CHANGELOG for more information
 
@@ -142,6 +137,12 @@ gracefully if it is not present/enabled to show all of the
 archive links as usual.
 
 == HISTORY ==
+
+* 1.1.5 (2009/05/05)
+    * Fixed options page problems (<? to <?php
+    * Fixed problem with mdash on page load (javascript update)
+    * When using option to have clicking on the year/month expand and collapse,
+      now includes a link, so it degrades nicely when javascript is turned off
 
 * 1.1.4 (2009/04/22) 
     * Fixed html validation error when using manual version
