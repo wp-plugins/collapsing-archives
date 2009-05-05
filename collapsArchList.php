@@ -1,6 +1,6 @@
 <?php
 /*
-Collapsing Archives version: 1.1.4
+Collapsing Archives version: 1.1.5
 
 Copyright 2007 Robert Felty
 
@@ -247,7 +247,7 @@ if( $allPosts ) {
         echo  "</span>";
         echo "<a href='".get_year_link($archPost->year). "'>$currentYear</a>$yearCount\n";
       } else {
-        echo "$currentYear$yearCount\n";
+        echo "<a href='".get_year_link($archPost->year). "'>$currentYear</a>$yearCount\n";
         echo "</span>";
       }
       if( $showMonths=='yes' ) {
@@ -306,10 +306,10 @@ if( $allPosts ) {
           if ($linkToArch=='yes') {
             $the_link.= "</span>";
             $the_link .="<a href='".get_month_link($currentYear, $currentMonth).
-						    "' title='$title_text'>";
-            $the_link .="$text</a>\n";
+						    "' title='$title_text'>$text</a>";
           } else {
-            $the_link .="$text\n";
+            $the_link .="<a href='".get_month_link($currentYear, $currentMonth).
+						    "' title='$title_text'>$text</a>";
             $the_link.="</span>";
           }
 				} else {
@@ -383,7 +383,7 @@ if( $allPosts ) {
 		echo "<script type=\"text/javascript\">\n";
 		echo "// <![CDATA[\n";
 		echo '/* These variables are part of the Collapsing Archives Plugin
-		       * version: 1.1.4
+		       * version: 1.1.5
 					 * revision: $Id: collapsArch.php 103059 2009-03-17 20:12:01Z robfelty $
 					 * Copyright 2008 Robert Felty (robfelty.com)
 					 */' ."\n";

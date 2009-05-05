@@ -1,5 +1,11 @@
 Collapsing Archives Changelog
 
+* 1.1.5 (2009/05/05)
+    * Fixed options page problems (<? to <?php
+    * Fixed problem with mdash on page load (javascript update)
+    * When using option to have clicking on the year/month expand and collapse,
+      now includes a link, so it degrades nicely when javascript is turned off
+
 * 1.1.4 (2009/04/18) 
     * Fixed html validation error when using manual version
     * Spanish localization (thanks to Karin Sequen)

@@ -1,140 +1,140 @@
     <p>
-     <input type="checkbox" name="collapsArch[<? echo $number ?>][showPostCount]" <? if ($showPostCount=='yes')  echo 'checked'; ?> id="collapsArch-showPostCount-<? echo $number ?>"></input> <label for="collapsArchShowPostCount"><? _e('Show Post Count', 'collapsArch'); ?> </label>
-     <input type="checkbox" name="collapsArch[<? echo $number
-     ?>][showPages]" <? if ($showPages=='yes')  echo 'checked'; ?>
-     id="collapsArch-showPages-<? echo $number ?>"></input> <label
-     for="collapsArchShowPages"><? _e('Show Pages as well as posts', 'collapsArch'); ?> </label>
+     <input type="checkbox" name="collapsArch[<?php echo $number ?>][showPostCount]" <?php if ($showPostCount=='yes')  echo 'checked'; ?> id="collapsArch-showPostCount-<?php echo $number ?>"></input> <label for="collapsArchShowPostCount"><?php _e('Show Post Count', 'collapsArch'); ?> </label>
+     <input type="checkbox" name="collapsArch[<?php echo $number
+     ?>][showPages]" <?php if ($showPages=='yes')  echo 'checked'; ?>
+     id="collapsArch-showPages-<?php echo $number ?>"></input> <label
+     for="collapsArchShowPages"><?php _e('Show Pages as well as posts', 'collapsArch'); ?> </label>
     </p>
-     <p><? _e('Display archives in', 'collapsArch'); ?> 
-     <select name="collapsArch[<? echo $number ?>][archSortOrder]">
-     <option  <? if($archSortOrder=='ASC') echo 'selected'; ?>
-     id="archSortOrder-<? echo $number ?>"
-     value='ASC'><? _e('Chronological order', 'collapsArch'); ?></option>
-     <option  <? if($archSortOrder=='DESC') echo 'selected'; ?>
-     id="archSortOrder-<? echo $number ?>"
-     value='DESC'><? _e('Reverse Chronological order', 'collapsArch'); ?></option>
+     <p><?php _e('Display archives in', 'collapsArch'); ?> 
+     <select name="collapsArch[<?php echo $number ?>][archSortOrder]">
+     <option  <?php if($archSortOrder=='ASC') echo 'selected'; ?>
+     id="archSortOrder-<?php echo $number ?>"
+     value='ASC'><?php _e('Chronological order', 'collapsArch'); ?></option>
+     <option  <?php if($archSortOrder=='DESC') echo 'selected'; ?>
+     id="archSortOrder-<?php echo $number ?>"
+     value='DESC'><?php _e('Reverse Chronological order', 'collapsArch'); ?></option>
      </select>
     </p>
-    <p><? _e('Clicking on year/month', 'collapsArch'); ?>:<br />
-     <input type="radio" name="collapsArch[<? echo $number ?>][linkToArch]"
-     <? if($linkToArch=='yes') echo 'checked'; ?>
-     id="collapsArch-linkToArchYes-<? echo $number ?>"
-     value='yes'></input> <label for="collapsArch-linkToArchYes"><? _e('Links to archive', 'collapsArch'); ?></label>
-     <input type="radio" name="collapsArch[<? echo $number ?>][linkToArch]"
-     <? if($linkToArch=='no') echo 'checked'; ?>
-     id="collapsArch-linkToArchNo-<? echo $number ?>"
-     value='no'></input> <label for="linkToArchNo"><? _e('Expands list', 'collapsArch'); ?></label>
+    <p><?php _e('Clicking on year/month', 'collapsArch'); ?>:<br />
+     <input type="radio" name="collapsArch[<?php echo $number ?>][linkToArch]"
+     <?php if($linkToArch=='yes') echo 'checked'; ?>
+     id="collapsArch-linkToArchYes-<?php echo $number ?>"
+     value='yes'></input> <label for="collapsArch-linkToArchYes"><?php _e('Links to archive', 'collapsArch'); ?></label>
+     <input type="radio" name="collapsArch[<?php echo $number ?>][linkToArch]"
+     <?php if($linkToArch=='no') echo 'checked'; ?>
+     id="collapsArch-linkToArchNo-<?php echo $number ?>"
+     value='no'></input> <label for="linkToArchNo"><?php _e('Expands list', 'collapsArch'); ?></label>
     </p>
-    <p><? _e('Expanding and collapse characters', 'collapsArch'); ?>:<br />
-     HTML: <input type="radio" name="collapsArch[<? echo $number ?>][expand]" <? if($expand==0) echo 'checked'; ?> id="expand0" value='0'></input> <label for="expand0">&#9658;&nbsp;&#9660;</label>
-     <input type="radio" name="collapsArch[<? echo $number ?>][expand]" <? if($expand==1) echo 'checked'; ?> id="expand1" value='1'></input> <label for="expand1">+&nbsp;&mdash;</label>
-     <input type="radio" name="collapsArch[<? echo $number ?>][expand]"
-     <? if($expand==2) echo 'checked'; ?> id="expand2" value='2'></input>
+    <p><?php _e('Expanding and collapse characters', 'collapsArch'); ?>:<br />
+     HTML: <input type="radio" name="collapsArch[<?php echo $number ?>][expand]" <?php if($expand==0) echo 'checked'; ?> id="expand0" value='0'></input> <label for="expand0">&#9658;&nbsp;&#9660;</label>
+     <input type="radio" name="collapsArch[<?php echo $number ?>][expand]" <?php if($expand==1) echo 'checked'; ?> id="expand1" value='1'></input> <label for="expand1">+&nbsp;&mdash;</label>
+     <input type="radio" name="collapsArch[<?php echo $number ?>][expand]"
+     <?php if($expand==2) echo 'checked'; ?> id="expand2" value='2'></input>
      <label for="expand2">[+]&nbsp;[&mdash;]</label><br />
-     <label for="expand4"><? _e('custom', 'collapsArch'); ?>:</label>
-     <input type="radio" name="collapsArch[<? echo $number ?>][expand]"
-     <? if($expand==4) echo 'checked'; ?> id="expand4" value='4'></input>
-     <? _e('expand', 'collapsArch'); ?>:
-     <input type="text" size='2' name="collapsArch[<? echo $number ?>][customExpand]" value="<? echo $customExpand ?>" id="collapsArch-customExpand-<? echo $number ?>"></input> 
-     <? _e('collapse', 'collapsArch'); ?>: 
-     <input type="text" size='2' name="collapsArch[<? echo $number ?>][customCollapse]" value="<? echo $customCollapse ?>" id="collapsArch-customCollapse-<? echo $number ?>"></input> <br />
-     <? _e('images', 'collapsArch'); ?>: 
-     <input type="radio" name="collapsArch[<? echo $number ?>][expand]"
-     <? if($expand==3) echo 'checked'; ?> id="expand0" value='3'></input>
-     <label for="expand3"><img src='<? echo get_settings('siteurl') .
+     <label for="expand4"><?php _e('custom', 'collapsArch'); ?>:</label>
+     <input type="radio" name="collapsArch[<?php echo $number ?>][expand]"
+     <?php if($expand==4) echo 'checked'; ?> id="expand4" value='4'></input>
+     <?php _e('expand', 'collapsArch'); ?>:
+     <input type="text" size='2' name="collapsArch[<?php echo $number ?>][customExpand]" value="<?php echo $customExpand ?>" id="collapsArch-customExpand-<?php echo $number ?>"></input> 
+     <?php _e('collapse', 'collapsArch'); ?>: 
+     <input type="text" size='2' name="collapsArch[<?php echo $number ?>][customCollapse]" value="<?php echo $customCollapse ?>" id="collapsArch-customCollapse-<?php echo $number ?>"></input> <br />
+     <?php _e('images', 'collapsArch'); ?>: 
+     <input type="radio" name="collapsArch[<?php echo $number ?>][expand]"
+     <?php if($expand==3) echo 'checked'; ?> id="expand0" value='3'></input>
+     <label for="expand3"><img src='<?php echo get_settings('siteurl') .
      "/wp-content/plugins/collapsing-archives/" ?>img/collapse.gif' />&nbsp;<img
-     src='<? echo get_settings('siteurl') .
+     src='<?php echo get_settings('siteurl') .
      "/wp-content/plugins/collapsing-archives/" ?>img/expand.gif' /></label>
     </p>
     <p>
-     <select name="collapsArch[<? echo $number ?>][inExcludeYear]">
-     <option  <? if($inExcludeYear=='include') echo 'selected'; ?> id="inExcludeYearInclude-<? echo $number ?>" value='include'><? _e('Include', 'collapsArch'); ?></option>
-     <option  <? if($inExcludeYear=='exclude') echo 'selected'; ?> id="inExcludeYearExclude-<? echo $number ?>" value='exclude'><? _e('Exclude', 'collapsArch'); ?></option>
+     <select name="collapsArch[<?php echo $number ?>][inExcludeYear]">
+     <option  <?php if($inExcludeYear=='include') echo 'selected'; ?> id="inExcludeYearInclude-<?php echo $number ?>" value='include'><?php _e('Include', 'collapsArch'); ?></option>
+     <option  <?php if($inExcludeYear=='exclude') echo 'selected'; ?> id="inExcludeYearExclude-<?php echo $number ?>" value='exclude'><?php _e('Exclude', 'collapsArch'); ?></option>
      </select>
-     <? _e('these years', 'collapsArch'); ?> (<? _e('separated by commas', 'collapsArch'); ?>):<br />
-    <input type="text" size='40' name="collapsArch[<? echo $number
-    ?>][inExcludeYears]" value="<? echo $inExcludeYears ?>"  
-    id="collapsArch-inExcludeYears-<? echo $number ?>"></input> 
+     <?php _e('these years', 'collapsArch'); ?> (<?php _e('separated by commas', 'collapsArch'); ?>):<br />
+    <input type="text" size='40' name="collapsArch[<?php echo $number
+    ?>][inExcludeYears]" value="<?php echo $inExcludeYears ?>"  
+    id="collapsArch-inExcludeYears-<?php echo $number ?>"></input> 
     </p>
     <p>
-     <select name="collapsArch[<? echo $number ?>][inExcludeCat]">
-     <option  <? if($inExcludeCat=='include') echo 'selected'; ?> id="inExcludeCatInclude-<? echo $number ?>" value='include'><? _e('Include', 'collapsArch'); ?></option>
-     <option  <? if($inExcludeCat=='exclude') echo 'selected'; ?> id="inExcludeCatExclude-<? echo $number ?>" value='exclude'><? _e('Exclude', 'collapsArch'); ?></option>
+     <select name="collapsArch[<?php echo $number ?>][inExcludeCat]">
+     <option  <?php if($inExcludeCat=='include') echo 'selected'; ?> id="inExcludeCatInclude-<?php echo $number ?>" value='include'><?php _e('Include', 'collapsArch'); ?></option>
+     <option  <?php if($inExcludeCat=='exclude') echo 'selected'; ?> id="inExcludeCatExclude-<?php echo $number ?>" value='exclude'><?php _e('Exclude', 'collapsArch'); ?></option>
      </select>
-     <? _e('these categories', 'collapsArch'); ?> (<? _e('slugs separated by commas', 'collapsArch'); ?>):<br />
-    <input type="text" size='40' name="collapsArch[<? echo $number
-    ?>][inExcludeCats]" value="<? echo $inExcludeCats ?>"
-    id="collapsArch-inExcludeCats-<? echo $number ?>" />
+     <?php _e('these categories', 'collapsArch'); ?> (<?php _e('slugs separated by commas', 'collapsArch'); ?>):<br />
+    <input type="text" size='40' name="collapsArch[<?php echo $number
+    ?>][inExcludeCats]" value="<?php echo $inExcludeCats ?>"
+    id="collapsArch-inExcludeCats-<?php echo $number ?>" />
     </p>
      <p>
-     <input type="checkbox" name="collapsArch[<? echo $number
-     ?>][expandCurrentYear]" <? if ($expandCurrentYear=='yes')  echo
-     'checked'; ?> id="expandCurrentYear-<? echo $number ?>"></input> <label for="expandCurrentYear"><? _e('Leave Current Year Expanded by Default', 'collapsArch'); ?></label>
+     <input type="checkbox" name="collapsArch[<?php echo $number
+     ?>][expandCurrentYear]" <?php if ($expandCurrentYear=='yes')  echo
+     'checked'; ?> id="expandCurrentYear-<?php echo $number ?>"></input> <label for="expandCurrentYear"><?php _e('Leave Current Year Expanded by Default', 'collapsArch'); ?></label>
     </p>
     <p>
-     <input type="checkbox" name="collapsArch[<? echo $number
-     ?>][showYearCount]" <? if ($showYearCount=='yes')  echo 'checked'; ?>
-     id="showYearCount=<? echo $number ?>"></input> <label for="showYearCount"><? _e('Show Post Count in Year Links', 'collapsArch'); ?></label>
+     <input type="checkbox" name="collapsArch[<?php echo $number
+     ?>][showYearCount]" <?php if ($showYearCount=='yes')  echo 'checked'; ?>
+     id="showYearCount=<?php echo $number ?>"></input> <label for="showYearCount"><?php _e('Show Post Count in Year Links', 'collapsArch'); ?></label>
     </p>
     <p>
-     <input type="checkbox" name="collapsArch[<? echo $number
-     ?>][showMonths]" <? if ($showMonths=='yes')  echo 'checked'; ?>
-     id="showMonths-<? echo $number ?>"></input> <label for="showMonths"><? _e('Show Month Link', 'collapsArch'); ?></label>
+     <input type="checkbox" name="collapsArch[<?php echo $number
+     ?>][showMonths]" <?php if ($showMonths=='yes')  echo 'checked'; ?>
+     id="showMonths-<?php echo $number ?>"></input> <label for="showMonths"><?php _e('Show Month Link', 'collapsArch'); ?></label>
    </p>
    <p>
-      &nbsp;&nbsp;<input type="checkbox" name="collapsArch[<? echo $number
-      ?>][showMonthCount]" <? if ($showMonthCount == 'yes') echo
-      'checked'; ?> id="showMonthCount-<? echo $number ?>"></input> <label
-      for="showMonthCount"><? _e('Show Post Count in Month Links', 'collapsArch'); ?></label><br />
+      &nbsp;&nbsp;<input type="checkbox" name="collapsArch[<?php echo $number
+      ?>][showMonthCount]" <?php if ($showMonthCount == 'yes') echo
+      'checked'; ?> id="showMonthCount-<?php echo $number ?>"></input> <label
+      for="showMonthCount"><?php _e('Show Post Count in Month Links', 'collapsArch'); ?></label><br />
 
         &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="collapsArch[<?
-        echo $number ?>][expandMonths]" <? if($expandMonths=='yes') echo
-        'checked'; ?> id="expandMonths-<? echo $number ?>"></input> <label
-        for="expandMonths"><? _e('Month Links should expand to show Posts', 'collapsArch'); ?></label><br />
+        echo $number ?>][expandMonths]" <?php if($expandMonths=='yes') echo
+        'checked'; ?> id="expandMonths-<?php echo $number ?>"></input> <label
+        for="expandMonths"><?php _e('Month Links should expand to show Posts', 'collapsArch'); ?></label><br />
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox"
-          name="collapsArch[<? echo $number ?>][expandCurrentMonth]" <?
+          name="collapsArch[<?php echo $number ?>][expandCurrentMonth]" <?
           if ($expandCurrentMonth=='yes') echo 'checked'; ?>
-          id="expandCurrentMonth-<? echo $number ?>"></input> <label
-          for="expandCurrentMonth"><? _e('Leave Current Month Expanded by Default', 'collapsArch'); ?></label>
+          id="expandCurrentMonth-<?php echo $number ?>"></input> <label
+          for="expandCurrentMonth"><?php _e('Leave Current Month Expanded by Default', 'collapsArch'); ?></label>
    </p>
    <p>
-   <input type="checkbox" name="collapsArch[<? echo $number
-   ?>][showPostTitle]" <? if ($showPostTitle=='yes') echo
-   'checked'; ?> id="showPostTitle-<? echo $number ?>"></input> <label
-   for="showPostTitle"><? _e('Show Post Title', 'collapsArch'); ?></label>
-   | <? _e('Truncate Post Title to', 'collapsArch'); ?>
-   <input type="text" size='3' name="collapsArch[<? echo $number
+   <input type="checkbox" name="collapsArch[<?php echo $number
+   ?>][showPostTitle]" <?php if ($showPostTitle=='yes') echo
+   'checked'; ?> id="showPostTitle-<?php echo $number ?>"></input> <label
+   for="showPostTitle"><?php _e('Show Post Title', 'collapsArch'); ?></label>
+   | <?php _e('Truncate Post Title to', 'collapsArch'); ?>
+   <input type="text" size='3' name="collapsArch[<?php echo $number
    ?>][postTitleLength]"
-   id="postTitleLength-<? echo $number ?>" value="<? echo
+   id="postTitleLength-<?php echo $number ?>" value="<?php echo
    $postTitleLength; ?>"></input> <label
-   for="postTitleLength"> <? _e('characters', 'collapsArch'); ?></label>
+   for="postTitleLength"> <?php _e('characters', 'collapsArch'); ?></label>
    </p>
    <p>
-   <input type="checkbox" name="collapsArch[<? echo $number
-   ?>][showPostDate]" <? if ($showPostDate=='yes') echo
-   'checked'; ?> id="showPostDate-<? echo $number ?>"></input> <label
-   for="showPostDate"><? _e('Show Post Date', 'collapsArch'); ?></label> | 
+   <input type="checkbox" name="collapsArch[<?php echo $number
+   ?>][showPostDate]" <?php if ($showPostDate=='yes') echo
+   'checked'; ?> id="showPostDate-<?php echo $number ?>"></input> <label
+   for="showPostDate"><?php _e('Show Post Date', 'collapsArch'); ?></label> | 
    <label for="postDateFormat"><a href='http://php.net/date'
     title='information about date formatting syntax' target='_blank'>
-    <? _e('Post Date Format', 'collapsArch'); ?></a>:</label>
-   <input type="text" size='8' name="collapsArch[<? echo $number
-   ?>][postDateFormat]" value="<? echo $postDateFormat; ?>" 
-   id="postDateFormat-<? echo $number ?>"></input> 
+    <?php _e('Post Date Format', 'collapsArch'); ?></a>:</label>
+   <input type="text" size='8' name="collapsArch[<?php echo $number
+   ?>][postDateFormat]" value="<?php echo $postDateFormat; ?>" 
+   id="postDateFormat-<?php echo $number ?>"></input> 
    </p>
    <p>
-   <input type="checkbox" name="collapsArch[<? echo $number
-   ?>][animate]" <? if ($animate==1) echo
-   'checked'; ?> id="animate-<? echo $number ?>"></input> <label
-   for="animate"><? _e('Animate collapsing and expanding', 'collapsArch'); ?></label>
+   <input type="checkbox" name="collapsArch[<?php echo $number
+   ?>][animate]" <?php if ($animate==1) echo
+   'checked'; ?> id="animate-<?php echo $number ?>"></input> <label
+   for="animate"><?php _e('Animate collapsing and expanding', 'collapsArch'); ?></label>
    </p>
     <p>
-     <input type="checkbox" name="collapsArch[<? echo $number ?>][debug]"
-<? if ($debug==1)  echo 'checked'; ?> id="collapsArch-debug-<? echo
-$number ?>"></input> <label for="collapsArchDebug"><? _e('Show debugging information', 'collapsArch'); ?>
-(<? _e('shows up as a hidden pre right after the title', 'collapsArch'); ?>)</label>
+     <input type="checkbox" name="collapsArch[<?php echo $number ?>][debug]"
+<?php if ($debug==1)  echo 'checked'; ?> id="collapsArch-debug-<?php echo
+$number ?>"></input> <label for="collapsArchDebug"><?php _e('Show debugging information', 'collapsArch'); ?>
+(<?php _e('shows up as a hidden pre right after the title', 'collapsArch'); ?>)</label>
     </p>
-    <p><? _e('Mark posts with no title as', 'collapsArch'); ?>: 
-    <input type="text" name="collapsArch[<? echo $number
-    ?>][noTitle]" value="<? echo $noTitle ?>"  
-    id="collapsArch-noTitle-<? echo $number ?>"></input> 
+    <p><?php _e('Mark posts with no title as', 'collapsArch'); ?>: 
+    <input type="text" name="collapsArch[<?php echo $number
+    ?>][noTitle]" value="<?php echo $noTitle ?>"  
+    id="collapsArch-noTitle-<?php echo $number ?>"></input> 
     </p>
