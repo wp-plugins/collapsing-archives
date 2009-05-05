@@ -43,7 +43,7 @@ add_action('init', 'collapsArch_load_domain');
 if (!is_admin()) {
   add_action('wp_head', wp_enqueue_script('scriptaculous-effects'));
   add_action('wp_head', wp_enqueue_script('collapsFunctions',
-  "$url/wp-content/plugins/collapsing-archives/collapsFunctions.js", '', '1.2'));
+  "$url/wp-content/plugins/collapsing-archives/collapsFunctions.js", '', '1.4'));
   add_action( 'wp_head', array('collapsArch','get_head'));
 //  add_action( 'wp_footer', array('collapsArch','get_foot'));
 }
