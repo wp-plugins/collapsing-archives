@@ -69,7 +69,7 @@ cursor:pointer;
        font-size:1.2em;
        font-family:Monaco, 'Andale Mono', 'FreeMono', 'Courier new', 'Courier', monospace;
        margin:2px 5px 0px 0; 
-       line-height:.8em;
+       line-height:1.2em;
        padding:0;
        /* uncomment to put a box around +/-
        border:1px solid;

@@ -247,7 +247,7 @@ if( $allPosts ) {
         echo  "</span>";
         echo "<a href='".get_year_link($archPost->year). "'>$currentYear</a>$yearCount\n";
       } else {
-        echo "<a href='".get_year_link($archPost->year). "'>$currentYear</a>$yearCount\n";
+        echo "<a href='".get_year_link($archPost->year). "'>$currentYear$yearCount</a>\n";
         echo "</span>";
       }
       if( $showMonths=='yes' ) {
@@ -292,24 +292,24 @@ if( $allPosts ) {
 							&& $currentYear == date('Y')
 							&& $currentMonth == date('n') ) {
 										$monthRel = 'hide';
-										$monthTitle= 'click to collapse';
+										$monthTitle= __('click to collapse', 'collapsArch');
                     $postStyle = '';
 										$ding = $collapseSym;
 					} else {
 										$monthRel = 'show';
-                    $monthTitle= __('click to collapse', 'collapsArch');
+                    $monthTitle= __('click to expand', 'collapsArch');
 										$ding = $expandSym;
 					}
-					$the_link = "<span title='$monthTitle' " .
-					    "class='$monthCollapse $monthRel' $onclick>" .
-							"<span class='sym'>$ding</span>";
+					$the_span = "<span title='$monthTitle' " .
+					    "class='$monthCollapse $monthRel' $onclick>" ;
+          $the_ding="<span class='sym'>$ding</span>";
           if ($linkToArch=='yes') {
-            $the_link.= "</span>";
+            $the_link= "$the_span$the_ding</span>";
             $the_link .="<a href='".get_month_link($currentYear, $currentMonth).
-						    "' title='$title_text'>$text</a>";
+						    "' title='$title_text'>$text</a>$monthCount";
           } else {
-            $the_link .="<a href='".get_month_link($currentYear, $currentMonth).
-						    "' title='$title_text'>$text</a>";
+            $the_link ="$the_span$the_ding<a href='".get_month_link($currentYear, $currentMonth).
+						    "' >$text$monthCount</a>";
             $the_link.="</span>";
           }
 				} else {
@@ -323,7 +323,7 @@ if( $allPosts ) {
 					$the_link .="$text</a>\n";
 				}
 
-				echo "      <li class='$monthCollapse'>".$the_link.$monthCount;
+				echo "      <li class='$monthCollapse'>".$the_link;
 
 			}
 			if ($showMonths=='yes' && $expandMonths=='yes' ) {
