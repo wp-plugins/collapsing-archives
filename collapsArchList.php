@@ -1,6 +1,6 @@
 <?php
 /*
-Collapsing Archives version: 1.1.5
+Collapsing Archives version: 1.2.beta
 
 Copyright 2007 Robert Felty
 
@@ -29,17 +29,16 @@ This file is part of Collapsing Archives
 ?>
 
 <?php
-function list_archives($number) {
-  global $wpdb;
+function list_archives($args='') {
 global $wpdb, $month;
-$idnum= '%i%'==$number ? $idnum=1 : $idnum=$number;
-echo "<ul id='collapsArchList-$idnum'>\n";
+include('defaults.php');
+$options=wp_parse_args($args, $defaults);
+extract($options);
+echo "<ul class='collapsArchList'>\n";
 
 
 $post_attrs = "post_date != '0000-00-00 00:00:00' AND post_status = 'publish'";
 
-  $options=get_option('collapsArchOptions');
-  extract($options[$number]);
 
   if ($expand==1) {
     $expandSym='+';
@@ -114,7 +113,7 @@ $post_attrs = "post_date != '0000-00-00 00:00:00' AND post_status = 'publish'";
   }
 
   $isPage='';
-  if ($showPages=='no') {
+  if (!$showPages) {
     $isPage="AND $wpdb->posts.post_type='post'";
   }
 	if ($defaultExpand!='') {
@@ -122,7 +121,7 @@ $post_attrs = "post_date != '0000-00-00 00:00:00' AND post_status = 'publish'";
   } else {
 	  $autoExpand = array();
   }
-if( $showPages=='no' ) {
+if( !$showPages ) {
   $post_attrs .= " AND post_type = 'post'";
 }
 
@@ -138,7 +137,7 @@ $postquery= "SELECT $wpdb->terms.slug, $wpdb->posts.ID, $wpdb->posts.post_name, 
 		                          $wpdb->term_taxonomy.term_id 
   WHERE $post_attrs  $inExcludeYearQuery $inExcludeCatQuery 
   GROUP BY $wpdb->posts.ID 
-  ORDER BY $wpdb->posts.post_date $archSortOrder";
+  ORDER BY $wpdb->posts.post_date $sort";
 
 /*
     $wpdb->term_relationships.term_taxonomy_id = $wpdb->terms.term_id 
@@ -157,7 +156,7 @@ if ($debug==1) {
   echo "<pre style='display:none' >";
   printf ("MySQL server version: %s\n", mysql_get_server_info());
   echo "\ncollapsArch options:\n";
-  print_r($options[$number]);
+  print_r($options);
   echo "POST QUERY:\n $postquery\n";
   echo "\nPOST QUERY RESULTS\n";
   print_r($allPosts);
@@ -187,20 +186,20 @@ if( $allPosts ) {
   foreach( $allPosts as $archPost ) {
     $ding = $expandSym;
     $i++;
-    $yearRel = 'show';
-    $monthRel = 'show';
+    $yearRel = 'expand';
+    $monthRel = 'expand';
     $yearTitle= __('click to expand', 'collapsArch');
     $monthTitle= __('click to expand', 'collapsArch');
     $postStyle = "style='display:none'";
     $monthStyle = "style='display:none'";
-    /* rel = show means that it will be hidden, and clicking on the
-     * triangle will expand it. rel = hide means that is will be shown, and
-     * clicking on the triangle will collapse (hide) it 
+    /* rel = expand means that it will be hidden, and clicking on the
+     * triangle will expand it. rel = collapse means that is will be shown, and
+     * clicking on the triangle will collapse it 
      */
-    if( $expandCurrentYear=='yes'
+    if( $expandCurrentYear
         && $archPost->year == date('Y') ) {
       $ding = $collapseSym;
-      $yearRel = "hide";
+      $yearRel = 'collapse';
       $yearTitle= __('click to collapse', 'collapsArch');
       $monthStyle = '';
     }
@@ -214,16 +213,17 @@ if( $allPosts ) {
        */
       $currentMonth = 0;
       $newYear = true;
-      if( $showYearCount=='yes') {
-         $yearCount = ' (' . $yearCounts{"$currentYear"} . ")\n";
+      if ($showYearCount) {
+        $yearCount = ' <span class="yearCount">(' .
+            $yearCounts{"$currentYear"} . ")</span>\n";
       }
       else {
         $yearCount = '';
       }
       
       if($i>=2 && $allPosts[$i-2]->year != $archPost->year ) {
-				if( $showMonths=='yes' ) {
-          if( $expandMonths=='yes' ) {
+				if( $expandYears ) {
+          if( $expandMonths ) {
             echo "        </ul>\n      </li> <!-- close expanded month --> \n";
           } else {
             echo "      </li> <!-- close month --> \n";
@@ -234,7 +234,7 @@ if( $allPosts ) {
         }
       }
       $home = get_settings('home');
-      if( $showMonths=='yes' ) {
+      if( $expandYears ) {
 				echo "  <li class='collapsArch'><span title='$yearTitle' " .
 				    "class='collapsArch $yearRel' " .
             "onclick='expandCollapse(event" .
@@ -243,27 +243,27 @@ if( $allPosts ) {
 			} else {
 			  echo "  <li class='collapsArchPost'>\n";
 			}
-      if ($linkToArch=='yes') {
+      if ($linkToArch) {
         echo  "</span>";
-        echo "<a href='".get_year_link($archPost->year). "'>$currentYear</a>$yearCount\n";
+        echo "<a href='".get_year_link($archPost->year). "'>$currentYear $yearCount</a>\n";
       } else {
         echo "<a href='".get_year_link($archPost->year). "'>$currentYear$yearCount</a>\n";
         echo "</span>";
       }
-      if( $showMonths=='yes' ) {
-        echo "    <ul $monthStyle id='collapsArchList-$currentYear-$idnum'>\n";
+      if( $expandYears ) {
+        echo "    <ul $monthStyle id='collapsArchList-$currentYear'>\n";
       }
       $newYear = false;
     }
 
-    if($currentMonth != $archPost->month) {
+    if ($currentMonth != $archPost->month) {
       $currentMonth = $archPost->month;
       $newMonth = true;
       if($newYear == false) { #close off last month
         $newYear=true; 
       } else {
-				if( $showMonths=='yes' ) {
-          if( $expandMonths=='yes' ) {
+				if ($expandYears) {
+          if ($expandMonths) {
             echo "        </ul>\n      </li> <!-- close expanded month --> \n";
           } else {
             echo "      </li> <!-- close month --> \n";
@@ -271,46 +271,48 @@ if( $allPosts ) {
         }
       }
 
-      if( $showMonthCount=='yes') {
-         $monthCount = ' (' . $monthCounts{"$currentYear$currentMonth"} . ")\n";
+      if ($showMonthCount) {
+        $monthCount = ' <span class="monthCount">(' .
+            $monthCounts{"$currentYear$currentMonth"} . ")</span>\n";
       } else {
         $monthCount = '';
       }
-      if( $showMonths=='yes' ) {
+      if( $expandYears ) {
 				$text = sprintf('%s', $month[zeroise($currentMonth,2)]);
 
 				$text = wptexturize($text);
 				$title_text = wp_specialchars($text,1);
 
-				if ($expandMonths=='yes' ) {
+				if ($expandMonths ) {
 					$link = 'javascript:;';
 					$onclick = "onclick='expandCollapse(event" . 
               ", \"$expandSymJS\", \"$collapseSymJS\", $animate, " .
 					    "\"collapsArch\"); return false'";
 					$monthCollapse = 'collapsArch';
-					if( $expandCurrentMonth=='yes'
+					if( $expandCurrentMonth
 							&& $currentYear == date('Y')
 							&& $currentMonth == date('n') ) {
-										$monthRel = 'hide';
+										$monthRel = 'collapse';
 										$monthTitle= __('click to collapse', 'collapsArch');
                     $postStyle = '';
 										$ding = $collapseSym;
 					} else {
-										$monthRel = 'show';
+										$monthRel = 'expand';
                     $monthTitle= __('click to expand', 'collapsArch');
 										$ding = $expandSym;
 					}
 					$the_span = "<span title='$monthTitle' " .
 					    "class='$monthCollapse $monthRel' $onclick>" ;
           $the_ding="<span class='sym'>$ding</span>";
-          if ($linkToArch=='yes') {
+          if ($linkToArch) {
             $the_link= "$the_span$the_ding</span>";
             $the_link .="<a href='".get_month_link($currentYear, $currentMonth).
-						    "' title='$title_text'>$text</a>$monthCount";
+						    "' title='$title_text'>";
+            $the_link .="$text $monthCount</a>\n";
           } else {
             $the_link ="$the_span$the_ding<a href='".get_month_link($currentYear, $currentMonth).
 						    "' >$text$monthCount</a>";
-            $the_link.="</span>";
+            $the_link.="</span>".$monthCount;
           }
 				} else {
 					$link = get_month_link( $currentYear, $currentMonth );
@@ -320,28 +322,28 @@ if( $allPosts ) {
 					$monthCollapse = 'collapsArchMonth';
 					$the_link ="<a href='".get_month_link($currentYear, $currentMonth).
 					    "' title='$title_text'>";
-					$the_link .="$text</a>\n";
+					$the_link .="$text $monthCount</a>\n";
 				}
 
 				echo "      <li class='$monthCollapse'>".$the_link;
 
 			}
-			if ($showMonths=='yes' && $expandMonths=='yes' ) {
+			if ($expandYears && $expandMonths=='yes' ) {
 				echo "        <ul $postStyle id=\"collapsArchList-";
-				echo "$currentYear-$currentMonth-$idnum\">\n";
+				echo "$currentYear-$currentMonth\">\n";
 				$text = '';
       }
 		} else {
 
-			if( $showMonths=='yes' && $expandMonths=='yes' ) {
+			if( $expandYears && $expandMonths=='yes' ) {
 				$text = '';
 			}
 		}
-		if( $showPostNumber=='yes' ) {
+		if( $showPostNumber ) {
 			$text .= '#'.$archPost->ID;
 		}
 
-		if ($showPostTitle=='yes'  && $expandMonths=='yes') {
+		if ($showPostTitle  && $expandMonths=='yes') {
 
 			$title_text = htmlspecialchars(strip_tags(__($archPost->post_title)), ENT_QUOTES);
 			if(strlen(trim($title_text))==0) {
@@ -354,12 +356,12 @@ if( $allPosts ) {
 			}
 
 			$text .= ( $tmp_text == '' ? $title_text : $tmp_text );
-      if ($showPostDate=='yes' ) {
+      if ($showPostDate ) {
         $theDate = mysql2date($postDateFormat, $archPost->post_date );
         $text .= ( $text == '' ? $theDate : " $theDate" );
       }
 
-      if ($showCommentCount=='yes' ) {
+      if ($showCommentCount ) {
         $commcount = ' ('.get_comments_number($archPost->ID).')';
       }
 
@@ -368,8 +370,8 @@ if( $allPosts ) {
           "title='$title_text'>$text</a>$commcount</li>\n";
     }
 	}
-  if ($showMonths=='yes' ) {
-    if ($expandMonths=='yes') {
+  if ($expandYears ) {
+    if ($expandMonths) {
       echo "        </ul>\n";
     }
     echo "  </li> <!-- close month -->
@@ -383,7 +385,7 @@ if( $allPosts ) {
 		echo "<script type=\"text/javascript\">\n";
 		echo "// <![CDATA[\n";
 		echo '/* These variables are part of the Collapsing Archives Plugin
-		       * version: 1.1.5
+		       * version: 1.2.beta
 					 * revision: $Id: collapsArch.php 103059 2009-03-17 20:12:01Z robfelty $
 					 * Copyright 2008 Robert Felty (robfelty.com)
 					 */' ."\n";
@@ -397,7 +399,7 @@ if( $allPosts ) {
     echo "var expandSym=\"$expandSym\";";
     echo "var collapseSym=\"$collapseSym\";";
     echo"
-    addLoadEvent(function() {
+    collapsAddLoadEvent(function() {
       autoExpandCollapse('collapsArch');
     });
     ";

@@ -18,7 +18,7 @@ if ( -1 == $number ) {
   $postTitleLength='';
   $showPosts='yes';
   $linkToArch='yes';
-  $showPages='no';
+  $showArchives='no';
   $expandCurrentYear='yes';
   $showYearCount='yes';
   $expandCurrentMonth='yes';
@@ -44,7 +44,7 @@ if ( -1 == $number ) {
   $archSortOrder = $options[$number]['archSortOrder'];
   $defaultExpand = $options[$number]['defaultExpand'];
   $showPosts = $options[$number]['showPosts'];
-  $showPages = $options[$number]['showPages'];
+  $showArchives = $options[$number]['showArchives'];
   $linkToArch = $options[$number]['linkToArch'];
   $showYearCount = $options[$number]['showYearCount'];
   $expandCurrentYear = $options[$number]['expandCurrentYear'];

@@ -1,9 +1,9 @@
 === Collapsing Archives ===
 Contributors: robfelty
 Donate link: http://blog.robfelty.com/wordpress-plugins
-Tags: archives, sidebar, widget, navigation, menu, posts
-Requires at least: 2.6
-Tested up to: 2.7.1
+Tags: archives, sidebar, widget, navigation, menu, posts, collapsing, collapsible
+Requires at least: 2.8
+Tested up to: 2.8
 Stable tag: 1.1.5
 
 This plugin uses Javascript to dynamically expand or collaps the set of
@@ -11,19 +11,26 @@ months for each year and posts for each month in the archive listing.
 
 == Description ==
 
+IMPORTANT! - Version 1.2.beta is not compatible with Wordpress 2.7 and lower.
+Please continue to use an earlier version
+
 This is a relatively simple plugin that uses Javascript to
-make the Archive links in the sidebar collapsable by year, and/or month.
+make the Archive links in the sidebar collapsable by year and/or month.
+
 
 = What's new? =
+* 1.2.beta (2009.06.07)
+    * Changed hide and show classed to collapse and expand to avoid CSS class
+      conflicts
+    * Fixed errors with options page
+    * Now includes several default styling templates
 
-* 1.1.5 (2009/05/05)
-    * Fixed options page problems (<? to <?php
-    * Fixed problem with mdash on page load (javascript update)
-    * When using option to have clicking on the year/month expand and collapse,
-      now includes a link, so it degrades nicely when javascript is turned off
-* 1.1.4 (2009/04/22) 
-    * Fixed html validation error when using manual version
-    * Internationalization and Spanish localization (thanks to Karin Sequen)
+* 1.2.alpha (2009.05.02)
+* Widget is compatible with wordpress 2.8 (not backwards compatible with 2.7
+  and previous). If you are using wordpress 2.7.1 or previous, please use
+  collapsing archives version 1.1.4 or earlier
+* Can now add parameters to the collapsLink function if you choose not to use
+  the widget (see options section below)
  
 See the CHANGELOG for more information
 
@@ -32,7 +39,7 @@ See the CHANGELOG for more information
 IMPORTANT!
 Please deactivate before upgrading, then re-activate the plugin. 
 
-MANUAL INSTALLATION
+= MANUAL INSTALLATION =
 
 Unpack the contents to wp-content/plugins/ so that the files are in a
 collapsing-archives directory. Now enable the plugin. To use the plugin,
@@ -41,31 +48,25 @@ change the following here appropriate (most likely sidebar.php):
 Change From:
 
     <ul>
-     `<?php wp_get_archives(your_options_here); ?>`
+     `<?php wp_get_archives(); ?>`
     </ul>
 
 To something of the following:
 `
     <?php
      if( function_exists('collapsArch') ) {
-      collapsArch('%i%');
+      collapsArch();
      } else {
       echo "<ul>\n";
-      wp_get_archives(your_options_here);
+      wp_get_archives();
       echo "</ul>\n";
      }
     ?>
 `
+You can specify options for collapsArch. See options section.
 
-This way, if you ever disable the plugin, your blog doesn't die.
 
-**Note**: `wp_get_archives` can be substituted for
-`wp_list_archives` depending on the design of the theme, so
-be sure to edit appropriately. Also, substitute
-`your_options_here` with what the appropriate options are
-for your theme.
-
-WIDGET INSTALLATION
+= WIDGET INSTALLATION =
 
 For those who have widget capabilities, (default in Wordpress 2.3+), installation is easier. 
 
@@ -112,23 +113,108 @@ I use this plugin in my blog at http://blog.robfelty.com
 
 == OPTIONS AND CONFIGURATIONS ==
 
-Options for Collapsing Archives are found under Options -> Collapsing
-Archives. So far, there are the following options:
+`$defaults=array(
+  'noTitle' => '',
+  'inExcludeCat' => 'exclude',
+  'inExcludeCats' => '',
+  'inExcludeYear' => 'exclude',
+  'inExcludeYears' => '',
+  'sort' => 'DESC',
+  'showPages' => false, 
+  'linkToArch' => true,
+  'showYearCount' => true,
+  'expandCurrentYear' => true,
+  'expandMonths' => true,
+  'expandYears' => true,
+  'expandCurrentMonth' => true,
+  'showMonthCount' => true,
+  'showPostTitle' => true,
+  'expand' => '0',
+  'showPostDate' => false,
+  'postDateFormat' => 'm/d',
+  'animate' => 0,
+  'postTitleLength' => '',
+  'debug' => '0',
+  );
+`
 
-  * Use chronological or reverse chronological ordering
-  * Leave Current Year Expanded by Default
-  * Display number of posts in a year
-  * Show Month Link
-    * Display number of posts in a month
-    * Enable month links to expand to show posts
-      * Display pages and posts, or just posts
-    * Leave Current Month Expanded by Defaul
-  * Posts can be displayed with any of the following:
-    * Number (ID)
-    * Title
-    * Comment Count
-  * Exclude posts belonging to particular categories (works for
-    single-category posts only)
+* noTitle
+    * If your posts don't have title, specify a string to show in place of the
+      title
+* inExcludeCat
+    * Whether to include or exclude certain categories 
+        * 'exclude' (default) 
+        * 'include'
+* inExcludeCats
+    * The categories which should be included or excluded
+* inExcludeYear
+    * Whether to include or exclude certain years 
+        * 'exclude' (default) 
+        * 'include'
+* inExcludeYears
+    * The years which should be included or excluded
+* showPages
+    * Whether or not to include pages as well as posts. Default if false
+* showYearCount
+    *  When true, the number of posts in the year will be shown in parentheses 
+* showMonthCount
+    *  When true, the number of posts in the month will be shown in parentheses 
+* linkToArch
+    * True, clicking on a the month or year will link to the archive (default)
+    * False, clicking on a month or year expands and collapses 
+* sort
+    * Whether posts should be sorted in chronological  or reverse
+      chronological order. Possible values:
+        * 'DESC' reverse chronological order (default)
+        * 'ASC' chronological order
+* expand
+    * The symbols to be used to mark expanding and collapsing. Possible values:
+        * '0' Triangles (default)
+        * '1' + -
+        * '2' [+] [-]
+        * '3' images (you can upload your own if you wish)
+        * '4' custom symbols
+* customExpand
+    * If you have selected '4' for the expand option, this character will be
+      used to mark expandable link categories
+* customCollapse
+    * If you have selected '4' for the expand option, this character will be
+      used to mark collapsible link categories
+ 
+* expandYears
+    * True: Years collapse and expand to show months (default)
+    * False: Only links to yearly archives are shown
+* expandMonths
+    * True: Months collapse and expand to show posts (default)
+    * False: Only links to yearly and monthly archives are shown
+* expandCurrentMonth
+    * When true, the current month will be expanded by default
+* expandCurrentYear
+    * When true, the current year will be expanded by default
+* showPostTitle
+    * True: The title of each post is shown (default)
+* showPostDate
+    * True: Show the date of each post 
+* postDateFormat
+    * The format in which the date should be shown (default: 'm/d')
+* postTitleLength
+    * Truncate post titles to this number of characters (default: 0 = don't
+      truncate)
+* animate
+    * When set to true, collapsing and expanding will be animated
+* debug
+    * When set to true, extra debugging information will be displayed in the
+      underlying code of your page (but not visible from the browser). Use
+      this option if you are having problems
+
+= Examples =
+
+`collapsArch('animate=true&sort=ASC&expand=3,inExcludeCats=general,uncategorized')`
+This will produce a list with:
+* animation on
+* shown in chronological order
+* using images to mark collapsing and expanding
+* exclude posts from  the categories general and uncategorized
 
 == CAVEAT ==
 
@@ -138,11 +224,13 @@ archive links as usual.
 
 == HISTORY ==
 
-* 1.1.5 (2009/05/05)
-    * Fixed options page problems (<? to <?php
-    * Fixed problem with mdash on page load (javascript update)
-    * When using option to have clicking on the year/month expand and collapse,
-      now includes a link, so it degrades nicely when javascript is turned off
+* 1.2.beta (2009.06.07)
+    * Changed hide and show classed to collapse and expand to avoid CSS class
+      conflicts
+
+* 1.2.alpha (2009.05.02)
+    * Widgets work with 2.8 API
+    * Can specify options directly in manual usage
 
 * 1.1.4 (2009/04/22) 
     * Fixed html validation error when using manual version
