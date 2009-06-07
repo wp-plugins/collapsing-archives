@@ -1,8 +1,8 @@
 <?php
 /*
 Plugin Name: Collapsing Archives
-Plugin URI: http://blog.robfelty.com/plugins
-Description: Allows users to expand and collapse archive links like Blogger 
+Plugin URI: http://blog.robfelty.com/plugins/collapsing-archives
+Description: Allows users to expand and collapse archive links like Blogger.  VERSION 1.2.beta IS NOT COMPATIBLE WITH WP 2.7 OR LESS  <a href='options-general.php?page=collapsArch.php'>Options and Settings</a> | <a href='http://wordpress.org/extend/plugins/collapsing-archives/other_notes'>Manual</a> | <a href='http://wordpress.org/extend/plugins/collapsing-archives/faq'>FAQ</a> | <a href='http://forum.robfelty.com/forum/collapsing-archives'>User forum</a> 
 Author: Robert Felty
 Version: 1.2.beta
 Author URI: http://robfelty.com
@@ -45,7 +45,6 @@ if (!is_admin()) {
   add_action('wp_head', wp_enqueue_script('collapsFunctions',
   "$url/wp-content/plugins/collapsing-archives/collapsFunctions.js", '', '1.4'));
   add_action( 'wp_head', array('collapsArch','get_head'));
-//  add_action( 'wp_footer', array('collapsArch','get_foot'));
 }
 add_action('admin_menu', array('collapsArch','setup'));
 add_action('activate_collapsing-archives/collapsArch.php', array('collapsArch','init'));
@@ -86,31 +85,6 @@ class collapsArch {
     $style
     </style>\n";
 	}
-  function get_foot() {
-    $url = get_settings('siteurl');
-		echo "<script type=\"text/javascript\">\n";
-		echo "// <![CDATA[\n";
-		echo '/* These variables are part of the Collapsing Archives Plugin
-		       * version: 1.2.beta
-					 * revision: $Id$
-					 * Copyright 2008 Robert Felty (robfelty.com)
-					 */' ."\n";
-
-    $expandSym="<img src='". $url .
-         "/wp-content/plugins/collapsing-archives/" . 
-         "img/expand.gif' alt='expand' />";
-    $collapseSym="<img src='". $url .
-         "/wp-content/plugins/collapsing-archives/" . 
-         "img/collapse.gif' alt='collapse' />";
-    echo "var expandSym=\"$expandSym\";";
-    echo "var collapseSym=\"$collapseSym\";";
-    echo"
-    addLoadEvent(function() {
-      autoExpandCollapse('collapsArch');
-    });
-    ";
-		echo ";\n// ]]>\n</script>\n";
-  }
 }
 
 function collapsArch($args='') {

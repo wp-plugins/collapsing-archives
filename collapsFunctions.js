@@ -34,7 +34,7 @@ function readCookie(name) {
 function eraseCookie(name) {
   createCookie(name,"",-1);
 }
-function addLoadEvent(func) {
+function collapsAddLoadEvent(func) {
   var oldonload = window.onload;
   if (typeof window.onload != 'function') {
     window.onload = func;
@@ -49,10 +49,10 @@ function addLoadEvent(func) {
 }
 function autoExpandCollapse(collapsClass) {
   var cookies = document.cookie.split(';');
-  var cookiePattern = new RegExp(collapsClass+'(-[0-9]+|List-[0-9]+-[0-9]+)');
+  var cookiePattern = new RegExp(collapsClass+'(-[0-9]+|List-[0-9]+-[0-9]+|List-[0-9]+)');
   var classPattern = new RegExp('^' + collapsClass);
-  var collapse = collapsClass + ' ' + 'collapse'
-  var expand = collapsClass + ' ' + 'expand'
+  var hide = collapsClass + ' ' + 'collapse'
+  var show = collapsClass + ' ' + 'expand'
   for (var cookieIndex=0; cookieIndex<cookies.length; cookieIndex++) {
     var cookieparts= cookies[cookieIndex].split('=');
     var cookiename=cookieparts[0].trim();
@@ -65,8 +65,8 @@ function autoExpandCollapse(collapsClass) {
           if (thisli.childNodes[childI].nodeName.toLowerCase() == 'span') {
             theSpan=thisli.childNodes[childI];
             if (theSpan.className.match(classPattern)) {
-              if ((theSpan.className == expand && cookievalue ==1) ||
-                  (theSpan.className == collapse && cookievalue ==0)) {
+              if ((theSpan.className == show && cookievalue ==1) ||
+                  (theSpan.className == hide && cookievalue ==0)) {
                 var theOnclick=theSpan.onclick+"";
                 var matches=theOnclick.match(/.*\(event, ?"([^"]*)", ?"([^"]*)".*\)/);
                 var expand=matches[1].replace(/\\u25BA/, '\u25BA');
@@ -101,10 +101,14 @@ function expandCollapse( e, expand,collapse, animate, collapsClass ) {
     }
   }
 
-  if (src.nodeName.toLowerCase() == 'img') {
-    src=src.parentNode;
-  }
   srcList = src.parentNode;
+  if (src.nodeName.toLowerCase() == 'img' ||
+      src.parentNode.nodeName.toLowerCase() == 'h2') {
+    srcList = src.parentNode.parentNode;
+  } else if (src.parentNode.parentNode.nodeName.toLowerCase() == 'h2') {
+    src=src.parentNode;
+    srcList = src.parentNode.parentNode;
+  }
   if (srcList.nodeName.toLowerCase() == 'span') {
     srcList= srcList.parentNode;
     src= src.parentNode;
@@ -118,9 +122,13 @@ function expandCollapse( e, expand,collapse, animate, collapsClass ) {
   }
   var hide = collapsClass + ' ' + 'collapse'
   var show = collapsClass + ' ' + 'expand'
+  var theSpan = src.childNodes[0];
+  var theId= childList.getAttribute('id');
+  if (theSpan.className!='sym') {
+    theSpan = theSpan.childNodes[0];
+    theId = childList.childNodes[0].getAttribute('id');
+  }
   if( src.getAttribute( 'class' ) == hide ) {
-    var theSpan = src.childNodes[0];
-    var theId= childList.getAttribute('id');
     createCookie(theId,0,7);
     src.setAttribute('class',show);
     src.setAttribute('title','click to expand');
@@ -131,8 +139,6 @@ function expandCollapse( e, expand,collapse, animate, collapsClass ) {
       childList.style.display = 'none';
     }
   } else {
-    var theSpan = src.childNodes[0];
-    var theId= childList.getAttribute('id');
     createCookie(theId,1,7);
     src.setAttribute('class',hide);
     src.setAttribute('title','click to collapse');

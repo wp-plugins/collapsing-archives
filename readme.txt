@@ -11,8 +11,12 @@ months for each year and posts for each month in the archive listing.
 
 == Description ==
 
+IMPORTANT! - Version 1.2.beta is not compatible with Wordpress 2.7 and lower.
+Please continue to use an earlier version
+
 This is a relatively simple plugin that uses Javascript to
-make the Archive links in the sidebar collapsable by year, and/or month.
+make the Archive links in the sidebar collapsable by year and/or month.
+
 
 = What's new? =
 * 1.2.beta (2009.06.07)

@@ -1,8 +1,10 @@
 Collapsing Archives Changelog
 
-* 1.2.beta (2009.06.07)
-    * Changed hide and show classed to collapse and expand to avoid CSS class
+* 1.2.beta (2009.06.08)
+    * Changed hide and show classes to collapse and expand to avoid CSS class
       conflicts
+    * Fixed errors with options page
+    * Now includes several default styling templates
 
 * 1.2.alpha (2009.05.02)
     * Widgets work with 2.8 API
