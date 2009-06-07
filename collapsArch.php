@@ -4,7 +4,7 @@ Plugin Name: Collapsing Archives
 Plugin URI: http://blog.robfelty.com/plugins
 Description: Allows users to expand and collapse archive links like Blogger 
 Author: Robert Felty
-Version: 1.2.alpha
+Version: 1.2.beta
 Author URI: http://robfelty.com
 
 Copyright 2007-2009 Robert Felty
@@ -53,37 +53,19 @@ add_action('activate_collapsing-archives/collapsArch.php', array('collapsArch','
 class collapsArch {
 
 	function init() {
-    $style="span.collapsArch {border:0;
-padding:0; 
-margin:0; 
-cursor:pointer;
-}
-#sidebar li.collapsArch:before {content:'';} 
-#sidebar li.collapsArch {list-style-type:none}
-#sidebar li.collapsArchPost {
-     text-indent:-1em;
-      list-style-type:none;
-     margin:0 0 0 1em;}
-#sidebar li.collapsArchPost:before {content: '\\\\00BB \\\\00A0' !important;} 
-#sidebar li.collapsArch .sym {
-       font-size:1.2em;
-       font-family:Monaco, 'Andale Mono', 'FreeMono', 'Courier new', 'Courier', monospace;
-       margin:2px 5px 0px 0; 
-       line-height:.8em;
-       padding:0;
-       /* uncomment to put a box around +/-
-       border:1px solid;
-       height:.9em;
-       display:inline-block;
-       vertical-align:baseline;
-       */
-      }";
+    include('collapsArchStyles.php');
+    $defaultStyles=compact('selected','default','block','noArrows','custom');
     if( function_exists('add_option') ) {
       update_option( 'collapsArchOrigStyle', $style);
+      update_option( 'collapsArchDefaultStyles', $defaultStyles);
     }
     if (!get_option('collapsArchStyle')) {
 			add_option( 'collapsArchStyle', $style);
 		}
+    if (!get_option('collapsPageSidebarId')) {
+      add_option( 'collapsPageSidebarId', 'sidebar');
+    }
+
 	}
 
 	function setup() {
@@ -109,7 +91,7 @@ cursor:pointer;
 		echo "<script type=\"text/javascript\">\n";
 		echo "// <![CDATA[\n";
 		echo '/* These variables are part of the Collapsing Archives Plugin
-		       * version: 1.2.alpha
+		       * version: 1.2.beta
 					 * revision: $Id$
 					 * Copyright 2008 Robert Felty (robfelty.com)
 					 */' ."\n";

@@ -1,6 +1,6 @@
 <?php
 /*
-Collapsing Archives version: 1.2.alpha
+Collapsing Archives version: 1.2.beta
 Copyright 2007 Robert Felty
 
 This work is largely based on the Fancy Archives plugin by Andrew Rader
@@ -45,58 +45,105 @@ if( isset($_POST['resetOptions']) ) {
   }
 } elseif (isset($_POST['infoUpdate'])) {
   $style=$_POST['collapsArchStyle'];
+  $defaultStyles=get_option('collapsArchDefaultStyles');
+  $selectedStyle=$_POST['collapsArchSelectedStyle'];
+  $defaultStyles['selected']=$selectedStyle;
+  $defaultStyles['custom']=$_POST['collapsArchStyle'];
+
   update_option('collapsArchStyle', $style);
+  update_option('collapsArchSidebarId', $_POST['collapsArchSidebarId']);
+  update_option('collapsArchDefaultStyles', $defaultStyles);
+
   if ($widgetOn==0) {
     include('updateOptions.php');
   }
 }
-/*
-echo "<pre>\n";
-print_r($options);
-echo "</pre>\n";
-*/
 include('processOptions.php');
 ?>
 <div class=wrap>
  <form method="post">
   <h2><? _e('Collapsing Archives Options', 'collapsArch'); ?></h2>
   <fieldset name="Collapsing Archives Options">
-   <legend><?php _e('Display Options', 'collapsArch'); ?>:</legend>
-   <ul style="list-style-type: none;">
-   <?php
-   if ($widgetOn==1) {
-     echo "
-    <div style='width:60em; background:#FFF; color:#444;border: 1px solid #444;padding:0 1em'><p>" . __('If you wish to use the collapsing categories plugin as a widget, you should set the options in the widget page (except for custom styling, which is set here). If you would like to use it manually (that is, you modify your theme), then click below to delete the current widget options.', 'collapsArch') . "</p>
-    <form method='post'>
     <p>
-       <input type='hidden' name='reset' value='true' />
-       <input type='submit' name='resetOptions' value='".__('reset options', 'collapsArch')."' />
-       </p>
-    </form>
-    </div>
-    ";
-    } else {
-     echo '<p style="text-align:left;"><label for="collapsArch-title-'.$number.'">' . __('Title', 'collapsArch') . ': <input class="widefat" style="width: 200px;" id="collapsArch-title-'.$number.'" name="collapsArch['.$number.'][title]" type="text" value="'.$title.'" /></label></p>';
-     include('options.txt'); 
-   }
-   ?>
-    <p>
-  <input type='hidden' id='collapsArchOrigStyle' value="<?php echo
-stripslashes(get_option('collapsArchOrigStyle')) ?>" />
-<label for="collapsArchStyle"><? _e('Style info', 'collapsArch'); ?>:</label>
-   <input type='button' value='<? _e('restore original style', 'collapsArch'); ?>' onclick='restoreStyle();' /><br />
-   <textarea cols='78' rows='10' id="collapsArchStyle" name="collapsArchStyle">
-    <?php echo stripslashes(get_option('collapsArchStyle')) ?>
-   </textarea>
+ <?php _e('Id of the sidebar where collapsing pages appears:', 'collapsing-pages'); ?>
+   <input id='collapsArchSidebarId' name='collapsArchSidebarId' type='text' size='20' value="<?php echo
+   get_option('collapsArchSidebarId')?>" onchange='changeStyle("collapsArchStylePreview","collapsArchStyle", "collapsArchDefaultStyles", "collapsArchSelectedStyle", false);' />
+   <table>
+     <tr>
+       <td>
+  <input type='hidden' id='collapsArchCurrentStyle' value="<?php echo
+stripslashes(get_option('collapsArchStyle')) ?>" />
+  <input type='hidden' id='collapsArchSelectedStyle'
+  name='collapsArchSelectedStyle' />
+<label for="collapsArchStyle"><?php _e('Select style:', 'collapsing-pages'); ?></label>
+       </td>
+       <td>
+       <select name='collapsArchDefaultStyles' id='collapsArchDefaultStyles'
+         onchange='changeStyle("collapsArchStylePreview","collapsArchStyle", "collapsArchDefaultStyles", "collapsArchSelectedStyle", false);' />
+       <?php
+    $url = get_settings('siteurl') . '/wp-content/plugins/collapsing-archives';
+       $styleOptions=get_option('collapsArchDefaultStyles');
+       //print_r($styleOptions);
+       $selected=$styleOptions['selected'];
+       foreach ($styleOptions as $key=>$value) {
+         if ($key!='selected') {
+           if ($key==$selected) {
+             $select=' selected=selected ';
+           } else {
+             $select=' ';
+           }
+           echo '<option' .  $select . 'value="'.
+               stripslashes($value) . '" >'.$key . '</option>';
+         }
+       }
+       ?>
+       </select>
+       </td>
+       <td><?php _e('Preview', 'collapsing-pages'); ?><br />
+       <img style='border:1px solid' id='collapsArchStylePreview' alt='preview'/>
+       </td>
+    </tr>
+    </table>
+    <?php _e('You may also customize your style below if you wish', 'collapsing-pages'); ?><br />
+   <input type='button' value='<?php _e("restore current style", "collapsing-pages"); ?>'
+onclick='restoreStyle();' /><br />
+   <textarea onchange='changeStyle("collapsArchStylePreview","collapsArchStyle", "collapsArchDefaultStyles", "collapsArchSelectedStyle", true);' cols='78' rows='10' id="collapsArchStyle"name="collapsArchStyle"><?php echo stripslashes(get_option('collapsArchStyle'))?></textarea>
     </p>
 <script type='text/javascript'>
-function restoreStyle() {
-  var defaultStyle = document.getElementById('collapsArchOrigStyle').value;
-  var catStyle = document.getElementById('collapsArchStyle');
-  catStyle.value=defaultStyle;
+
+function changeStyle(preview,template,select,selected,custom) {
+  var preview = document.getElementById(preview);
+  var pageStyles = document.getElementById(select);
+  var selectedStyle;
+  var hiddenStyle=document.getElementById(selected);
+  var pageStyle = document.getElementById(template);
+  if (custom==true) {
+    selectedStyle=pageStyles.options[pageStyles.options.length-1];
+    selectedStyle.value=pageStyle.value;
+    selectedStyle.selected=true;
+  } else {
+    for(i=0; i<pageStyles.options.length; i++) {
+      if (pageStyles.options[i].selected == true) {
+        selectedStyle=pageStyles.options[i];
+      }
+    }
+  }
+  hiddenStyle.value=selectedStyle.innerHTML
+  preview.src='<?php echo $url ?>/img/'+selectedStyle.innerHTML+'.png';
+  var sidebarId=document.getElementById('collapsArchSidebarId').value;
+
+  var theStyle = selectedStyle.value.replace(/#[a-zA-Z]+\s/g, '#'+sidebarId + ' ');
+  pageStyle.value=theStyle
 }
+
+function restoreStyle() {
+  var defaultStyle = document.getElementById('collapsArchCurrentStyle').value;
+  var pageStyle = document.getElementById('collapsArchStyle');
+  pageStyle.value=defaultStyle;
+}
+  changeStyle('collapsArchStylePreview','collapsArchStyle', 'collapsArchDefaultStyles', 'collapsArchSelectedStyle', false);
+
 </script>
-   </ul>
   </fieldset>
   <div class="submit">
    <input type="submit" name="infoUpdate" value="<?php _e('Update options', 'collapsArch'); ?> &raquo;" />

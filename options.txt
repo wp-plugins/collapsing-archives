@@ -1,8 +1,8 @@
     <p>
-     <input type="checkbox" name="<?php echo $this->get_field_name('showPostCount'); ?>" <? if ($showPostCount=='yes')  echo 'checked'; ?> id="<?php echo $this->get_field_id('collapsArch'); ?>"></input> <label for="collapsArchShowPostCount"><? _e('Show Post Count', 'collapsArch'); ?> </label>
-     <input type="checkbox" name="<?php echo $this->get_field_name('showPages'); ?>" <? if ($showPages=='yes')  echo 'checked'; ?>
+     <input type="checkbox" name="<?php echo $this->get_field_name('showPostCount'); ?>" <?php if ($showPostCount=='yes')  echo 'checked'; ?> id="<?php echo $this->get_field_id('collapsArch'); ?>"></input> <label for="collapsArchShowPostCount"><?php _e('Show Post Count', 'collapsArch'); ?> </label>
+     <input type="checkbox" name="<?php echo $this->get_field_name('showPages'); ?>" <?php if ($showPages=='yes')  echo 'checked'; ?>
      id="<?php echo $this->get_field_id('showPages'); ?>"></input> <label
-     for="collapsArchShowPages"><? _e('Show Pages as well as posts', 'collapsArch'); ?> </label>
+     for="collapsArchShowPages"><?php _e('Show Pages as well as posts', 'collapsArch'); ?> </label>
     </p>
      <p><?php _e('Display archives in', 'collapsArch'); ?> 
      <select name="<?php echo $this->get_field_name('sort'); ?>">

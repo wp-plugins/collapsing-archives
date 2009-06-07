@@ -1,6 +1,6 @@
 <?php
 /*
-Collapsing Archives version: 1.2.alpha
+Collapsing Archives version: 1.2.beta
 
 Copyright 2007 Robert Felty
 
@@ -187,8 +187,8 @@ if( $allPosts ) {
   foreach( $allPosts as $archPost ) {
     $ding = $expandSym;
     $i++;
-    $yearRel = 'show';
-    $monthRel = 'show';
+    $yearRel = 'expand';
+    $monthRel = 'expand';
     $yearTitle= __('click to expand', 'collapsArch');
     $monthTitle= __('click to expand', 'collapsArch');
     $postStyle = "style='display:none'";
@@ -291,12 +291,12 @@ if( $allPosts ) {
 					if( $expandCurrentMonth
 							&& $currentYear == date('Y')
 							&& $currentMonth == date('n') ) {
-										$monthRel = 'hide';
+										$monthRel = 'collapse';
 										$monthTitle= 'click to collapse';
                     $postStyle = '';
 										$ding = $collapseSym;
 					} else {
-										$monthRel = 'show';
+										$monthRel = 'expand';
                     $monthTitle= __('click to collapse', 'collapsArch');
 										$ding = $expandSym;
 					}
@@ -383,7 +383,7 @@ if( $allPosts ) {
 		echo "<script type=\"text/javascript\">\n";
 		echo "// <![CDATA[\n";
 		echo '/* These variables are part of the Collapsing Archives Plugin
-		       * version: 1.2.alpha
+		       * version: 1.2.beta
 					 * revision: $Id: collapsArch.php 103059 2009-03-17 20:12:01Z robfelty $
 					 * Copyright 2008 Robert Felty (robfelty.com)
 					 */' ."\n";

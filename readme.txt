@@ -1,10 +1,10 @@
 === Collapsing Archives ===
 Contributors: robfelty
 Donate link: http://blog.robfelty.com/wordpress-plugins
-Tags: archives, sidebar, widget, navigation, menu, posts
+Tags: archives, sidebar, widget, navigation, menu, posts, collapsing, collapsible
 Requires at least: 2.8
 Tested up to: 2.8
-Stable tag: 1.1.4
+Stable tag: 1.2.beta
 
 This plugin uses Javascript to dynamically expand or collaps the set of
 months for each year and posts for each month in the archive listing.
@@ -14,7 +14,14 @@ months for each year and posts for each month in the archive listing.
 This is a relatively simple plugin that uses Javascript to
 make the Archive links in the sidebar collapsable by year, and/or month.
 
-= What's new for 1.2.alpha? =
+= What's new? =
+* 1.2.beta (2009.06.07)
+    * Changed hide and show classed to collapse and expand to avoid CSS class
+      conflicts
+    * Fixed errors with options page
+    * Now includes several default styling templates
+
+* 1.2.alpha (2009.05.02)
 * Widget is compatible with wordpress 2.8 (not backwards compatible with 2.7
   and previous). If you are using wordpress 2.7.1 or previous, please use
   collapsing archives version 1.1.4 or earlier
@@ -28,7 +35,7 @@ See the CHANGELOG for more information
 IMPORTANT!
 Please deactivate before upgrading, then re-activate the plugin. 
 
-MANUAL INSTALLATION
+= MANUAL INSTALLATION =
 
 Unpack the contents to wp-content/plugins/ so that the files are in a
 collapsing-archives directory. Now enable the plugin. To use the plugin,
@@ -55,7 +62,7 @@ To something of the following:
 You can specify options for collapsArch. See options section.
 
 
-WIDGET INSTALLATION
+= WIDGET INSTALLATION =
 
 For those who have widget capabilities, (default in Wordpress 2.3+), installation is easier. 
 
@@ -212,6 +219,14 @@ gracefully if it is not present/enabled to show all of the
 archive links as usual.
 
 == HISTORY ==
+
+* 1.2.beta (2009.06.07)
+    * Changed hide and show classed to collapse and expand to avoid CSS class
+      conflicts
+
+* 1.2.alpha (2009.05.02)
+    * Widgets work with 2.8 API
+    * Can specify options directly in manual usage
 
 * 1.1.4 (2009/04/22) 
     * Fixed html validation error when using manual version
