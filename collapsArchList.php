@@ -311,8 +311,8 @@ if( $allPosts ) {
             $the_link .="$text $monthCount</a>\n";
           } else {
             $the_link ="$the_span$the_ding<a href='".get_month_link($currentYear, $currentMonth).
-						    "' >$text$monthCount</a>";
-            $the_link.="</span>".$monthCount;
+						    "' >$text $monthCount</a>";
+            $the_link.="</span>";
           }
 				} else {
 					$link = get_month_link( $currentYear, $currentMonth );

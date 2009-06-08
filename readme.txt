@@ -29,7 +29,7 @@ make the Archive links in the sidebar collapsable by year and/or month.
 * Widget is compatible with wordpress 2.8 (not backwards compatible with 2.7
   and previous). If you are using wordpress 2.7.1 or previous, please use
   collapsing archives version 1.1.4 or earlier
-* Can now add parameters to the collapsLink function if you choose not to use
+* Can now add parameters to the collapsArch function if you choose not to use
   the widget (see options section below)
  
 See the CHANGELOG for more information
