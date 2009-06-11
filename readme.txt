@@ -4,7 +4,7 @@ Donate link: http://blog.robfelty.com/wordpress-plugins
 Tags: archives, sidebar, widget, navigation, menu, posts, collapsing, collapsible
 Requires at least: 2.8
 Tested up to: 2.8
-Stable tag: 1.1.5
+Stable tag: 1.2.beta
 
 This plugin uses Javascript to dynamically expand or collaps the set of
 months for each year and posts for each month in the archive listing.
