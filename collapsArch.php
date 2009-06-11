@@ -61,8 +61,8 @@ class collapsArch {
     if (!get_option('collapsArchStyle')) {
 			add_option( 'collapsArchStyle', $style);
 		}
-    if (!get_option('collapsPageSidebarId')) {
-      add_option( 'collapsPageSidebarId', 'sidebar');
+    if (!get_option('collapsArchSidebarId')) {
+      add_option( 'collapsArchSidebarId', 'sidebar');
     }
 
 	}
