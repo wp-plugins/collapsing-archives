@@ -93,5 +93,7 @@ function collapsArch($args='') {
     list_archives($args);
   }
 }
-include('collapsArchWidget.php');
+$version = get_bloginfo('version');
+if (preg_match('/^2.8/', $version)) 
+  include('collapsArchWidget.php');
 ?>

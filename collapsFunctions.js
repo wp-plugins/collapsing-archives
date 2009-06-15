@@ -71,7 +71,8 @@ function autoExpandCollapse(collapsClass) {
                 var matches=theOnclick.match(/.*\(event, ?"([^"]*)", ?"([^"]*)".*\)/);
                 var expand=matches[1].replace(/\\u25BA/, '\u25BA');
                 var collapse=matches[2].replace(/\\u25BC/, '\u25BC');
-                collapse=collapse.replace(/\\u2014/, '\u2014');
+                //collapse=collapse.replace(/\\u2014/, '\u2014');
+                collapse=collapse.replace(/(\\u[0-9A-Z]+)/, '$1');
                 expandCollapse(theSpan,expand,collapse,0,collapsClass);
               }
             }
