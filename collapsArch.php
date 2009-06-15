@@ -94,6 +94,6 @@ function collapsArch($args='') {
   }
 }
 $version = get_bloginfo('version');
-if (preg_match('/^2.8/', $version)) 
+if (preg_match('/^2\.[8-9]/', $version)) 
   include('collapsArchWidget.php');
 ?>
