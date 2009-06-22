@@ -385,9 +385,9 @@ if( $allPosts ) {
 		echo "<script type=\"text/javascript\">\n";
 		echo "// <![CDATA[\n";
 		echo '/* These variables are part of the Collapsing Archives Plugin
-         * version: 1.2.1
-         * revision: $Id:$
-         * Copyright 2008 Robert Felty (robfelty.com)
+ * version: 1.2.1
+ * revision: $Id$
+ * Copyright 2008 Robert Felty (robfelty.com)
          */' ."\n";
 
     $expandSym="<img src='". $url .
