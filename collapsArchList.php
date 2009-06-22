@@ -386,7 +386,7 @@ if( $allPosts ) {
 		echo "// <![CDATA[\n";
 		echo '/* These variables are part of the Collapsing Archives Plugin
          * version: 1.2.1
-         * revision: $Id$
+         * revision: $Id:$
          * Copyright 2008 Robert Felty (robfelty.com)
          */' ."\n";
 
