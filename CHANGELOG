@@ -1,7 +1,9 @@
 Collapsing Archives Changelog
 
-* 1.2.0 (2009.06.xx)
+* 1.2.1 (2009.06.22)
     * Can now use manually in WP 2.7-
+    * Updated Spanish localization (thanks to Karin Sequen)
+    * Fixed problems with page load and cookies
     
 * 1.2.beta (2009.06.08)
     * Changed hide and show classes to collapse and expand to avoid CSS class

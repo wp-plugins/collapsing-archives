@@ -1,6 +1,6 @@
 <?php
 /*
-Collapsing Archives version: 1.2.beta
+Collapsing Archives version: 1.2.1
 Copyright 2007 Robert Felty
 
 This work is largely based on the Fancy Archives plugin by Andrew Rader
@@ -65,7 +65,7 @@ include('processOptions.php');
   <h2><? _e('Collapsing Archives Options', 'collapsArch'); ?></h2>
   <fieldset name="Collapsing Archives Options">
     <p>
- <?php _e('Id of the sidebar where collapsing pages appears:', 'collapsing-pages'); ?>
+ <?php _e('Id of the sidebar where collapsing pages appears:', 'collapsArch'); ?>
    <input id='collapsArchSidebarId' name='collapsArchSidebarId' type='text' size='20' value="<?php echo
    get_option('collapsArchSidebarId')?>" onchange='changeStyle("collapsArchStylePreview","collapsArchStyle", "collapsArchDefaultStyles", "collapsArchSelectedStyle", false);' />
    <table>
@@ -75,7 +75,7 @@ include('processOptions.php');
 stripslashes(get_option('collapsArchStyle')) ?>" />
   <input type='hidden' id='collapsArchSelectedStyle'
   name='collapsArchSelectedStyle' />
-<label for="collapsArchStyle"><?php _e('Select style:', 'collapsing-pages'); ?></label>
+<label for="collapsArchStyle"><?php _e('Select style:', 'collapsArch'); ?></label>
        </td>
        <td>
        <select name='collapsArchDefaultStyles' id='collapsArchDefaultStyles'
@@ -99,13 +99,13 @@ stripslashes(get_option('collapsArchStyle')) ?>" />
        ?>
        </select>
        </td>
-       <td><?php _e('Preview', 'collapsing-pages'); ?><br />
+       <td><?php _e('Preview', 'collapsArch'); ?><br />
        <img style='border:1px solid' id='collapsArchStylePreview' alt='preview'/>
        </td>
     </tr>
     </table>
-    <?php _e('You may also customize your style below if you wish', 'collapsing-pages'); ?><br />
-   <input type='button' value='<?php _e("restore current style", "collapsing-pages"); ?>'
+    <?php _e('You may also customize your style below if you wish', 'collapsArch'); ?><br />
+   <input type='button' value='<?php _e('restore current style', 'collapsArch'); ?>'
 onclick='restoreStyle();' /><br />
    <textarea onchange='changeStyle("collapsArchStylePreview","collapsArchStyle", "collapsArchDefaultStyles", "collapsArchSelectedStyle", true);' cols='78' rows='10' id="collapsArchStyle"name="collapsArchStyle"><?php echo stripslashes(get_option('collapsArchStyle'))?></textarea>
     </p>

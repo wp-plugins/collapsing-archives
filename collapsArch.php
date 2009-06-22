@@ -4,7 +4,7 @@ Plugin Name: Collapsing Archives
 Plugin URI: http://blog.robfelty.com/plugins/collapsing-archives
 Description: Allows users to expand and collapse archive links like Blogger.  VERSION 1.2.beta IS NOT COMPATIBLE WITH WP 2.7 OR LESS  <a href='options-general.php?page=collapsArch.php'>Options and Settings</a> | <a href='http://wordpress.org/extend/plugins/collapsing-archives/other_notes'>Manual</a> | <a href='http://wordpress.org/extend/plugins/collapsing-archives/faq'>FAQ</a> | <a href='http://forum.robfelty.com/forum/collapsing-archives'>User forum</a> 
 Author: Robert Felty
-Version: 1.2.beta
+Version: 1.2.1
 Author URI: http://robfelty.com
 
 Copyright 2007-2009 Robert Felty

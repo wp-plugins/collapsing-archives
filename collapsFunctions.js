@@ -1,4 +1,4 @@
-/*  Collapse Functions, version 1.4
+/*  Collapse Functions, version 1.5
  *
  *--------------------------------------------------------------------------*/
 String.prototype.trim = function() {
@@ -71,8 +71,7 @@ function autoExpandCollapse(collapsClass) {
                 var matches=theOnclick.match(/.*\(event, ?"([^"]*)", ?"([^"]*)".*\)/);
                 var expand=matches[1].replace(/\\u25BA/, '\u25BA');
                 var collapse=matches[2].replace(/\\u25BC/, '\u25BC');
-                //collapse=collapse.replace(/\\u2014/, '\u2014');
-                collapse=collapse.replace(/(\\u[0-9A-Z]+)/, '$1');
+                collapse=collapse.replace(/\\u2014/, '\u2014');
                 expandCollapse(theSpan,expand,collapse,0,collapsClass);
               }
             }
@@ -106,6 +105,7 @@ function expandCollapse( e, expand,collapse, animate, collapsClass ) {
   if (src.nodeName.toLowerCase() == 'img' ||
       src.parentNode.nodeName.toLowerCase() == 'h2') {
     srcList = src.parentNode.parentNode;
+    src=src.parentNode;
   } else if (src.parentNode.parentNode.nodeName.toLowerCase() == 'h2') {
     src=src.parentNode;
     srcList = src.parentNode.parentNode;
@@ -113,6 +113,9 @@ function expandCollapse( e, expand,collapse, animate, collapsClass ) {
   if (srcList.nodeName.toLowerCase() == 'span') {
     srcList= srcList.parentNode;
     src= src.parentNode;
+  }
+  if (srcList.nodeName.toLowerCase() == 'h2') {
+    srcList=srcList.parentNode;
   }
   childList = null;
 
@@ -127,6 +130,7 @@ function expandCollapse( e, expand,collapse, animate, collapsClass ) {
   var theId= childList.getAttribute('id');
   if (theSpan.className!='sym') {
     theSpan = theSpan.childNodes[0];
+    //alert(childList.getAttribute('id'));
     theId = childList.childNodes[0].getAttribute('id');
   }
   if( src.getAttribute( 'class' ) == hide ) {
