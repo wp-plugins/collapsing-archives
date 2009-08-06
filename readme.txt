@@ -215,7 +215,7 @@ I use this plugin in my blog at http://blog.robfelty.com
 
 = Examples =
 
-`collapsArch('animate=true&sort=ASC&expand=3,inExcludeCats=general,uncategorized')`
+`collapsArch('animate=1&sort=ASC&expand=3,inExcludeCats=general,uncategorized')`
 This will produce a list with:
 * animation on
 * shown in chronological order
