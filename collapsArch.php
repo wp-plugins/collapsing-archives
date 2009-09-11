@@ -68,7 +68,7 @@ class collapsArch {
 	}
 
 	function setup() {
-		if( function_exists('add_options_page') ) {
+		if( function_exists('add_options_page') && current_user_can('manage_options') ) {
 			add_options_page(__('Collapsing Archives', 'collapsArch'),__('Collapsing Archives', 'collapsArch'),1,basename(__FILE__),array('collapsArch','ui'));
 		}
 	}

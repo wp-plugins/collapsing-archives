@@ -166,8 +166,8 @@ I use this plugin in my blog at http://blog.robfelty.com
 * showMonthCount
     *  When true, the number of posts in the month will be shown in parentheses 
 * linkToArch
-    * True, clicking on a the month or year will link to the archive (default)
-    * False, clicking on a month or year expands and collapses 
+    * 1 (true), clicking on a the month or year will link to the archive (default)
+    * 0 (false), clicking on a month or year expands and collapses 
 * sort
     * Whether posts should be sorted in chronological  or reverse
       chronological order. Possible values:
@@ -188,19 +188,19 @@ I use this plugin in my blog at http://blog.robfelty.com
       used to mark collapsible link categories
  
 * expandYears
-    * True: Years collapse and expand to show months (default)
-    * False: Only links to yearly archives are shown
+    * 1 (true): Years collapse and expand to show months (default)
+    * 0 (false): Only links to yearly archives are shown
 * expandMonths
-    * True: Months collapse and expand to show posts (default)
-    * False: Only links to yearly and monthly archives are shown
+    * 1 (true): Months collapse and expand to show posts (default)
+    * 0 (false): Only links to yearly and monthly archives are shown
 * expandCurrentMonth
     * When true, the current month will be expanded by default
 * expandCurrentYear
     * When true, the current year will be expanded by default
 * showPostTitle
-    * True: The title of each post is shown (default)
+    * 1 (true): The title of each post is shown (default)
 * showPostDate
-    * True: Show the date of each post 
+    * 1 (true): Show the date of each post 
 * postDateFormat
     * The format in which the date should be shown (default: 'm/d')
 * postTitleLength
@@ -228,36 +228,39 @@ This plugin relies on Javascript, but does degrade
 gracefully if it is not present/enabled to show all of the
 archive links as usual.
 
-== HISTORY ==
+== CHANGELOG ==
 
-* 1.2.1 (2009.06.22)
+=  1.2.2 (2009.09.xx) =
+    * Restricting settings page to authorized users
+
+=  1.2.1 (2009.06.22) =
     * Can now use manually in WP 2.7-
     * Updated Spanish localization (thanks to Karin Sequen)
     * Fixed problems with page load and cookies
 
-* 1.2.beta (2009.06.07)
+=  1.2.beta (2009.06.07) =
     * Changed hide and show classed to collapse and expand to avoid CSS class
       conflicts
 
-* 1.2.alpha (2009.05.02)
+=  1.2.alpha (2009.05.02) =
     * Widgets work with 2.8 API
     * Can specify options directly in manual usage
 
-* 1.1.4 (2009/04/22) 
+=  1.1.4 (2009/04/22)  =
     * Fixed html validation error when using manual version
     * Spanish localization (thanks to Karin Sequen)
 
-* 1.1.3 (2009/04/17)
+=  1.1.3 (2009/04/17) =
     * Fixed bug with unicode codes showing up instead of triangles
 
-* 1.1.2 (2009/03/28)
+=  1.1.2 (2009/03/28) =
     * Span all on one line so it doesn't mess up exec-php (thanks GeekLad)
     * fixed some minor issues to get page to be valid xhtml
     * no longer requires footer
     * updated javascript file
     * added option for custom expanding and collapsing symbols
 
-* 1.1 (2009/03/07)
+=  1.1 (2009/03/07) =
     * fixed bug with truncating titles
     * cleaned up code a bit
     * fixed query for excluding categories
@@ -267,7 +270,7 @@ archive links as usual.
     * Improved internationalization
     * fixed settings panel
 
-* 1.0.5 (2009/01/21)
+=  1.0.5 (2009/01/21) =
     * changed query
     * when using truncated titles, title attribute has full title
     * using html ellipsis in truncate titles
@@ -275,105 +278,105 @@ archive links as usual.
     * fixed some issues with settings page
     * updated FAQ
 
-* 1.0.4 (2009/01/15)
+=  1.0.4 (2009/01/15) =
     * fixed debug option
     * style is set in database if the style column is not already there
 
-* 1.0.3 (2009/01/09)
+=  1.0.3 (2009/01/09) =
     * don't put an expand icon for years if "show months" is not selected
     * add self class to post for additional styling
     * fixed :before style info to restore default style
     * fixed post title truncating
 
-* 1.0.2 (2009/01/07)
+=  1.0.2 (2009/01/07) =
     * added javascript version
     * not loading unnecessary code for admin pages (fixes interference with
       akismet stats page
     * fixed settings page for manual usage
     * fixed sort order option
 
-* 1.0.1 (2009/01/06)
+=  1.0.1 (2009/01/06) =
     * Finally fixed disappearing widget problem when trying to add to sidebar
     * Added debugging option to show the query used and the output
     * Moved style option to options page
 
-* 1.0 (2008.12.08)
+=  1.0 (2008.12.08) =
     * Integrating javascript with other collapsing plugins
     * Non-widget version now works out of the box (defaults added to database
       upon activation)
     * style can now be set with an option
     * inline javascript moved to bottom for faster page loading
 
-* 0.9.6 (2008.12.02)
+=  0.9.6 (2008.12.02) =
     * Minor bug fix with missing end tag when years expand to months, but
       months do not expand to posts
 
-* 0.9.5 (2008.12.01)
+=  0.9.5 (2008.12.01) =
     * fixed javascript bug for IE7
 
-* 0.9.4 (2008.11.21)
+=  0.9.4 (2008.11.21) =
     * Improved handling of options for non-widget version
     * Uses cookies to keep track of expanded and collapsed years/months
     * tested with 2.7 beta3
 
-* 0.9.3 (2008.11.04)
+=  0.9.3 (2008.11.04) =
     * Now can once again use as a widget or non-widget
 
-* 0.9.2 (2008.11.01)
+=  0.9.2 (2008.11.01) =
     * Fixed truncating of title
 
-* 0.9.1 (2008.10.28)
+=  0.9.1 (2008.10.28) =
     * added collapsArchMonth class for when posts are not shown
     * added img directory
     * calling it stable
 
-* 0.9.alpha (2008.10.23) 
+=  0.9.alpha (2008.10.23)  =
     * Can now use more than one widget
     * Added option to animate collapsing and expanding
     * Added option to use images as collapsing symbols
     * Added option to have the year and month activate collapsing instead of
       linking to the yearly/monthly archive
 
-* 0.8.9 (2008.06.04)
+=  0.8.9 (2008.06.04) =
     * added option for different expand and collapse symbols (triangles, +/-)
 
-* 0.8.8 (2008.05.27)
+=  0.8.8 (2008.05.27) =
     * added some more FAQ about stylesheets
     * added option to only include certain years
 
-* 0.8.7
+=  0.8.7 =
     * fixed sparse year problem (extra tags would get inserted after a year
       with only one post which was in January) -- thanks to [aishdas]
       (http://wordpress.org/support/profile/444678) for pointing this out
 
-* 0.8.6
+=  0.8.6 =
     * fixed bug which had wrong markup when months were turned off
 
-* 0.8.5
+=  0.8.5 =
     * fixed bug (introduced in 0.8.2) that made the widget not show up after an
       upgrade
 
-* 0.8.4
+=  0.8.4 =
     * title of archives now shows up correctly using before_title and
       after_title
 
-* 0.8.3 
+=  0.8.3  =
     * fixed bug introduced in version 0.8.2 trying to exclude categories. Would
       break if no categories were being excluded
 
-* 0.8.2
+=  0.8.2 =
     * Added option to exclude posts that belong to certain categories. So far
       this is only working for posts that belong to a single category
     * Added option to change title in widget, and can now set all options from
       the widget page
     * Now is condensed into one plugin
 
-* 0.8.1
+=  0.8.1 =
     * Changed htmlentities to htmlspecialchars in formatting title text. Now
       this should not mess up accented characters, but should escape quotes
     * Using unicode codes in css file for double quote character
 
-* 0.8 
+=  0.8  =
     * Verified to work with wordpress 2.5
     * Now has custom styling option through the collapsArch.css stylesheet
     * updated screenshots
@@ -381,52 +384,52 @@ archive links as usual.
       back in)
     * moved javascript into collapsArch.php and got rid of separate file
 
-* 0.7.8 
+=  0.7.8  =
     * Got rid of htmlentities in post titles. Should display better now
 
-* 0.7.7
+=  0.7.7 =
     * Now links should work with all sorts of permalink structures. Thanks to
       Krysthora http://krysthora.free.fr/ for finding this bug
 
-* 0.7.6
+=  0.7.6 =
     * fixed some more markup issues to make it valid xhtml
 
-* 0.7.5
+=  0.7.5 =
     * fixed bug when turning off "month links should expand to show posts" 
       option
 
-* 0.7.4
+=  0.7.4 =
     * fixed broken links
 
-* 0.7.3
+=  0.7.3 =
     * posts now have the class "collapsCatPost" and can be styled with CSS.
       Some styling has been added in collapsCat.php
     * removed list icons in front of triangles
     
-* 0.7.2
+=  0.7.2 =
     * Added option to link to index.php, root, or archives.php
 
-* 0.7.1
+=  0.7.1 =
     * Fixed comment count feature in post links
     * Fixed display of date in post links
     * Fixed automatic loading of options into database
 
-* 0.7:
+=  0.7: =
 		* Complete rewrite of database code to reduce the number of queries from
 		  2 * #months + 1 to 1 single query
 
-* 0.6.2: 
+=  0.6.2:  =
     * Added collapsing class to <li>s with triangles for CSS styling
     * Added style information to make triangles bigger and give a pointer
       cursor over them
     * Added title tags to triangles to indicate functionality
 
-* 0.6.1:
+=  0.6.1: =
     * Bug fix - fixed the previous year triangle pointing in the wrong 
       direction
     * Changed default options to reflect how I use it on my website
 
-* 0.6: 
+=  0.6:  =
     * Changed name from Fancy Archives to Collapsing Archives
     * Changed author from Andrew Rader to Robert Felty
     * Added option to link to archives.php
@@ -441,30 +444,30 @@ archive links as usual.
 
 ---------------------------------------------------------------------------
 Fancy Archives Changelog
-* 0.5:
+=  0.5: =
     * Added option to display Page entries with Posts inside the month links
     * Cleaned up the list generation code
 
-* 0.4:
+=  0.4: =
     * Added option: Trim post titles to a set size
     * Added option: Optionally show ellipsis if a post title was shrunk
     * Fix: Added fix for when page's content-type is "application/xhtml+xml"
 
-* 0.3:
+=  0.3: =
     * Huge rewrite: cleaned up javascript - one function does all the work,
       javascript no longer visible in page source
     * Added options: month links are optional, set current year/month to be
       expanded by default
     * Links now link to 'javascript;' instead of '#'
 
-* 0.2.5:
+=  0.2.5: =
     * Fixed an issue with displaying comment counts in < WP2.0, fixed by using
       WP's internal comment counting function (Thanks Will)
 
-* 0.2:
+=  0.2: =
     * Massive update, now has a dedicated options page (no more passing
       options to function)
     * Month links can expand to show individual posts
 
-* 0.1:
+=  0.1: =
 	* Initial Release
