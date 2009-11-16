@@ -245,9 +245,9 @@ if( $allPosts ) {
 			}
       if ($linkToArch) {
         echo  "</span>";
-        echo "<a href='".get_year_link($archPost->year). "?nav=year'>$currentYear $yearCount</a>\n";
+        echo "<a href='".get_year_link($archPost->year). "'>$currentYear $yearCount</a>\n";
       } else {
-        echo "<a href='".get_year_link($archPost->year). "'?nav=year>$currentYear$yearCount</a>\n";
+        echo "<a href='".get_year_link($archPost->year). "'>$currentYear$yearCount</a>\n";
         echo "</span>";
       }
       if( $expandYears ) {
@@ -307,11 +307,11 @@ if( $allPosts ) {
           if ($linkToArch) {
             $the_link= "$the_span$the_ding</span>";
             $the_link .="<a href='".get_month_link($currentYear, $currentMonth).
-						    "?nav=month' title='$title_text'>";
+						    "' title='$title_text'>";
             $the_link .="$text $monthCount</a>\n";
           } else {
             $the_link ="$the_span$the_ding<a href='".get_month_link($currentYear, $currentMonth).
-						    "?nav=month' >$text $monthCount</a>";
+						    "' >$text $monthCount</a>";
             $the_link.="</span>";
           }
 				} else {
@@ -321,7 +321,7 @@ if( $allPosts ) {
 					$monthTitle = '';
 					$monthCollapse = 'collapsArchMonth';
 					$the_link ="<a href='".get_month_link($currentYear, $currentMonth).
-					    "?nav=month' title='$title_text'>";
+					    "' title='$title_text'>";
 					$the_link .="$text $monthCount</a>\n";
 				}
 
