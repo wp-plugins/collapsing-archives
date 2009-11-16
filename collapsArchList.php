@@ -57,7 +57,7 @@ $post_attrs = "post_date != '0000-00-00 00:00:00' AND post_status = 'publish'";
     $expandSym=htmlentities($customExpand);
     $collapseSym=htmlentities($customCollapse);
   } else {
-    $expandSym='►';
+    $expandSym='▶';
     $collapseSym='▼';
   }
   if ($expand==3) {
@@ -245,9 +245,9 @@ if( $allPosts ) {
 			}
       if ($linkToArch) {
         echo  "</span>";
-        echo "<a href='".get_year_link($archPost->year). "'>$currentYear $yearCount</a>\n";
+        echo "<a href='".get_year_link($archPost->year). "?nav=year'>$currentYear $yearCount</a>\n";
       } else {
-        echo "<a href='".get_year_link($archPost->year). "'>$currentYear$yearCount</a>\n";
+        echo "<a href='".get_year_link($archPost->year). "'?nav=year>$currentYear$yearCount</a>\n";
         echo "</span>";
       }
       if( $expandYears ) {
@@ -307,11 +307,11 @@ if( $allPosts ) {
           if ($linkToArch) {
             $the_link= "$the_span$the_ding</span>";
             $the_link .="<a href='".get_month_link($currentYear, $currentMonth).
-						    "' title='$title_text'>";
+						    "?nav=month' title='$title_text'>";
             $the_link .="$text $monthCount</a>\n";
           } else {
             $the_link ="$the_span$the_ding<a href='".get_month_link($currentYear, $currentMonth).
-						    "' >$text $monthCount</a>";
+						    "?nav=month' >$text $monthCount</a>";
             $the_link.="</span>";
           }
 				} else {
@@ -321,7 +321,7 @@ if( $allPosts ) {
 					$monthTitle = '';
 					$monthCollapse = 'collapsArchMonth';
 					$the_link ="<a href='".get_month_link($currentYear, $currentMonth).
-					    "' title='$title_text'>";
+					    "?nav=month' title='$title_text'>";
 					$the_link .="$text $monthCount</a>\n";
 				}
 
@@ -365,7 +365,7 @@ if( $allPosts ) {
         $commcount = ' ('.get_comments_number($archPost->ID).')';
       }
 
-      $link = get_permalink($archPost);
+      $link = get_permalink($archPost). '?nav=collapsing-archives';
       echo "          <li class='collapsArchPost'><a href='$link' " .
           "title='$title_text'>$text</a>$commcount</li>\n";
     }
