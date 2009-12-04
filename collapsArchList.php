@@ -375,16 +375,20 @@ if( $allPosts ) {
           "title='$title_text'>$text</a>$commcount</li>\n";
     }
 	}
-  if ($expandYears ) {
-    if ($expandMonths) {
-      echo "        </ul>\n";
-    }
-    echo "  </li> <!-- close month -->
-          </ul>";
+  if ($expandMonths) {
+    echo "        </ul>
+    </li> <!-- close month -->\n";
+    echo "  </ul>";
+  }
+  if (!$expandYears && $expandMonths) {
   }
 } 
-   echo "  </li> <!-- close year -->
-  </ul> <!-- end of collapsing archives -->";
+  if ($expandYears && !$expandMonths) {
+   echo "  </li> <!-- close month --></ul><!-- close year -->\n";
+  }
+  if ($expandYears) {
+    echo "</li></ul> <!-- end of collapsing archives -->";
+  }
   return;
 }
 		echo "<script type=\"text/javascript\">\n";
