@@ -126,7 +126,8 @@ if( !$showPages ) {
 }
 
 
-$postquery= "SELECT $wpdb->terms.slug, $wpdb->posts.ID, $wpdb->posts.post_name, $wpdb->posts.post_title,
+$postquery= "SELECT $wpdb->terms.slug, $wpdb->posts.ID,
+    $wpdb->posts.post_name, $wpdb->posts.post_title, $wpdb->posts.post_author,
     $wpdb->posts.post_date, YEAR($wpdb->posts.post_date) AS 'year',
     MONTH($wpdb->posts.post_date) AS 'month' 
   FROM $wpdb->posts LEFT JOIN $wpdb->term_relationships ON $wpdb->posts.ID =
@@ -230,11 +231,15 @@ if( $allPosts ) {
           }
           echo "    </ul>\n  </li> <!-- end year -->\n";
         } else {
-          echo "  </li> <!-- end year -->\n";
+          if( $expandMonths ) {
+            echo "    </ul>\n  </li> <!-- end year -->\n";
+          } else {
+            echo "  </li> <!-- end year -->\n";
+          }
         }
       }
       $home = get_settings('home');
-      if( $expandYears ) {
+      if( $expandYears  || $expandMonths) {
 				echo "  <li class='collapsArch'><span title='$yearTitle' " .
 				    "class='collapsArch $yearRel' " .
             "onclick='expandCollapse(event" .
@@ -250,7 +255,7 @@ if( $allPosts ) {
         echo "<a href='".get_year_link($archPost->year). "'>$currentYear$yearCount</a>\n";
         echo "</span>";
       }
-      if( $expandYears ) {
+      if( $expandYears || $expandMonths ) {
         echo "    <ul $monthStyle id='collapsArchList-$currentYear'>\n";
       }
       $newYear = false;
@@ -328,17 +333,17 @@ if( $allPosts ) {
 				echo "      <li class='$monthCollapse'>".$the_link;
 
 			}
-			if ($expandYears && $expandMonths=='yes' ) {
+			if ($expandYears && $expandMonths ) {
 				echo "        <ul $postStyle id=\"collapsArchList-";
 				echo "$currentYear-$currentMonth\">\n";
 				$text = '';
       }
 		} else {
-
-			if( $expandYears && $expandMonths=='yes' ) {
+			if( $expandYears && $expandMonths ) {
 				$text = '';
 			}
 		}
+    $text = '';
 		if( $showPostNumber ) {
 			$text .= '#'.$archPost->ID;
 		}
@@ -365,7 +370,7 @@ if( $allPosts ) {
         $commcount = ' ('.get_comments_number($archPost->ID).')';
       }
 
-      $link = get_permalink($archPost). '?nav=collapsing-archives';
+      $link = get_permalink($archPost);
       echo "          <li class='collapsArchPost'><a href='$link' " .
           "title='$title_text'>$text</a>$commcount</li>\n";
     }

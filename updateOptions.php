@@ -43,10 +43,10 @@
 	$inExcludeYear= $new_instance['inExcludeYear'];
 	$inExcludeCat= $new_instance['inExcludeCat'];
 
-  if(isset($new_instance['showMonths'])) {
-    $showMonths= true ;
+  if(isset($new_instance['expandYears'])) {
+    $expandYears= true ;
   } else {
-    $showMonths=false;
+    $expandYears=false;
   }
   if (isset($new_instance['showMonthCount'])) {
     $showMonthCount= true ;
@@ -91,7 +91,7 @@
   $instance = compact( 'title','showPostCount',
       'inExcludeCat', 'inExcludeCats', 'inExcludeYear', 'inExcludeYears',
       'archSortOrder', 'showPosts', 'showPages', 'linkToArch', 'debug',
-      'showYearCount', 'expandCurrentYear','expandMonths', 'showMonths',
+      'showYearCount', 'expandCurrentYear','expandMonths', 'expandYears',
       'expandCurrentMonth','showMonthCount', 'showPostTitle', 'expand',
 			'noTitle', 'customExpand', 'customCollapse',
       'showPostDate', 'postDateFormat','animate','postTitleLength');

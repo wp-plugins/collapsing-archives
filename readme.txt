@@ -232,6 +232,9 @@ archive links as usual.
 
 =  1.2.2 (2009.09.xx) =
     * Restricting settings page to authorized users
+    * Fixed expandYears option. Now when you show posts, but not months, the
+      year expands to show posts. 
+    * Updated javascript to fix cookie bug
 
 =  1.2.1 (2009.06.22) =
     * Can now use manually in WP 2.7-
