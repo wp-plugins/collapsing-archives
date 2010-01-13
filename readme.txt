@@ -83,6 +83,14 @@ Collapsing Archives Widget.
 
 == Frequently Asked Questions ==
 
+= Does Collapsing Archives conflict with any other plugins? =
+
+Yes. It will not work with other plugins which use the mootools javascript
+library, because collapsing archives uses the scriptaculous library and these
+two libraries conflict with each other. Here is a list of plugins which are
+known not to work with collapsing archives:
+* Featured Content Gallery
+
 =  How do I change the style of the collapsing archives lists? =
 
   The collapsing archives plugin uses several ids and classes which can be
