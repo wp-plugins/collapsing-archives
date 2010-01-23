@@ -3,7 +3,7 @@ Contributors: robfelty
 Donate link: http://blog.robfelty.com/wordpress-plugins
 Tags: archives, sidebar, widget, navigation, menu, posts, collapsing, collapsible
 Requires at least: 2.8
-Tested up to: 2.8
+Tested up to: 2.9.1
 Stable tag: 1.2.1
 
 This plugin uses Javascript to dynamically expand or collaps the set of
