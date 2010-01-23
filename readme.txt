@@ -83,14 +83,6 @@ Collapsing Archives Widget.
 
 == Frequently Asked Questions ==
 
-= Does Collapsing Archives conflict with any other plugins? =
-
-Yes. It will not work with other plugins which use the mootools javascript
-library, because collapsing archives uses the scriptaculous library and these
-two libraries conflict with each other. Here is a list of plugins which are
-known not to work with collapsing archives:
-* Featured Content Gallery
-
 =  How do I change the style of the collapsing archives lists? =
 
   The collapsing archives plugin uses several ids and classes which can be
@@ -238,11 +230,13 @@ archive links as usual.
 
 == CHANGELOG ==
 
-=  1.2.2 (2009.09.xx) =
+=  1.2.2 (2010.01.xx) =
     * Restricting settings page to authorized users
     * Fixed expandYears option. Now when you show posts, but not months, the
       year expands to show posts. 
     * Updated javascript to fix cookie bug
+    * Switched from scriptaculous to jquery. Now no longer conflicts with
+      plugins which use mootools (for example featured content gallery)
 
 =  1.2.1 (2009.06.22) =
     * Can now use manually in WP 2.7-

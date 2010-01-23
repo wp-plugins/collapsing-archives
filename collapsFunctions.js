@@ -1,4 +1,4 @@
-/*  Collapse Functions, version 1.5
+/*  Collapse Functions, version 1.6
  *
  *--------------------------------------------------------------------------*/
 String.prototype.trim = function() {
@@ -141,7 +141,8 @@ function expandCollapse( e, expand,collapse, animate, collapsClass ) {
     src.setAttribute('title','click to expand');
     theSpan.innerHTML=expand;
     if (animate==1) {
-      Effect.BlindUp(childList, {duration: 0.5});
+      //Effect.BlindUp(childList, {duration: 0.5});
+      jQuery(childList).hide('blind', '', 500);
     } else {
       childList.style.display = 'none';
     }
@@ -151,7 +152,8 @@ function expandCollapse( e, expand,collapse, animate, collapsClass ) {
     src.setAttribute('title','click to collapse');
     theSpan.innerHTML=collapse;
     if (animate==1) {
-      Effect.BlindDown(childList, {duration: 0.5});
+      //Effect.BlindDown(childList, {duration: 0.5});
+      jQuery(childList).show('blind', '', 500);
     } else {
       childList.style.display = 'block';
     }
