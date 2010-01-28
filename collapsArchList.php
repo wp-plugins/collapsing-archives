@@ -1,6 +1,6 @@
 <?php
 /*
-Collapsing Archives version: 1.2.1
+Collapsing Archives version: 1.2.2
 
 Copyright 2007 Robert Felty
 
@@ -34,7 +34,7 @@ global $wpdb, $month;
 include('defaults.php');
 $options=wp_parse_args($args, $defaults);
 extract($options);
-echo "<ul class='collapsArchList'>\n";
+echo "<ul class='collapsing archives list'>\n";
 
 
 $post_attrs = "post_date != '0000-00-00 00:00:00' AND post_status = 'publish'";
@@ -140,17 +140,6 @@ $postquery= "SELECT $wpdb->terms.slug, $wpdb->posts.ID,
   GROUP BY $wpdb->posts.ID 
   ORDER BY $wpdb->posts.post_date $sort";
 
-/*
-    $wpdb->term_relationships.term_taxonomy_id = $wpdb->terms.term_id 
-$allPosts=wp_cache_get('collapsArchPosts');
-if (false === $allPosts) {
-  echo "not using cache";
-  $allPosts=$wpdb->get_results($postquery);
-  wp_cache_set('collapsArchPosts', $allPosts,$expire=200);
-} else {
-  echo "using cache";
-}
-*/
   $allPosts=$wpdb->get_results($postquery);
 
 if ($debug==1) {
@@ -240,13 +229,13 @@ if( $allPosts ) {
       }
       $home = get_settings('home');
       if( $expandYears  || $expandMonths) {
-				echo "  <li class='collapsArch'><span title='$yearTitle' " .
-				    "class='collapsArch $yearRel' " .
+				echo "  <li class='collapsing archives'><span title='$yearTitle' " .
+				    "class='collapsing archives $yearRel' " .
             "onclick='expandCollapse(event" .
             ", \"$expandSymJS\", \"$collapseSymJS\", $animate," .
             "\"collapsArch\"); return false' ><span class='sym'>$ding</span>";
 			} else {
-			  echo "  <li class='collapsArchPost'>\n";
+			  echo "  <li class='collapsing archives item'>\n";
 			}
       if ($linkToArch) {
         echo  "</span>";
@@ -256,7 +245,7 @@ if( $allPosts ) {
         echo "</span>";
       }
       if( $expandYears || $expandMonths ) {
-        echo "    <ul $monthStyle id='collapsArchList-$currentYear'>\n";
+        echo "    <ul $monthStyle id='collapsing archives list-$currentYear'>\n";
       }
       $newYear = false;
     }
@@ -334,7 +323,7 @@ if( $allPosts ) {
 
 			}
 			if ($expandYears && $expandMonths ) {
-				echo "        <ul $postStyle id=\"collapsArchList-";
+				echo "        <ul $postStyle id=\"collapsing archives list-";
 				echo "$currentYear-$currentMonth\">\n";
 				$text = '';
       }
@@ -371,7 +360,7 @@ if( $allPosts ) {
       }
 
       $link = get_permalink($archPost);
-      echo "          <li class='collapsArchPost'><a href='$link' " .
+      echo "          <li class='collapsing archives item'><a href='$link' " .
           "title='$title_text'>$text</a>$commcount</li>\n";
     }
 	}
@@ -394,7 +383,7 @@ if( $allPosts ) {
 		echo "<script type=\"text/javascript\">\n";
 		echo "// <![CDATA[\n";
 		echo '/* These variables are part of the Collapsing Archives Plugin
- * version: 1.2.1
+ * version: 1.2.2
  * revision: $Id$
  * Copyright 2008 Robert Felty (robfelty.com)
          */' ."\n";

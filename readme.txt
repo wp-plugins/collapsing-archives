@@ -4,7 +4,7 @@ Donate link: http://blog.robfelty.com/wordpress-plugins
 Tags: archives, sidebar, widget, navigation, menu, posts, collapsing, collapsible
 Requires at least: 2.8
 Tested up to: 2.9.1
-Stable tag: 1.2.1
+Stable tag: 1.2.2
 
 This plugin uses Javascript to dynamically expand or collaps the set of
 months for each year and posts for each month in the archive listing.
@@ -20,23 +20,19 @@ make the Archive links in the sidebar collapsable by year and/or month.
 
 = What's new? =
 
+*  1.2.2 (2010.01.28)
+    * Restricting settings page to authorized users
+    * Fixed expandYears option. Now when you show posts, but not months, the
+      year expands to show posts. 
+    * Updated javascript to fix cookie bug
+    * Switched from scriptaculous to jquery. Now no longer conflicts with
+      plugins which use mootools (for example featured content gallery)
+
 * 1.2.1 (2009.06.22)
     * Can now use manually in WP 2.7-
     * Updated Spanish localization (thanks to Karin Sequen)
     * Fixed problems with page load and cookies
 
-* 1.2.beta (2009.06.07)
-    * Changed hide and show classed to collapse and expand to avoid CSS class
-      conflicts
-    * Fixed errors with options page
-    * Now includes several default styling templates
-
-* 1.2.alpha (2009.05.02)
-    * Widget is compatible with wordpress 2.8 (not backwards compatible with 2.7
-      and previous). If you are using wordpress 2.7.1 or previous, please use
-      collapsing archives version 1.1.4 or earlier
-    * Can now add parameters to the collapsArch function if you choose not to
-      use the widget (see options section below)
  
 See the CHANGELOG for more information
 
@@ -230,7 +226,7 @@ archive links as usual.
 
 == CHANGELOG ==
 
-=  1.2.2 (2010.01.xx) =
+=  1.2.2 (2010.01.28) =
     * Restricting settings page to authorized users
     * Fixed expandYears option. Now when you show posts, but not months, the
       year expands to show posts. 

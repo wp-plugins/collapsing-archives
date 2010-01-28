@@ -4,7 +4,7 @@ Plugin Name: Collapsing Archives
 Plugin URI: http://blog.robfelty.com/plugins/collapsing-archives
 Description: Allows users to expand and collapse archive links like Blogger.  VERSION 1.2.beta IS NOT COMPATIBLE WITH WP 2.7 OR LESS  <a href='options-general.php?page=collapsArch.php'>Options and Settings</a> | <a href='http://wordpress.org/extend/plugins/collapsing-archives/other_notes'>Manual</a> | <a href='http://wordpress.org/extend/plugins/collapsing-archives/faq'>FAQ</a> | <a href='http://forum.robfelty.com/forum/collapsing-archives'>User forum</a> 
 Author: Robert Felty
-Version: 1.2.1
+Version: 1.2.2
 Author URI: http://robfelty.com
 
 Copyright 2007-2009 Robert Felty
@@ -31,6 +31,8 @@ This file is part of Collapsing Archives
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */ 
 $url = get_settings('siteurl');
+global $collapsArchVersion;
+$collapsArchVersion = '1.2.2';
 
 // LOCALIZATION
 function collapsArch_load_domain() {
@@ -45,6 +47,11 @@ if (!is_admin()) {
   add_action('wp_head', wp_enqueue_script('collapsFunctions',
   "$url/wp-content/plugins/collapsing-archives/collapsFunctions.js", '', '1.6'));
   add_action( 'wp_head', array('collapsArch','get_head'));
+} else {
+  // call upgrade function if current version is lower than actual version
+  $dbversion = get_option('collapsArchVersion');
+  if (!$dbversion || $collapsArchVersion != $dbversion)
+    collapsArch::init();
 }
 add_action('admin_menu', array('collapsArch','setup'));
 add_action('activate_collapsing-archives/collapsArch.php', array('collapsArch','init'));
@@ -52,7 +59,14 @@ add_action('activate_collapsing-archives/collapsArch.php', array('collapsArch','
 class collapsArch {
 
 	function init() {
+    global $collapsArchVersion;
     include('collapsArchStyles.php');
+    $dbversion = get_option('collapsArchVersion');
+    if ($collapsArchVersion != $dbversion && $selected!='custom') {
+      $style = $defaultStyles[$selected];
+      update_option( 'collapsArchStyle', $style);
+      update_option( 'collapsArchVersion', $collapsArchVersion);
+    }
     $defaultStyles=compact('selected','default','block','noArrows','custom');
     if( function_exists('add_option') ) {
       update_option( 'collapsArchOrigStyle', $style);
@@ -64,6 +78,9 @@ class collapsArch {
     if (!get_option('collapsArchSidebarId')) {
       add_option( 'collapsArchSidebarId', 'sidebar');
     }
+    if (!get_option('collapsArchVersion')) {
+      add_option( 'collapsArchVersion', $collapsArchVersion);
+		}
 
 	}
 
