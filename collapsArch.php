@@ -2,17 +2,12 @@
 /*
 Plugin Name: Collapsing Archives
 Plugin URI: http://blog.robfelty.com/plugins/collapsing-archives
-Description: Allows users to expand and collapse archive links like Blogger.  VERSION 1.2.beta IS NOT COMPATIBLE WITH WP 2.7 OR LESS  <a href='options-general.php?page=collapsArch.php'>Options and Settings</a> | <a href='http://wordpress.org/extend/plugins/collapsing-archives/other_notes'>Manual</a> | <a href='http://wordpress.org/extend/plugins/collapsing-archives/faq'>FAQ</a> | <a href='http://forum.robfelty.com/forum/collapsing-archives'>User forum</a> 
+Description: Allows users to expand and collapse archive links like Blogger.  <a href='options-general.php?page=collapsArch.php'>Options and Settings</a> | <a href='http://wordpress.org/extend/plugins/collapsing-archives/other_notes'>Manual</a> | <a href='http://wordpress.org/extend/plugins/collapsing-archives/faq'>FAQ</a> | <a href='http://forum.robfelty.com/forum/collapsing-archives'>User forum</a> 
 Author: Robert Felty
-Version: 1.2.2
+Version: 1.3
 Author URI: http://robfelty.com
 
-Copyright 2007-2009 Robert Felty
-
-This work is largely based on the Fancy Archives plugin by Andrew Rader
-(http://nymb.us), which was also distributed under the GPLv2. I have tried
-contacting him, but his website has been down for quite some time now. See the
-CHANGELOG file for more information.
+Copyright 2007-2010 Robert Felty
 
 This file is part of Collapsing Archives
 
@@ -32,7 +27,7 @@ This file is part of Collapsing Archives
 */ 
 $url = get_settings('siteurl');
 global $collapsArchVersion;
-$collapsArchVersion = '1.2.2';
+$collapsArchVersion = '1.3';
 
 // LOCALIZATION
 function collapsArch_load_domain() {
@@ -43,9 +38,9 @@ add_action('init', 'collapsArch_load_domain');
 
 /****************/
 if (!is_admin()) {
-  add_action('wp_head', wp_enqueue_script('jquery'));
-  add_action('wp_head', wp_enqueue_script('collapsFunctions',
-  "$url/wp-content/plugins/collapsing-archives/collapsFunctions.js", '', '1.6'));
+  wp_enqueue_script('collapsFunctions',
+      WP_PLUGIN_URL . "/collapsing-archives/collapsFunctions.js",
+      array('jquery'), '1.7');
   add_action( 'wp_head', array('collapsArch','get_head'));
 } else {
   // call upgrade function if current version is lower than actual version
@@ -104,11 +99,34 @@ class collapsArch {
 	}
 }
 
-function collapsArch($args='') {
   include_once( 'collapsArchList.php' );
+function collapsArch($args='') {
   if (!is_admin()) {
-    list_archives($args);
+    $archives = list_archives($args);
   }
+		$archives .= "<script type=\"text/javascript\">\n";
+		$archives .= "// <![CDATA[\n";
+		$archives .= '/* These variables are part of the Collapsing Archives Plugin
+ * version: 1.2.2
+ * revision: $Id$
+ * Copyright 2008 Robert Felty (robfelty.com)
+         */' ."\n";
+
+    $expandSym="<img src='". $url .
+         "/wp-content/plugins/collapsing-archives/" . 
+         "img/expand.gif' alt='expand' />";
+    $collapseSym="<img src='". $url .
+         "/wp-content/plugins/collapsing-archives/" . 
+         "img/collapse.gif' alt='collapse' />";
+    $archives .= "var expandSym=\"$expandSym\";";
+    $archives .= "var collapseSym=\"$collapseSym\";";
+    $archives .="
+    collapsAddLoadEvent(function() {
+      autoExpandCollapse('collapsArch');
+    });
+    ";
+		$archives .= ";\n// ]]>\n</script>\n";
+  print $archives;
 }
 $version = get_bloginfo('version');
 if (preg_match('/^2\.[8-9]/', $version)) 

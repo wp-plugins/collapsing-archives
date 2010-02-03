@@ -34,7 +34,7 @@ global $wpdb, $month;
 include('defaults.php');
 $options=wp_parse_args($args, $defaults);
 extract($options);
-echo "<ul class='collapsing archives list'>\n";
+$archives =  "<ul class='collapsing archives list'>\n";
 
 
 $post_attrs = "post_date != '0000-00-00 00:00:00' AND post_status = 'publish'";
@@ -143,14 +143,14 @@ $postquery= "SELECT $wpdb->terms.slug, $wpdb->posts.ID,
   $allPosts=$wpdb->get_results($postquery);
 
 if ($debug==1) {
-  echo "<pre style='display:none' >";
+  $archives .= "<pre style='display:none' >";
   printf ("MySQL server version: %s\n", mysql_get_server_info());
-  echo "\ncollapsArch options:\n";
+  $archives .= "\ncollapsArch options:\n";
   print_r($options);
-  echo "POST QUERY:\n $postquery\n";
-  echo "\nPOST QUERY RESULTS\n";
+  $archives .= "POST QUERY:\n $postquery\n";
+  $archives .= "\nPOST QUERY RESULTS\n";
   print_r($allPosts);
-  echo "</pre>";
+  $archives .= "</pre>";
 }
 
 if( $allPosts ) {
@@ -214,38 +214,38 @@ if( $allPosts ) {
       if($i>=2 && $allPosts[$i-2]->year != $archPost->year ) {
 				if( $expandYears ) {
           if( $expandMonths ) {
-            echo "        </ul>\n      </li> <!-- close expanded month --> \n";
+            $archives .= "        </ul>\n      </li> <!-- close expanded month --> \n";
           } else {
-            echo "      </li> <!-- close month --> \n";
+            $archives .= "      </li> <!-- close month --> \n";
           }
-          echo "    </ul>\n  </li> <!-- end year -->\n";
+          $archives .= "    </ul>\n  </li> <!-- end year -->\n";
         } else {
           if( $expandMonths ) {
-            echo "    </ul>\n  </li> <!-- end year -->\n";
+            $archives .= "    </ul>\n  </li> <!-- end year -->\n";
           } else {
-            echo "  </li> <!-- end year -->\n";
+            $archives .= "  </li> <!-- end year -->\n";
           }
         }
       }
       $home = get_settings('home');
       if( $expandYears  || $expandMonths) {
-				echo "  <li class='collapsing archives'><span title='$yearTitle' " .
+				$archives .= "  <li class='collapsing archives'><span title='$yearTitle' " .
 				    "class='collapsing archives $yearRel' " .
             "onclick='expandCollapse(event" .
             ", \"$expandSymJS\", \"$collapseSymJS\", $animate," .
             "\"collapsArch\"); return false' ><span class='sym'>$ding</span>";
 			} else {
-			  echo "  <li class='collapsing archives item'>\n";
+			  $archives .= "  <li class='collapsing archives item'>\n";
 			}
       if ($linkToArch) {
-        echo  "</span>";
-        echo "<a href='".get_year_link($archPost->year). "'>$currentYear $yearCount</a>\n";
+        $archives .=  "</span>";
+        $archives .= "<a href='".get_year_link($archPost->year). "'>$currentYear $yearCount</a>\n";
       } else {
-        echo "<a href='".get_year_link($archPost->year). "'>$currentYear$yearCount</a>\n";
-        echo "</span>";
+        $archives .= "<a href='".get_year_link($archPost->year). "'>$currentYear$yearCount</a>\n";
+        $archives .= "</span>";
       }
       if( $expandYears || $expandMonths ) {
-        echo "    <ul $monthStyle id='collapsing archives list-$currentYear'>\n";
+        $archives .= "    <ul $monthStyle id='collapsing archives list-$currentYear'>\n";
       }
       $newYear = false;
     }
@@ -258,9 +258,9 @@ if( $allPosts ) {
       } else {
 				if ($expandYears) {
           if ($expandMonths) {
-            echo "        </ul>\n      </li> <!-- close expanded month --> \n";
+            $archives .= "        </ul>\n      </li> <!-- close expanded month --> \n";
           } else {
-            echo "      </li> <!-- close month --> \n";
+            $archives .= "      </li> <!-- close month --> \n";
           }
         }
       }
@@ -319,12 +319,12 @@ if( $allPosts ) {
 					$the_link .="$text $monthCount</a>\n";
 				}
 
-				echo "      <li class='$monthCollapse'>".$the_link;
+				$archives .= "      <li class='$monthCollapse'>".$the_link;
 
 			}
 			if ($expandYears && $expandMonths ) {
-				echo "        <ul $postStyle id=\"collapsing archives list-";
-				echo "$currentYear-$currentMonth\">\n";
+				$archives .= "        <ul $postStyle id=\"collapsing archives list-";
+				$archives .= "$currentYear-$currentMonth\">\n";
 				$text = '';
       }
 		} else {
@@ -360,46 +360,24 @@ if( $allPosts ) {
       }
 
       $link = get_permalink($archPost);
-      echo "          <li class='collapsing archives item'><a href='$link' " .
+      $archives .= "          <li class='collapsing archives item'><a href='$link' " .
           "title='$title_text'>$text</a>$commcount</li>\n";
     }
 	}
   if ($expandMonths) {
-    echo "        </ul>
+    $archives .= "        </ul>
     </li> <!-- close month -->\n";
-    echo "  </ul>";
+    $archives .= "  </ul>";
   }
   if (!$expandYears && $expandMonths) {
   }
 } 
   if ($expandYears && !$expandMonths) {
-   echo "  </li> <!-- close month --></ul><!-- close year -->\n";
+   $archives .= "  </li> <!-- close month --></ul><!-- close year -->\n";
   }
   if ($expandYears) {
-    echo "</li></ul> <!-- end of collapsing archives -->";
+    $archives .= "</li></ul> <!-- end of collapsing archives -->";
   }
-  return;
+  return($archives);
 }
-		echo "<script type=\"text/javascript\">\n";
-		echo "// <![CDATA[\n";
-		echo '/* These variables are part of the Collapsing Archives Plugin
- * version: 1.2.2
- * revision: $Id$
- * Copyright 2008 Robert Felty (robfelty.com)
-         */' ."\n";
-
-    $expandSym="<img src='". $url .
-         "/wp-content/plugins/collapsing-archives/" . 
-         "img/expand.gif' alt='expand' />";
-    $collapseSym="<img src='". $url .
-         "/wp-content/plugins/collapsing-archives/" . 
-         "img/collapse.gif' alt='collapse' />";
-    echo "var expandSym=\"$expandSym\";";
-    echo "var collapseSym=\"$collapseSym\";";
-    echo"
-    collapsAddLoadEvent(function() {
-      autoExpandCollapse('collapsArch');
-    });
-    ";
-		echo ";\n// ]]>\n</script>\n";
  ?>
