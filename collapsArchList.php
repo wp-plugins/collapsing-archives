@@ -372,7 +372,9 @@ function list_archives($args='') {
         $link = get_permalink($archPost);
         $monthText .= "          <li class='collapsing archives item'><a href='$link' " .
             "title='$title_text'>$text</a>$commcount</li>\n";
-        if ($expandCurrentMonth) {
+        if ($expandCurrentMonth 
+                && $currentYear == date('Y')
+                && $currentMonth == date('n') ) {
           $archives .= $monthText;
         }
       }
