@@ -139,18 +139,22 @@ function expandCollapse( e, expand,collapse, animate, collapsClass ) {
     src.setAttribute('class',show);
     src.setAttribute('title','click to expand');
     theSpan.innerHTML=expand;
-    childList.innerHTML='<li></li>';
     if (animate==1) {
       jQuery(childList).hide('blind', '', 500);
     } else {
       childList.style.display = 'none';
+    }
+    if (collapsItems[theId]) {
+      childList.innerHTML='<li></li>';
     }
   } else {
     createCookie(theId,1,7);
     src.setAttribute('class',hide);
     src.setAttribute('title','click to collapse');
     theSpan.innerHTML=collapse;
-    childList.innerHTML=collapsItems[theId];
+    if (collapsItems[theId]) {
+      childList.innerHTML=collapsItems[theId];
+    }
     if (animate==1) {
       jQuery(childList).show('blind', '', 500);
     } else {
@@ -164,3 +168,5 @@ function expandCollapse( e, expand,collapse, animate, collapsClass ) {
 
   return false;
 }
+
+collapsItems= new Object();

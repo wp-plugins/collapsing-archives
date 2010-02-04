@@ -40,7 +40,7 @@ add_action('init', 'collapsArch_load_domain');
 if (!is_admin()) {
   wp_enqueue_script('collapsFunctions',
       WP_PLUGIN_URL . "/collapsing-archives/collapsFunctions.js",
-      array('jquery'), '1.7');
+      array('jquery'), '1.7', false);
   add_action( 'wp_head', array('collapsArch','get_head'));
 } else {
   // call upgrade function if current version is lower than actual version
@@ -97,15 +97,26 @@ class collapsArch {
     $style
     </style>\n";
 	}
+  function phpArrayToJS($array,$name) {
+    /* generates javscript code to create an array from a php array */
+    $script = "try { $name" . 
+        "['catTest'] = 'test'; } catch (err) { $name = new Object(); }\n";
+    foreach ($array as $key => $value){
+      $script .= $name . "['$key'] = '" . 
+          addslashes(str_replace("\n", '', $value)) . "';\n";
+    }
+    return($script);
+  }
 }
 
   include_once( 'collapsArchList.php' );
 function collapsArch($args='') {
+  global $collapsArchItems;
   if (!is_admin()) {
     $archives = list_archives($args);
   }
-		$archives .= "<script type=\"text/javascript\">\n";
-		$archives .= "// <![CDATA[\n";
+    $archives .= "<li style='display:none'><script type=\"text/javascript\">\n";
+	$archives .= "// <![CDATA[\n";
 		$archives .= '/* These variables are part of the Collapsing Archives Plugin
  * version: 1.2.2
  * revision: $Id$
@@ -120,12 +131,14 @@ function collapsArch($args='') {
          "img/collapse.gif' alt='collapse' />";
     $archives .= "var expandSym=\"$expandSym\";";
     $archives .= "var collapseSym=\"$collapseSym\";";
-    $archives .="
-    collapsAddLoadEvent(function() {
-      autoExpandCollapse('collapsArch');
-    });
-    ";
-		$archives .= ";\n// ]]>\n</script>\n";
+//    $archives .="
+//    collapsAddLoadEvent(function() {
+//      autoExpandCollapse('collapsArch');
+//    });
+//    ";
+      // now we create an array indexed by the id of the ul for posts
+    $archives .= collapsArch::phpArrayToJS($collapsArchItems, 'collapsItems');
+		$archives .= ";\n// ]]>\n</script></li>\n";
   print $archives;
 }
 $version = get_bloginfo('version');

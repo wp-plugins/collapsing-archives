@@ -16,14 +16,16 @@ class collapsArchWidget extends WP_Widget {
  
     $title = empty($instance['title']) ? '&nbsp;' : apply_filters('widget_title', $instance['title']);
     echo $before_widget . $before_title . $title . $after_title;
+    $instance['number'] = $this->get_field_id('top');
+    $instance['number'] = preg_replace('/[a-zA-Z-]/', '', $instance['number']);
+    echo "<ul id='" .  $this->get_field_id('top') . "
+        ' class='collapsing archives list'>\n";
        if( function_exists('collapsArch') ) {
         collapsArch($instance);
        } else {
-        echo "<ul>\n";
         wp_list_archives();
-        echo "</ul>\n";
        }
-
+    echo "</ul>\n";
     echo $after_widget;
   }
  
