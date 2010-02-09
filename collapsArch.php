@@ -52,7 +52,6 @@ add_action('admin_menu', array('collapsArch','setup'));
 add_action('activate_collapsing-archives/collapsArch.php', array('collapsArch','init'));
 
 class collapsArch {
-
 	function init() {
     global $collapsArchVersion;
     include('collapsArchStyles.php');
@@ -108,8 +107,7 @@ class collapsArch {
     return($script);
   }
 }
-
-  include_once( 'collapsArchList.php' );
+include_once( 'collapsArchList.php' );
 function collapsArch($args='') {
   global $collapsArchItems;
   if (!is_admin()) {

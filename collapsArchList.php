@@ -22,7 +22,6 @@ This file is part of Collapsing Archives
 
 */
 ?>
-
 <?php
 global $collapsArchItems;
 $collapsArchItems = array();
@@ -398,4 +397,4 @@ function list_archives($args='') {
   }
   return($archives);
 }
- ?>
+?>
