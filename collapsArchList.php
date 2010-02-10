@@ -190,6 +190,7 @@ function list_archives($args='') {
 
       if( $currentYear != $archPost->year ) {
         $lastYear=$currentYear;
+        $lastMonth=$currentMonth;
         $currentYear = $archPost->year;
         $theID = "collapsArch-$currentYear:$number";
         /* this should fix the "sparse year" problem
@@ -246,7 +247,7 @@ function list_archives($args='') {
 
       if ($currentMonth != $archPost->month) {
         //$lastMonth = $currentMonth;
-        $lastMonth= ($currentMonth==0) ? 1 : $currentMonth;
+        //$lastMonth= ($currentMonth==0) ? 1 : $currentMonth;
         if ($currentMonth==0) {
           //$lastID = "collapArch-$currentYear-$currentMonth:$number";
           $lastID = "collapArch-$lastYear-$lastMonth:$number";
