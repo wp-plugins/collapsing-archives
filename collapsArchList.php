@@ -179,8 +179,8 @@ function list_archives($args='') {
        * triangle will expand it. rel = collapse means that is will be shown, and
        * clicking on the triangle will collapse it 
        */
-      if( $expandCurrentYear
-          && $archPost->year == date('Y') ) {
+      if (( $expandCurrentYear
+          && $archPost->year == date('Y')) || $_COOKIE[$theID]==1) {
         $ding = $collapseSym;
         $yearRel = 'collapse';
         $yearTitle= __('click to collapse', 'collapsArch');
@@ -293,9 +293,8 @@ function list_archives($args='') {
                 ", \"$expandSymJS\", \"$collapseSymJS\", $animate, " .
                 "\"collapsArch\"); return false'";
             $monthCollapse = 'collapsArch';
-            if( $expandCurrentMonth
-                && $currentYear == date('Y')
-                && $currentMonth == date('n') ) {
+            if(( $expandCurrentMonth && $currentYear == date('Y')
+                && $currentMonth == date('n')) || $_COOKIE[$theID]==1 ) {
                       $monthRel = 'collapse';
                       $monthTitle= __('click to collapse', 'collapsArch');
                       $postStyle = '';
@@ -372,12 +371,12 @@ function list_archives($args='') {
         $link = get_permalink($archPost);
         $monthText .= "          <li class='collapsing archives item'><a href='$link' " .
             "title='$title_text'>$text</a>$commcount</li>\n";
-        if ($expandCurrentMonth 
+        if (($expandCurrentMonth 
                 && $currentYear == date('Y')
-                && $currentMonth == date('n') ) {
+                && $currentMonth == date('n')) || $_COOKIE[$theID]==1 ) {
           $archives .= $monthText;
+          $monthText='';
         }
-        $monthText='';
       }
     }
     if ($expandMonths) {
