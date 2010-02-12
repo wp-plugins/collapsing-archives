@@ -136,14 +136,14 @@ function list_archives($args='') {
   $allPosts=$wpdb->get_results($postquery);
 
   if ($debug==1) {
-    $archives .= "<pre style='display:none' >";
+    echo  "<pre style='display:none' >";
     printf ("MySQL server version: %s\n", mysql_get_server_info());
-    $archives .= "\ncollapsArch options:\n";
+    echo  "\ncollapsArch options:\n";
     print_r($options);
-    $archives .= "POST QUERY:\n $postquery\n";
-    $archives .= "\nPOST QUERY RESULTS\n";
+    echo  "POST QUERY:\n $postquery\n";
+    echo  "\nPOST QUERY RESULTS\n";
     print_r($allPosts);
-    $archives .= "</pre>";
+    echo  "</pre>";
   }
 
   if( $allPosts ) {
@@ -377,6 +377,7 @@ function list_archives($args='') {
                 && $currentMonth == date('n') ) {
           $archives .= $monthText;
         }
+        $monthText='';
       }
     }
     if ($expandMonths) {

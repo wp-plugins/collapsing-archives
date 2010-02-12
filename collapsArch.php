@@ -49,7 +49,7 @@ if (!is_admin()) {
     collapsArch::init();
 }
 add_action('admin_menu', array('collapsArch','setup'));
-add_action('activate_collapsing-archives/collapsArch.php', array('collapsArch','init'));
+register_activation_hook(__FILE__, array('collapsArch','init'));
 
 class collapsArch {
 	function init() {
@@ -140,6 +140,6 @@ function collapsArch($args='') {
   print $archives;
 }
 $version = get_bloginfo('version');
-if (preg_match('/^2\.[8-9]/', $version)) 
+if (preg_match('/^(2\.[8-9]|3\..*)/', $version)) 
   include('collapsArchWidget.php');
 ?>
