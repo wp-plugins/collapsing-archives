@@ -25,10 +25,8 @@ This file is part of Collapsing Archives
 <?php
 global $collapsArchItems;
 $collapsArchItems = array();
-function list_archives($args='') {
+function list_archives($options) {
   global $wpdb, $month, $collapsArchItems;
-  include('defaults.php');
-  $options=wp_parse_args($args, $defaults);
   extract($options);
   $post_attrs = "post_date != '0000-00-00 00:00:00' AND post_status = 'publish'";
 
@@ -167,25 +165,6 @@ function list_archives($args='') {
     $monthCount=0;
     $i=0;
     foreach( $allPosts as $archPost ) {
-      $ding = $expandSym;
-      $i++;
-      $yearRel = 'expand';
-      $monthRel = 'expand';
-      $yearTitle= __('click to expand', 'collapsArch');
-      $monthTitle= __('click to expand', 'collapsArch');
-      $postStyle = "style='display:none'";
-      $monthStyle = "style='display:none'";
-      /* rel = expand means that it will be hidden, and clicking on the
-       * triangle will expand it. rel = collapse means that is will be shown, and
-       * clicking on the triangle will collapse it 
-       */
-      if (( $expandCurrentYear
-          && $archPost->year == date('Y')) || $_COOKIE[$theID]==1) {
-        $ding = $collapseSym;
-        $yearRel = 'collapse';
-        $yearTitle= __('click to collapse', 'collapsArch');
-        $monthStyle = '';
-      }
 
 
       if( $currentYear != $archPost->year ) {
@@ -205,6 +184,25 @@ function list_archives($args='') {
         else {
           $yearCount = '';
         }
+      $ding = $expandSym;
+      $i++;
+      $yearRel = 'expand';
+      $monthRel = 'expand';
+      $yearTitle= __('click to expand', 'collapsArch');
+      $monthTitle= __('click to expand', 'collapsArch');
+      $postStyle = "style='display:none'";
+      $monthStyle = "style='display:none'";
+      /* rel = expand means that it will be hidden, and clicking on the
+       * triangle will expand it. rel = collapse means that is will be shown, and
+       * clicking on the triangle will collapse it 
+       */
+      if (( $expandCurrentYear
+          && $archPost->year == date('Y')) || $_COOKIE[$theID]==1) {
+        $ding = $collapseSym;
+        $yearRel = 'collapse';
+        $yearTitle= __('click to collapse', 'collapsArch');
+        $monthStyle = '';
+      }
         
         if($i>=2 && $allPosts[$i-2]->year != $archPost->year ) {
           if( $expandYears ) {
@@ -228,7 +226,7 @@ function list_archives($args='') {
               "class='collapsing archives $yearRel' " .
               "onclick='expandCollapse(event" .
               ", \"$expandSymJS\", \"$collapseSymJS\", $animate," .
-              "\"collapsArch\"); return false' ><span class='sym'>$ding</span>";
+              "\"collapsing archives\"); return false' ><span class='sym'>$ding</span>";
         } else {
           $archives .= "  <li class='collapsing archives item'>\n";
         }
@@ -249,14 +247,14 @@ function list_archives($args='') {
         //$lastMonth = $currentMonth;
         //$lastMonth= ($currentMonth==0) ? 1 : $currentMonth;
         if ($currentMonth==0) {
-          //$lastID = "collapArch-$currentYear-$currentMonth:$number";
-          $lastID = "collapArch-$lastYear-$lastMonth:$number";
+          $lastID = "collapsArch-$lastYear-$lastMonth:$number";
         } else {
-          $lastID = "collapArch-$currentYear-$currentMonth:$number";
+          $lastID = "collapsArch-$currentYear-$currentMonth:$number";
         }
         $currentMonth = $archPost->month;
         $newMonth = true;
-        $theID = "collapArch-$currentYear-$currentMonth:$number";
+        if ($expandYears) 
+          $theID = "collapsArch-$currentYear-$currentMonth:$number";
         if ($i>1) {
           //echo "$theID, $lastID, $currentMonth, $i<br />";
           $collapsArchItems[$lastID] = $monthText;
@@ -291,18 +289,18 @@ function list_archives($args='') {
             $link = 'javascript:;';
             $onclick = "onclick='expandCollapse(event" . 
                 ", \"$expandSymJS\", \"$collapseSymJS\", $animate, " .
-                "\"collapsArch\"); return false'";
-            $monthCollapse = 'collapsArch';
+                "\"collapsing archives\"); return false'";
+            $monthCollapse = 'collapsing archives';
             if(( $expandCurrentMonth && $currentYear == date('Y')
                 && $currentMonth == date('n')) || $_COOKIE[$theID]==1 ) {
-                      $monthRel = 'collapse';
-                      $monthTitle= __('click to collapse', 'collapsArch');
-                      $postStyle = '';
-                      $ding = $collapseSym;
+              $monthRel = 'collapse';
+              $monthTitle= __('click to collapse', 'collapsArch');
+              $postStyle = '';
+              $ding = $collapseSym;
             } else {
-                      $monthRel = 'expand';
-                      $monthTitle= __('click to expand', 'collapsArch');
-                      $ding = $expandSym;
+              $monthRel = 'expand';
+              $monthTitle= __('click to expand', 'collapsArch');
+              $ding = $expandSym;
             }
             $the_span = "<span title='$monthTitle' " .
                 "class='$monthCollapse $monthRel' $onclick>" ;
@@ -322,7 +320,7 @@ function list_archives($args='') {
             $onclick = '';
             $monthRel = '';
             $monthTitle = '';
-            $monthCollapse = 'collapsArchMonth';
+            $monthCollapse = 'collapsing archives';
             $the_link ="<a href='".get_month_link($currentYear, $currentMonth).
                 "' title='$title_text'>";
             $the_link .="$text $monthCount</a>\n";
@@ -371,9 +369,13 @@ function list_archives($args='') {
         $link = get_permalink($archPost);
         $monthText .= "          <li class='collapsing archives item'><a href='$link' " .
             "title='$title_text'>$text</a>$commcount</li>\n";
-        if (($expandCurrentMonth 
+        if (($expandCurrentMonth  && $expandYears
                 && $currentYear == date('Y')
                 && $currentMonth == date('n')) || $_COOKIE[$theID]==1 ) {
+          $archives .= $monthText;
+          $monthText='';
+        } elseif (($expandCurrentYear  && $expandMonths
+                && $currentYear == date('Y')) || $_COOKIE[$theID]==1 ) {
           $archives .= $monthText;
           $monthText='';
         }

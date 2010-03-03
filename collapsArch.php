@@ -96,24 +96,47 @@ class collapsArch {
     $style
     </style>\n";
 	}
-  function phpArrayToJS($array,$name) {
+  function phpArrayToJS($array, $name, $options) {
     /* generates javscript code to create an array from a php array */
-    $script = "try { $name" . 
+    print "try { $name" . 
         "['catTest'] = 'test'; } catch (err) { $name = new Object(); }\n";
-    foreach ($array as $key => $value){
-      $script .= $name . "['$key'] = '" . 
-          addslashes(str_replace("\n", '', $value)) . "';\n";
+    if (!$options['expandYears'] && $options['expandMonths']) {
+      $lastYear = -1;
+      foreach ($array as $key => $value){
+        $parts = explode('-', $key);
+        $label = $parts[0];
+        $year = $parts[1];
+        $moreparts = explode(':', $key);
+        $widget = $moreparts[1];
+        if ($year != $lastYear) {
+          if ($lastYear>0)
+            print  "';\n";
+          print $name . "['$label-$year:$widget'] = '" . 
+              addslashes(str_replace("\n", '', $value));
+
+          $lastYear=$year;
+        } else {
+          print addslashes(str_replace("\n", '', $value));
+        }
+      }
+      print  "';\n";
+    } else {
+      foreach ($array as $key => $value){
+        print $name . "['$key'] = '" . 
+            addslashes(str_replace("\n", '', $value)) . "';\n";
+      }
     }
-    return($script);
   }
 }
 include_once( 'collapsArchList.php' );
 function collapsArch($args='') {
   global $collapsArchItems;
+  include('defaults.php');
+  $options=wp_parse_args($args, $defaults);
   if (!is_admin()) {
-    $archives = list_archives($args);
+    $archives = list_archives($options);
   }
-    $archives .= "<li style='display:none'><script type=\"text/javascript\">\n";
+  $archives .= "<li style='display:none'><script type=\"text/javascript\">\n";
 	$archives .= "// <![CDATA[\n";
 		$archives .= '/* These variables are part of the Collapsing Archives Plugin
  * version: 1.2.2
@@ -121,23 +144,18 @@ function collapsArch($args='') {
  * Copyright 2008 Robert Felty (robfelty.com)
          */' ."\n";
 
-    $expandSym="<img src='". $url .
-         "/wp-content/plugins/collapsing-archives/" . 
-         "img/expand.gif' alt='expand' />";
-    $collapseSym="<img src='". $url .
-         "/wp-content/plugins/collapsing-archives/" . 
-         "img/collapse.gif' alt='collapse' />";
-    $archives .= "var expandSym=\"$expandSym\";";
-    $archives .= "var collapseSym=\"$collapseSym\";";
-//    $archives .="
-//    collapsAddLoadEvent(function() {
-//      autoExpandCollapse('collapsArch');
-//    });
-//    ";
-      // now we create an array indexed by the id of the ul for posts
-    $archives .= collapsArch::phpArrayToJS($collapsArchItems, 'collapsItems');
-		$archives .= ";\n// ]]>\n</script></li>\n";
+  $expandSym="<img src='". $url .
+       "/wp-content/plugins/collapsing-archives/" . 
+       "img/expand.gif' alt='expand' />";
+  $collapseSym="<img src='". $url .
+       "/wp-content/plugins/collapsing-archives/" . 
+       "img/collapse.gif' alt='collapse' />";
+  $archives .= "var expandSym=\"$expandSym\";\n";
+  $archives .= "var collapseSym=\"$collapseSym\";\n";
   print $archives;
+  // now we create an array indexed by the id of the ul for posts
+  collapsArch::phpArrayToJS($collapsArchItems, 'collapsItems', $options);
+  print "// ]]>\n</script></li>\n";
 }
 $version = get_bloginfo('version');
 if (preg_match('/^(2\.[8-9]|3\..*)/', $version)) 

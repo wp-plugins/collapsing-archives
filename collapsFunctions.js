@@ -152,6 +152,7 @@ function expandCollapse( e, expand,collapse, animate, collapsClass ) {
     src.setAttribute('class',hide);
     src.setAttribute('title','click to collapse');
     theSpan.innerHTML=collapse;
+      //alert(collapsItems[theId]);
     if (collapsItems[theId]) {
       childList.innerHTML=collapsItems[theId];
     }
