@@ -134,28 +134,30 @@ function collapsArch($args='') {
   include('defaults.php');
   $options=wp_parse_args($args, $defaults);
   if (!is_admin()) {
+    if (!$options['number'] || $options['number']=='') 
+      $options['number']=1;
     $archives = list_archives($options);
-  }
-  $archives .= "<li style='display:none'><script type=\"text/javascript\">\n";
-	$archives .= "// <![CDATA[\n";
-		$archives .= '/* These variables are part of the Collapsing Archives Plugin
- * version: 1.2.2
- * revision: $Id$
- * Copyright 2008 Robert Felty (robfelty.com)
-         */' ."\n";
+    $archives .= "<li style='display:none'><script type=\"text/javascript\">\n";
+    $archives .= "// <![CDATA[\n";
+      $archives .= '/* These variables are part of the Collapsing Archives Plugin
+   * version: 1.2.2
+   * revision: $Id$
+   * Copyright 2008 Robert Felty (robfelty.com)
+           */' ."\n";
 
-  $expandSym="<img src='". $url .
-       "/wp-content/plugins/collapsing-archives/" . 
-       "img/expand.gif' alt='expand' />";
-  $collapseSym="<img src='". $url .
-       "/wp-content/plugins/collapsing-archives/" . 
-       "img/collapse.gif' alt='collapse' />";
-  $archives .= "var expandSym=\"$expandSym\";\n";
-  $archives .= "var collapseSym=\"$collapseSym\";\n";
-  print $archives;
-  // now we create an array indexed by the id of the ul for posts
-  collapsArch::phpArrayToJS($collapsArchItems, 'collapsItems', $options);
-  print "// ]]>\n</script></li>\n";
+    $expandSym="<img src='". $url .
+         "/wp-content/plugins/collapsing-archives/" . 
+         "img/expand.gif' alt='expand' />";
+    $collapseSym="<img src='". $url .
+         "/wp-content/plugins/collapsing-archives/" . 
+         "img/collapse.gif' alt='collapse' />";
+    $archives .= "var expandSym=\"$expandSym\";\n";
+    $archives .= "var collapseSym=\"$collapseSym\";\n";
+    print $archives;
+    // now we create an array indexed by the id of the ul for posts
+    collapsArch::phpArrayToJS($collapsArchItems, 'collapsItems', $options);
+    print "// ]]>\n</script></li>\n";
+  }
 }
 $version = get_bloginfo('version');
 if (preg_match('/^(2\.[8-9]|3\..*)/', $version)) 

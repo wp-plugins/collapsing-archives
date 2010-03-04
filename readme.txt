@@ -204,6 +204,12 @@ I use this plugin in my blog at http://blog.robfelty.com
       truncate)
 * animate
     * When set to true, collapsing and expanding will be animated
+* number
+    * If using manually with more than one instance on a page, you can give
+      unique ids to each instance with this option. For example, if you had
+      one instance with number 1 and another with number 2, the ul for March
+      2004 for number 1 would have an id of 'collapsArch-2004-3:1', while the
+      id for number 2 would be 'collapsArch-2004-3:2'
 * debug
     * When set to true, extra debugging information will be displayed in the
       underlying code of your page (but not visible from the browser). Use
