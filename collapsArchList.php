@@ -344,7 +344,7 @@ function list_archives($options) {
         $text .= '#'.$archPost->ID;
       }
 
-      if ($showPostTitle  && $expandMonths=='yes') {
+      if ($showPostTitle  && $expandMonths) {
 
         $title_text = htmlspecialchars(strip_tags(__($archPost->post_title)), ENT_QUOTES);
         if(strlen(trim($title_text))==0) {
