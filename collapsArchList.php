@@ -165,9 +165,10 @@ function list_archives($options) {
     $monthCount=0;
     $i=0;
     foreach( $allPosts as $archPost ) {
+      $monthStyle = "style='display:none'";
+      $postStyle = "style='display:none'";
 
-
-      if( $currentYear != $archPost->year ) {
+      if ($currentYear != $archPost->year ) {
         $lastYear=$currentYear;
         $lastMonth=$currentMonth;
         $currentYear = $archPost->year;
@@ -184,25 +185,23 @@ function list_archives($options) {
         else {
           $yearCount = '';
         }
-      $ding = $expandSym;
-      $i++;
-      $yearRel = 'expand';
-      $monthRel = 'expand';
-      $yearTitle= __('click to expand', 'collapsArch');
-      $monthTitle= __('click to expand', 'collapsArch');
-      $postStyle = "style='display:none'";
-      $monthStyle = "style='display:none'";
-      /* rel = expand means that it will be hidden, and clicking on the
-       * triangle will expand it. rel = collapse means that is will be shown, and
-       * clicking on the triangle will collapse it 
-       */
-      if (( $expandCurrentYear
-          && $archPost->year == date('Y')) || $_COOKIE[$theID]==1) {
-        $ding = $collapseSym;
-        $yearRel = 'collapse';
-        $yearTitle= __('click to collapse', 'collapsArch');
-        $monthStyle = '';
-      }
+        $ding = $expandSym;
+        $i++;
+        $yearRel = 'expand';
+        $monthRel = 'expand';
+        $yearTitle= __('click to expand', 'collapsArch');
+        $monthTitle= __('click to expand', 'collapsArch');
+        /* rel = expand means that it will be hidden, and clicking on the
+         * triangle will expand it. rel = collapse means that is will be shown, and
+         * clicking on the triangle will collapse it 
+         */
+        if (( $expandCurrentYear
+            && $archPost->year == date('Y')) || $_COOKIE[$theID]==1) {
+          $ding = $collapseSym;
+          $yearRel = 'collapse';
+          $yearTitle= __('click to collapse', 'collapsArch');
+          $monthStyle = '';
+        }
         
         if($i>=2 && $allPosts[$i-2]->year != $archPost->year ) {
           if( $expandYears ) {
