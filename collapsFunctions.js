@@ -170,4 +170,3 @@ function expandCollapse( e, expand,collapse, animate, collapsClass ) {
   return false;
 }
 
-collapsItems= new Object();
