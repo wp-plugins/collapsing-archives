@@ -79,6 +79,10 @@
     $showPostDate=false;
   }
   $postDateFormat=addslashes($new_instance['postDateFormat']);
+  $postDateAppend= 'after' ;
+  if($new_instance['postDateAppend'] == 'before') {
+    $postDateAppend= 'before' ;
+  }
   if(isset($new_instance['expandCurrentMonth'])) {
     $expandCurrentMonth= true ;
   } else {
@@ -93,6 +97,6 @@
       'archSortOrder', 'showPosts', 'showPages', 'linkToArch', 'debug',
       'showYearCount', 'expandCurrentYear','expandMonths', 'expandYears',
       'expandCurrentMonth','showMonthCount', 'showPostTitle', 'expand',
-			'noTitle', 'customExpand', 'customCollapse',
+			'noTitle', 'customExpand', 'customCollapse', 'postDateAppend',
       'showPostDate', 'postDateFormat','animate','postTitleLength');
 ?>

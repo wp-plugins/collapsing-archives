@@ -104,9 +104,13 @@
    <input type="checkbox" name="<?php echo $this->get_field_name('showPostDate'); ?>" <?php if ($showPostDate) echo
    'checked'; ?> id="<?php echo $this->get_field_id('showPostDate'); ?>"></input> <label
    for="showPostDate"><?php _e('Show Post Date', 'collapsArch'); ?></label> | 
+     <select name="<?php echo $this->get_field_name('postDateAppend'); ?>">
+     <option  <?php if($postDateAppend=='before') echo 'selected'; ?> id="<?php echo $this->get_field_id('postDateAppendBefore') ?>" value='before'><?php _e('Before post title', 'collapsArch') ?></option>
+     <option  <?php if($postDateAppend=='after') echo 'selected'; ?> id="<?php echo $this->get_field_id('postDateAppendAfter') ?>" value='after'><?php _e('After post title', 'collapsArch') ?></option>
+     </select>
    <label for="postDateFormat"><a href='http://php.net/date'
     title='information about date formatting syntax' target='_blank'>
-    <?php _e('Post Date Format', 'collapsArch'); ?></a>:</label>
+    <?php _e('as', 'collapsArch'); ?></a>:</label>
    <input type="text" size='8' name="<?php echo $this->get_field_name('postDateFormat'); ?>" value="<?php echo $postDateFormat; ?>" 
    id="<?php echo $this->get_field_id('postDateFormat'); ?>"></input> 
    </p>

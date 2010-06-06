@@ -20,6 +20,7 @@ $defaults=array(
   'showPostDate' => false,
   'debug' => '0',
   'postDateFormat' => 'm/d',
+   'postDateAppend' => 'after',
   'animate' => 0,
   'postTitleLength' => '');
  ?>

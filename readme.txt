@@ -134,6 +134,7 @@ I use this plugin in my blog at http://blog.robfelty.com
   'expand' => '0',
   'showPostDate' => false,
   'postDateFormat' => 'm/d',
+  'postDateAppenc' => 'after',
   'animate' => 0,
   'postTitleLength' => '',
   'debug' => '0',
@@ -199,6 +200,9 @@ I use this plugin in my blog at http://blog.robfelty.com
     * 1 (true): Show the date of each post 
 * postDateFormat
     * The format in which the date should be shown (default: 'm/d')
+* postDateAppend
+    * after: The post date comes after the title (default)
+    * before: The post date comes before the title 
 * postTitleLength
     * Truncate post titles to this number of characters (default: 0 = don't
       truncate)
@@ -235,6 +239,7 @@ archive links as usual.
 =  1.3 (2010.xx.xx) =
   * Storing post information in javascript array to reduce number of DOM
     elements (and improve page loading speed)
+  * Added option to select post date before or after title
 
 =  1.2.2 (2010.01.28) =
   * Restricting settings page to authorized users

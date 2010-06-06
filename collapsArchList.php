@@ -358,7 +358,11 @@ function list_archives($options) {
         $text .= ( $tmp_text == '' ? $title_text : $tmp_text );
         if ($showPostDate ) {
           $theDate = mysql2date($postDateFormat, $archPost->post_date );
-          $text .= ( $text == '' ? $theDate : " $theDate" );
+          if ($postDateAppend=='after') { 
+            $text .= ( $text == '' ? $theDate : " $theDate" );
+          } else {
+            $text = ( $text == '' ? $theDate : "$theDate " ) . $text;
+          }
         }
 
         if ($showCommentCount ) {
