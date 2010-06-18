@@ -140,7 +140,7 @@ function collapsArch($args='') {
     $archives .= "<li style='display:none'><script type=\"text/javascript\">\n";
     $archives .= "// <![CDATA[\n";
       $archives .= '/* These variables are part of the Collapsing Archives Plugin
-   * version: 1.2.2
+   * version: 1.3
    * revision: $Id$
    * Copyright 2008 Robert Felty (robfelty.com)
            */' ."\n";
