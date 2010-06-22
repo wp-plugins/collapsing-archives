@@ -1,6 +1,6 @@
 <?php
 /*
-Collapsing Archives version: 1.3
+Collapsing Archives version: 1.3.1
 
 Copyright 2007-2010 Robert Felty
 
@@ -186,7 +186,6 @@ function list_archives($options) {
           $yearCount = '';
         }
         $ding = $expandSym;
-        $i++;
         $yearRel = 'expand';
         $monthRel = 'expand';
         $yearTitle= __('click to expand', 'collapsArch');
@@ -243,6 +242,7 @@ function list_archives($options) {
       }
 
       if ($currentMonth != $archPost->month) {
+        $i++;
         //$lastMonth = $currentMonth;
         //$lastMonth= ($currentMonth==0) ? 1 : $currentMonth;
         if ($currentMonth==0) {
@@ -379,8 +379,8 @@ function list_archives($options) {
           $monthText='';
         } elseif (($expandCurrentYear  && $expandMonths
                 && $currentYear == date('Y')) || $_COOKIE[$theID]==1 ) {
-          $archives .= $monthText;
-          $monthText='';
+          //$archives .= $monthText;
+          //$monthText='';
         }
       }
     }
