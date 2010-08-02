@@ -227,6 +227,9 @@ archive links as usual.
 
 == CHANGELOG ==
 
+= 1.3.2 (2010.xx.xx) =
+* Fixed html validation with empty ul elements
+
 =  1.3.1 (2010.06.22) =
 * Fixed bug where months would not expand for current year when "expand
   current year" was set to no (thanks to beardedgit for debugging help)

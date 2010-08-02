@@ -205,6 +205,10 @@ function list_archives($options) {
         if($i>=2 && $allPosts[$i-2]->year != $archPost->year ) {
           if( $expandYears ) {
             if( $expandMonths ) {
+              if ((!$currentYear == date('Y') && !$currentMonth == date('n')) 
+                  || !$_COOKIE[$theID]==1 ) {
+                $archives .= '<li></li>';
+              }
               $archives .= "        </ul>\n      </li> <!-- close expanded month --> \n";
             } else {
               $archives .= "      </li> <!-- close month --> \n";
@@ -265,6 +269,10 @@ function list_archives($options) {
         } else {
           if ($expandYears) {
             if ($expandMonths) {
+              if ((!$currentYear == date('Y') && !$currentMonth == date('n')) 
+                  || !$_COOKIE[$theID]==1 ) {
+                $archives .= '<li></li>';
+              }
               $archives .= "        </ul>\n      </li> <!-- close expanded month --> \n";
             } else {
               $archives .= "      </li> <!-- close month --> \n";
@@ -379,12 +387,16 @@ function list_archives($options) {
           $monthText='';
         } elseif (($expandCurrentYear  && $expandMonths
                 && $currentYear == date('Y')) || $_COOKIE[$theID]==1 ) {
-          //$archives .= $monthText;
+          //$archives .= '<li></li>';
           //$monthText='';
         }
       }
     }
     if ($expandMonths) {
+      if ((!$currentYear == date('Y') && !$currentMonth == date('n')) 
+          || !$_COOKIE[$theID]==1 ) {
+        $archives .= '<li></li>';
+      }
       $archives .= "        </ul>
       </li> <!-- close month -->\n";
       $archives .= "  </ul>";
