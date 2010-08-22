@@ -203,12 +203,37 @@ function list_archives($options) {
         }
         
         if($i>=2 && $allPosts[$i-2]->year != $archPost->year ) {
+          if ($currentMonth==0) {
+            $lastID = "collapsArch-$lastYear-$lastMonth:$number";
+          } else {
+            $lastID = "collapsArch-$currentYear-$currentMonth:$number";
+          }
           if( $expandYears ) {
             if( $expandMonths ) {
+              $expandingCurrentMonth = $expandCurrentMonth && $currentYear == date('Y')
+              && $lastMonth== date('n');
+              $cookieSet = isset($_COOKIE[$lastID]) && $_COOKIE[$lastID]==1;
+              //$archives .= "evaluation='$expandingCurrentMonth'<br />\n";
+              //$archives .= "evaluation2='$cookieSet'<br />\n";
+              if (!$expandingCurrentMonth && !$cookieSet) {
+              //if ($expandCurrentMonth) {
+              //if ($currentYear == date('Y')) {
+              //if ($lastMonth == date('n')) {
+                $archives .= "<li>" .
+                //"last month ='$lastMonth' " .
+                //"current year ='$currentYear' " .
+                //"this year ='" . date('Y') . 
+                //"' this month ='" . date('n') . "<br />\n" .
+                //"lastID='$lastID" . "<br />\n" .
+                //"cookie='" . $_COOKIE[$lastID] . "'" .  
+                "</li>";
+              }
+              /*
               if ((!$currentYear == date('Y') && !$currentMonth == date('n')) 
                   || !$_COOKIE[$theID]==1 ) {
-                $archives .= '<li></li>';
+                $archives .= '<li>id=' . $lastID . '</li>';
               }
+              */
               $archives .= "        </ul>\n      </li> <!-- close expanded month --> \n";
             } else {
               $archives .= "      </li> <!-- close month --> \n";
@@ -247,13 +272,13 @@ function list_archives($options) {
 
       if ($currentMonth != $archPost->month) {
         $i++;
-        //$lastMonth = $currentMonth;
         //$lastMonth= ($currentMonth==0) ? 1 : $currentMonth;
         if ($currentMonth==0) {
           $lastID = "collapsArch-$lastYear-$lastMonth:$number";
         } else {
           $lastID = "collapsArch-$currentYear-$currentMonth:$number";
         }
+        $lastMonth = $currentMonth;
         $currentMonth = $archPost->month;
         $newMonth = true;
         if ($expandYears) 
@@ -269,9 +294,23 @@ function list_archives($options) {
         } else {
           if ($expandYears) {
             if ($expandMonths) {
-              if ((!$currentYear == date('Y') && !$currentMonth == date('n')) 
-                  || !$_COOKIE[$theID]==1 ) {
-                $archives .= '<li></li>';
+              $expandingCurrentMonth = $expandCurrentMonth && $currentYear == date('Y')
+              && $lastMonth== date('n');
+              $cookieSet = isset($_COOKIE[$lastID]) && $_COOKIE[$lastID]==1;
+              //$archives .= "evaluation='$expandingCurrentMonth'<br />\n";
+              //$archives .= "evaluation2='$cookieSet'<br />\n";
+              if (!$expandingCurrentMonth && !$cookieSet) {
+              //if ($expandCurrentMonth) {
+              //if ($currentYear == date('Y')) {
+              //if ($lastMonth == date('n')) {
+                $archives .= "<li>" .
+                //"last month ='$lastMonth' " . "<br />\n" .
+                //"current year ='$currentYear' " . "<br />\n" .
+                //"this year ='" . date('Y') .  "<br />\n" .
+                //"' this month ='" . date('n') . "<br />\n" .
+                //"thislastID='$lastID" . "<br />\n" .
+                //"cookie='" . $_COOKIE[$lastID] . "'" .  
+                "</li>";
               }
               $archives .= "        </ul>\n      </li> <!-- close expanded month --> \n";
             } else {
