@@ -4,7 +4,7 @@ Plugin Name: Collapsing Archives
 Plugin URI: http://blog.robfelty.com/plugins/collapsing-archives
 Description: Allows users to expand and collapse archive links like Blogger.  <a href='options-general.php?page=collapsArch.php'>Options and Settings</a> | <a href='http://wordpress.org/extend/plugins/collapsing-archives/other_notes'>Manual</a> | <a href='http://wordpress.org/extend/plugins/collapsing-archives/faq'>FAQ</a> | <a href='http://forum.robfelty.com/forum/collapsing-archives'>User forum</a> 
 Author: Robert Felty
-Version: 1.3.1
+Version: 2.0
 Author URI: http://robfelty.com
 
 Copyright 2007-2010 Robert Felty
@@ -27,7 +27,7 @@ This file is part of Collapsing Archives
 */ 
 $url = get_settings('siteurl');
 global $collapsArchVersion;
-$collapsArchVersion = '1.3';
+$collapsArchVersion = '2.0';
 
 // LOCALIZATION
 function collapsArch_load_domain() {
@@ -54,23 +54,9 @@ register_activation_hook(__FILE__, array('collapsArch','init'));
 class collapsArch {
 	function init() {
     global $collapsArchVersion;
-    include('collapsArchStyles.php');
     $dbversion = get_option('collapsArchVersion');
-    if ($collapsArchVersion != $dbversion && $selected!='custom') {
-      $style = $defaultStyles[$selected];
-      update_option( 'collapsArchStyle', $style);
+    if ($collapsArchVersion != $dbversion) {
       update_option( 'collapsArchVersion', $collapsArchVersion);
-    }
-    $defaultStyles=compact('selected','default','block','noArrows','custom');
-    if( function_exists('add_option') ) {
-      update_option( 'collapsArchOrigStyle', $style);
-      update_option( 'collapsArchDefaultStyles', $defaultStyles);
-    }
-    if (!get_option('collapsArchStyle')) {
-			add_option( 'collapsArchStyle', $style);
-		}
-    if (!get_option('collapsArchSidebarId')) {
-      add_option( 'collapsArchSidebarId', 'sidebar');
     }
     if (!get_option('collapsArchVersion')) {
       add_option( 'collapsArchVersion', $collapsArchVersion);
@@ -91,11 +77,27 @@ class collapsArch {
 
 
 	function get_head() {
-    $style=stripslashes(get_option('collapsArchStyle'));
-    echo "<style type='text/css'>
-    $style
-    </style>\n";
+    echo "<style type='text/css'>";
+    echo collapsArch::set_styles();
+    echo "</style>\n";
 	}
+  function set_styles() {
+    $widget_options = get_option('widget_collapsarch');
+    include('collapsArchStyles.php');
+    $css = '';
+    $oldStyle=true;
+    foreach ($widget_options as $key=>$value) {
+      $id = "widget-collapsarch-$key-top";
+      if (isset($value['style'])) {
+        $oldStyle=false;
+        $style = $defaultStyles[$value['style']];
+        $css .= str_replace('{ID}', '#' . $id, $style);
+      }
+    }
+    if ($oldStyle)
+      $css=stripslashes(get_option('collapsArchStyle'));
+    return($css);
+  }
   function phpArrayToJS($array, $name, $options) {
     /* generates javscript code to create an array from a php array */
     print "try { $name" . 

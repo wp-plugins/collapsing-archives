@@ -92,7 +92,9 @@
   $postTitleLength=addslashes($new_instance['postTitleLength']);
   $inExcludeCats=addslashes($new_instance['inExcludeCats']);
   $defaultExpand=addslashes($new_instance['defaultExpand']);
-  $instance = compact( 'title','showPostCount',
+  /* update style settings */
+  $style = $new_instance['style'];
+  $instance = compact( 'title','showPostCount', 'style',
       'inExcludeCat', 'inExcludeCats', 'inExcludeYear', 'inExcludeYears',
       'archSortOrder', 'showPosts', 'showPages', 'linkToArch', 'debug',
       'showYearCount', 'expandCurrentYear','expandMonths', 'expandYears',

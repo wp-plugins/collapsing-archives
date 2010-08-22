@@ -37,6 +37,7 @@ class collapsArchWidget extends WP_Widget {
  
   function form($instance) {
   include('defaults.php');
+    include('collapsArchStyles.php');
   $options=wp_parse_args($instance, $defaults);
   extract($options);
 ?>
@@ -44,8 +45,6 @@ class collapsArchWidget extends WP_Widget {
 <?php
     include('options.txt');
 ?>
-  <p>Style can be set from the <a
-  href='options-general.php?page=collapsArch.php'>options page</a></p>
 <?php
   }
 }

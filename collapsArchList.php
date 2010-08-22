@@ -249,7 +249,7 @@ function list_archives($options) {
         }
         $home = get_settings('home');
         if( $expandYears  || $expandMonths) {
-          $archives .= "  <li class='collapsing archives'><span title='$yearTitle' " .
+          $archives .= "  <li class='collapsing archives $yearRel'><span title='$yearTitle' " .
               "class='collapsing archives $yearRel' " .
               "onclick='expandCollapse(event" .
               ", \"$expandSymJS\", \"$collapseSymJS\", $animate," .
@@ -372,7 +372,7 @@ function list_archives($options) {
             $the_link .="$text $monthCount</a>\n";
           }
 
-          $archives .= "      <li class='collapsing archives'>".$the_link;
+          $archives .= "      <li class='collapsing archives $monthRel'>".$the_link;
 
         }
         if ($expandYears && $expandMonths ) {
