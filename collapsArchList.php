@@ -48,8 +48,8 @@ function list_archives($options) {
     $expandSym=htmlentities($customExpand);
     $collapseSym=htmlentities($customCollapse);
   } else {
-    $expandSym='▶';
-    $collapseSym='▼';
+    $expandSym='&#9658;';
+    $collapseSym='&#9660;';
   }
   if ($expand==3) {
     $expandSymJS='expandImg';
