@@ -1,4 +1,4 @@
-/*  Collapse Functions, version 1.7
+/*  Collapse Functions, version 1.8
  *
  *--------------------------------------------------------------------------*/
 String.prototype.trim = function() {
@@ -152,7 +152,6 @@ function expandCollapse( e, expand,collapse, animate, collapsClass ) {
     src.setAttribute('class',hide);
     src.setAttribute('title','click to collapse');
     theSpan.innerHTML=collapse;
-      //alert(collapsItems[theId]);
     if (collapsItems[theId]) {
       childList.innerHTML=collapsItems[theId];
     }
@@ -170,3 +169,4 @@ function expandCollapse( e, expand,collapse, animate, collapsClass ) {
   return false;
 }
 
+//collapsItems= new Object();

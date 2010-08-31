@@ -40,7 +40,7 @@ add_action('init', 'collapsArch_load_domain');
 if (!is_admin()) {
   wp_enqueue_script('collapsFunctions',
       WP_PLUGIN_URL . "/collapsing-archives/collapsFunctions.js",
-      array('jquery'), '1.7', false);
+      array('jquery'), '1.8', false);
   add_action( 'wp_head', array('collapsArch','get_head'));
 } else {
   // call upgrade function if current version is lower than actual version
