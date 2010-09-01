@@ -144,16 +144,22 @@ function expandCollapse( e, expand,collapse, animate, collapsClass ) {
     } else {
       childList.style.display = 'none';
     }
-    if (collapsItems[theId]) {
-      childList.innerHTML='<li></li>';
+    try {
+      if (collapsItems[theId]) {
+        childList.innerHTML='<li></li>';
+      }
+    } catch (err) {
     }
   } else {
     createCookie(theId,1,7);
     src.setAttribute('class',hide);
     src.setAttribute('title','click to collapse');
     theSpan.innerHTML=collapse;
-    if (collapsItems[theId]) {
-      childList.innerHTML=collapsItems[theId];
+    try {
+      if (collapsItems[theId]) {
+        childList.innerHTML=collapsItems[theId];
+      }
+    } catch (err) {
     }
     if (animate==1) {
       jQuery(childList).show('blind', '', 500);
