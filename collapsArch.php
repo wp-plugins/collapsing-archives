@@ -38,9 +38,7 @@ add_action('init', 'collapsArch_load_domain');
 
 /****************/
 if (!is_admin()) {
-  wp_enqueue_script('collapsFunctions',
-      WP_PLUGIN_URL . "/collapsing-archives/collapsFunctions.js",
-      array('jquery'), '1.8', false);
+  wp_enqueue_script('jquery');
   add_action( 'wp_head', array('collapsArch','get_head'));
 } else {
   // call upgrade function if current version is lower than actual version
@@ -139,6 +137,8 @@ function collapsArch($args='') {
     if (!$options['number'] || $options['number']=='') 
       $options['number']=1;
     $archives = list_archives($options);
+    extract($options);
+    include('symbols.php');
     $archives .= "<li style='display:none'><script type=\"text/javascript\">\n";
     $archives .= "// <![CDATA[\n";
       $archives .= '/* These variables are part of the Collapsing Archives Plugin
@@ -147,17 +147,12 @@ function collapsArch($args='') {
    * Copyright 2008 Robert Felty (robfelty.com)
            */' ."\n";
 
-    $expandSym="<img src='". $url .
-         "/wp-content/plugins/collapsing-archives/" . 
-         "img/expand.gif' alt='expand' />";
-    $collapseSym="<img src='". $url .
-         "/wp-content/plugins/collapsing-archives/" . 
-         "img/collapse.gif' alt='collapse' />";
-    $archives .= "var expandSym=\"$expandSym\";\n";
-    $archives .= "var collapseSym=\"$collapseSym\";\n";
     print $archives;
     // now we create an array indexed by the id of the ul for posts
     collapsArch::phpArrayToJS($collapsArchItems, 'collapsItems', $options);
+    include_once('collapsFunctions.js');
+      echo "addExpandCollapse('widget-collapsarch-$number-top'," . 
+          "'$expandSym', '$collapseSym', " . $accordion . ")";
     print "// ]]>\n</script></li>\n";
   }
 }

@@ -21,6 +21,7 @@ $defaults=array(
   'debug' => '0',
   'postDateFormat' => 'm/d',
    'postDateAppend' => 'after',
-  'animate' => 0,
+  'accordion' => 0,
+  'useCookies' => true,
   'postTitleLength' => '');
  ?>

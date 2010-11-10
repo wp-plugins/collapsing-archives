@@ -1,7 +1,7 @@
 === Collapsing Archives ===
 Contributors: robfelty
 Donate link: http://blog.robfelty.com/wordpress-plugins
-Tags: archives, sidebar, widget, navigation, menu, posts, collapsing, collapsible
+Tags: archives, sidebar, widget, navigation, menu, posts, collapsing, collapsible, collapse, expand, expandable, expanding
 Requires at least: 2.8
 Tested up to: 3.0
 Stable tag: 1.3.1
@@ -226,6 +226,13 @@ gracefully if it is not present/enabled to show all of the
 archive links as usual.
 
 == CHANGELOG ==
+
+= 2.0 (2010.xx.xx) =
+* now using all jquery for javascript stuff
+* added accordion option
+* added option to not use cookies
+* Fixed display issues with IE
+* Easier style handling
 
 = 1.3.2 (2010.xx.xx) =
 * Fixed html validation with empty ul elements

@@ -63,10 +63,10 @@
   } else {
     $showPostTitle=false;
   }
-  if( !isset($new_instance['animate'])) {
-    $animate= 0 ;
+  if( !isset($new_instance['accordion'])) {
+    $accordion= 0 ;
   } else {
-    $animate=1;
+    $accordion=1;
   }
   if (isset($new_instance['debug'])) {
     $debug= true ;
@@ -92,13 +92,17 @@
   $postTitleLength=addslashes($new_instance['postTitleLength']);
   $inExcludeCats=addslashes($new_instance['inExcludeCats']);
   $defaultExpand=addslashes($new_instance['defaultExpand']);
+  $useCookies=true;
+  if (!isset($new_instance['useCookies'])) {
+    $useCookies= false ;
+  }
   /* update style settings */
   $style = $new_instance['style'];
-  $instance = compact( 'title','showPostCount', 'style',
+  $instance = compact( 'title','showPostCount', 'style', 'useCookies',
       'inExcludeCat', 'inExcludeCats', 'inExcludeYear', 'inExcludeYears',
       'archSortOrder', 'showPosts', 'showPages', 'linkToArch', 'debug',
       'showYearCount', 'expandCurrentYear','expandMonths', 'expandYears',
       'expandCurrentMonth','showMonthCount', 'showPostTitle', 'expand',
 			'noTitle', 'customExpand', 'customCollapse', 'postDateAppend',
-      'showPostDate', 'postDateFormat','animate','postTitleLength');
+      'showPostDate', 'postDateFormat','accordion','postTitleLength');
 ?>

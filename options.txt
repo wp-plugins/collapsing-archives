@@ -50,7 +50,7 @@
      <option  <?php if($inExcludeCat=='include') echo 'selected'; ?> id="<?php echo $this->get_field_id('inExcludeCatInclude') ?>" value='include'>Include</option>
      <option  <?php if($inExcludeCat=='exclude') echo 'selected'; ?> id="<?php echo $this->get_field_id('inExcludeCatExclude') ?>" value='exclude'>Exclude</option>
      </select>
-     <?php _e('these categories (input slug or ID separated by commas):', 'collapsArch') ?><br />
+     <?php _e('these archives (input slug or ID separated by commas):', 'collapsArch') ?><br />
     <input type="text" name="<?php echo $this->get_field_name('inExcludeCats'); ?>" value="<?php echo $inExcludeCats ?>" id="<?php echo $this->get_field_id('inExcludeCats') ?>"</input> 
     </p>
 <?php
@@ -59,9 +59,9 @@ global $wp_taxonomies;
 ?>
     <p><?php _e('Taxonomy type','collapsArch')?>:
     <select name="<?php echo $this->get_field_name('taxonomy'); ?> id="<?php echo $this->get_field_id('taxonomy'); ?>"">
-    <option <?php if($taxonomy=='both') echo 'selected="selected"'; ?> value='both'><?php _e('Categories and Tags', 'collapsArch') ?></option>
+    <option <?php if($taxonomy=='both') echo 'selected="selected"'; ?> value='both'><?php _e('archives and Tags', 'collapsArch') ?></option>
     <?php foreach ($wp_taxonomies as $tax): ?>
-<option <?php if ($taxonomy == $tax->name) echo "selected='selected'"?> value='<?=$tax->name?>'><?=$tax->label?> (<?=$tax->name?>)</option>
+<option <?php if ($taxonomy == $tax->name) echo "selected='selected'"?> value='<?php echo $tax->name?>'><?php echo $tax->label?> (<?php echo $tax->name?>)</option>
     <?php endforeach ?>
     </select>
     </p>
@@ -70,9 +70,9 @@ global $wp_taxonomies;
 global $wp_post_types;
 ?>
     <p><?php _e('Post type','collapsArch')?>:
-    <select name="<?php echo $this->get_field_name('post_type'); ?> id="<?php echo $this->get_field_id('post_type'); ?>"">
+    <select name="<?php echo $this->get_field_name('post_type'); ?>" id="<?php echo $this->get_field_id('post_type'); ?>">
     <?php foreach ($wp_post_types as $key=>$post): ?>
-<option <?php if ($post_type == $key) echo "selected='selected'"?> value='<?=$key?>'><?=$post->label?> (<?=$post->name?>)</option>
+<option <?php if ($post_type == $key) echo "selected='selected'"?> value='<?php echo $key?>'><?php echo $post->label?> (<?php echo $post->name?>)</option>
     <?php endforeach ?>
     </select>
     <p><?php _e('Clicking on year/month', 'collapsArch'); ?>:<br />
@@ -107,8 +107,8 @@ global $wp_post_types;
         'checked'; ?> id="<?php echo $this->get_field_id('expandMonths'); ?>"></input> <label
         for="expandMonths"><?php _e('Month Links should expand to show Posts', 'collapsArch'); ?></label><br />
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox"
-          name="<?php echo $this->get_field_name('expandCurrentMonth'); ?>" <?
-          if ($expandCurrentMonth) echo 'checked'; ?>
+          name="<?php echo $this->get_field_name('expandCurrentMonth'); ?>"
+<?php if ($expandCurrentMonth) echo 'checked'; ?>
           id="<?php echo $this->get_field_id('expandCurrentMonth'); ?>"></input> <label
           for="expandCurrentMonth"><?php _e('Leave Current Month Expanded by Default', 'collapsArch'); ?></label>
    </p>
@@ -136,11 +136,6 @@ global $wp_post_types;
    <input type="text" size='8' name="<?php echo $this->get_field_name('postDateFormat'); ?>" value="<?php echo $postDateFormat; ?>" 
    id="<?php echo $this->get_field_id('postDateFormat'); ?>"></input> 
    </p>
-<p>
-   <input type="checkbox" name="<?php echo $this->get_field_name('animate'); ?>" <?php if ($animate==1) echo
-   'checked'; ?> id="<?php echo $this->get_field_id(''); ?>"></input> <label
-   for="animate"><?php _e('Animate collapsing and expanding', 'collapsArch');?></label>
-   </p>
   <p><label for='<?php echo $this->get_field_id("style")?>'><?php _e('Style',
   'collapsArch')?></label>
   <select id='<?php echo $this->get_field_id("style")?>'
@@ -154,6 +149,13 @@ global $wp_post_types;
   </p>
   <a style='cursor:pointer' onclick='showAdvanced("<?php echo $this->get_field_id('advanced') ?>", "<?php echo $this->get_field_id('arrow') ?>");'><span id="<?php echo $this->get_field_id('arrow') ?>">&#9654;</span> Advanced options</a>
   <div id="<?php echo $this->get_field_id('advanced') ?>" style='display:none;'>
+   <p>
+     <input type="checkbox" name="<?php echo $this->get_field_name('useCookies'); ?>"
+<?php if ($useCookies)  echo 'checked'; ?> id="<?php echo $this->get_field_id('useCookies'); ?>"></input>    Remember expanding and collapsing for each visitor (using cookies)
+   </p>
+   <p>
+     <input type="checkbox" id="<?php echo $this->get_field_id('accordion'); ?>" name="<?php echo $this->get_field_name('accordion'); ?>"
+<?php if ($accordion)  echo 'checked'; ?> id="<?php echo $this->get_field_id('accordion'); ?>"></input><label for="<?php echo $this->get_field_id('accordion'); ?>"><?php _e('Accordion style', 'collapsing-archives')?> <a class='help' title='<?php _e('When expanding one category, close all others', 'collapsing-archives')?>'>?</a></label>   </p>
     <p>
      <input type="checkbox" name="<?php echo $this->get_field_name('debug'); ?>"
 <?php if ($debug=='1')  echo 'checked'; ?> id="<?php echo $this->get_field_id('collapsArch'); ?>"></input> <label for="collapsArchDebug"><?php _e('Show debugging information
