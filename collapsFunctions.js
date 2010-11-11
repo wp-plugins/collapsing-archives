@@ -41,8 +41,9 @@ function addExpandCollapse(id, expandSym, collapseSym, accordion) {
       var theDiv = jQuery(this).parent().parent().find('span.collapse').parent().children('div');
       jQuery(theDiv).hide('normal');
       jQuery(this).parent().parent().find('span.collapse').removeClass('collapse').addClass('expand');
-        createCookie(theDiv.attr('id'), 0, 7);
-      jQuery('#' + id + ' .expand .sym').html(expandSym);
+      createCookie(theDiv.attr('id'), 0, 7);
+      jQuery(this).parent().parent().find('span.sym').html(expandSym);
+      //jQuery('#' + id + ' .expand .sym').html(expandSym);
     }
     expandArch(this, expandSym, collapseSym);
     return false;

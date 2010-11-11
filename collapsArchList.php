@@ -191,10 +191,6 @@ function list_archives($options) {
             && $lastMonth== date('n');
             $cookieSet = $useCookies AND isset($_COOKIE[$lastID]) 
                 AND $_COOKIE[$lastID]==1;
-            if (!$expandingCurrentMonth && !$cookieSet) {
-              $archives .= "<li>" .
-              "</li>";
-            }
             if ($expanded)
               $archives .= "\n        </ul>\n";
             $archives .= "        </div>\n      </li> <!-- close expanded month --> \n";
