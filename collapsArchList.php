@@ -323,8 +323,8 @@ function list_archives($options) {
     if ($expandYears && $expandMonths ) {
       $archives .= "        <div $postStyle " . 
           "id='$theID'>\n";
-      if ($expandCurrentMonth AND $currentYear == date('Y') 
-          AND $lastMonth== date('n')
+      if (($expandCurrentMonth AND $currentYear == date('Y') 
+          AND $currentMonth== date('n'))
           OR ($useCookies AND isset($_COOKIE[$theID]) AND $_COOKIE[$theID]==1))
         $archives .= "        <ul>\n";
       if ($expanded)
