@@ -1,6 +1,6 @@
 <?php
 /*
-Collapsing Archives version: 1.3.1
+Collapsing Archives version: 1.3.2
 Copyright 2007 Robert Felty
 
 This work is largely based on the Fancy Archives plugin by Andrew Rader
