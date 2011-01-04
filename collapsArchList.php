@@ -179,7 +179,7 @@ function list_archives($options) {
         $monthStyle = '';
       }
       
-      if($i>=2 && $allPosts[$i-2]->year != $archPost->year ) {
+      if($i>=1 && $allPosts[$i-1]->year != $archPost->year ) {
         if ($currentMonth==0) {
           $lastID = "collapsArch-$lastYear-$lastMonth:$number";
         } else {
