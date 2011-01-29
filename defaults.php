@@ -23,5 +23,7 @@ $defaults=array(
    'postDateAppend' => 'after',
   'accordion' => 0,
   'useCookies' => true,
+  'post_type' => 'post',
+  'taxoncmy' => 'category',
   'postTitleLength' => '');
  ?>

@@ -77,17 +77,11 @@ function list_archives($options) {
     $inExcludeYearQuery ="AND YEAR($wpdb->posts.post_date) $in ($inExclusionsYear)";
   }
 
-  $isPage='';
-  if (!$showPages) {
-    $isPage="AND $wpdb->posts.post_type='post'";
-  }
+  $postTypeQuery="$wpdb->posts.post_type='$post_type'";
 	if ($defaultExpand!='') {
 		$autoExpand = preg_split('/,\s*/',$defaultExpand);
   } else {
 	  $autoExpand = array();
-  }
-  if( !$showPages ) {
-    $post_attrs .= " AND post_type = 'post'";
   }
 
 
@@ -101,7 +95,7 @@ function list_archives($options) {
 																			$wpdb->term_relationships.term_taxonomy_id
 		LEFT JOIN $wpdb->terms ON $wpdb->terms.term_id = 
 		                          $wpdb->term_taxonomy.term_id 
-  WHERE $post_attrs  $inExcludeYearQuery $inExcludeCatQuery 
+  WHERE $postTypeQuery $inExcludeYearQuery $inExcludeCatQuery 
   GROUP BY $wpdb->posts.ID 
   ORDER BY $wpdb->posts.post_date $sort";
 

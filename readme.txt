@@ -235,6 +235,7 @@ archive links as usual.
 * added option to not use cookies
 * Fixed display issues with IE
 * Easier style handling
+* Added support for custom post types
 
 =  1.3.2 (2011.01.03) =
 * Fixed display bug when only one month in year

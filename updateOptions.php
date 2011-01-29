@@ -92,6 +92,8 @@
   $postTitleLength=addslashes($new_instance['postTitleLength']);
   $inExcludeCats=addslashes($new_instance['inExcludeCats']);
   $defaultExpand=addslashes($new_instance['defaultExpand']);
+  $taxonomy= $new_instance['taxonomy'];
+  $post_type= $new_instance['post_type'];
   $useCookies=true;
   if (!isset($new_instance['useCookies'])) {
     $useCookies= false ;
@@ -104,5 +106,6 @@
       'showYearCount', 'expandCurrentYear','expandMonths', 'expandYears',
       'expandCurrentMonth','showMonthCount', 'showPostTitle', 'expand',
 			'noTitle', 'customExpand', 'customCollapse', 'postDateAppend',
+      'post_type', 'taxonomy',
       'showPostDate', 'postDateFormat','accordion','postTitleLength');
 ?>
