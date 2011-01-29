@@ -208,11 +208,16 @@ function list_archives($options) {
       } else {
         $archives .= "  <li class='collapsing archives item'>\n";
       }
+      if (in_array($post_type, array('publish', 'post'))) {
+        $yearLink = "<a href='".get_year_link($archPost->year). "'>$currentYear $yearCount</a>\n";
+      } else {
+        $yearLink = "<a href='". add_query_arg('post_type', $post_type, get_year_link($archPost->year)). "'>$currentYear $yearCount</a>\n";
+      }
       if ($linkToArch) {
         $archives .=  "</span>";
-        $archives .= "<a href='".get_year_link($archPost->year). "'>$currentYear $yearCount</a>\n";
+        $archives .=  $yearLink;
       } else {
-        $archives .= "<a href='".get_year_link($archPost->year). "'>$currentYear$yearCount</a>\n";
+        $archives .=  $yearLink;
         $archives .= "</span>";
       }
     if( $expandYears || $expandMonths ) {
@@ -273,6 +278,11 @@ function list_archives($options) {
       $text = wptexturize($text);
       $title_text = wp_specialchars($text,1);
 
+      if (in_array($post_type, array('publish', 'post'))) {
+        $monthLink = get_month_link( $currentYear, $currentMonth );
+      } else {
+        $monthLink = add_query_arg('post_type', $post_type,get_month_link( $currentYear, $currentMonth ));
+      }
       if ($expandMonths ) {
         $link = 'javascript:;';
         $monthCollapse = 'collapsing archives';
@@ -293,21 +303,17 @@ function list_archives($options) {
         $the_ding="<span class='sym'>$ding</span>";
         if ($linkToArch) {
           $the_link= "$the_span$the_ding</span>";
-          $the_link .="<a href='".get_month_link($currentYear, $currentMonth).
-              "' title='$title_text'>";
+          $the_link .="<a href='$monthLink' title='$title_text'>";
           $the_link .="$text $monthCount</a>\n";
         } else {
-          $the_link ="$the_span$the_ding<a href='".get_month_link($currentYear, $currentMonth).
-              "' >$text $monthCount</a>";
+          $the_link ="$the_span$the_ding<a href='$monthLink'>$text $monthCount</a>";
           $the_link.="</span>";
         }
       } else {
-        $link = get_month_link( $currentYear, $currentMonth );
         $monthRel = '';
         $monthTitle = '';
         $monthCollapse = 'collapsing archives';
-        $the_link ="<a href='".get_month_link($currentYear, $currentMonth).
-            "' title='$title_text'>";
+        $the_link ="<a href='$monthLink' title='$title_text'>";
         $the_link .="$text $monthCount</a>\n";
       }
 
