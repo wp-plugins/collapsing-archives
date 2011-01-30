@@ -37,9 +37,9 @@
      "/wp-content/plugins/collapsArch/" ?>img/expand.gif' /></label>
     </p>
     <p>
-     <select name="<?php echo $this->get_field_name('inExcludePage'); ?>">
-     <option  <?php if($inExcludePage=='include') echo 'selected'; ?> id="<?php echo $this->get_field_id(''); ?>" value='include'><?php _e('Include', 'collapsArch');?></option>
-     <option  <?php if($inExcludePage=='exclude') echo 'selected'; ?> id="<?php echo $this->get_field_id(''); ?>" value='exclude'><?php _e('Exclude', 'collapsArch');?></option>
+     <select name="<?php echo $this->get_field_name('inExcludeYear'); ?>">
+     <option  <?php if($inExcludeYear=='include') echo 'selected'; ?> id="<?php echo $this->get_field_id(''); ?>" value='include'><?php _e('Include', 'collapsArch');?></option>
+     <option  <?php if($inExcludeYear=='exclude') echo 'selected'; ?> id="<?php echo $this->get_field_id(''); ?>" value='exclude'><?php _e('Exclude', 'collapsArch');?></option>
      </select>
      <?php _e('these years (separated by commas):', 'collapsArch');?><br />
     <input type="text" name="<?php echo $this->get_field_name('inExcludeYears'); ?>" value="<?php echo $inExcludeYears ?>"  
@@ -50,7 +50,7 @@
      <option  <?php if($inExcludeCat=='include') echo 'selected'; ?> id="<?php echo $this->get_field_id('inExcludeCatInclude') ?>" value='include'>Include</option>
      <option  <?php if($inExcludeCat=='exclude') echo 'selected'; ?> id="<?php echo $this->get_field_id('inExcludeCatExclude') ?>" value='exclude'>Exclude</option>
      </select>
-     <?php _e('these archives (input slug or ID separated by commas):', 'collapsArch') ?><br />
+     <?php _e('these categories (input slug or ID separated by commas):', 'collapsArch') ?><br />
     <input type="text" name="<?php echo $this->get_field_name('inExcludeCats'); ?>" value="<?php echo $inExcludeCats ?>" id="<?php echo $this->get_field_id('inExcludeCats') ?>"</input> 
     </p>
 <?php

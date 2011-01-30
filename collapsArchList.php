@@ -95,7 +95,7 @@ function list_archives($options) {
 																			$wpdb->term_relationships.term_taxonomy_id
 		LEFT JOIN $wpdb->terms ON $wpdb->terms.term_id = 
 		                          $wpdb->term_taxonomy.term_id 
-  WHERE $postTypeQuery $inExcludeYearQuery $inExcludeCatQuery 
+  WHERE post_status='publish' AND $postTypeQuery $inExcludeYearQuery $inExcludeCatQuery 
   GROUP BY $wpdb->posts.ID 
   ORDER BY $wpdb->posts.post_date $sort";
 
