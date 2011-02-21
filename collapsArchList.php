@@ -28,8 +28,6 @@ $collapsArchItems = array();
 function list_archives($options) {
   global $wpdb, $month, $collapsArchItems;
   extract($options);
-  $post_attrs = "post_date != '0000-00-00 00:00:00' AND post_status = 'publish'";
-
 
   include('symbols.php');
 	$inExclusionsCat = array();
@@ -77,7 +75,17 @@ function list_archives($options) {
     $inExcludeYearQuery ="AND YEAR($wpdb->posts.post_date) $in ($inExclusionsYear)";
   }
 
-  $postTypeQuery="$wpdb->posts.post_type='$post_type'";
+  if (is_array($post_type)) {
+    $postTypeQuery="AND $wpdb->posts.post_type IN (";
+    foreach ($post_type as $type) {
+      $postTypeQuery .= "'$type',";
+    }
+    $postTypeQuery .= ')';
+  } else if ($post_type=='all') {
+    $postTypeQuery="AND $wpdb->posts.post_type NOT IN ('page', 'revision', 'nav_menu_item', 'attachment')";
+  } else {
+    $postTypeQuery="AND $wpdb->posts.post_type='$post_type'";
+  }
 	if ($defaultExpand!='') {
 		$autoExpand = preg_split('/,\s*/',$defaultExpand);
   } else {
@@ -88,14 +96,15 @@ function list_archives($options) {
   $postquery= "SELECT $wpdb->terms.slug, $wpdb->posts.ID,
     $wpdb->posts.post_name, $wpdb->posts.post_title, $wpdb->posts.post_author,
     $wpdb->posts.post_date, YEAR($wpdb->posts.post_date) AS 'year',
-    MONTH($wpdb->posts.post_date) AS 'month' 
+    MONTH($wpdb->posts.post_date) AS 'month' ,
+    $wpdb->posts.post_type
     FROM $wpdb->posts LEFT JOIN $wpdb->term_relationships ON $wpdb->posts.ID =
     $wpdb->term_relationships.object_id 
 		LEFT JOIN $wpdb->term_taxonomy ON $wpdb->term_taxonomy.term_taxonomy_id =
 																			$wpdb->term_relationships.term_taxonomy_id
 		LEFT JOIN $wpdb->terms ON $wpdb->terms.term_id = 
 		                          $wpdb->term_taxonomy.term_id 
-  WHERE post_status='publish' AND $postTypeQuery $inExcludeYearQuery $inExcludeCatQuery 
+  WHERE post_status='publish' $postTypeQuery $inExcludeYearQuery $inExcludeCatQuery 
   GROUP BY $wpdb->posts.ID 
   ORDER BY $wpdb->posts.post_date $sort";
 
@@ -208,7 +217,7 @@ function list_archives($options) {
       } else {
         $archives .= "  <li class='collapsing archives item'>\n";
       }
-      if (in_array($post_type, array('publish', 'post'))) {
+      if (in_array($post_type, array('all', 'post'))) {
         $yearLink = "<a href='".get_year_link($archPost->year). "'>$currentYear $yearCount</a>\n";
       } else {
         $yearLink = "<a href='". add_query_arg('post_type', $post_type, get_year_link($archPost->year)). "'>$currentYear $yearCount</a>\n";
@@ -278,7 +287,7 @@ function list_archives($options) {
       $text = wptexturize($text);
       $title_text = wp_specialchars($text,1);
 
-      if (in_array($post_type, array('publish', 'post'))) {
+      if (in_array($post_type, array('all', 'post'))) {
         $monthLink = get_month_link( $currentYear, $currentMonth );
       } else {
         $monthLink = add_query_arg('post_type', $post_type,get_month_link( $currentYear, $currentMonth ));

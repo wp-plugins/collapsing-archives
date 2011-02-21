@@ -99,7 +99,7 @@ You probably want to add a float:left to the .sym class
 == Screenshots ==
 
 1. Collapsing archives with default theme
-2. available options
+2. widget options
 
 == Demo ==
 
@@ -128,8 +128,9 @@ I use this plugin in my blog at http://blog.robfelty.com
   'showPostDate' => false,
   'postDateFormat' => 'm/d',
   'postDateAppenc' => 'after',
-  'animate' => 0,
+  'accordion' => 0,
   'postTitleLength' => '',
+  'post_type' => 'post',
   'debug' => '0',
   );
 `
@@ -199,8 +200,15 @@ I use this plugin in my blog at http://blog.robfelty.com
 * postTitleLength
     * Truncate post titles to this number of characters (default: 0 = don't
       truncate)
-* animate
-    * When set to true, collapsing and expanding will be animated
+* post_type 
+    * post (default)
+    * page
+    * all (includes regular post types plus any custom post types - excludes
+      pages, revisions, wp_nav_items, and attachments)
+    * custom post type that you have registered (e.g. recipe)
+* accordion
+    * When set to true, expanding one year will collapse all other years.
+      Expanding one month will collapse all other months in that year
 * number
     * If using manually with more than one instance on a page, you can give
       unique ids to each instance with this option. For example, if you had
@@ -214,9 +222,16 @@ I use this plugin in my blog at http://blog.robfelty.com
 
 = Examples =
 
-`collapsArch('animate=1&sort=ASC&expand=3,inExcludeCats=general,uncategorized')`
+`collapsArch('accordion=1&sort=ASC&expand=3&inExcludeCat=exclude&inExcludeCats=general,uncategorized')`
 This will produce a list with:
-* animation on
+* accordion style expanding and collapsing
+* shown in chronological order
+* using images to mark collapsing and expanding
+* exclude posts from  the categories general and uncategorized
+
+`collapsArch('post_type=recipe')`
+This will produce a list with:
+* only posts of type 'recipe'
 * shown in chronological order
 * using images to mark collapsing and expanding
 * exclude posts from  the categories general and uncategorized

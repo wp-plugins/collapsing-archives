@@ -71,6 +71,8 @@ global $wp_post_types;
 ?>
     <p><?php _e('Post type','collapsArch')?>:
     <select name="<?php echo $this->get_field_name('post_type'); ?>" id="<?php echo $this->get_field_id('post_type'); ?>">
+    <option <?php if ($post_type == 'all') echo "selected='selected'"?>
+value='all'>All post types (regular posts plus custom post types)</option>
     <?php foreach ($wp_post_types as $key=>$post): ?>
 <option <?php if ($post_type == $key) echo "selected='selected'"?> value='<?php echo $key?>'><?php echo $post->label?> (<?php echo $post->name?>)</option>
     <?php endforeach ?>
