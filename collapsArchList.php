@@ -145,6 +145,7 @@ function list_archives($options) {
   $monthCount=0;
   $i=0;
   foreach( $allPosts as $archPost ) {
+    $expanded=false;
     $monthStyle = "style='display:none'";
     $postStyle = "style='display:none'";
 
