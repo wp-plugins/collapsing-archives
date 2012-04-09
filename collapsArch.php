@@ -46,7 +46,6 @@ if (!is_admin()) {
   if (!$dbversion || $collapsArchVersion != $dbversion)
     collapsArch::init();
 }
-add_action('admin_menu', array('collapsArch','setup'));
 register_activation_hook(__FILE__, array('collapsArch','init'));
 
 class collapsArch {
@@ -61,18 +60,6 @@ class collapsArch {
 		}
 
 	}
-
-	function setup() {
-		if( function_exists('add_options_page') && current_user_can('manage_options') ) {
-			add_options_page(__('Collapsing Archives', 'collapsArch'),__('Collapsing Archives', 'collapsArch'),1,basename(__FILE__),array('collapsArch','ui'));
-		}
-	}
-
-	function ui() {
-		include_once( 'collapsArchUI.php' );
-	}
-
-
 
 	function get_head() {
     echo "<style type='text/css'>";
@@ -142,7 +129,7 @@ function collapsArch($args='') {
     $archives .= "<li style='display:none'><script type=\"text/javascript\">\n";
     $archives .= "// <![CDATA[\n";
       $archives .= '/* These variables are part of the Collapsing Archives Plugin
-   * version: 1.3.1
+   * version: 2.0
    * revision: $Id$
    * Copyright 2008 Robert Felty (robfelty.com)
            */' ."\n";
