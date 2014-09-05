@@ -4,7 +4,7 @@ Plugin Name: Collapsing Archives
 Plugin URI: http://blog.robfelty.com/plugins/collapsing-archives
 Description: Allows users to expand and collapse archive links like Blogger.  <a href='options-general.php?page=collapsArch.php'>Options and Settings</a> | <a href='http://wordpress.org/extend/plugins/collapsing-archives/other_notes'>Manual</a> | <a href='http://wordpress.org/extend/plugins/collapsing-archives/faq'>FAQ</a> | <a href='http://forum.robfelty.com/forum/collapsing-archives'>User forum</a> 
 Author: Robert Felty
-Version: 2.0
+Version: 2.0.1
 Author URI: http://robfelty.com
 
 Copyright 2007-2010 Robert Felty
@@ -129,7 +129,7 @@ function collapsArch($args='') {
     $archives .= "<li style='display:none'><script type=\"text/javascript\">\n";
     $archives .= "// <![CDATA[\n";
       $archives .= '/* These variables are part of the Collapsing Archives Plugin
-   * version: 2.0
+   * version: 2.0.1
    * revision: $Id$
    * Copyright 2008 Robert Felty (robfelty.com)
            */' ."\n";
@@ -144,6 +144,6 @@ function collapsArch($args='') {
   }
 }
 $version = get_bloginfo('version');
-if (preg_match('/^(2\.[8-9]|3\..*)/', $version)) 
+if (preg_match('/^(2\.[8-9]|[3-9]\..*)/', $version)) 
   include('collapsArchWidget.php');
 ?>
