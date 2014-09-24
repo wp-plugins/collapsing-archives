@@ -1,6 +1,6 @@
 <?php
 /*
-Collapsing Archives version: 2.0.1
+Collapsing Archives version: 2.0.2
 
 Copyright 2007-2010 Robert Felty
 
@@ -248,7 +248,7 @@ function list_archives($options) {
     $lastMonth = $currentMonth;
     $currentMonth = $archPost->month;
     $newMonth = true;
-    if ($expandYears) 
+    if ($expandYears)
       $theID = "collapsArch-$currentYear-$currentMonth:$number";
     if ($i>1) {
       if ($monthText!='')
@@ -401,7 +401,12 @@ function list_archives($options) {
     $archives .= "  </ul></div>";
     if ($monthText!='')
       $monthText = "<ul>$monthText</ul>";
-    $collapsArchItems[$theID] = $monthText;
+    if ($expandYears) {
+      $collapsArchItems[$theID] = $monthText;
+    } else {
+      $thisID = "collapsArch-$currentYear-$currentMonth:$number";
+      $collapsArchItems[$thisID] .= $monthText;
+    }
     $monthText='';
   }
   if (!$expandYears && $expandMonths) {
