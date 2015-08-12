@@ -1,6 +1,6 @@
 <?php 
 class collapsArchWidget extends WP_Widget {
-  function collapsArchWidget() {
+  function __construct() {
     $widget_ops = array('classname' => 'widget_collapsarch', 'description' =>
     'Collapsible archives listing' );
 		$control_ops = array (
